@@ -1,7 +1,7 @@
 <header class="main-header">
     <a href="<?= base_url('assets/') ?>index2.html" class="logo">
-        <span class="logo-mini"><b>A</b>LT</span>
-        <span class="logo-lg"><b>Admin</b>LTE</span>
+        <span class="logo-mini"><b>S</b>IA</span>
+        <span class="logo-lg"><b>SIAK</b> Seruling Mas</span>
     </a>
     <nav class="navbar navbar-static-top">
         <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
@@ -30,7 +30,7 @@
                                 <a href="#" class="btn btn-default btn-flat">Profile</a>
                             </div>
                             <div class="pull-right">
-                                <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                <a href="<?= base_url('auth/logout') ?>" class="btn btn-default btn-flat">Sign out</a>
                             </div>
                         </li>
                     </ul>

@@ -15,7 +15,7 @@
 
             <!-- Main content -->
             <section class="content">
-
+                <?= $this->session->flashdata('message'); ?>
                 <!-- Default box -->
                 <div class="box">
                     <div class="box-header with-border">
