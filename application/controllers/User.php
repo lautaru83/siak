@@ -1,15 +1,20 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Dashboard extends CI_Controller
+class User extends CI_Controller
 {
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model('User_model');
+    }
     public function index()
     {
-        //$data['menu'] = $this->db->get('menus')->result_array();
+        $data['user'] = $this->User_model->user_data();
         $this->load->view('templates/header');
         $this->load->view('templates/topbar');
         $this->load->view('templates/sidebar2');
-        $this->load->view('templates/content');
+        $this->load->view('user/index', $data);
         $this->load->view('templates/footer');
     }
 }

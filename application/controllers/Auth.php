@@ -44,7 +44,8 @@ class Auth extends CI_Controller
                     //echo "Login Sukses!";
                     $data = [
                         'email' => $user['email'],
-                        'role_id' => $user['role_id']
+                        'role_id' => $user['role_id'],
+                        'nama_user' => $user['nama']
                     ];
                     $this->session->set_userdata($data);
                     if ($user['role_id'] == 1) {

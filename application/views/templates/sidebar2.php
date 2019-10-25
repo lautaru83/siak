@@ -3,7 +3,10 @@
             <section class="sidebar">
                 <ul class="sidebar-menu" data-widget="tree">
                     <li class="header">MENU UTAMA</li>
-                    <?php foreach ($menu as $m) :  ?>
+                    <?php
+                    $queryMenu = "select * from menus";
+                    $menu = $this->db->query($queryMenu)->result_array();
+                    foreach ($menu as $m) :  ?>
 
                         <?php
                             if ($m['id'] == 1) {
