@@ -20,10 +20,13 @@
                     <!-- Default panel contents -->
                     <div class="panel-heading">
                         <div class="row">
-                            <div class="col-md-11">
+                            <div class="col-md-1">
+                                <a href="<?= base_url('user/add') ?>" class="btn btn-success btn-sm active" role="button">Tambah</a>
+                            </div>
+                            <div class="col-md-10">
                             </div>
                             <div class="col-md-1">
-                                <button type="button" class="btn btn-success btn-sm">Tambah</button>
+                                <button type="button" class="btn btn-success btn-sm">Cetak</button>
                             </div>
                         </div>
                     </div>
