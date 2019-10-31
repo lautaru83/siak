@@ -8,4 +8,13 @@ class Unit_model extends CI_Model
         $data = $this->db->query($sql);
         return $data->result_array();
     }
+    public function getUnitById($id)
+    {
+        return $this->db->get_where('units', ['id' => $id])->row_array();
+    }
+    public function hapusUnit($id)
+    {
+        // $this->db->where('id', $id);
+        $this->db->delete('units', ['id' => $id]);
+    }
 }

@@ -20,10 +20,15 @@
                     <!-- Default panel contents -->
                     <div class="panel-heading">
                         <div class="row">
-                            <div class="col-md-11">
+                            <div class="col-md-10">
+                                <button type="button" class="btn btn-info" onclick="Swal.fire('Hello World!!','Latihan SweetAlert','success')">Info</button>
                             </div>
-                            <div class="col-md-1">
-                                <button type="button" class="btn btn-success btn-sm">Tambah</button>
+                            <div class="col-md-2 ">
+                                <div class="pull-right">
+                                    <button type="button" class="btn btn-success btn-sm " data-toggle="modal" data-target="#modal-tambah">
+                                        Tambah Data
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -34,7 +39,7 @@
                                     <th scope="col">#</th>
                                     <th scope="col">Role</th>
                                     <th scope="col">Keterangan</th>
-                                    <th scope="col">Action</th>
+                                    <th scope="col" class="text-center">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -46,7 +51,16 @@
                                         <th scope="row"><?= $no; ?></th>
                                         <td><?= $dataRole['role']; ?></td>
                                         <td><?= $dataRole['keterangan']; ?></td>
-                                        <td></td>
+                                        <td class="align-middle text-center">
+                                            <a href="javascript:void();" data-id="<?= $dataRole['id']; ?>" data-role="<?= $dataRole['role']; ?>" data-keterangan="<?= $dataRole['keterangan']; ?>" data-toggle="modal" data-target="#modal-ubah" class="btn btn-default btn-form-ubah btn=xs" title="Ubah Data">
+                                                <span class="glyphicon glyphicon-pencil"></span>
+                                            </a>
+                                            <!-- <a href="#" data-id="" data-toggle="modal" data-target="#form-modal" class="btn btn-default btn-form-ubah btn=xs"><span class="glyphicon glyphicon-pencil"></span></a> -->
+
+                                            <a href="javascript:void();" data-id="<?= $dataRole['id']; ?>" data-role="<?= $dataRole['role']; ?>" data-toggle="modal" data-target="#modal-hapus" class="btn btn-danger btn-alert-hapus" title="Hapus Data"><span class="glyphicon glyphicon-erase"></span></a>
+
+
+                                        </td>
                                     </tr>
                                     <?php $no++; ?>
                                 <?php endforeach; ?>
@@ -54,6 +68,7 @@
                         </table>
                     </div>
                 </div>
+                <?php $this->load->view('role/modal'); ?>
             </section>
             <!-- /.content -->
 

@@ -1,5 +1,6 @@
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
+
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <h1>
@@ -23,39 +24,61 @@
                             <div class="col-md-11">
                             </div>
                             <div class="col-md-1">
-                                <button type="button" class="btn btn-success btn-sm">Tambah</button>
+                                <div class="pull-right">
+                                    <button type="button" id="btn-tambah-institusi" class="btn btn-success btn-sm ">
+                                        Tambah Data
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="panel-body">
-                        <table class="table table-bordered table-striped" id="table1">
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Nama Intitusi</th>
-                                    <th scope="col">Keterangan</th>
-                                    <th scope="col">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                $no = 1;
-                                ?>
-                                <?php foreach ($institusi as $dataInstitusi) :  ?>
+                    <div class=" panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped" id="table1">
+                                <thead>
                                     <tr>
-                                        <th scope="row"><?= $no; ?></th>
-                                        <td><?= $dataInstitusi['institusi']; ?></td>
-                                        <td><?= $dataInstitusi['keterangan']; ?></td>
-                                        <td></td>
+                                        <th class="col-md-1">#</th>
+                                        <th class="col-md-3">Nama Intitusi</th>
+                                        <th class="col-md-6">Keterangan</th>
+                                        <th class="col-md-2 text-center"><span class="glyphicon glyphicon-cog"></span></th>
                                     </tr>
-                                    <?php $no++; ?>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $no = 1;
+                                    ?>
+                                    <?php foreach ($institusi as $dataInstitusi) :  ?>
+                                        <tr>
+                                            <th scope="row" class="align-middle"><?= $no; ?></th>
+                                            <td class="align-middle"><?= $dataInstitusi['institusi']; ?></td>
+                                            <td class="align-middle"><?= $dataInstitusi['keterangan']; ?></td>
+                                            <td class="align-middle text-center">
+
+                                                <div class="dropup">
+                                                    <button class="btn btn-default  dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        Action
+                                                        <span class="caret"></span>
+                                                    </button>
+                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+
+                                                        <li><a href="<?= site_url(); ?>institusi/hapus/<?= $dataInstitusi['id']; ?>" class="btn hapus-institusi" data-id="<?= $dataInstitusi['id']; ?>" data-institusi="<?= $dataInstitusi['institusi']; ?>"><span class="glyphicon glyphicon-trash"></span>Hapus</a></li>
+
+                                                        <li role=" separator" class="divider"></li>
+
+                                                        <li><a class="btn ubah-institusi" data-id="<?= $dataInstitusi['id']; ?>"><span class="glyphicon glyphicon-edit"></span>Ubah</a></li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <?php $no++; ?>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
+                <?php $this->load->view('institusi/modal'); ?>
             </section>
             <!-- /.content -->
-
         </div>
         <!-- /.content-wrapper -->
