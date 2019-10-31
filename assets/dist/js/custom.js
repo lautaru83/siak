@@ -307,40 +307,153 @@ $(document).ready(function () {
             }
         })
     });
-    // end Hapus institusi
-
-
-
-    // $('#modal-ubah').on('show.bs.modal', function (event) {
-    //     var div = $(event.relatedTarget) // Tombol dimana modal di tampilkan
-    //     var modal = $(this)
-    //     modal.find('#idubah').attr("value", div.data('id'));
-    //     modal.find('#role').attr("value", div.data('role'));
-    //     modal.find('#keterangan').html(div.data('keterangan'));
-
-    // });
-    // $('#modal-ubah-unit').on('show.bs.modal', function (event) {
-    //     var div = $(event.relatedTarget) // Tombol dimana modal di tampilkan
-    //     var modal = $(this)
-
-    //     // Isi nilai pada field
-    //     modal.find('#idunit').attr("value", div.data('id'));
-    //     modal.find('#unit').attr("value", div.data('unit'));
-    //     modal.find('#institusi_id').attr("value", div.data('idinstitusi'));
-    //     //
-    // });
-    // $('#modal-hapus-unit').on('show.bs.modal', function (event) {
-    //     var div = $(event.relatedTarget) // Tombol dimana modal di tampilkan
-    //     var modal = $(this)
-
-    //     // Isi nilai pada field
-    //     modal.find('#idhapus').attr("value", div.data('id'));
-    //     modal.find('#unithapus').attr("value", div.data('unit'));
-    // });
+    // end Hapus unit
 
     //---------------------------------------END UNIT----------------------------------------
+    //---------------------------------------ROLE----------------------------------------
+    // tombol tambah role table
+    $('#btn-tambah-role').on('click', function (e) {
+        e.preventDefault();
+        const judul = document.getElementById('judul-modal');
+        judul.innerHTML = 'Tambah Data Role';
+        $('#btn-ubah-role').hide();
+        $('#modal-role').modal('show');
+    });
+    // end tombol tambah role table
+    // ajax tombol Simpan modal role
+    $('#btn-simpan-role').on('click', function (e) {
+        e.preventDefault();
+        $.ajax({
+            type: "POST",
+            url: base_url + "/role/simpan",
+            data: $("#form-role").serialize(),
+            dataType: "JSON",
+            beforeSend: function () {
+                $('#btn-simpan-role').attr('disabled', 'disabled');
+            },
+            success: function (data) {
+                if (data.status == 'gagal') {
+                    Swal.fire({
+                        title: 'Data tidak valid!',
+                        text: '',
+                        type: 'warning'
+                    });
+                    if (data.role_error != '') {
+                        $('#role_error').html(data.role_error);
+                    } else {
+                        $('#role_error').html('');
+                    }
+                    if (data.keterangan_error != '') {
+                        $('#keterangan_error').html(data.keterangan_error);
+                    } else {
+                        $('#keterangan_error').html('');
+                    }
+                } else {
+                    Swal.fire({
+                        title: 'Data berhasil disimpan!',
+                        text: '',
+                        type: 'success'
+                    })
+                    $('#modal-role').modal('hide');
+                    dataTable.ajax.reload();
+                }
+                $('#btn-simpan-role').attr('disabled', false);
+            }
+        });
+        return false;
+    });
+    //end  ajax tombol Simpan modal role
+    // ajax ubah-unit klik table
+    $('.ubah-role').on('click', function (e) {
+        e.preventDefault();
+        const judul = document.getElementById('judul-modal');
+        judul.innerHTML = 'Ubah Data Role';
+        $('#btn-simpan-role').hide();
+        var id = $(this).data('id');
+        $.ajax({
+            url: site_url + "role/ajax_edit/" + id,
+            type: "GET",
+            dataType: "JSON",
+            success: function (data) {
+                $('[name="idubah"]').val(data.id);
+                $('[name="role"]').val(data.role);
+                $('[name="keterangan"]').val(data.keterangan);
+                $('#modal-role').modal('show');
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('Error get data from ajax');
+            }
+        });
+    });
+    // end ajax ubah-role klik table
+    // ajax tombol modal ubah role
+    $('#btn-ubah-role').on('click', function (e) {
+        e.preventDefault();
+        var id = $('#idubah').val();
+        $.ajax({
+            type: "POST",
+            url: site_url + "role/ubah/" + id,
+            data: $("#form-role").serialize(),
+            dataType: 'JSON',
+            beforeSend: function () {
+                $('#btn-ubah-role').attr('disabled', 'disabled');
+            },
+            success: function (data) {
+                if (data.status == 'gagal') {
+                    Swal.fire({
+                        title: 'Data tidak valid!',
+                        text: '',
+                        type: 'warning'
+                    });
+                    if (data.role_error != '') {
+                        $('#role_error').html(data.role_error);
 
+                    } else {
+                        $('#role_error').html('');
+                    }
+                    if (data.keterangan_error != '') {
+                        $('#keterangan_error').html(data.keterangan_error);
+                    } else {
+                        $('#keterangan_error').html('');
+                    }
+                } else {
+                    Swal.fire({
+                        title: 'Data berhasil diubah!',
+                        text: '',
+                        type: 'success'
+                    });
+                    $('#modal-role').modal('hide');
+                    dataTable.ajax.reload();
+                }
+                $('#btn-ubah-role').attr('disabled', false);
+            }
+        });
+        return false;
+    });
+    // end ajax tombol modal ubah role
 
+    // Hapus role
+    $('.hapus-role').on('click', function (e) {
+        e.preventDefault();
+        const href = $(this).attr('href');
+        var datainfo = $(this).data('role');
+        Swal.fire({
+            title: 'Apakah anda yakin',
+            text: 'Role ' + datainfo + ' akan dihapus ?',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Hapus Data!'
+        }).then((result) => {
+            if (result.value) {
+                document.location.href = href;
+            }
+        })
+    });
+    // end Hapus role
+
+    //---------------------------------------ENDROLE----------------------------------------
 
 
 }); // end document ready
