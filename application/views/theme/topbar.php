@@ -1,7 +1,7 @@
 <header class="main-header">
     <a href="<?= site_url('dashboard') ?>" class="logo">
-        <span class="logo-mini"><b>A</b>LT</span>
-        <span class="logo-lg"><b>Admin</b>LTE</span>
+        <span class="logo-mini"><b>SI</b>A</span>
+        <span class="logo-lg"><b>Siak</b>SM</span>
     </a>
     <nav class="navbar navbar-static-top">
         <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
@@ -10,7 +10,6 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </a>
-
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
                 <li class="dropdown user user-menu">

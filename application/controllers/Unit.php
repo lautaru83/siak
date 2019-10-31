@@ -6,12 +6,12 @@ class Unit extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('Unit_model');
+        $this->load->model(array('Institusi_model' => 'Institusi_model', 'Unit_model' => 'Unit_model'));
     }
     public function index()
     {
-        $data['unit'] = $this->Unit_model->unit_data();
-        $data['institusi'] = $this->db->get('institusis')->result_array();
+        $data['unit'] = $this->Unit_model->ambil_data();
+        $data['institusi'] = $this->Institusi_model->ambil_data();
         $this->load->view('theme/header');
         $this->load->view('theme/topbar');
         $this->load->view('theme/sidebar');
@@ -19,29 +19,71 @@ class Unit extends CI_Controller
         $this->load->view('theme/footer');
     }
 
-    public function add()
+    public function simpan()
     {
-        $data = [
-            'id' => $this->input->post('idunit'),
-            'institusi_id' => $this->input->post('institusi_id'),
-            'unit' => htmlspecialchars($this->input->post('unit', true))
-        ];
-        $this->db->insert('units', $data);
-        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-        Data berhasil disimpan!</div>');
-        redirect('unit');
-    }
-    public function ajax_ubah($id)
-    {
-        $data = $this->Unit_model->getUnitById($id);
+        $this->_validate();
+        if ($this->form_validation->run() == false) {
+            $data = array(
+                'status' => 'gagal',
+                'id_error' => form_error('id'),
+                'unit_error' => form_error('unit'),
+                'institusi_error' => form_error('institusi_id')
+            );
+        } else {
+            $this->Unit_model->simpan();
+            $data = array(
+                'status' => 'sukses'
+            );
+        }
         echo json_encode($data);
     }
-    public function hapus()
+    public function ajax_edit($id)
     {
-        $id = $this->input->post('idhapus');
-        $this->Unit_model->hapusUnit($id);
-        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-        Data berhasil dihapus!</div>');
-        redirect('unit');
+        $data = $this->Unit_model->ambil_data_id($id);
+        echo json_encode($data);
+    }
+    public function hapus($id)
+    {
+        $hasil = $this->Unit_model->cek_hapus($id);
+        if (!$hasil) {
+            $this->Unit_model->hapus($id);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+            Data unit berhasil dihapus!</div>');
+            redirect('unit');
+        } else {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+            Penghapusan data dibatalkan, data sedang digunakan oleh system!</div>');
+            redirect('unit');
+        }
+    }
+    public function ubah($id)
+    {
+        $this->_validate();
+        if ($this->form_validation->run() == false) {
+            $data = array(
+                'status' => 'gagal',
+                'id_error' => form_error('id'),
+                'unit_error' => form_error('unit'),
+                'institusi_error' => form_error('institusi_id')
+            );
+        } else {
+            $this->Unit_model->ubah($id);
+            $data = array(
+                'status' => 'sukses'
+            );
+        }
+        echo json_encode($data);
+    }
+    private function _validate()
+    {
+        $this->form_validation->set_rules('id', 'kode', 'required|trim', [
+            'required' => 'Kode harap diisi!'
+        ]);
+        $this->form_validation->set_rules('unit', 'unit', 'required|trim', [
+            'required' => 'Nama unit harap diisi!'
+        ]);
+        $this->form_validation->set_rules('institusi_id', 'Institusi_id', 'required|trim', [
+            'required' => 'Harap pilih institusi!'
+        ]);
     }
 }

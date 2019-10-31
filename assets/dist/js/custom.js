@@ -130,9 +130,6 @@ $(document).ready(function () {
         return false;
     });
     // end ajax tombol modal ubah institusi
-
-
-
     //Hapus institusi
     $('.hapus-institusi').on('click', function (e) {
         e.preventDefault();
@@ -152,37 +149,194 @@ $(document).ready(function () {
             }
         })
     });
-
-
+    // end Hapus institusi
     //---------------------------------------END INSTITUSI----------------------------------------
 
     //---------------------------------------UNIT----------------------------------------
-    $('#modal-ubah').on('show.bs.modal', function (event) {
-        var div = $(event.relatedTarget) // Tombol dimana modal di tampilkan
-        var modal = $(this)
-        modal.find('#idubah').attr("value", div.data('id'));
-        modal.find('#role').attr("value", div.data('role'));
-        modal.find('#keterangan').html(div.data('keterangan'));
-
+    // tombol tambah unit table
+    $('#btn-tambah-unit').on('click', function (e) {
+        e.preventDefault();
+        const judul = document.getElementById('judul-modal');
+        judul.innerHTML = 'Tambah Data Unit';
+        $('#btn-ubah-unit').hide();
+        $('#modal-unit').modal('show');
     });
-    $('#modal-ubah-unit').on('show.bs.modal', function (event) {
-        var div = $(event.relatedTarget) // Tombol dimana modal di tampilkan
-        var modal = $(this)
+    // end tombol tambah unit table
+    // ajax tombol Simpan modal unit
+    $('#btn-simpan-unit').on('click', function (e) {
+        e.preventDefault();
+        $.ajax({
+            type: "POST",
+            url: base_url + "/unit/simpan",
+            data: $("#form-unit").serialize(),
+            dataType: "JSON",
+            beforeSend: function () {
+                $('#btn-simpan-unit').attr('disabled', 'disabled');
+            },
+            success: function (data) {
+                if (data.status == 'gagal') {
+                    Swal.fire({
+                        title: 'Data tidak valid!',
+                        text: '',
+                        type: 'warning'
+                    });
+                    if (data.id_error != '') {
+                        $('#id_error').html(data.id_error);
 
-        // Isi nilai pada field
-        modal.find('#idunit').attr("value", div.data('id'));
-        modal.find('#unit').attr("value", div.data('unit'));
-        modal.find('#institusi_id').attr("value", div.data('idinstitusi'));
-        //
+                    } else {
+                        $('#id_error').html('');
+                    }
+                    if (data.unit_error != '') {
+                        $('#unit_error').html(data.unit_error);
+                    } else {
+                        $('#unit_error').html('');
+                    }
+                    if (data.unit_error != '') {
+                        $('#institusi_error').html(data.institusi_error);
+                    } else {
+                        $('#institusi_error').html('');
+                    }
+                } else {
+                    Swal.fire({
+                        title: 'Data berhasil disimpan!',
+                        text: '',
+                        type: 'success'
+                    })
+                    $('#modal-unit').modal('hide');
+                    dataTable.ajax.reload();
+                }
+                $('#btn-simpan-unit').attr('disabled', false);
+            }
+        });
+        return false;
     });
-    $('#modal-hapus-unit').on('show.bs.modal', function (event) {
-        var div = $(event.relatedTarget) // Tombol dimana modal di tampilkan
-        var modal = $(this)
+    //end  ajax tombol Simpan modal unit
 
-        // Isi nilai pada field
-        modal.find('#idhapus').attr("value", div.data('id'));
-        modal.find('#unithapus').attr("value", div.data('unit'));
+    // ajax ubah-unit klik table
+    $('.ubah-unit').on('click', function (e) {
+        e.preventDefault();
+        const judul = document.getElementById('judul-modal');
+        judul.innerHTML = 'Ubah Data Unit';
+        $('#btn-simpan-unit').hide();
+        var id = $(this).data('id');
+        $.ajax({
+            url: site_url + "unit/ajax_edit/" + id,
+            type: "GET",
+            dataType: "JSON",
+            success: function (data) {
+                $('[name="id"]').val(data.id);
+                $('[name="idubah"]').val(data.id);
+                $('[name="institusi_id"]').val(data.institusi_id);
+                $('[name="unit"]').val(data.unit);
+                $('#id').attr('disabled', 'disabled');
+                $('#modal-unit').modal('show');
+                $('#unit').focus();
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('Error get data from ajax');
+            }
+        });
     });
+    // end ajax ubah-unit klik table
+    // ajax tombol ubah modal unit
+    $('#btn-ubah-unit').on('click', function (e) {
+        e.preventDefault();
+        var id = $('#idubah').val();
+        $.ajax({
+            type: "POST",
+            url: site_url + "unit/ubah/" + id,
+            data: $("#form-unit").serialize(),
+            dataType: "JSON",
+            beforeSend: function () {
+                $('#btn-ubah-unit').attr('disabled', 'disabled');
+            },
+            success: function (data) {
+                if (data.status == 'gagal') {
+                    Swal.fire({
+                        title: 'Data tidak valid!',
+                        text: '',
+                        type: 'warning'
+                    });
+                    if (data.id_error != '') {
+                        $('#id_error').html(data.id_error);
+
+                    } else {
+                        $('#id_error').html('');
+                    }
+                    if (data.unit_error != '') {
+                        $('#unit_error').html(data.unit_error);
+                    } else {
+                        $('#unit_error').html('');
+                    }
+                    if (data.unit_error != '') {
+                        $('#institusi_error').html(data.institusi_error);
+                    } else {
+                        $('#institusi_error').html('');
+                    }
+                } else {
+                    Swal.fire({
+                        title: 'Data berhasil diubah!',
+                        text: '',
+                        type: 'success'
+                    })
+                    $('#modal-unit').modal('hide');
+                    dataTable.ajax.reload();
+                }
+                $('#btn-ubah-unit').attr('disabled', false);
+            }
+        });
+        return false;
+    });
+    //end  ajax tombol ubah modal unit
+    // Hapus unit
+    $('.hapus-unit').on('click', function (e) {
+        e.preventDefault();
+        const href = $(this).attr('href');
+        var datainfo = $(this).data('unit');
+        Swal.fire({
+            title: 'Apakah anda yakin',
+            text: 'Unit ' + datainfo + ' akan dihapus ?',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Hapus Data!'
+        }).then((result) => {
+            if (result.value) {
+                document.location.href = href;
+            }
+        })
+    });
+    // end Hapus institusi
+
+
+
+    // $('#modal-ubah').on('show.bs.modal', function (event) {
+    //     var div = $(event.relatedTarget) // Tombol dimana modal di tampilkan
+    //     var modal = $(this)
+    //     modal.find('#idubah').attr("value", div.data('id'));
+    //     modal.find('#role').attr("value", div.data('role'));
+    //     modal.find('#keterangan').html(div.data('keterangan'));
+
+    // });
+    // $('#modal-ubah-unit').on('show.bs.modal', function (event) {
+    //     var div = $(event.relatedTarget) // Tombol dimana modal di tampilkan
+    //     var modal = $(this)
+
+    //     // Isi nilai pada field
+    //     modal.find('#idunit').attr("value", div.data('id'));
+    //     modal.find('#unit').attr("value", div.data('unit'));
+    //     modal.find('#institusi_id').attr("value", div.data('idinstitusi'));
+    //     //
+    // });
+    // $('#modal-hapus-unit').on('show.bs.modal', function (event) {
+    //     var div = $(event.relatedTarget) // Tombol dimana modal di tampilkan
+    //     var modal = $(this)
+
+    //     // Isi nilai pada field
+    //     modal.find('#idhapus').attr("value", div.data('id'));
+    //     modal.find('#unithapus').attr("value", div.data('unit'));
+    // });
 
     //---------------------------------------END UNIT----------------------------------------
 
@@ -236,24 +390,5 @@ $(document).ready(function () {
 //tesss
 
 
-    //ubah=tes-klik
-    // $('.ubah-tes').on('click', function (e) {
-    //     e.preventDefault();
-    //     const id = $(this).data('id');
 
-    //     $.ajax({
-    //         url: base_url + "institusi/ajax_edit/" + id,
-    //         type: "GET",
-    //         dataType: "JSON",
-    //         success: function (data) {
-    //             $('[name="id"]').val(data.id);
-    //             $('[name="institusi"]').val(data.institusi);
-    //             $('[name="keterangan"]').val(data.keterangan);
-    //             $('#modal-institusi').modal('show');
-    //         },
-    //         error: function (jqXHR, textStatus, errorThrown) {
-    //             alert('Error get data from ajax');
-    //         }
-    //     });
-    // });
 
