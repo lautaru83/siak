@@ -20,46 +20,70 @@
                     <!-- Default panel contents -->
                     <div class="panel-heading">
                         <div class="row">
-                            <div class="col-md-11">
+                            <div class="col-md-10">
                             </div>
-                            <div class="col-md-1">
-                                <button type="button" class="btn btn-success btn-sm">Tambah</button>
+                            <div class="col-md-2">
+                                <div class="pull-right">
+                                    <button type="button" id="btn-tambah-submenu" class="btn btn-success btn-sm">
+                                        Tambah Data
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="panel-body">
-                        <table class="table table-bordered table-striped" id="table1">
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Submenu</th>
-                                    <th scope="col">Menu</th>
-                                    <th scope="col">Url</th>
-                                    <th scope="col">Icon</th>
-                                    <th scope="col">Is_Active</th>
-                                    <th scope="col">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                $no = 1;
-                                ?>
-                                <?php foreach ($submenu as $dataSubmenu) :  ?>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped table-hover" id="table1">
+                                <thead>
                                     <tr>
-                                        <th scope="row"><?= $no; ?></th>
-                                        <td><?= $dataSubmenu['submenu']; ?></td>
-                                        <td><?= $dataSubmenu['menu']; ?></td>
-                                        <td><?= $dataSubmenu['url']; ?></td>
-                                        <td><?= $dataSubmenu['icon']; ?></td>
-                                        <td><?= $dataSubmenu['is_active']; ?></td>
-                                        <td></td>
+                                        <th class="col-md-1">#</th>
+                                        <th scope="col" class="col-md-3">Submenu</th>
+                                        <th scope="col" class="col-md-2">Menu</th>
+                                        <th scope="col" class="col-md-2">Url</th>
+                                        <th scope="col" class="col-md-1">Icon</th>
+                                        <th scope="col" class="col-md-1">Is_Active</th>
+                                        <th class="col-md-2 text-center"><span class="glyphicon glyphicon-cog"></span></th>
                                     </tr>
-                                    <?php $no++; ?>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $no = 1;
+                                    ?>
+                                    <?php foreach ($submenu as $dataSubmenu) :  ?>
+                                        <tr>
+                                            <th scope="row" class="align-middle"><?= $no; ?></th>
+                                            <td class="align-middle"><?= $dataSubmenu['submenu']; ?></td>
+                                            <td class="align-middle"><?= $dataSubmenu['menu']; ?></td>
+                                            <td class="align-middle"><?= $dataSubmenu['url']; ?></td>
+                                            <td class="align-middle"><?= $dataSubmenu['icon']; ?></td>
+                                            <td class="align-middle"><?= $dataSubmenu['is_active']; ?></td>
+                                            <td class="align-middle text-center">
+                                                <div class="dropup">
+                                                    <button class="btn btn-default  dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        Action
+                                                        <span class="caret"></span>
+                                                    </button>
+                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+
+                                                        <li><a href="<?= site_url(); ?>submenu/hapus/<?= $dataSubmenu['id']; ?>" class="btn hapus-submenu" data-id="<?= $dataSubmenu['id']; ?>" data-submenu="<?= $dataSubmenu['submenu']; ?>"><span class="glyphicon glyphicon-trash"></span>Hapus</a></li>
+
+                                                        <li role=" separator" class="divider"></li>
+
+                                                        <li><a class="btn ubah-submenu" data-id="<?= $dataSubmenu['id']; ?>"><span class="glyphicon glyphicon-edit"></span>Ubah</a></li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <?php $no++;
+                                            ?>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
+                <?php $this->load->view('submenu/modal');
+                ?>
             </section>
             <!-- /.content -->
 
