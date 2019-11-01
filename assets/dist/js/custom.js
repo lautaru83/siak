@@ -363,7 +363,7 @@ $(document).ready(function () {
         return false;
     });
     //end  ajax tombol Simpan modal role
-    // ajax ubah-unit klik table
+    // ajax ubah-role klik table
     $('.ubah-role').on('click', function (e) {
         e.preventDefault();
         const judul = document.getElementById('judul-modal');
@@ -454,6 +454,159 @@ $(document).ready(function () {
     // end Hapus role
 
     //---------------------------------------ENDROLE----------------------------------------
+    //---------------------------------------MENU----------------------------------------
+    // tombol tambah menu table
+    $('#btn-tambah-menu').on('click', function (e) {
+        e.preventDefault();
+        const judul = document.getElementById('judul-modal');
+        judul.innerHTML = 'Tambah Data Menu';
+        $('#btn-ubah-menu').hide();
+        $('#modal-menu').modal('show');
+    });
+    // end tombol tambah menu table
+    // ajax tombol Simpan modal menu
+    $('#btn-simpan-menu').on('click', function (e) {
+        e.preventDefault();
+        $.ajax({
+            type: "POST",
+            url: site_url + "/menu/simpan",
+            data: $("#form-menu").serialize(),
+            dataType: "JSON",
+            beforeSend: function () {
+                $('#btn-simpan-menu').attr('disabled', 'disabled');
+            },
+            success: function (data) {
+                if (data.status == 'gagal') {
+                    Swal.fire({
+                        title: 'Data tidak valid!',
+                        text: '',
+                        type: 'warning'
+                    });
+                    if (data.menu_error != '') {
+                        $('#menu_error').html(data.menu_error);
+                    } else {
+                        $('#menu_error').html('');
+                    }
+                    if (data.icon_error != '') {
+                        $('#icon_error').html(data.icon_error);
+                    } else {
+                        $('#icon_error').html('');
+                    }
+                    if (data.keterangan_error != '') {
+                        $('#keterangan_error').html(data.keterangan_error);
+                    } else {
+                        $('#keterangan_error').html('');
+                    }
+                } else {
+                    Swal.fire({
+                        title: 'Data berhasil disimpan!',
+                        text: '',
+                        type: 'success'
+                    })
+                    $('#modal-menu').modal('hide');
+                    dataTable.ajax.reload();
+                }
+                $('#btn-simpan-menu').attr('disabled', false);
+            }
+        });
+        return false;
+    });
+    //end  ajax tombol Simpan modal menu
+    // ajax ubah-menu klik table
+    $('.ubah-menu').on('click', function (e) {
+        e.preventDefault();
+        const judul = document.getElementById('judul-modal');
+        judul.innerHTML = 'Ubah Data Menu';
+        $('#btn-simpan-menu').hide();
+        var id = $(this).data('id');
+        $.ajax({
+            url: site_url + "menu/ajax_edit/" + id,
+            type: "GET",
+            dataType: "JSON",
+            success: function (data) {
+                $('[name="idubah"]').val(data.id);
+                $('[name="menu"]').val(data.menu);
+                $('[name="icon"]').val(data.icon);
+                $('[name="keterangan"]').val(data.keterangan);
+                $('#modal-menu').modal('show');
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('Error get data from ajax');
+            }
+        });
+    });
+    // end ajax ubah-menu klik table
+    // ajax tombol modal ubah menu
+    $('#btn-ubah-menu').on('click', function (e) {
+        e.preventDefault();
+        var id = $('#idubah').val();
+        $.ajax({
+            type: "POST",
+            url: site_url + "menu/ubah/" + id,
+            data: $("#form-menu").serialize(),
+            dataType: 'JSON',
+            beforeSend: function () {
+                $('#btn-ubah-menu').attr('disabled', 'disabled');
+            },
+            success: function (data) {
+                if (data.status == 'gagal') {
+                    Swal.fire({
+                        title: 'Data tidak valid!',
+                        text: '',
+                        type: 'warning'
+                    });
+                    if (data.menu_error != '') {
+                        $('#menu_error').html(data.menu_error);
+                    } else {
+                        $('#menu_error').html('');
+                    }
+                    if (data.icon_error != '') {
+                        $('#icon_error').html(data.icon_error);
+                    } else {
+                        $('#icon_error').html('');
+                    }
+                    if (data.keterangan_error != '') {
+                        $('#keterangan_error').html(data.keterangan_error);
+                    } else {
+                        $('#keterangan_error').html('');
+                    }
+                } else {
+                    Swal.fire({
+                        title: 'Data berhasil diubah!',
+                        text: '',
+                        type: 'success'
+                    });
+                    $('#modal-menu').modal('hide');
+                    dataTable.ajax.reload();
+                }
+                $('#btn-ubah-menu').attr('disabled', false);
+            }
+        });
+        return false;
+    });
+    // end ajax tombol modal ubah menu
+    // Hapus menu
+    $('.hapus-menu').on('click', function (e) {
+        e.preventDefault();
+        const href = $(this).attr('href');
+        var datainfo = $(this).data('menu');
+        Swal.fire({
+            title: 'Apakah anda yakin',
+            text: 'Menu ' + datainfo + ' akan dihapus ?',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Hapus Data!'
+        }).then((result) => {
+            if (result.value) {
+                document.location.href = href;
+            }
+        })
+    });
+    // end Hapus menu
+
+    //---------------------------------------ENDMENU----------------------------------------
 
 
 }); // end document ready
