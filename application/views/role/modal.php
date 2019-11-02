@@ -2,16 +2,14 @@
 <div class="modal fade" id="modal-role" tabindex="-1">
     <div class="vertical-alignment-helper">
         <div class="modal-dialog vertical-align-center">
-            <div class="modal-content">
+            <div class="modal-content panel-default">
+                <div class=" modal-header panel-heading">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="judul-modal">Tambah Data Role</h4>
+                </div>
                 <form id="form-role" class="form-horizontal">
-                    <div class=" modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="judul-modal">Tambah Data Role</h4>
-                    </div>
-                    <div class="modal-body">
-                        <!-- Beri id "pesan-error" untuk menampung pesan error -->
-                        <div id="pesan-error" class="alert alert-danger"></div>
+                    <div class="modal-body panel-body">
                         <div class="form-group">
                             <label for="role" class="col-sm-2 control-label">Role</label>
                             <div class="col-sm-10">
@@ -28,7 +26,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer">
+                    <div class="modal-footer panel-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
                         <button id="btn-ubah-role" type="submit" class="btn btn-primary">Ubah</button>
                         <button id="btn-simpan-role" type="submit" class="btn btn-primary">Simpan</button>
                     </div>

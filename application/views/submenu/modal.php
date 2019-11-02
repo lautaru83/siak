@@ -2,19 +2,19 @@
 <div class="modal fade" id="modal-submenu" tabindex="-1">
     <div class="vertical-alignment-helper">
         <div class="modal-dialog vertical-align-center">
-            <div class="modal-content">
-                <div class="modal-header">
+            <div class="modal-content panel-default">
+                <div class="modal-header panel-heading">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="judul-modal">Tambah Data Submenu</h4>
                 </div>
                 <form id="form-submenu" class="form-horizontal">
-                    <div class="modal-body">
+                    <div class="modal-body panel-body">
                         <div class="form-group">
                             <label for="submenu" class="col-sm-2 control-label">Submenu</label>
                             <div class="col-sm-10">
                                 <input type="hidden" id="idubah" name="idubah">
-                                <input type="text" name="submenu" class="form-control" id="submenu" placeholder="Nama submenu">
+                                <input type="text" name="submenu" class="form-control" id="submenu" placeholder="Nama submenu" autofocus>
                                 <span id="submenu_error" class="text-danger"></span>
                             </div>
                         </div>
@@ -46,9 +46,9 @@
                                 <span id="icon_error" class="text-danger"></span>
                             </div>
                         </div>
-
                     </div>
-                    <div class="modal-footer">
+                    <div class="modal-footer panel-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
                         <button id="btn-ubah-submenu" type="submit" class="btn btn-primary">Ubah</button>
                         <button id="btn-simpan-submenu" type="submit" class="btn btn-primary">Simpan</button>
                     </div>

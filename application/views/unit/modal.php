@@ -2,15 +2,14 @@
 <div class="modal fade" id="modal-unit" tabindex="-1">
     <div class="vertical-alignment-helper">
         <div class="modal-dialog vertical-align-center">
-            <div class="modal-content">
-                <div class="modal-header">
+            <div class="modal-content panel-default">
+                <div class="modal-header panel-heading">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="judul-modal">Tambah Data unit</h4>
                 </div>
                 <form id="form-unit" class="form-horizontal">
-                    <div class="modal-body">
-
+                    <div class="modal-body panel-body">
                         <div class="form-group">
                             <label for="id" class="col-sm-2 control-label">Kode</label>
                             <div class="col-sm-10">
@@ -42,7 +41,8 @@
                         </div>
 
                     </div>
-                    <div class="modal-footer">
+                    <div class="modal-footer panel-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
                         <button id="btn-ubah-unit" type="submit" class="btn btn-primary">Ubah</button>
                         <button id="btn-simpan-unit" type="submit" class="btn btn-primary">Simpan</button>
                     </div>
