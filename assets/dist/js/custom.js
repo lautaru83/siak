@@ -605,7 +605,6 @@ $(document).ready(function () {
         })
     });
     // end Hapus menu
-
     //---------------------------------------ENDMENU----------------------------------------
     //---------------------------------------SUBMENU----------------------------------------
     // tombol tambah menu table
@@ -690,7 +689,7 @@ $(document).ready(function () {
             }
         })
     });
-    // end Hapus menu
+    // end Hapus submenu
     // ajax ubah-submenu klik table
     $('.ubah-submenu').on('click', function (e) {
         e.preventDefault();
@@ -773,7 +772,185 @@ $(document).ready(function () {
     });
     //end  ajax tombol ubah modal submenu
 
-    //---------------------------------------END-SUBMENU----------------------------------------
+    //---------------------------------------END-SUBMENU----------------------------------------------
+    //---------------------------------------USER-----------------------------------------------------
+    // tombol tambah user table
+    $('#btn-tambah-user').on('click', function (e) {
+        e.preventDefault();
+        const judul = document.getElementById('judul-modal');
+        judul.innerHTML = 'Tambah Data User';
+        $('#btn-ubah-user').hide();
+        $('#info').hide();
+        $('#modal-user').modal('show');
+    });
+    // end tombol tambah user table
+    // ajax tombol Simpan modal user
+    $('#btn-simpan-user').on('click', function (e) {
+        e.preventDefault();
+        $.ajax({
+            type: "POST",
+            url: base_url + "/user/simpan",
+            data: $("#form-user").serialize(),
+            dataType: "JSON",
+            beforeSend: function () {
+                $('#btn-simpan-user').attr('disabled', 'disabled');
+            },
+            success: function (data) {
+                if (data.status == 'gagal') {
+                    Swal.fire({
+                        title: 'Data tidak valid!',
+                        text: '',
+                        type: 'warning'
+                    });
+                    if (data.nama_error != '') {
+                        $('#nama_error').html(data.nama_error);
+                    } else {
+                        $('#nama_error').html('');
+                    }
+                    if (data.role_error != '') {
+                        $('#role_error').html(data.role_error);
+
+                    } else {
+                        $('#role_error').html('');
+                    }
+                    if (data.unit_error != '') {
+                        $('#unit_error').html(data.unit_error);
+                    } else {
+                        $('#unit_error').html('');
+                    }
+                    if (data.email_error != '') {
+                        $('#email_error').html(data.email_error);
+                    } else {
+                        $('#email_error').html('');
+                    }
+                    if (data.sandi_error != '') {
+                        $('#sandi_error').html(data.sandi_error);
+                    } else {
+                        $('#sandi_error').html('');
+                    }
+                } else {
+                    Swal.fire({
+                        title: 'Data berhasil disimpan!',
+                        text: '',
+                        type: 'success'
+                    })
+                    $('#modal-user').modal('hide');
+                    dataTable.ajax.reload();
+                }
+                $('#btn-simpan-user').attr('disabled', false);
+            }
+        });
+        return false;
+    });
+    //end  ajax tombol Simpan modal user
+    // ajax ubah-user klik table
+    $('.ubah-user').on('click', function (e) {
+        e.preventDefault();
+        const judul = document.getElementById('judul-modal');
+        judul.innerHTML = 'Ubah Data User';
+        $('#btn-simpan-user').hide();
+        var id = $(this).data('id');
+        $.ajax({
+            url: site_url + "user/ajax_edit/" + id,
+            type: "GET",
+            dataType: "JSON",
+            success: function (data) {
+                $('[name="idubah"]').val(data.id);
+                $('[name="nama"]').val(data.nama);
+                $('[name="role_id"]').val(data.role_id);
+                $('[name="unit_id"]').val(data.unit_id);
+                $('[name="email"]').val(data.email);
+                $('#email').attr('disabled', 'disabled');
+                $('#modal-user').modal('show');
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('Error get data from ajax');
+            }
+        });
+    });
+    // end ajax ubah-user klik table
+    // ajax tombol ubah modal user
+    $('#btn-ubah-user').on('click', function (e) {
+        e.preventDefault();
+        var id = $('#idubah').val();
+        $.ajax({
+            type: "POST",
+            url: site_url + "user/ubah/" + id,
+            data: $("#form-user").serialize(),
+            dataType: "JSON",
+            beforeSend: function () {
+                $('#btn-ubah-user').attr('disabled', 'disabled');
+            },
+            success: function (data) {
+                if (data.status == 'gagal') {
+                    Swal.fire({
+                        title: 'Data tidak valid!',
+                        text: '',
+                        type: 'warning'
+                    })
+                    if (data.nama_error != '') {
+                        $('#nama_error').html(data.nama_error);
+                    } else {
+                        $('#nama_error').html('');
+                    }
+                    if (data.role_error != '') {
+                        $('#role_error').html(data.role_error);
+
+                    } else {
+                        $('#role_error').html('');
+                    }
+                    if (data.unit_error != '') {
+                        $('#unit_error').html(data.unit_error);
+                    } else {
+                        $('#unit_error').html('');
+                    }
+                    if (data.email_error != '') {
+                        $('#email_error').html(data.email_error);
+                    } else {
+                        $('#email_error').html('');
+                    }
+                    if (data.sandi_error != '') {
+                        $('#sandi_error').html(data.sandi_error);
+                    } else {
+                        $('#sandi_error').html('');
+                    }
+                } else {
+                    Swal.fire({
+                        title: 'Data berhasil diubah!',
+                        text: '',
+                        type: 'success'
+                    })
+                    $('#modal-user').modal('hide');
+                    dataTable.ajax.reload();
+                }
+                $('#btn-ubah-user').attr('disabled', false);
+            }
+        });
+        return false;
+    });
+    //end  ajax tombol ubah modal user
+    // Hapus user
+    $('.hapus-user').on('click', function (e) {
+        e.preventDefault();
+        const href = $(this).attr('href');
+        var datainfo = $(this).data('nama');
+        Swal.fire({
+            title: 'Apakah anda yakin',
+            text: 'User ' + datainfo + ' akan dihapus ?',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Hapus Data!'
+        }).then((result) => {
+            if (result.value) {
+                document.location.href = href;
+            }
+        })
+    });
+    // end Hapus user
+
+    //---------------------------------------END-USER-------------------------------------------------
 
 
 }); // end document ready

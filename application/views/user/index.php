@@ -20,51 +20,72 @@
                     <!-- Default panel contents -->
                     <div class="panel-heading">
                         <div class="row">
-                            <div class="col-md-1">
-                                <a class="btn btn-success btn-sm active" role="button" data-toggle="modal" data-target="#modal-user">Tambah</a>
-                            </div>
                             <div class="col-md-10">
                             </div>
-                            <div class="col-md-1">
-                                <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal-user">Cetak</button>
+                            <div class="col-md-2">
+                                <div class="pull-right">
+                                    <button type="button" id="btn-tambah-user" class="btn btn-success btn-sm">
+                                        Tambah Data
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="panel-body">
-                        <table class="table table-bordered table-striped" id="table1">
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Nama</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Unit</th>
-                                    <th scope="col">Role</th>
-                                    <th scope="col">Active</th>
-                                    <th scope="col">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                $no = 1;
-                                ?>
-                                <?php foreach ($user as $dataUser) :  ?>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped table-hover" id="table1">
+                                <thead>
                                     <tr>
-                                        <th scope="row"><?= $no; ?></th>
-                                        <td><?= $dataUser['nama']; ?></td>
-                                        <td><?= $dataUser['email']; ?></td>
-                                        <td><?= $dataUser['unit']; ?></td>
-                                        <td><?= $dataUser['role']; ?></td>
-                                        <td><?= $dataUser['is_active']; ?></td>
-                                        <td></td>
+                                        <th class="col-md-1">#</th>
+                                        <th scope="col" class="col-md-3">Nama</th>
+                                        <th scope="col" class="col-md-2">Role</th>
+                                        <th scope="col" class="col-md-2">Unit</th>
+                                        <th scope="col" class="col-md-1">Email</th>
+                                        <th scope="col" class="col-md-1">Is_Active</th>
+                                        <th class="col-md-2 text-center"><span class="glyphicon glyphicon-cog"></span></th>
                                     </tr>
-                                    <?php $no++; ?>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $no = 1;
+                                    ?>
+                                    <?php foreach ($user as $dataUser) :  ?>
+                                        <tr>
+                                            <th scope="row" class="align-middle"><?= $no; ?></th>
+                                            <td class="align-middle"><?= $dataUser['nama']; ?></td>
+                                            <td class="align-middle"><?= $dataUser['role']; ?></td>
+                                            <td class="align-middle"><?= $dataUser['unit']; ?></td>
+                                            <td class="align-middle"><?= $dataUser['email']; ?></td>
+                                            <td class="align-middle"><?= $dataUser['is_active']; ?></td>
+                                            <td class="align-middle text-center">
+                                                <div class="dropup">
+                                                    <button class="btn btn-default  dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        Action
+                                                        <span class="caret"></span>
+                                                    </button>
+                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+
+                                                        <li><a href="<?= site_url(); ?>user/hapus/<?= $dataUser['id']; ?>" class="btn hapus-user" data-id="<?= $dataUser['id']; ?>" data-nama="<?= $dataUser['nama']; ?>"><span class="glyphicon glyphicon-trash"></span>Hapus</a></li>
+
+                                                        <li role=" separator" class="divider"></li>
+
+                                                        <li><a class="btn ubah-user" data-id="<?= $dataUser['id']; ?>"><span class="glyphicon glyphicon-edit"></span>Ubah</a></li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <?php $no++;
+                                            ?>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
-                <?php $this->load->view('user/modal'); ?>
+                <?php $this->load->view('user/modal');
+                ?>
             </section>
             <!-- /.content -->
+
         </div>
         <!-- /.content-wrapper -->
