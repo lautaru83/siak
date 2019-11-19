@@ -6,15 +6,19 @@ class Institusi extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        is_logged_in();
         $this->load->model('Institusi_model');
     }
     public function index()
     {
+        $data['kontenmenu'] = "Master Data";
+        $data['kontensubmenu'] = "Institusi Management";
         $data['institusi'] = $this->Institusi_model->ambil_data();
-        $this->load->view('theme/header');
+        $this->load->view('theme/header', $data);
         $this->load->view('theme/topbar');
         $this->load->view('theme/sidebar');
-        $this->load->view('institusi/index', $data);
+        $this->load->view('setting/institusi/index', $data);
+        $this->load->view('theme/sidebar-info');
         $this->load->view('theme/footer');
     }
     public function simpan()
@@ -56,27 +60,39 @@ class Institusi extends CI_Controller
         $data = $this->Institusi_model->ambil_data_id($id);
         echo json_encode($data);
     }
-    public function hapus($id)
+    public function hapus($id, $info)
     {
         $hasil = $this->Institusi_model->cek_hapus($id);
         if (!$hasil) {
-            $this->Institusi_model->hapus($id);
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-            Data institusi berhasil dihapus!</div>');
-            redirect('institusi');
+            $this->Institusi_model->hapus($id, $info);
+            $data = array(
+                'status' => 'sukses'
+            );
         } else {
-            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
-            Penghapusan data dibatalkan, data sedang digunakan oleh system!</div>');
-            redirect('institusi');
+            $data = array(
+                'status' => 'gagal'
+            );
         }
+        echo json_encode($data);
     }
+    // public function ajax_hapus($id, $info)
+    // {
+    //     $hasil = $this->Institusi_model->cek_hapus($id);
+    //     if (!$hasil) {
+    //         $this->Institusi_model->hapus($id, $info);
+    //         $data = array(
+    //             'status' => 'sukses'
+    //         );
+    //     } else {
+    //         $data = array(
+    //             'status' => 'gagal'
+    //         );
+    //     }
+    //     echo json_encode($data);
+    // }
     private function _validate()
     {
-        $this->form_validation->set_rules('institusi', 'Institusi', 'required|trim', [
-            'required' => 'Institusi harap diisi!'
-        ]);
-        $this->form_validation->set_rules('keterangan', 'Keterangan', 'required|trim', [
-            'required' => 'Keterangan harap diisi!'
-        ]);
+        $this->form_validation->set_rules('institusi', 'Institusi', 'required|trim');
+        $this->form_validation->set_rules('keterangan', 'Keterangan', 'required|trim');
     }
 }

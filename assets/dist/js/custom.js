@@ -1,5 +1,38 @@
 //var id = 0 // Untuk menampung ID yang kaan di ubah / hapus
 $(document).ready(function () {
+    // ---------------tes-------------
+    // function jumlahIntitusiTerpilih() {
+    //     return document.querySelectorAll('.cek-institusi').length;
+    // };
+    // cek-institusi klik
+    // $(".cek-institusi").on('click', function () {
+    //     const checkbox = $('.cek-institusi:checked');
+    //     if (checkbox.length = 1) {
+    //         $('#btn-cek-institusi-ubah').attr('disabled', false);
+    //         $('#btn-cek-institusi-hapus').attr('disabled', false);
+    //     } else if (checkbox.length > 1) {
+    //         $('#btn-cek-institusi-ubah').attr('disabled', 'disabled');
+    //     } else {
+    //         $('#btn-cek-institusi-ubah').attr('disabled', 'disabled');
+    //         $('#btn-cek-institusi-hapus').attr('disabled', 'disabled');
+    //     }
+    // });
+    // $(".cek-institusi").on('click', function () {
+    //     if ($('.cek-institusi').length = 1) {
+    //         $('#btn-cek-institusi-ubah').attr('disabled', false);
+    //         $('#btn-cek-institusi-hapus').attr('disabled', false);
+    //     } else if ($('.cek-institusi').length > 1) {
+    //         $('#btn-cek-institusi-ubah').attr('disabled', 'disabled');
+    //     } else {
+    //         $('#btn-cek-institusi-ubah').attr('disabled', 'disabled');
+    //         $('#btn-cek-institusi-hapus').attr('disabled', 'disabled');
+    //     }
+    // });
+
+
+
+    // ---------------/tes-------------
+
     // Sembunyikan loading simpan, loading ubah, loading hapus, pesan error, pesan sukes, dan tombol reset
     $('#loading-simpan, #loading-ubah, #loading-hapus, #pesan-error, #pesan-sukses, #btn-reset').hide()
 
@@ -798,7 +831,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.status == 'gagal') {
                     Swal.fire({
-                        title: 'Data tidak valid!',
+                        title: ' Data tidak valid!',
                         text: '',
                         type: 'warning'
                     });
@@ -830,7 +863,7 @@ $(document).ready(function () {
                     }
                 } else {
                     Swal.fire({
-                        title: 'Data berhasil disimpan!',
+                        title: ' Data berhasil disimpan!',
                         text: '',
                         type: 'success'
                     })
@@ -884,7 +917,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.status == 'gagal') {
                     Swal.fire({
-                        title: 'Data tidak valid!',
+                        title: ' Data tidak valid!',
                         text: '',
                         type: 'warning'
                     })
@@ -916,7 +949,7 @@ $(document).ready(function () {
                     }
                 } else {
                     Swal.fire({
-                        title: 'Data berhasil diubah!',
+                        title: ' Data berhasil diubah!',
                         text: '',
                         type: 'success'
                     })

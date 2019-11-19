@@ -52,3 +52,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 $route['default_controller'] = 'auth';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+$route['tahunbuku'] = 'akuntansi/tahunbuku';
+$route['tahunanggaran'] = 'akuntansi/tahunanggaran';
+$route['kodeperkiraan'] = 'akuntansi/kodeperkiraan';
+$route['kodeanggaran'] = 'akuntansi/kodeanggaran';
+$route['jenistransaksi'] = 'akuntansi/jenistransaksi';

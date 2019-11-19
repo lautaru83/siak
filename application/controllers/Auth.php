@@ -44,12 +44,16 @@ class Auth extends CI_Controller
                     //echo "Login Sukses!";
                     $data = [
                         'email' => $user['email'],
+                        'xyz' => $user['id'],
                         'role_id' => $user['role_id'],
                         'nama_user' => $user['nama'],
                         'image' => $user['image'],
 
                     ];
                     $this->session->set_userdata($data);
+                    $log_type = "login";
+                    $log_desc = "login User";
+                    userLog($log_type, $log_desc);
                     if ($user['role_id'] == 1) {
                         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
                     login Admin Sukses!</div>');
@@ -122,6 +126,8 @@ class Auth extends CI_Controller
     public function logout()
     {
         $this->session->unset_userdata('email');
+        $this->session->unset_userdata('xyz');
+        $this->session->unset_userdata('nama_user');
         $this->session->unset_userdata('role_id');
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
         Logout Berhasil!</div>');

@@ -4,14 +4,19 @@
     width: 100%;
 }
 .vertical-align-center {
-    display: table-cell;
-    vertical-align: middle;
+   /* display: table-cell;
+    vertical-align: middle;*/
+    display: flex!important;
+    align-items: center!important;
+    .modal-dialog {
+        flex-grow: 1;
+    }
 }
-.modal-content {
+/*.modal-content {
     width:inherit;
     height:inherit;
     margin: 0 auto;
-}
+}*/
 /* .vcenter {
     display: inline-block;
     vertical-align: middle;
