@@ -6,6 +6,14 @@ class Institusi_model extends CI_Model
     {
         return $this->db->get('institusis')->result_array();
     }
+    // data untuk kontoller lain
+    public function data_institusi()
+    {
+        $this->db->select('id,institusi');
+        $query = $this->db->get('institusis');
+        return $query->result_array();
+        //return $this->db->query("select id,institusi from institusis")->result_array();
+    }
     public function ambil_data_id($id)
     {
         return $this->db->get_where('institusis', ['id' => $id])->row_array();

@@ -49,6 +49,14 @@ function icon_aktif($nilai)
         return "style='color: grey'";
     }
 }
+function posisi_akun($posisi)
+{
+    if ($posisi == "D") {
+        return "Debet";
+    } else {
+        return "Kredit";
+    }
+}
 function tanggal_indo($tgl)
 {
     $tanggal = date('d-m-Y', strtotime($tgl));
