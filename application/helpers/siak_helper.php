@@ -21,7 +21,6 @@ function is_logged_in()
         }
     }
 }
-
 function cek_access($role_id, $submenu_id)
 {
     $ci = get_instance();
@@ -29,6 +28,14 @@ function cek_access($role_id, $submenu_id)
     $ci->db->where('submenu_id', $submenu_id);
     $result = $ci->db->get('accesses');
 
+    if ($result->num_rows() > 0) {
+        return "checked='checked'";
+    }
+}
+function cek_akun($tran_id, $akun_id)
+{
+    $ci = get_instance();
+    $result = $ci->db->query("select siak_akuntansi.akun_transaksis.id as id from siak_akuntansi.akun_transaksis where siak_akuntansi.akun_transaksis.jenis_transaksi_id='$tran_id' and siak_akuntansi.akun_transaksis.a6level_id='$akun_id'");
     if ($result->num_rows() > 0) {
         return "checked='checked'";
     }

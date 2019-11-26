@@ -55,4 +55,26 @@ class Jenistransaksi_model extends CI_Model
         $log_desc = "ubah jenis transaksi -" . $jenis_transaksi . "-";
         userLog($log_type, $log_desc);
     }
+    public function simpanakun($data = array())
+    {
+        $tran_id = $this->input->post('jenis_transaksi_id');
+        $level6_id = $this->input->post('a6level_id');
+        $this->db2->insert('akun_transaksis', $data);
+        $log_type = "simpan";
+        $log_desc = "simpan akun transaksi -" . $tran_id . "-" . $level6_id . "-";
+        userLog($log_type, $log_desc);
+    }
+    public function hapusakun($data = array())
+    {
+        $tran_id = $this->input->post('jenis_transaksi_id');
+        $level6_id = $this->input->post('a6level_id');
+        $this->db2->delete('akun_transaksis', $data);
+        $log_type = "hapus";
+        $log_desc = "hapus akun transaksi -" . $tran_id . "-" . $level6_id . "-";
+        userLog($log_type, $log_desc);
+    }
+    public function cek_akun($data = array())
+    {
+        return $this->db2->get_where('akun_transaksis', $data)->row_array();
+    }
 }

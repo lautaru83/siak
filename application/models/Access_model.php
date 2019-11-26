@@ -10,11 +10,9 @@ class Access_model extends CI_Model
     {
         $this->db->delete('accesses', $data);
     }
-    // public function cek_data($role_id, $submenu_id)
     public function cek_data($data = array())
     {
         return $this->db->get_where('accesses', $data)->row_array();
-        // return $this->db->get_where('accesses', ['role_id' => $role_id, 'submenu_id' => $submenu_id])->row_array();
     }
     private function _log($tipe, $desc)
     {

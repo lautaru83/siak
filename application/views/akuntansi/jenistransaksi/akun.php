@@ -10,6 +10,7 @@
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right mr-4">
                     <li class="breadcrumb-item"><a><?= $kontenmenu; ?></a></li>
+                    <li class="breadcrumb-item"><a href="<?= site_url('jenistransaksi'); ?>" style="color: teal">Jenis Transaksi</a></li>
                     <li class="breadcrumb-item active"><?= $kontensubmenu; ?></li>
                 </ol>
             </div>
@@ -27,7 +28,15 @@
                         <div class="card-header bg-gradient-light">
                             <div>
                                 <h4 class="card-title">
-                                    <a class="text-reset"><i class="far fa-list-alt" style="color: teal"></i> </a>
+                                    <a href="<?= site_url('jenistransaksi'); ?>" class="text-reset"><i class="far fa-list-alt" style="color: teal"></i>
+                                        <?php
+                                        if ($transaksi) {
+                                            ?>
+                                            Jenis Transaksi : <?= $transaksi['jenis_transaksi']; ?>
+                                        <?php
+                                        }
+                                        ?>
+                                    </a>
                                 </h4>
                             </div>
                             <div class="float-right">
@@ -45,7 +54,8 @@
                                         <!-- <td class="col-1 text-center">Kode</td> -->
                                         <td colspan="5">Daftar Kode Perkiraan</td>
                                         <td>Posisi</td>
-                                        <td class="text-center" style="color: grey"><i class="fas fa-cog"></i></td>
+                                        <td>Institusi</td>
+                                        <td class="text-center" style="color: grey" width="10%"><i class="fas fa-cog"></i></td>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -59,7 +69,7 @@
                                                 <td class="text-center" width="8%">
                                                     <?= $idakun3; ?>.00.00.00
                                                 </td>
-                                                <td colspan="6" class="">
+                                                <td colspan="7" class="">
                                                     <?= $dataKode['level1']; ?> / <?= $dataKode['level2']; ?> / <?= $dataKode['level3']; ?>
                                                 </td>
                                             </tr>
@@ -70,13 +80,12 @@
                                                             $idakun4 = $dataLevel4['id'];
                                                             ?>
                                                     <tr>
-                                                        <td></td>
-                                                        <td width="8%"><?= $dataLevel4['id']; ?>.00.00</td>
-                                                        <td colspan="4"><?= $dataLevel4['level4']; ?></td>
                                                         <td class="text-center">
-                                                            <!-- <div class="form-check">
-                                                                <input class="form-check-input frm-cek-access" type="checkbox">
-                                                            </div> -->
+                                                        </td>
+                                                        <td class="text-center" width="8%"><?= $dataLevel4['id']; ?>.00.00</td>
+                                                        <td colspan="5"><?= $dataLevel4['level4']; ?>
+                                                        </td>
+                                                        <td class="text-center">
                                                         </td>
                                                     </tr>
                                                     <?php
@@ -87,13 +96,12 @@
                                                                             ?>
                                                             <tr>
                                                                 <td></td>
-                                                                <td></td>
-                                                                <td width="8%"><?= $dataLevel5['id']; ?>.00</td>
-                                                                <td colspan="3"><?= $dataLevel5['level5']; ?></td>
                                                                 <td class="text-center">
-                                                                    <!-- <div class="form-check">
-                                                                        <input class="form-check-input frm-cek-access" type="checkbox">
-                                                                    </div> -->
+                                                                </td>
+                                                                <td class="text-center" width="8%"><?= $dataLevel5['id']; ?>.00</td>
+                                                                <td colspan="4"><?= $dataLevel5['level5']; ?>
+                                                                </td>
+                                                                <td class="text-center">
                                                                 </td>
                                                             </tr>
                                                             <?php
@@ -109,10 +117,11 @@
                                                                         <td width="8%"><?= $dataLevel6['id']; ?></td>
                                                                         <td><?= $dataLevel6['level6']; ?></td>
                                                                         <td><?= posisi_akun($dataLevel6['posisi']); ?></td>
+                                                                        <td><?= $dataLevel6['institusi']; ?></td>
                                                                         <td class="text-center">
-                                                                            <!-- <div class="form-check">
-                                                                                <input class="form-check-input frm-cek-access" type="checkbox">
-                                                                            </div> -->
+                                                                            <div class="form-check">
+                                                                                <input class="form-check-input frm-cek-akuntransaksi" type="checkbox" data-tranid="<?= $tran_id; ?>" data-level6id="<?= $idakun6; ?>" <?= cek_akun($tran_id, $idakun6); ?>>
+                                                                            </div>
                                                                         </td>
                                                                     </tr>
                                                             <?php
@@ -148,8 +157,6 @@
             <!-- /.row -->
         </div>
         <!-- /.container-fluid -->
-        <?php $this->load->view('akuntansi/kodeperkiraan/modal');
-        ?>
     </section>
     <!-- /.content -->
 </div>

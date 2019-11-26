@@ -8,7 +8,7 @@ class Jenistransaksi extends CI_Controller
         parent::__construct();
         is_logged_in();
         $this->db2 = $this->load->database('akuntansi', TRUE);
-        $this->load->model('akuntansi/Jenistransaksi_model', 'Jenistransaksi_model');
+        $this->load->model(array('akuntansi/Jenistransaksi_model' => 'Jenistransaksi_model', 'akuntansi/Kodeperkiraan_model' => 'Kodeperkiraan_model'));
     }
     public function index()
     {
@@ -16,6 +16,31 @@ class Jenistransaksi extends CI_Controller
         $data['kontensubmenu'] = "Jenis Transaksi";
         $data['jenistransaksi'] = $this->Jenistransaksi_model->ambil_data();
         $this->template->display('akuntansi/jenistransaksi/index', $data);
+    }
+    public function akun($id)
+    {
+        $data['transaksi'] = $this->Jenistransaksi_model->ambil_data_id($id);
+        $data['tran_id'] = $id;
+        $data['kontenmenu'] = "Master Pembukuan";
+        $data['kontensubmenu'] = "Akun Transaksi";
+        $data['kodeperkiraan'] = $this->Kodeperkiraan_model->ambil_data();
+        //$data['institusi'] = $this->Institusi_model->data_institusi();
+        $this->template->display('akuntansi/jenistransaksi/akun', $data);
+    }
+    public function ubahakun()
+    {
+        $jenis_transaksi_id = $this->input->post('jenis_transaksi_id');
+        $a6level_id = $this->input->post('a6level_id');
+        $data = [
+            "jenis_transaksi_id" => $jenis_transaksi_id,
+            "a6level_id" => $a6level_id
+        ];
+        $hasil = $this->Jenistransaksi_model->cek_akun($data);
+        if ($hasil) {
+            $this->Jenistransaksi_model->hapusakun($data);
+        } else {
+            $this->Jenistransaksi_model->simpanakun($data);
+        }
     }
     public function simpan()
     {
