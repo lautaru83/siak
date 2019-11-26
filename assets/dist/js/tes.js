@@ -32,32 +32,7 @@ $(document).ready(function () {
         },
     });
     // ---------------------TES---------------------------
-    //ajax cekbox access user
-    $('.frm-cek-akuntransaksi').on('click', function (e) {
-        const tranId = $(this).data('tranid');
-        const level6Id = $(this).data('level6id');
-        $.ajax({
-            url: base_url + "akuntansi/jenistransaksi/ubahakun",
-            type: 'post',
-            data: {
-                jenis_transaksi_id: tranId,
-                a6level_id: level6Id
-            },
-            beforeSend: function () {
-                // $('#btn-ubah-submenu').attr('disabled', 'disabled');
-                //$(this).attr('disabled', 'disabled');
-            },
-            success: function () {
-                Toast.fire({
-                    type: 'success',
-                    title: 'akun transaksi berhasil diperbaharui!'
-                });
-                //$(this).attr('disabled', false);
-                // document.location.href = site_url + "role/access/" + roleId;
-            }
-        });
-    });
-    //end  ajax cekbox acess user
+
     // ---------------------/TES---------------------------
 });
 

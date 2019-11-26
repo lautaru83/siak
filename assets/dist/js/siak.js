@@ -2233,6 +2233,28 @@ $(document).ready(function () {
     });
     // end ajax tombol modal ubah level6
     //--------------------------------------/KODEPERKIRAAN------------------------------------
+    //---------------------------------------AKUN TRANSAKSI CEKBOX----------------------------
+    //ajax cekbox akun transaksi
+    $('.frm-cek-akuntransaksi').on('click', function (e) {
+        const tranId = $(this).data('tranid');
+        const level6Id = $(this).data('level6id');
+        $.ajax({
+            url: base_url + "akuntansi/jenistransaksi/ubahakun",
+            type: 'post',
+            data: {
+                jenis_transaksi_id: tranId,
+                a6level_id: level6Id
+            },
+            success: function () {
+                Toast.fire({
+                    type: 'success',
+                    title: 'akun transaksi berhasil diperbaharui!'
+                });
+            }
+        });
+    });
+    //end ajax cekbox akun transaksi
+    //--------------------------------------/AKUN TRANSAKSI CEKBOX----------------------------
 
 
 
