@@ -91,3 +91,27 @@ function userLog($type, $desc)
     //save to database
     $ci->db->insert('userlogs', $log_data);
 }
+function ambilsaldo($thbukuid, $akunid)
+{
+    $ci = get_instance();
+    // $ci->db->where('role_id', $role_id);
+    // $ci->db->where('submenu_id', $submenu_id);
+    $result = $ci->db->query("select siak_akuntansi.saldoawals.saldoawal as saldoawal from siak_akuntansi.saldoawals where siak_akuntansi.saldoawals.tahun_pembukuan_id='$thbukuid' and siak_akuntansi.saldoawals.a6level_id='$akunid'")->row_array();
+    if ($result) {
+        //echo $result['saldoawal'];
+        echo rupiah($result['saldoawal']);
+    } else {
+        echo "0,00";
+    }
+}
+function rupiah($angka)
+{
+    $hasil_rupiah = number_format($angka, 2, ',', '.');
+    return $hasil_rupiah;
+}
+function input_uang($uang)
+{
+    $uang1 = str_replace(".", "", $uang);
+    $uang2 = str_replace(",", ".", $uang1);
+    return $uang2;
+}

@@ -42,7 +42,7 @@
                             <table class="table table-bordered table-hover">
                                 <thead>
                                     <tr class="">
-                                        <td colspan="8">Akun Anggaran</td>
+                                        <td colspan="8">Kode Anggaran</td>
                                         <td width="10%">Posisi</td>
                                         <td width="10%">Institusi</td>
                                         <td class="text-center" style="color: grey" width="10%"><i class="fas fa-cog"></i></td>

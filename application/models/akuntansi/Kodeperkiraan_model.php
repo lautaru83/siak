@@ -19,6 +19,10 @@ class Kodeperkiraan_model extends CI_Model
     {
         return $this->db2->query("select a3levels.id as id,a1levels.level1 as level1,a2levels.level2 as level2, a3levels.level3 as level3 from a1levels join a2levels on a1levels.id=a2levels.a1level_id join a3levels on a2levels.id=a3levels.a2level_id order by a3levels.id asc")->result_array();
     }
+    public function akun_saldo()
+    {
+        return $this->db2->query("select a3levels.id as id,a1levels.level1 as level1,a2levels.level2 as level2, a3levels.level3 as level3 from a1levels join a2levels on a1levels.id=a2levels.a1level_id join a3levels on a2levels.id=a3levels.a2level_id where a1levels.id IN(100,200,300) order by a3levels.id asc")->result_array();
+    }
     public function level4($id)
     {
         return $this->db2->get_where('a4levels', ['a3level_id' => $id])->result_array();
@@ -27,10 +31,6 @@ class Kodeperkiraan_model extends CI_Model
     {
         return $this->db2->get_where('a5levels', ['a4level_id' => $id])->result_array();
     }
-    // public function level6a($id)
-    // {
-    //     return $this->db2->get_where('a6levels', ['a5level_id' => $id])->result_array();
-    // }
     public function level6($id)
     {
         return $this->db2->query("select siak_akuntansi.a6levels.id as id,siak_akuntansi.a6levels.a5level_id as a5level_id,siak_akuntansi.a6levels.kode6 as kode6,siak_akuntansi.a6levels.level6 as level6, siak_akuntansi.a6levels.posisi as posisi,siak_setting.institusis.institusi as institusi from siak_akuntansi.a6levels join siak_setting.institusis on siak_setting.institusis.id=siak_akuntansi.a6levels.institusi_id  where siak_akuntansi.a6levels.a5level_id='$id' order by siak_akuntansi.a6levels.id ASC  ")->result_array();

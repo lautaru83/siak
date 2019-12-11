@@ -92,12 +92,6 @@ class Jenistransaksi extends CI_Controller
         }
         echo json_encode($data);
     }
-    // public function tahunaktif()
-    // {
-    //     $id = $this->input->post('id');
-    //     $info = $this->input->post('info');
-    //     $this->Jenistransaksi_model->tahunaktif($id, $info);
-    // }
     public function ubah($id)
     {
         $this->_validate();

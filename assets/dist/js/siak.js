@@ -7,6 +7,7 @@ $(document).ready(function () {
         showConfirmButton: false,
         timer: 4000
     });
+    $(":input").inputmask(); // input matauang
     // atur datatable
     $('#tabel1').DataTable({
         "paging": true,
@@ -2659,6 +2660,193 @@ $(document).ready(function () {
     });
     // end ajax tombol modal ubah anggaran
     //--------------------------------------/KODE ANGGARAN------------------------------------
+    //---------------------------------------SALDOAWAL------------------------------------
+    //set focus input saldoawal saat modal muncul
+    $('#modal-saldoawal').on('shown.bs.modal', function () {
+        $('#saldoawal').trigger('focus');
+    })
+    //set focus input saldoawal saat modal muncul
+    // btn simpan saldoawal modal
+    $('#btn-simpan-saldoawal').on('click', function (e) {
+        e.preventDefault();
+        const a6level_id = $('[name="a6level_id"]').val();
+        const tahunbuku = $('[name="tahun_pembukuan_id"]').val();
+        const saldo = $('[name="saldoawal"]').val();
+        $.ajax({
+            type: "POST",
+            url: base_url + "akuntansi/saldoawal/simpan",
+            data: {
+                a6level_id: a6level_id,
+                tahun_pembukuan_id: tahunbuku,
+                saldoawal: saldo
+            },
+            dataType: "JSON",
+            beforeSend: function () {
+                $('#btn-simpan-saldoawal').attr('disabled', 'disabled');
+            },
+            success: function (data) {
+                if (data.status == 'gagal') {
+                    Toast.fire({
+                        type: 'error',
+                        title: ' Input data tidak valid!!!.'
+                    });
+                    if (data.saldoawal_error != '') {
+                        $('#saldoawal_error').html(data.saldoawal_error);
+                    } else {
+                        $('#saldoawal_error').html('');
+                    }
+                    $('#saldoawal').trigger('focus');
+                } else {
+                    Toast.fire({
+                        type: 'success',
+                        title: ' Pengaturan saldo berhasil.'
+                    });
+                    $('#modal-saldoawal').modal('hide');
+                }
+                $('#btn-simpan-saldoawal').attr('disabled', false);
+            }
+        });
+        return false;
+
+    });
+    // end btn simpan saldoawal modal
+    // ajax tombol edit data table saldoawal klik
+    $('.btn-edit-saldoawal').on('click', function (e) {
+        e.preventDefault();
+        const judul = document.getElementById('judul-modal');
+        judul.innerHTML = 'Atur saldo awal';
+        const thbuku_id = $(this).data('thbukuid');
+        const akun_id = $(this).data('akunid');
+        const level6 = $(this).data('info');
+        $.ajax({
+            url: base_url + 'akuntansi/saldoawal/ajax_edit',
+            type: "POST",
+            data: {
+                a6level_id: akun_id,
+                tahun_pembukuan_id: thbuku_id,
+                level6: level6
+            },
+            dataType: "JSON",
+            success: function (data) {
+                if (data.status == 'ubah') {
+                    $('[name="idubah"]').val(data.id);
+                    $('[name="a6level_id"]').val(data.a6level_id);
+                    $('[name="level6"]').val(data.level6);
+                    $('[name="tahun_pembukuan_id"]').val(data.tahun_pembukuan_id);
+                    $('[name="saldoawal"]').val(data.saldoawal);
+                    $('[name="saldo"]').val(data.saldoawal);
+                    $('#btn-simpan-saldoawal').hide();
+                    $('#modal-saldoawal').modal('show');
+                    $('#saldoawal').trigger('focus');
+                } else {
+                    $('[name="a6level_id"]').val(data.a6level_id);
+                    $('[name="level6"]').val(data.level6);
+                    $('[name="tahun_pembukuan_id"]').val(data.tahun_pembukuan_id);
+                    $('#btn-ubah-saldoawal').hide();
+                    $('#modal-saldoawal').modal('show');
+                    $('#saldoawal').trigger('focus');
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('Error get data from ajax');
+            }
+        });
+    });
+    //end ajax tombol edit data table saldoawal klik
+    // ajax icon hapus table level6 klik
+    $('.btn-hapus-saldoawal').on('click', function (e) {
+        e.preventDefault();
+        var thbuku_id = $(this).data('thbukuid');
+        var akun_id = $(this).data('akunid');
+        var info = $(this).data('info');
+        Swal.fire({
+            title: 'Konfirmasi!',
+            text: 'Anda yakin akan menghapus Saldo Akun -' + info + '- !?!',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'Batal',
+            confirmButtonText: 'Hapus'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    type: "POST",
+                    url: base_url + "akuntansi/saldoawal/hapus",
+                    data: {
+                        tahun_pembukuan_id: thbuku_id,
+                        a6level_id: akun_id,
+                        info: info
+                    },
+                    dataType: 'JSON',
+                    success: function (data) {
+                        if (data.status == 'sukses') {
+                            Toast.fire({
+                                type: 'success',
+                                title: ' Saldo berhasil dihapus!!!.'
+                            });
+
+                            document.location.reload();
+                        } else {
+                            Toast.fire({
+                                type: 'warning',
+                                title: 'Akun tidak meiliki saldo!!!.'
+                            });
+                        }
+                    }
+                });
+            }
+        })
+    });
+    // end ajax icon hapus table saldoawal klik
+    // ajax tombol modal ubah saldoawal
+    $('#btn-ubah-saldoawal').on('click', function (e) {
+        e.preventDefault();
+        const idubah = $('[name="idubah"]').val();
+        const thbuku_id = $('[name="tahun_pembukuan_id"]').val();
+        const akun_id = $('[name="a6level_id"]').val();
+        const saldo = $('[name="saldoawal"]').val();
+        $.ajax({
+            type: "POST",
+            url: base_url + "akuntansi/saldoawal/ubah",
+            data: {
+                id: idubah,
+                tahun_pembukuan_id: thbuku_id,
+                a6level_id: akun_id,
+                saldoawal: saldo
+            },
+            dataType: 'JSON',
+            beforeSend: function () {
+                $('#btn-ubah-saldoawal').attr('disabled', 'disabled');
+            },
+            success: function (data) {
+                if (data.status == 'gagal') {
+                    Toast.fire({
+                        type: 'error',
+                        title: ' Input data tidak valid!!!.'
+                    });
+                    if (data.saldoawal_error != '') {
+                        $('#saldoawal_error').html(data.saldoawal_error);
+
+                    } else {
+                        $('#saldoawal_error').html('');
+                    }
+                    $('#saldoawal').trigger('focus');
+                } else {
+                    Toast.fire({
+                        type: 'success',
+                        title: ' Data berhasil diubah!'
+                    });
+                    $('#modal-saldoawal').modal('hide');
+                    //dataTable.ajax.reload();
+                }
+                $('#btn-ubah-saldoawal').attr('disabled', false);
+            }
+        });
+        return false;
+    });
+    // end ajax tombol modal ubah saldoawal
+    //--------------------------------------/SALDOAWAL------------------------------------
 
 
 

@@ -32,7 +32,21 @@ $(document).ready(function () {
         },
     });
     // ---------------------TES---------------------------
-  
+
+
+
+    // cek data
+    // $('#btn-tes').on('click', function (e) {
+    //     e.preventDefault();
+    //     const a6level_id = $('[name="a6level_id"]').val();
+    //     const tahunbuku = $('[name="tahun_pembukuan_id"]').val();
+    //     const saldo = $('[name="saldoawal"]').val();
+    //     Toast.fire({
+    //         type: 'success',
+    //         title: ' Datanya ' + a6level_id + "-" + tahunbuku + "-" + saldo + "-"
+    //     });
+    // });
+    // cek data
 
     // ---------------------/TES---------------------------
 });

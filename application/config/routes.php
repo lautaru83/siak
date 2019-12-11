@@ -57,3 +57,4 @@ $route['tahunanggaran'] = 'akuntansi/tahunanggaran';
 $route['kodeperkiraan'] = 'akuntansi/kodeperkiraan';
 $route['kodeanggaran'] = 'akuntansi/kodeanggaran';
 $route['jenistransaksi'] = 'akuntansi/jenistransaksi';
+$route['saldoawal'] = 'akuntansi/saldoawal';

@@ -57,6 +57,7 @@
   <script src="<?= base_url('assets/') ?>plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
   <!-- AdminLTE App -->
   <script src="<?= base_url('assets/') ?>dist/js/adminlte.js"></script>
+  <script src="<?= base_url('assets/') ?>dist/js/jquery.inputmask.bundle.js"></script>
   <script src="<?= base_url('assets/') ?>dist/js/siak.js"></script>
   <script src="<?= base_url('assets/') ?>dist/js/tes.js"></script>
   <script>
