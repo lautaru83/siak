@@ -21,7 +21,11 @@ class Kodeanggaran_model extends CI_Model
     }
     public function unitanggaran($id)
     {
-        return $this->db2->get_where('unitanggarans', ['kelompokanggaran_id' => $id])->result_array();
+        return $this->db2->get_where('unitanggarans', ['subanggaran_id' => $id])->result_array();
+    }
+    public function subanggaran($id)
+    {
+        return $this->db2->get_where('subanggarans', ['kelompokanggaran_id' => $id])->result_array();
     }
     public function anggaran($id)
     {

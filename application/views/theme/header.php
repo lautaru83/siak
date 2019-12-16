@@ -52,7 +52,6 @@
             vertical-align: middle !important;
         }
     </style>
-
     <script>
         var base_url = '<?= base_url(); ?>'; // Buat variabel base_url agar bisa di akses di semua file js
         var site_url = '<?= site_url(); ?>';

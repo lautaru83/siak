@@ -44,8 +44,8 @@
                                     <tr class="">
                                         <!-- <td class="col-1 text-center">Kode</td> -->
                                         <td colspan="5">Daftar Kode Perkiraan</td>
-                                        <td>Posisi</td>
                                         <td>Institusi</td>
+                                        <td>Posisi</td>
                                         <td class="text-center" style="color: grey" width="10%"><i class="fas fa-cog"></i></td>
                                     </tr>
                                 </thead>
@@ -113,8 +113,8 @@
                                                                         <td></td>
                                                                         <td width="8%"><?= $dataLevel6['id']; ?></td>
                                                                         <td><?= $dataLevel6['level6']; ?></td>
-                                                                        <td><?= posisi_akun($dataLevel6['posisi']); ?></td>
                                                                         <td><?= $dataLevel6['institusi']; ?></td>
+                                                                        <td><?= posisi_akun($dataLevel6['posisi']); ?></td>
                                                                         <td class="text-center">
                                                                             <a href="" class="btn-edit-level6" data-id="<?= $dataLevel6['id']; ?>" data-id5="<?= $dataLevel6['a5level_id']; ?>" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fas fa-edit" style="color: olive"></i></a> - <a href="" class="btn-hapus-level6" data-id="<?= $dataLevel6['id']; ?>" data-info="<?= $dataLevel6['level6']; ?>" data-toggle="tooltip" data-placement="bottom" title="Hapus"> <i class="far fa-trash-alt" style="color: maroon"></i></a>
                                                                         </td>

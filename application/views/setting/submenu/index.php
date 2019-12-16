@@ -39,7 +39,7 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body" id="tabel-data">
-                            <table id="tabel1" class="table table-bordered table-striped">
+                            <table id="tabel3" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <td class="w-1">No</td>

@@ -85,17 +85,6 @@
                             <span id="level6_error" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label for="posisi" class="control-label">Posisi Akun</label>
-                            <div>
-                                <select id="posisi" name="posisi" class="form-control">
-                                    <option value="">- Pilih -</option>
-                                    <option value="D">Debet</option>
-                                    <option value="K">Kredit</option>
-                                </select>
-                            </div>
-                            <span id="posisi_error" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
                             <label for="institusi_id" class="control-label">Institusi</label>
                             <div>
                                 <select id="institusi_id" name="institusi_id" class="form-control">
@@ -113,6 +102,17 @@
                             </div>
                             <span id="institusi_error" class="text-danger"></span>
                         </div>
+                        <div class="form-group">
+                            <label for="posisi" class="control-label">Posisi Akun</label>
+                            <div>
+                                <select id="posisi" name="posisi" class="form-control">
+                                    <option value="">- Pilih -</option>
+                                    <option value="D">Debet</option>
+                                    <option value="K">Kredit</option>
+                                </select>
+                            </div>
+                            <span id="posisi_error" class="text-danger"></span>
+                        </div>         
                     </div>
                     <div class="modal-footer card-footer">
                         <div>

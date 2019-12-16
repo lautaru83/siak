@@ -56,66 +56,90 @@
                                             ?>
                                             <tr class="bg-light">
                                                 <td class="text-center" width="5%">
-                                                    <a href="" class="btn-tambah-unitanggaran" data-idkelompok="<?= $dataKelompok['id'] ?>" data-info="<?= $dataKelompok['kelompok_anggaran'] ?>" data-toggle="tooltip" data-placement="bottom" title="Akun baru"><i class="fas fa-file-alt" style="color: teal"></i></a>
+                                                    <a href="" class="btn-tambah-unitanggaran" data-idkelompok="<?= $dataKelompok['id'] ?>" data-info="<?= $dataKelompok['kelompok_anggaran'] ?>" data-toggle="tooltip" data-placement="bottom" title="Subakun baru"><i class="fas fa-file-alt" style="color: teal"></i></a>
                                                 </td>
                                                 <td class="text-center" width="5%">
-                                                    <?= $dataKelompok['id']; ?>.00
+                                                    <?= $dataKelompok['id']; ?>.00.00
                                                 </td>
                                                 <td colspan="9" class="">
                                                     <?= $dataKelompok['kelompok_anggaran']; ?>
                                                 </td>
                                             </tr>
                                             <?php
-                                                    $unit = $this->Kodeanggaran_model->unitanggaran($idKelompok);
-                                                    if ($unit) {
-                                                        foreach ($unit as $dataUnit) :
-                                                            $idUnit = $dataUnit['id'];
+                                                    $subanggaran = $this->Kodeanggaran_model->subanggaran($idKelompok);
+                                                    if ($subanggaran) {
+                                                        foreach ($subanggaran as $dataSubanggaran) :
+                                                            $idSubanggaran = $dataSubanggaran['id'];
                                                             ?>
                                                     <tr>
                                                         <td></td>
                                                         <td class="text-center">
-                                                            <a href="" class="btn-tambah-anggaran" data-idunit="<?= $dataUnit['id']; ?>" data-info="<?= $dataUnit['unit_anggaran']; ?>" data-toggle="tooltip" data-placement="bottom" title="Akun baru"><i class="fas fa-file-alt" style="color: teal"></i></a>
+                                                            <a href="" class="btn-tambah-subanggaran" data-idunit="<?= $dataSubanggaran['id']; ?>" data-info="<?= $dataSubanggaran['subanggaran']; ?>" data-toggle="tooltip" data-placement="bottom" title="Subakun baru"><i class="fas fa-file-alt" style="color: teal"></i></a>
                                                         </td>
-                                                        <td class="text-center" width="5%"><?= $dataUnit['id']; ?>.00</td>
-                                                        <td colspan="7"><?= $dataUnit['unit_anggaran']; ?>
+                                                        <td class="text-center" width="5%"><?= $dataSubanggaran['id']; ?>.00.00</td>
+                                                        <td colspan="7"><?= $dataSubanggaran['subanggaran']; ?>
                                                         </td>
                                                         <td class="text-center">
-                                                            <a href="" class="btn-edit-unitanggaran" data-id="<?= $dataUnit['id']; ?>" data-idkelompok="<?= $dataUnit['kelompokanggaran_id']; ?>" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fas fa-edit" style="color: olive"></i></a> - <a href="" class="btn-hapus-unitanggaran" data-id="<?= $dataUnit['id']; ?>" data-info="<?= $dataUnit['unit_anggaran']; ?>" data-toggle="tooltip" data-placement="bottom" title="Hapus"> <i class="far fa-trash-alt" style="color: maroon"></i></a>
+                                                            <a href="" class="btn-edit-subanggaran" data-id="<?= $dataSubanggaran['id']; ?>" data-idkelompok="<?= $dataSubanggaran['kelompokanggaran_id']; ?>" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fas fa-edit" style="color: olive"></i></a> - <a href="" class="btn-hapus-subanggaran" data-id="<?= $dataSubanggaran['id']; ?>" data-info="<?= $dataSubanggaran['subanggaran']; ?>" data-toggle="tooltip" data-placement="bottom" title="Hapus"> <i class="far fa-trash-alt" style="color: maroon"></i></a>
                                                         </td>
                                                     </tr>
                                                     <?php
-                                                                    $anggaran = $this->Kodeanggaran_model->anggaran($idUnit);
-                                                                    if ($anggaran) {
-                                                                        foreach ($anggaran as $dataAnggaran) :
-                                                                            $idunit = $dataAnggaran['id'];
+                                                                    $unit = $this->Kodeanggaran_model->unitanggaran($idSubanggaran);
+                                                                    if ($unit) {
+                                                                        foreach ($unit as $dataUnit) :
+                                                                            $idUnit = $dataUnit['id'];
                                                                             ?>
                                                             <tr>
                                                                 <td></td>
                                                                 <td></td>
-                                                                <td></td>
-                                                                <td class="text-center" width="5%">
-                                                                    <?= $dataAnggaran['id']; ?>
+                                                                <td class="text-center">
+                                                                    <a href="" class="btn-tambah-anggaran" data-idunit="<?= $dataUnit['id']; ?>" data-info="<?= $dataUnit['unit_anggaran']; ?>" data-toggle="tooltip" data-placement="bottom" title="Subakun baru"><i class="fas fa-file-alt" style="color: teal"></i></a>
                                                                 </td>
-                                                                <td colspan="4">
-                                                                    <?= $dataAnggaran['nama_anggaran']; ?>
-                                                                </td>
-                                                                <td>
-                                                                    <?= posisi_akun($dataAnggaran['posisi']); ?>
-                                                                </td>
-                                                                <td>
-                                                                    <?= $dataAnggaran['institusi']; ?>
+                                                                <td class="text-center" width="5%"><?= $dataUnit['id']; ?>.00</td>
+                                                                <td colspan="6"><?= $dataUnit['unit_anggaran']; ?>
                                                                 </td>
                                                                 <td class="text-center">
-                                                                    <a href="" class="btn-edit-anggaran" data-id="<?= $dataAnggaran['id']; ?>" data-idunit="<?= $dataAnggaran['unitanggaran_id']; ?>" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fas fa-edit" style="color: olive"></i></a> - <a href="" class="btn-hapus-anggaran" data-id="<?= $dataAnggaran['id']; ?>" data-info="<?= $dataAnggaran['nama_anggaran']; ?>" data-toggle="tooltip" data-placement="bottom" title="Hapus"> <i class="far fa-trash-alt" style="color: maroon"></i></a>
-
+                                                                    <a href="" class="btn-edit-unitanggaran" data-id="<?= $dataUnit['id']; ?>" data-idsub="<?= $dataUnit['subanggaran_id']; ?>" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fas fa-edit" style="color: olive"></i></a> - <a href="" class="btn-hapus-unitanggaran" data-id="<?= $dataUnit['id']; ?>" data-info="<?= $dataUnit['unit_anggaran']; ?>" data-toggle="tooltip" data-placement="bottom" title="Hapus"> <i class="far fa-trash-alt" style="color: maroon"></i></a>
                                                                 </td>
                                                             </tr>
+                                                            <?php
+                                                                                    $anggaran = $this->Kodeanggaran_model->anggaran($idUnit);
+                                                                                    if ($anggaran) {
+                                                                                        foreach ($anggaran as $dataAnggaran) :
+                                                                                            $idunit = $dataAnggaran['id'];
+                                                                                            ?>
+                                                                    <tr>
+                                                                        <td></td>
+                                                                        <td></td>
+                                                                        <td></td>
+                                                                        <td></td>
+                                                                        <td class="text-center" width="5%">
+                                                                            <?= $dataAnggaran['id']; ?>
+                                                                        </td>
+                                                                        <td colspan="3">
+                                                                            <?= $dataAnggaran['nama_anggaran']; ?>
+                                                                        </td>
+                                                                        <td>
+                                                                            <?= posisi_akun($dataAnggaran['posisi']); ?>
+                                                                        </td>
+                                                                        <td>
+                                                                            <?= $dataAnggaran['institusi']; ?>
+                                                                        </td>
+                                                                        <td class="text-center">
+                                                                            <a href="" class="btn-edit-anggaran" data-id="<?= $dataAnggaran['id']; ?>" data-idunit="<?= $dataAnggaran['unitanggaran_id']; ?>" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fas fa-edit" style="color: olive"></i></a> - <a href="" class="btn-hapus-anggaran" data-id="<?= $dataAnggaran['id']; ?>" data-info="<?= $dataAnggaran['nama_anggaran']; ?>" data-toggle="tooltip" data-placement="bottom" title="Hapus"> <i class="far fa-trash-alt" style="color: maroon"></i></a>
+
+                                                                        </td>
+                                                                    </tr>
+
+                                                            <?php
+                                                                                        endforeach;
+                                                                                    }
+                                                                                    ?>
 
                                                     <?php
                                                                         endforeach;
                                                                     }
                                                                     ?>
-
 
                                             <?php
                                                         endforeach;
