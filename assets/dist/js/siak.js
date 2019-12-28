@@ -581,10 +581,10 @@ $(document).ready(function () {
                     } else {
                         $('#role_error').html('');
                     }
-                    if (data.unit_error != '') {
-                        $('#unit_error').html(data.unit_error);
+                    if (data.institusi_error != '') {
+                        $('#institusi_error').html(data.institusi_error);
                     } else {
-                        $('#unit_error').html('');
+                        $('#institusi_error').html('');
                     }
                     if (data.email_error != '') {
                         $('#email_error').html(data.email_error);
@@ -669,7 +669,7 @@ $(document).ready(function () {
                 $('[name="idubah"]').val(data.id);
                 $('[name="nama"]').val(data.nama);
                 $('[name="role_id"]').val(data.role_id);
-                $('[name="unit_id"]').val(data.unit_id);
+                $('[name="institusi_id"]').val(data.institusi_id);
                 $('[name="email"]').val(data.email);
                 $('[name="is_active"]').val(data.is_active);
                 $('#modal-user').modal('show');
@@ -710,10 +710,10 @@ $(document).ready(function () {
                     } else {
                         $('#role_error').html('');
                     }
-                    if (data.unit_error != '') {
-                        $('#unit_error').html(data.unit_error);
+                    if (data.institusi_error != '') {
+                        $('#institusi_error').html(data.institusi_error);
                     } else {
-                        $('#unit_error').html('');
+                        $('#institusi_error').html('');
                     }
                     if (data.email_error != '') {
                         $('#email_error').html(data.email_error);

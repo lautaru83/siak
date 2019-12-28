@@ -11,7 +11,13 @@ $(document).ready(function () {
         locale: {
             format: 'DD-MM-YYYY'
         }
-    })
+    });
+    $('#tanggal_transaksi').daterangepicker({
+        singleDatePicker: true,
+        locale: {
+            format: 'DD-MM-YYYY'
+        }
+    });
     const Toast = Swal.mixin({
         toast: true,
         position: 'center',

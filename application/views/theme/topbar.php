@@ -65,7 +65,7 @@
       </ul>
     </li>
     <li class="nav-item">
-      <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#"><i class="fas fa-th-large"></i></a>
+      <a class="nav-link" data-widget="control-sidebara" data-slide="false" href="#"><i class="fas fa-th-large"></i></a>
     </li>
   </ul>
 </nav>

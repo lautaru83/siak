@@ -12,6 +12,10 @@ class Unit_model extends CI_Model
     {
         return $this->db->get_where('units', ['id' => $id])->row_array();
     }
+    public function ambil_data_institusi_id($id)
+    {
+        return $this->db->get_where('units', ['institusi_id' => $id])->result_array();
+    }
     public function cek_hapus($id)
     {
         return $this->db->get_where('users', ['unit_id' => $id])->row_array();

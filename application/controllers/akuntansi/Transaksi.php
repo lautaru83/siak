@@ -9,14 +9,16 @@ class Transaksi extends CI_Controller
         is_logged_in();
         $this->db2 = $this->load->database('akuntansi', TRUE);
         //$this->load->model('akuntansi/Tahunbuku_model', 'Tahunbuku_model');
-        $this->load->model(array('Institusi_model' => 'Institusi_model', 'akuntansi/Kodeperkiraan_model' => 'Kodeperkiraan_model', 'akuntansi/Saldoawal_model' => 'Saldoawal_model', 'akuntansi/Transaksi_model' => 'Transaksi_model', 'akuntansi/Kodeperkiraan_model' => 'Kodeperkiraan_model'));
+        $this->load->model(array('Institusi_model' => 'Institusi_model', 'akuntansi/Kodeperkiraan_model' => 'Kodeperkiraan_model', 'akuntansi/Saldoawal_model' => 'Saldoawal_model', 'akuntansi/Transaksi_model' => 'Transaksi_model', 'akuntansi/Kodeperkiraan_model' => 'Kodeperkiraan_model', 'Unit_model' => 'Unit_model'));
     }
     public function kasmasuk()
     {
-        $data['kontenmenu'] = "Pengaturan";
-        $data['kontensubmenu'] = "Saldo Awal";
-        $data['tahunbuku'] = $this->Tahunbuku_model->ambil_data();
+        $institusi_id = $this->session->userdata('idInstitusi');
+        $data['kontenmenu'] = "Transaksi";
+        $data['kontensubmenu'] = "Jurnal Kas Masuk";
+        $data['unit'] = $this->Unit_model->ambil_data_institusi_id($institusi_id);
         $this->template->display('akuntansi/transaksi/kasmasuk', $data);
+        //$this->template->display('akuntansi/transaksi/kasmasuk');
     }
     // public function saldo($idtahun)
     // {

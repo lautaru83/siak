@@ -28,7 +28,7 @@
                                     <option value="">- Pilih -</option>
                                     <?php
                                     foreach ($role as $dataRole) :
-                                        ?>
+                                    ?>
                                         <option value="<?= $dataRole['id']; ?>"><?= $dataRole['role']; ?></option>
                                     <?php endforeach; ?>
                                 </select>
@@ -36,17 +36,17 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="unit_id" class="control-label">Unit</label>
+                            <label for="institusi_id" class="control-label">Institusi</label>
                             <div>
-                                <select id="unit_id" name="unit_id" class="form-control">
+                                <select id="institusi_id" name="institusi_id" class="form-control">
                                     <option value="">- Pilih -</option>
                                     <?php
-                                    foreach ($unit as $dataUnit) :
-                                        ?>
-                                        <option value="<?= $dataUnit['id']; ?>"><?= $dataUnit['unit']; ?></option>
+                                                                            foreach ($institusi as $dataInstitusi) :
+                                    ?>
+                                        <option value="<?= $dataInstitusi['id']; ?>"><?= $dataInstitusi['institusi']; ?></option>
                                     <?php endforeach; ?>
                                 </select>
-                                <span id="unit_error" class="text-danger"></span>
+                                <span id="institusi_error" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="form-group">

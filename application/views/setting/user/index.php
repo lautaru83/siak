@@ -45,7 +45,7 @@
                                         <td class="w-1">No</td>
                                         <td class="w-20">Nama</td>
                                         <td class="w-15">Role</td>
-                                        <td class="w-10">Unit</td>
+                                        <td class="w-10">Institusi</td>
                                         <td class="w-20">Email</td>
                                         <td class="w-5">Status</td>
                                         <td class="w-29 text-center" style="color: grey"><i class="fas fa-cog"></i></td>
@@ -53,24 +53,24 @@
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $no = 1;
-                                    if ($user) {
-                                        foreach ($user as $dataUser) :
-                                            ?>
+                                                        $no = 1;
+                                                        if ($user) {
+                                                            foreach ($user as $dataUser) :
+                                    ?>
 
                                             <tr>
                                                 <td><?= $no; ?></td>
                                                 <td><?= $dataUser['nama']; ?></td>
                                                 <td><?= $dataUser['role']; ?></td>
-                                                <td><?= $dataUser['unit']; ?></td>
+                                                <td><?= $dataUser['institusi']; ?></td>
                                                 <td><?= $dataUser['email']; ?></td>
                                                 <td><?= $dataUser['is_active']; ?></td>
                                                 <td class="text-center"><a href="" class="btn-edit-user" data-id="<?= $dataUser['id']; ?>" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fas fa-edit" style="color: olive"></i></a> - <a href="" class="btn-hapus-user" data-id="<?= $dataUser['id']; ?>" data-info="<?= $dataUser['nama']; ?>" data-toggle="tooltip" data-placement="bottom" title="Hapus"> <i class="far fa-trash-alt" style="color: maroon"></i></a></td>
                                             </tr>
                                     <?php
-                                            $no++;
-                                        endforeach;
-                                    }
+                                                                                                                                                                                                                                                                                                                                            $no++;
+                                                                                                                                                                                                                                                                                                                                        endforeach;
+                                                                                                                                                                                                                                                                                                                                    }
                                     ?>
 
                                 </tbody>

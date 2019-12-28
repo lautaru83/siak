@@ -7,15 +7,16 @@ class User extends CI_Controller
     {
         parent::__construct();
         is_logged_in();
-        $this->load->model(array('User_model' => 'User_model', 'Role_model' => 'Role_model', 'Unit_model' => 'Unit_model'));
+        $this->load->model(array('User_model' => 'User_model', 'Role_model' => 'Role_model', 'Unit_model' => 'Unit_model', 'Institusi_model' => 'Institusi_model'));
     }
     public function index()
     {
         $data['kontenmenu'] = "Master Data";
         $data['kontensubmenu'] = "User Management";
         $data['user'] = $this->User_model->ambil_data();
+        $data['institusi'] = $this->Institusi_model->ambil_data();
         $data['role'] = $this->Role_model->ambil_data();
-        $data['unit'] = $this->Unit_model->ambil_data();
+        //$data['unit'] = $this->Unit_model->ambil_data();
         $this->load->view('theme/header');
         $this->load->view('theme/topbar');
         $this->load->view('theme/sidebar');
@@ -32,7 +33,7 @@ class User extends CI_Controller
                 'status' => 'gagal',
                 'nama_error' => form_error('nama'),
                 'role_error' => form_error('role_id'),
-                'unit_error' => form_error('unit_id'),
+                'institusi_error' => form_error('institusi_id'),
                 'email_error' => form_error('email'),
                 'sandi_error' => form_error('sandi'),
                 'status_error' => form_error('is_active')
@@ -76,7 +77,7 @@ class User extends CI_Controller
                 'status' => 'gagal',
                 'nama_error' => form_error('nama'),
                 'role_error' => form_error('role_id'),
-                'unit_error' => form_error('unit_id'),
+                'institusi_error' => form_error('institusi_id'),
                 'email_error' => form_error('email'),
                 'status_error' => form_error('is_active'),
                 'sandi_error' => form_error('sandi')
@@ -93,7 +94,7 @@ class User extends CI_Controller
     {
         $this->form_validation->set_rules('nama', 'Nama', 'required|trim');
         $this->form_validation->set_rules('role_id', 'Role', 'required|trim');
-        $this->form_validation->set_rules('unit_id', 'Unit', 'required|trim');
+        $this->form_validation->set_rules('institusi_id', 'Institusi', 'required|trim');
         $this->form_validation->set_rules('is_active', 'Status', 'required|trim');
         if (!$this->input->post('idubah')) {
             $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|is_unique[users.email]');

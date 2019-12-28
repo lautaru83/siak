@@ -4,7 +4,12 @@ class Role_model extends CI_Model
 {
     public function ambil_data()
     {
-        return $this->db->get('roles')->result_array();
+        $user_id = $this->session->userdata('xyz');
+        if ($user_id == 1) {
+            return $this->db->get('roles')->result_array();
+        } else {
+            return $this->db->query("select * from roles where id>2")->result_array();
+        }
     }
     public function tes_data()
     {

@@ -48,7 +48,7 @@ class Auth extends CI_Controller
                         'role_id' => $user['role_id'],
                         'nama_user' => $user['nama'],
                         'image' => $user['image'],
-
+                        'idInstitusi' => $user['institusi_id']
                     ];
                     $this->session->set_userdata($data);
                     $log_type = "login";
@@ -129,6 +129,7 @@ class Auth extends CI_Controller
         $this->session->unset_userdata('xyz');
         $this->session->unset_userdata('nama_user');
         $this->session->unset_userdata('role_id');
+        $this->session->unset_userdata('idInstitusi');
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
         Logout Berhasil!</div>');
         redirect('auth');
