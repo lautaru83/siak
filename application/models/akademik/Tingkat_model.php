@@ -13,68 +13,46 @@ class Tingkat_model extends CI_Model
     }
     public function ambil_data_id($id)
     {
-        return $this->db3->get_where('angkatans', ['id' => $id])->row_array();
+        return $this->db3->get_where('tingkats', ['id' => $id])->row_array();
     }
     public function cek_hapus($id)
     {
-        return $this->db2->get_where('akun_transaksis', ['jenis_transaksi_id' => $id])->num_rows();
+        return $this->db3->get_where('kelases', ['tingkat_id' => $id])->num_rows();
     }
     public function cek_id($id) // cek uniq id
     {
-        return $this->db2->get_where('jenis_transaksis', ['id' => $id])->num_rows();
+        return $this->db3->get_where('tingkats', ['id' => $id])->num_rows();
     }
     public function hapus($id, $info)
     {
-        $this->db2->delete('jenis_transaksis', ['id' => $id]);
+        $this->db3->delete('tingkats', ['id' => $id]);
         $log_type = "hapus";
-        $log_desc = "hapus jenis transaksi - $info";
+        $log_desc = "hapus tingkat - $info";
         userLog($log_type, $log_desc);
     }
     public function simpan()
     {
         $id = $this->input->post('id');
-        $jenis_transaksi = htmlspecialchars($this->input->post('jenis_transaksi'));
+        $tingkat = htmlspecialchars($this->input->post('tingkat'));
         $data = array(
             'id' => $id,
-            'jenis_transaksi' => $jenis_transaksi
+            'tingkat' => $tingkat
         );
-        $this->db2->insert('jenis_transaksis', $data);
+        $this->db3->insert('tingkats', $data);
         $log_type = "tambah";
-        $log_desc = "tambah jenis transaksi -" . $id . "-" . $jenis_transaksi . "-";
+        $log_desc = "tambah tingkat -" . $id . "-" . $tingkat . "-";
         userLog($log_type, $log_desc);
     }
     public function ubah($id)
     {
-        $jenis_transaksi = $this->input->post('jenis_transaksi');
+        $tingkat = $this->input->post('tingkat');
         $data = array(
-            'jenis_transaksi' => $jenis_transaksi
+            'tingkat' => $tingkat
         );
-        $this->db2->where('id', $id);
-        $this->db2->update('jenis_transaksis', $data);
+        $this->db3->where('id', $id);
+        $this->db3->update('tingkats', $data);
         $log_type = "ubah";
-        $log_desc = "ubah jenis transaksi -" . $jenis_transaksi . "-";
+        $log_desc = "ubah tingkat -" . $tingkat . "-";
         userLog($log_type, $log_desc);
-    }
-    // public function simpanakun($data = array())
-    // {
-    //     $tran_id = $this->input->post('jenis_transaksi_id');
-    //     $level6_id = $this->input->post('a6level_id');
-    //     $this->db2->insert('akun_transaksis', $data);
-    //     $log_type = "simpan";
-    //     $log_desc = "simpan akun transaksi -" . $tran_id . "-" . $level6_id . "-";
-    //     userLog($log_type, $log_desc);
-    // }
-    // public function hapusakun($data = array())
-    // {
-    //     $tran_id = $this->input->post('jenis_transaksi_id');
-    //     $level6_id = $this->input->post('a6level_id');
-    //     $this->db2->delete('akun_transaksis', $data);
-    //     $log_type = "hapus";
-    //     $log_desc = "hapus akun transaksi -" . $tran_id . "-" . $level6_id . "-";
-    //     userLog($log_type, $log_desc);
-    // }
-    public function cek_akun($data = array())
-    {
-        return $this->db2->get_where('akun_transaksis', $data)->row_array();
     }
 }

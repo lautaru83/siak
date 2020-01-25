@@ -51,36 +51,37 @@ $(document).ready(function () {
     // });
     // cek data
 
-    //set focus input jalur saat modal muncul
-    $('#modal-jalur').on('shown.bs.modal', function () {
-        $('#jalur').trigger('focus');
+    //set focus input tingkat saat modal muncul
+    $('#modal-tingkat').on('shown.bs.modal', function () {
+        $('#tingkat').trigger('focus');
     })
-    //set focus input jalur saat modal muncul
-    // tombol tambah jalur table
-    $('#btn-tambah-jalur').on('click', function (e) {
+    //set focus input tingkat saat modal muncul
+    // tombol tambah tingkat table
+    $('#btn-tambah-tingkat').on('click', function (e) {
         e.preventDefault();
         const judul = document.getElementById('judul-modal');
-        judul.innerHTML = 'Tambah Data Jalur Pendidikan';
-        $('#btn-ubah-jalur').hide();
-        $('#modal-jalur').modal('show');
+        judul.innerHTML = 'Tambah Data Tingkat Pendidikan';
+        $('#btn-ubah-tingkat').hide();
+        $('#modal-tingkat').modal('show');
     });
-    // end tombol tambah jalur table
-    // ajax tombol Simpan modal jalur
-    $('#btn-simpan-jalur').on('click', function (e) {
+    // end tombol tambah tingkat table
+    // ajax tombol Simpan modal tingkat
+    $('#btn-simpan-tingkat').on('click', function (e) {
         e.preventDefault();
-        //const id = $('[name="id"]').val();
-        const jalur = $('[name="jalur"]').val();
+        const id = $('[name="id"]').val();
+        const tingkat = $('[name="tingkat"]').val();
         // const is_active = $('[name="is_active"]').val();
         $.ajax({
 
             type: "POST",
-            url: base_url + "akademik/jalur/simpan",
+            url: base_url + "akademik/tingkat/simpan",
             data: {
-                jalur: jalur
+                id: id,
+                tingkat: tingkat,
             },
             dataType: "JSON",
             beforeSend: function () {
-                $('#btn-simpan-jalur').attr('disabled', 'disabled');
+                $('#btn-simpan-tingkat').attr('disabled', 'disabled');
             },
             success: function (data) {
                 if (data.status == 'gagal') {
@@ -88,10 +89,15 @@ $(document).ready(function () {
                         type: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
-                    if (data.jalur_error != '') {
-                        $('#jalur_error').html(data.jalur_error);
+                    if (data.kode_error != '') {
+                        $('#kode_error').html(data.kode_error);
                     } else {
-                        $('#jalur_error').html('');
+                        $('#kode_error').html('');
+                    }
+                    if (data.tingkat_error != '') {
+                        $('#tingkat_error').html(data.tingkat_error);
+                    } else {
+                        $('#tingkat_error').html('');
                     }
                     $('#id').trigger('focus');
                 } else {
@@ -99,22 +105,22 @@ $(document).ready(function () {
                         type: 'success',
                         title: ' Data berhasil disimpan.'
                     });
-                    $('#modal-jalur').modal('hide');
+                    $('#modal-tingkat').modal('hide');
                 }
-                $('#btn-simpan-jalur').attr('disabled', false);
+                $('#btn-simpan-tingkat').attr('disabled', false);
             }
         });
         return false;
     });
-    //end  ajax tombol Simpan modal jalur
-    // ajax icon hapus table jalur klik
-    $('.btn-hapus-jalur').on('click', function (e) {
+    //end  ajax tombol Simpan modal tingkat
+    // ajax icon hapus table tingkat klik
+    $('.btn-hapus-tingkat').on('click', function (e) {
         e.preventDefault();
         var id = $(this).data('id');
         var info = $(this).data('info');
         Swal.fire({
             title: 'Konfirmasi!',
-            text: 'Apakah anda yakin akan menghapus Jalur Pendidikan -' + info + '- !?!',
+            text: 'Apakah anda yakin akan menghapus Tingkat Pendidikan -' + info + '- !?!',
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -129,7 +135,7 @@ $(document).ready(function () {
                 // });
                 $.ajax({
                     type: "POST",
-                    url: base_url + "akademik/jalur/hapus/",
+                    url: base_url + "akademik/tingkat/hapus/",
                     data: {
                         id: id,
                         info: info
@@ -153,46 +159,46 @@ $(document).ready(function () {
             }
         })
     });
-    // end ajax icon hapus table jalur klik
-    // ajax tombol edit data table jalur klik
-    $('.btn-edit-jalur').on('click', function (e) {
+    // end ajax icon hapus table tingkat klik
+    // ajax tombol edit data table tingkat klik
+    $('.btn-edit-tingkat').on('click', function (e) {
         e.preventDefault();
         const judul = document.getElementById('judul-modal');
-        judul.innerHTML = 'Ubah Data Jalur Pendidikan';
+        judul.innerHTML = 'Ubah Data Tingkat Pendidikan';
         var id = $(this).data('id');
-        $('#btn-simpan-jalur').hide();
-        // $('#id').attr('disabled', 'disabled');
+        $('#btn-simpan-tingkat').hide();
+        $('#id').attr('disabled', 'disabled');
         $.ajax({
-            url: base_url + 'akademik/jalur/ajax_edit/' + id,
+            url: base_url + 'akademik/tingkat/ajax_edit/' + id,
             type: "GET",
             dataType: "JSON",
             success: function (data) {
-                // $('[name="id"]').val(data.id);
+                $('[name="id"]').val(data.id);
                 $('[name="idubah"]').val(data.id);
-                $('[name="jalur"]').val(data.jalur);
-                $('#modal-jalur').modal('show');
+                $('[name="tingkat"]').val(data.tingkat);
+                $('#modal-tingkat').modal('show');
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert('Error get data from ajax');
             }
         });
     });
-    //end ajax tombol edit data table jalur klik
-    // ajax tombol modal ubah jalur
-    $('#btn-ubah-jalur').on('click', function (e) {
+    //end ajax tombol edit data table tingkat klik
+    // ajax tombol modal ubah tingkat
+    $('#btn-ubah-tingkat').on('click', function (e) {
         e.preventDefault();
         const idubah = $('[name="idubah"]').val();
-        const jalur = $('[name="jalur"]').val();
+        const tingkat = $('[name="tingkat"]').val();
         $.ajax({
             type: "POST",
-            url: base_url + "akademik/jalur/ubah/" + idubah,
+            url: base_url + "akademik/tingkat/ubah/" + idubah,
             data: {
                 idubah: idubah,
-                jalur: jalur
+                tingkat: tingkat
             },
             dataType: 'JSON',
             beforeSend: function () {
-                $('#btn-ubah-jalur').attr('disabled', 'disabled');
+                $('#btn-ubah-tingkat').attr('disabled', 'disabled');
             },
             success: function (data) {
                 if (data.status == 'gagal') {
@@ -200,27 +206,27 @@ $(document).ready(function () {
                         type: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
-                    if (data.jalur_error != '') {
-                        $('#jalur_error').html(data.jalur_error);
+                    if (data.tingkat_error != '') {
+                        $('#tingkat_error').html(data.tingkat_error);
 
                     } else {
-                        $('#jalur_error').html('');
+                        $('#tingkat_error').html('');
                     }
-                    $('#jalur').trigger('focus');
+                    $('#tingkat').trigger('focus');
                 } else {
                     Toast.fire({
                         type: 'success',
                         title: ' Data berhasil diubah!'
                     });
-                    $('#modal-jalur').modal('hide');
+                    $('#modal-tingkat').modal('hide');
                     //dataTable.ajax.reload();
                 }
-                $('#btn-ubah-jalur').attr('disabled', false);
+                $('#btn-ubah-tingkat').attr('disabled', false);
             }
         });
         return false;
     });
-    // end ajax tombol modal ubah jalur
+    // end ajax tombol modal ubah tingkat
 
 
     // ---------------------/TES---------------------------
