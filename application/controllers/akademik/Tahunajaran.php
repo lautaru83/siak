@@ -8,7 +8,7 @@ class Tahunajaran extends CI_Controller
         parent::__construct();
         is_logged_in();
         $this->db3 = $this->load->database('akademik', TRUE);
-        $this->load->model(array('akademik/Tahunajaran_model' => 'Tahunajaran_model', 'akuntansi/Kodeperkiraan_model' => 'Kodeperkiraan_model'));
+        $this->load->model(array('akademik/Tahunajaran_model' => 'Tahunajaran_model'));
     }
     public function index()
     {
@@ -18,42 +18,18 @@ class Tahunajaran extends CI_Controller
         $data['tahunajaran'] = $this->Tahunajaran_model->ambil_data();
         $this->template->display('akademik/tahunajaran/index', $data);
     }
-    // public function akun($id)
-    // {
-    //     $data['transaksi'] = $this->Jenjang_model->ambil_data_id($id);
-    //     $data['tran_id'] = $id;
-    //     $data['kontenmenu'] = "Master Pembukuan";
-    //     $data['kontensubmenu'] = "Akun Transaksi";
-    //     $data['kodeperkiraan'] = $this->Kodeperkiraan_model->ambil_data();
-    //     //$data['institusi'] = $this->Institusi_model->data_institusi();
-    //     $this->template->display('akuntansi/jenistransaksi/akun', $data);
-    // }
-    // public function ubahakun()
-    // {
-    //     $jenis_transaksi_id = $this->input->post('jenis_transaksi_id');
-    //     $a6level_id = $this->input->post('a6level_id');
-    //     $data = [
-    //         "jenis_transaksi_id" => $jenis_transaksi_id,
-    //         "a6level_id" => $a6level_id
-    //     ];
-    //     $hasil = $this->Jenjang_model->cek_akun($data);
-    //     if ($hasil) {
-    //         $this->Jenjang_model->hapusakun($data);
-    //     } else {
-    //         $this->Jenjang_model->simpanakun($data);
-    //     }
-    // }
     public function simpan()
     {
         $this->_validate();
         if ($this->form_validation->run() == false) {
             $data = array(
                 'status' => 'gagal',
-                'kode_error' => form_error('id'),
-                'jenis_transaksi_error' => form_error('jenis_transaksi')
+                'awal_periode_error' => form_error('awal_periode'),
+                'akhir_periode_error' => form_error('akhir_periode'),
+                'tahun_ajaran_error' => form_error('tahun_ajaran')
             );
         } else {
-            $this->Jenjang_model->simpan();
+            $this->Tahunajaran_model->simpan();
             $data = array(
                 'status' => 'sukses'
             );
@@ -64,13 +40,13 @@ class Tahunajaran extends CI_Controller
     {
         $id = $this->input->post('id');
         $info = $this->input->post('info');
-        $hasil = $this->Jenjang_model->cek_hapus($id);
+        $hasil = $this->Tahunajaran_model->cek_hapus($id);
         if ($hasil > 0) {
             $data = array(
                 'status' => 'gagal'
             );
         } else {
-            $this->Jenjang_model->hapus($id, $info);
+            $this->Tahunajaran_model->hapus($id, $info);
             $data = array(
                 'status' => 'sukses'
             );
@@ -79,12 +55,14 @@ class Tahunajaran extends CI_Controller
     }
     public function ajax_edit($id)
     {
-        $hasil = $this->Jenjang_model->ambil_data_id($id);
+        $hasil = $this->Tahunajaran_model->ambil_data_id($id);
         if ($hasil) {
             $data = array(
                 'status' => 'sukses',
                 'id' => $hasil['id'],
-                'jenis_transaksi' => $hasil['jenis_transaksi']
+                'awal_periode' => tanggal_indo($hasil['awal_periode']),
+                'akhir_periode' => tanggal_indo($hasil['akhir_periode']),
+                'tahun_ajaran' => $hasil['tahun_ajaran']
             );
         } else {
             $data = array(
@@ -99,11 +77,12 @@ class Tahunajaran extends CI_Controller
         if ($this->form_validation->run() == false) {
             $data = array(
                 'status' => 'gagal',
-                'kode_error' => form_error('id'),
-                'jenis_transaksi_error' => form_error('jenis_transaksi'),
+                'awal_periode_error' => form_error('awal_periode'),
+                'akhir_periode_error' => form_error('akhir_periode'),
+                'tahun_ajaran_error' => form_error('tahun_ajaran')
             );
         } else {
-            $this->Jenjang_model->ubah($id);
+            $this->Tahunajaran_model->ubah($id);
             $data = array(
                 'status' => 'sukses'
             );
@@ -113,7 +92,7 @@ class Tahunajaran extends CI_Controller
     // public function cek_unik()
     // {
     //     $id = $this->input->post('id');
-    //     $hasil = $this->Jenjang_model->cek_id($id);
+    //     $hasil = $this->Tahunajaran_model->cek_id($id);
     //     if ($hasil > 0) {
     //         return false;
     //     } else {
@@ -122,11 +101,13 @@ class Tahunajaran extends CI_Controller
     // }
     private function _validate()
     {
-        if (!$this->input->post('idubah')) {
-            $this->form_validation->set_rules('id', 'Kode', 'required|trim|exact_length[2]|callback_cek_unik', [
-                'cek_unik' => 'Kode telah digunakan oleh data lain !'
-            ]);
-        }
-        $this->form_validation->set_rules('jenis_transaksi', 'Jenis Transaksi', 'required|trim');
+        // if (!$this->input->post('idubah')) {
+        //     $this->form_validation->set_rules('id', 'Kode', 'required|trim|exact_length[2]|callback_cek_unik', [
+        //         'cek_unik' => 'Kode telah digunakan oleh data lain !'
+        //     ]);
+        // }
+        $this->form_validation->set_rules('tahun_ajaran', 'Tahun Ajaran', 'required|trim');
+        $this->form_validation->set_rules('awal_periode', 'Awal Periode', 'required|trim');
+        $this->form_validation->set_rules('akhir_periode', 'Akhir Periode', 'required|trim');
     }
 }

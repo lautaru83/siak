@@ -45,8 +45,8 @@
                                     <tr>
                                         <td width="8%" class="text-center">No</td>
                                         <td>Tahun Ajaran</td>
-                                        <td>Awal Tahun</td>
-                                        <td>Akhir Tahun</td>
+                                        <td>Awal Periode</td>
+                                        <td>Akhir Periode</td>
                                         <td>Status</td>
                                         <td width="10%" class="text-center" style="color: grey"><i class="fas fa-cog"></i></td>
                                     </tr>
@@ -62,9 +62,9 @@
                                             <tr>
                                                 <td class="text-center"><?= $no; ?></td>
                                                 <td><?= $dataTahunajaran['tahun_ajaran']; ?></td>
-                                                <td><?= $dataTahunajaran['awal_tahun']; ?></td>
-                                                <td><?= $dataTahunajaran['akhir_tahun']; ?></td>
-                                                <td><?= $dataTahunajaran['is_active']; ?></td>
+                                                <td><?= tanggal_indo($dataTahunajaran['awal_periode']); ?></td>
+                                                <td><?= tanggal_indo($dataTahunajaran['akhir_periode']); ?></td>
+                                                <td><?= txt_status($dataTahunajaran['is_active']); ?></td>
                                                 <td class="text-center"><a href="" class="btn-edit-tahunajaran" data-id="<?= $idTahunajaran; ?>" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fas fa-edit" style="color: olive"></i></a> - <a href="" class="btn-hapus-tahunajaran" data-id="<?= $idTahunajaran; ?>" data-info="<?= $dataTahunajaran['tahun_ajaran']; ?>" data-toggle="tooltip" data-placement="bottom" title="Hapus"> <i class="far fa-trash-alt" style="color: maroon"></i></a></td>
                                             </tr>
                                     <?php
@@ -87,7 +87,7 @@
             <!-- /.row -->
         </div>
         <!-- /.container-fluid -->
-        <?php //$this->load->view('akuntansi/jenistransaksi/modal');
+        <?php $this->load->view('akademik/tahunajaran/modal');
         ?>
     </section>
     <!-- /.content -->

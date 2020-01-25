@@ -3740,6 +3740,209 @@ $(document).ready(function () {
     // end ajax tombol modal ubah semester
 
     //---------------------------------------/SEMESTER------------------------------------
+    //----------------------------------------TAHUN AJARAN------------------------------------
+
+    //set focus input tahunajaran saat modal muncul
+    $('#modal-tahunajaran').on('shown.bs.modal', function () {
+        $('#tahun_ajaran').trigger('focus');
+    })
+    //set focus input tahunajaran saat modal muncul
+    // tombol tambah tahunajaran table
+    $('#btn-tambah-tahunajaran').on('click', function (e) {
+        e.preventDefault();
+        const judul = document.getElementById('judul-modal');
+        judul.innerHTML = 'Tambah Data Tahun Ajaran';
+        $('#btn-ubah-tahunajaran').hide();
+        $('#modal-tahunajaran').modal('show');
+    });
+    // end tombol tambah tahunajaran table
+    // ajax tombol Simpan modal tahunajaran
+    $('#btn-simpan-tahunajaran').on('click', function (e) {
+        e.preventDefault();
+        //const id = $('[name="id"]').val();
+        const tahunAjaran = $('[name="tahun_ajaran"]').val();
+        const awalPeriode = $('[name="awal_periode"]').val();
+        const akhirPeriode = $('[name="akhir_periode"]').val();
+        // const is_active = $('[name="is_active"]').val();
+        $.ajax({
+
+            type: "POST",
+            url: base_url + "akademik/tahunajaran/simpan",
+            data: {
+                //id: id,
+                tahun_ajaran: tahunAjaran,
+                awal_periode: awalPeriode,
+                akhir_periode: akhirPeriode
+            },
+            dataType: "JSON",
+            beforeSend: function () {
+                $('#btn-simpan-tahunajaran').attr('disabled', 'disabled');
+            },
+            success: function (data) {
+                if (data.status == 'gagal') {
+                    Toast.fire({
+                        type: 'error',
+                        title: ' Input data tidak valid!!!.'
+                    });
+                    if (data.tahun_ajaran_error != '') {
+                        $('#tahun_ajaran_error').html(data.tahun_ajaran_error);
+                    } else {
+                        $('#tahun_ajaran_error').html('');
+                    }
+                    if (data.awal_periode_error != '') {
+                        $('#awal_periode_error').html(data.awal_periode_error);
+                    } else {
+                        $('#awal_periode_error').html('');
+                    }
+                    if (data.akhir_periode_error != '') {
+                        $('#akhir_periode_error').html(data.akhir_periode_error);
+                    } else {
+                        $('#akhir_periode_error').html('');
+                    }
+                    $('#tahun_ajaran').trigger('focus');
+                } else {
+                    Toast.fire({
+                        type: 'success',
+                        title: ' Data berhasil disimpan.'
+                    });
+                    $('#modal-tahunajaran').modal('hide');
+                }
+                $('#btn-simpan-tahunajaran').attr('disabled', false);
+            }
+        });
+        return false;
+    });
+    //end  ajax tombol Simpan modal tahunajaran
+    // ajax icon hapus table tahunajaran klik
+    $('.btn-hapus-tahunajaran').on('click', function (e) {
+        e.preventDefault();
+        var id = $(this).data('id');
+        var info = $(this).data('info');
+        Swal.fire({
+            title: 'Konfirmasi!',
+            text: 'Apakah anda yakin akan menghapus Tahun Ajaran -' + info + '- !?!',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'Batal',
+            confirmButtonText: 'Hapus'
+        }).then((result) => {
+            if (result.value) {
+                // Toast.fire({
+                //     type: 'success',
+                //     title: id + "-" + info
+                // });
+                $.ajax({
+                    type: "POST",
+                    url: base_url + "akademik/tahunajaran/hapus/",
+                    data: {
+                        id: id,
+                        info: info
+                    },
+                    dataType: 'JSON',
+                    success: function (data) {
+                        if (data.status == 'sukses') {
+                            Toast.fire({
+                                type: 'success',
+                                title: ' Data berhasil dihapus!!!.'
+                            });
+                            document.location.reload();
+                        } else {
+                            Toast.fire({
+                                type: 'warning',
+                                title: ' Penghapusan dibatalkan, data sedang digunakan oleh system!!!.'
+                            });
+                        }
+                    }
+                });
+            }
+        })
+    });
+    // end ajax icon hapus table tahunajaran klik
+    // ajax tombol edit data table tahunajaran klik
+    $('.btn-edit-tahunajaran').on('click', function (e) {
+        e.preventDefault();
+        const judul = document.getElementById('judul-modal');
+        judul.innerHTML = 'Ubah Data Tahun Ajaran';
+        var id = $(this).data('id');
+        $('#btn-simpan-tahunajaran').hide();
+        $('#id').attr('disabled', 'disabled');
+        $.ajax({
+            url: base_url + 'akademik/tahunajaran/ajax_edit/' + id,
+            type: "GET",
+            dataType: "JSON",
+            success: function (data) {
+                $('[name="idubah"]').val(data.id);
+                $('[name="tahun_ajaran"]').val(data.tahun_ajaran);
+                $('[name="awal_periode"]').val(data.awal_periode);
+                $('[name="akhir_periode"]').val(data.akhir_periode);
+                $('#modal-tahunajaran').modal('show');
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('Error get data from ajax');
+            }
+        });
+    });
+    //end ajax tombol edit data table tahunajaran klik
+    // ajax tombol modal ubah tahunajaran
+    $('#btn-ubah-tahunajaran').on('click', function (e) {
+        e.preventDefault();
+        const idubah = $('[name="idubah"]').val();
+        const tahunAjaran = $('[name="tahun_ajaran"]').val();
+        const awalPeriode = $('[name="awal_periode"]').val();
+        const akhirPeriode = $('[name="akhir_periode"]').val();
+        $.ajax({
+            type: "POST",
+            url: base_url + "akademik/tahunajaran/ubah/" + idubah,
+            data: {
+                tahun_ajaran: tahunAjaran,
+                awal_periode: awalPeriode,
+                akhir_periode: akhirPeriode
+            },
+            dataType: 'JSON',
+            beforeSend: function () {
+                $('#btn-ubah-tahunajaran').attr('disabled', 'disabled');
+            },
+            success: function (data) {
+                if (data.status == 'gagal') {
+                    Toast.fire({
+                        type: 'error',
+                        title: ' Input data tidak valid!!!.'
+                    });
+                    if (data.tahun_ajaran_error != '') {
+                        $('#tahun_ajaran_error').html(data.tahun_ajaran_error);
+
+                    } else {
+                        $('#tahun_ajaran_error').html('');
+                    }
+                    if (data.awal_periode_error != '') {
+                        $('#awal_periode_error').html(data.awal_periode_error);
+                    } else {
+                        $('#awal_periode_error').html('');
+                    }
+                    if (data.akhir_periode_error != '') {
+                        $('#akhir_periode_error').html(data.akhir_periode_error);
+                    } else {
+                        $('#akhir_periode_error').html('');
+                    }
+                    $('#tahun_ajaran').trigger('focus');
+                } else {
+                    Toast.fire({
+                        type: 'success',
+                        title: ' Data berhasil diubah!'
+                    });
+                    $('#modal-tahunajaran').modal('hide');
+                    //dataTable.ajax.reload();
+                }
+                $('#btn-ubah-tahunajaran').attr('disabled', false);
+            }
+        });
+        return false;
+    });
+    // end ajax tombol modal ubah tahunajaran
+
+    //---------------------------------------/TAHUN AJARAN------------------------------------
 
 
 
