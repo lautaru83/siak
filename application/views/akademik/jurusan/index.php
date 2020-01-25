@@ -60,7 +60,7 @@
                                             <tr>
                                                 <td class="text-center"><?= $idJurusan; ?></td>
                                                 <td><?= $dataJurusan['jurusan']; ?></td>
-                                                <td><?= $dataJurusan['unit_id']; ?></td>
+                                                <td><?= $dataJurusan['unit']; ?></td>
                                                 <td class="text-center"><a href="" class="btn-edit-jurusan" data-id="<?= $idJurusan; ?>" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fas fa-edit" style="color: olive"></i></a> - <a href="" class="btn-hapus-jurusan" data-id="<?= $idJurusan; ?>" data-info="<?= $dataJurusan['jurusan']; ?>" data-toggle="tooltip" data-placement="bottom" title="Hapus"> <i class="far fa-trash-alt" style="color: maroon"></i></a></td>
                                             </tr>
                                     <?php
@@ -83,7 +83,7 @@
             <!-- /.row -->
         </div>
         <!-- /.container-fluid -->
-        <?php //$this->load->view('akuntansi/jenistransaksi/modal');
+        <?php $this->load->view('akademik/jurusan/modal');
         ?>
     </section>
     <!-- /.content -->
