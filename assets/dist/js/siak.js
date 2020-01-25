@@ -3560,6 +3560,186 @@ $(document).ready(function () {
     // end ajax tombol modal ubah tingkat
 
     //---------------------------------------/TINGKAT------------------------------------
+    //----------------------------------------SEMESTER------------------------------------
+
+    //set focus input semester saat modal muncul
+    $('#modal-semester').on('shown.bs.modal', function () {
+        $('#semester').trigger('focus');
+    })
+    //set focus input semester saat modal muncul
+    // tombol tambah semester table
+    $('#btn-tambah-semester').on('click', function (e) {
+        e.preventDefault();
+        const judul = document.getElementById('judul-modal');
+        judul.innerHTML = 'Tambah Data Semester Pendidikan';
+        $('#btn-ubah-semester').hide();
+        $('#modal-semester').modal('show');
+    });
+    // end tombol tambah semester table
+    // ajax tombol Simpan modal semester
+    $('#btn-simpan-semester').on('click', function (e) {
+        e.preventDefault();
+        //const id = $('[name="id"]').val();
+        const semester = $('[name="semester"]').val();
+        // const is_active = $('[name="is_active"]').val();
+        $.ajax({
+
+            type: "POST",
+            url: base_url + "akademik/semester/simpan",
+            data: {
+                //id: id,
+                semester: semester,
+            },
+            dataType: "JSON",
+            beforeSend: function () {
+                $('#btn-simpan-semester').attr('disabled', 'disabled');
+            },
+            success: function (data) {
+                if (data.status == 'gagal') {
+                    Toast.fire({
+                        type: 'error',
+                        title: ' Input data tidak valid!!!.'
+                    });
+                    // if (data.kode_error != '') {
+                    //     $('#kode_error').html(data.kode_error);
+                    // } else {
+                    //     $('#kode_error').html('');
+                    // }
+                    if (data.semester_error != '') {
+                        $('#semester_error').html(data.semester_error);
+                    } else {
+                        $('#semester_error').html('');
+                    }
+                    $('#id').trigger('focus');
+                } else {
+                    Toast.fire({
+                        type: 'success',
+                        title: ' Data berhasil disimpan.'
+                    });
+                    $('#modal-semester').modal('hide');
+                }
+                $('#btn-simpan-semester').attr('disabled', false);
+            }
+        });
+        return false;
+    });
+    //end  ajax tombol Simpan modal semester
+    // ajax icon hapus table semester klik
+    $('.btn-hapus-semester').on('click', function (e) {
+        e.preventDefault();
+        var id = $(this).data('id');
+        var info = $(this).data('info');
+        Swal.fire({
+            title: 'Konfirmasi!',
+            text: 'Apakah anda yakin akan menghapus Semester Pendidikan -' + info + '- !?!',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'Batal',
+            confirmButtonText: 'Hapus'
+        }).then((result) => {
+            if (result.value) {
+                // Toast.fire({
+                //     type: 'success',
+                //     title: id + "-" + info
+                // });
+                $.ajax({
+                    type: "POST",
+                    url: base_url + "akademik/semester/hapus/",
+                    data: {
+                        id: id,
+                        info: info
+                    },
+                    dataType: 'JSON',
+                    success: function (data) {
+                        if (data.status == 'sukses') {
+                            Toast.fire({
+                                type: 'success',
+                                title: ' Data berhasil dihapus!!!.'
+                            });
+                            document.location.reload();
+                        } else {
+                            Toast.fire({
+                                type: 'warning',
+                                title: ' Penghapusan dibatalkan, data sedang digunakan oleh system!!!.'
+                            });
+                        }
+                    }
+                });
+            }
+        })
+    });
+    // end ajax icon hapus table semester klik
+    // ajax tombol edit data table semester klik
+    $('.btn-edit-semester').on('click', function (e) {
+        e.preventDefault();
+        const judul = document.getElementById('judul-modal');
+        judul.innerHTML = 'Ubah Data Semester Pendidikan';
+        var id = $(this).data('id');
+        $('#btn-simpan-semester').hide();
+        $('#id').attr('disabled', 'disabled');
+        $.ajax({
+            url: base_url + 'akademik/semester/ajax_edit/' + id,
+            type: "GET",
+            dataType: "JSON",
+            success: function (data) {
+                $('[name="id"]').val(data.id);
+                $('[name="idubah"]').val(data.id);
+                $('[name="semester"]').val(data.semester);
+                $('#modal-semester').modal('show');
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('Error get data from ajax');
+            }
+        });
+    });
+    //end ajax tombol edit data table semester klik
+    // ajax tombol modal ubah semester
+    $('#btn-ubah-semester').on('click', function (e) {
+        e.preventDefault();
+        const idubah = $('[name="idubah"]').val();
+        const semester = $('[name="semester"]').val();
+        $.ajax({
+            type: "POST",
+            url: base_url + "akademik/semester/ubah/" + idubah,
+            data: {
+                idubah: idubah,
+                semester: semester
+            },
+            dataType: 'JSON',
+            beforeSend: function () {
+                $('#btn-ubah-semester').attr('disabled', 'disabled');
+            },
+            success: function (data) {
+                if (data.status == 'gagal') {
+                    Toast.fire({
+                        type: 'error',
+                        title: ' Input data tidak valid!!!.'
+                    });
+                    if (data.semester_error != '') {
+                        $('#semester_error').html(data.semester_error);
+
+                    } else {
+                        $('#semester_error').html('');
+                    }
+                    $('#semester').trigger('focus');
+                } else {
+                    Toast.fire({
+                        type: 'success',
+                        title: ' Data berhasil diubah!'
+                    });
+                    $('#modal-semester').modal('hide');
+                    //dataTable.ajax.reload();
+                }
+                $('#btn-ubah-semester').attr('disabled', false);
+            }
+        });
+        return false;
+    });
+    // end ajax tombol modal ubah semester
+
+    //---------------------------------------/SEMESTER------------------------------------
 
 
 
