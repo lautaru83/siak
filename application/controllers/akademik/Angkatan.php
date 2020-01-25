@@ -18,31 +18,6 @@ class Angkatan extends CI_Controller
         $data['angkatan'] = $this->Angkatan_model->ambil_data();
         $this->template->display('akademik/angkatan/index', $data);
     }
-    // public function akun($id)
-    // {
-    //     $data['transaksi'] = $this->Angkatan_model->ambil_data_id($id);
-    //     $data['tran_id'] = $id;
-    //     $data['kontenmenu'] = "Master Pembukuan";
-    //     $data['kontensubmenu'] = "Akun Transaksi";
-    //     $data['kodeperkiraan'] = $this->Kodeperkiraan_model->ambil_data();
-    //     //$data['institusi'] = $this->Institusi_model->data_institusi();
-    //     $this->template->display('akuntansi/jenistransaksi/akun', $data);
-    // }
-    // public function ubahakun()
-    // {
-    //     $jenis_transaksi_id = $this->input->post('jenis_transaksi_id');
-    //     $a6level_id = $this->input->post('a6level_id');
-    //     $data = [
-    //         "jenis_transaksi_id" => $jenis_transaksi_id,
-    //         "a6level_id" => $a6level_id
-    //     ];
-    //     $hasil = $this->Angkatan_model->cek_akun($data);
-    //     if ($hasil) {
-    //         $this->Angkatan_model->hapusakun($data);
-    //     } else {
-    //         $this->Angkatan_model->simpanakun($data);
-    //     }
-    // }
     public function simpan()
     {
         $this->_validate();
@@ -50,7 +25,7 @@ class Angkatan extends CI_Controller
             $data = array(
                 'status' => 'gagal',
                 'kode_error' => form_error('id'),
-                'jenis_transaksi_error' => form_error('jenis_transaksi')
+                'angkatan_error' => form_error('angkatan')
             );
         } else {
             $this->Angkatan_model->simpan();
@@ -84,7 +59,7 @@ class Angkatan extends CI_Controller
             $data = array(
                 'status' => 'sukses',
                 'id' => $hasil['id'],
-                'jenis_transaksi' => $hasil['jenis_transaksi']
+                'angkatan' => $hasil['angkatan']
             );
         } else {
             $data = array(
@@ -100,7 +75,7 @@ class Angkatan extends CI_Controller
             $data = array(
                 'status' => 'gagal',
                 'kode_error' => form_error('id'),
-                'jenis_transaksi_error' => form_error('jenis_transaksi'),
+                'angkatan_error' => form_error('angkatan'),
             );
         } else {
             $this->Angkatan_model->ubah($id);

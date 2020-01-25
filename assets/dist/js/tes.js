@@ -51,20 +51,6 @@ $(document).ready(function () {
     // });
     // cek data
 
-    //set focus input angkatan saat modal muncul
-    $('#modal-angkatan').on('shown.bs.modal', function () {
-        $('#angkatan').trigger('focus');
-    })
-    //set focus input angkatan saat modal muncul
-    // tombol tambah angkatan table
-    $('#btn-tambah-angkatan').on('click', function (e) {
-        e.preventDefault();
-        const judul = document.getElementById('judul-modal');
-        judul.innerHTML = 'Tambah Data Angkatan';
-        $('#btn-ubah-angkatan').hide();
-        $('#modal-angkatan').modal('show');
-    });
-    // end tombol tambah angkatan table
 
     // ---------------------/TES---------------------------
 });

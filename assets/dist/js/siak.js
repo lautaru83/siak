@@ -2847,6 +2847,185 @@ $(document).ready(function () {
     });
     // end ajax tombol modal ubah saldoawal
     //--------------------------------------/SALDOAWAL------------------------------------
+    //---------------------------------------ANGKATAN------------------------------------
+
+    //set focus input angkatan saat modal muncul
+    $('#modal-angkatan').on('shown.bs.modal', function () {
+        $('#angkatan').trigger('focus');
+    })
+    //set focus input angkatan saat modal muncul
+    // tombol tambah angkatan table
+    $('#btn-tambah-angkatan').on('click', function (e) {
+        e.preventDefault();
+        const judul = document.getElementById('judul-modal');
+        judul.innerHTML = 'Tambah Data Angkatan';
+        $('#btn-ubah-angkatan').hide();
+        $('#modal-angkatan').modal('show');
+    });
+    // end tombol tambah angkatan table
+    // ajax tombol Simpan modal angkatan
+    $('#btn-simpan-angkatan').on('click', function (e) {
+        e.preventDefault();
+        const id = $('[name="id"]').val();
+        const angkatan = $('[name="angkatan"]').val();
+        // const is_active = $('[name="is_active"]').val();
+        $.ajax({
+
+            type: "POST",
+            url: base_url + "akademik/angkatan/simpan",
+            data: {
+                id: id,
+                angkatan: angkatan,
+            },
+            dataType: "JSON",
+            beforeSend: function () {
+                $('#btn-simpan-angkatan').attr('disabled', 'disabled');
+            },
+            success: function (data) {
+                if (data.status == 'gagal') {
+                    Toast.fire({
+                        type: 'error',
+                        title: ' Input data tidak valid!!!.'
+                    });
+                    if (data.kode_error != '') {
+                        $('#kode_error').html(data.kode_error);
+                    } else {
+                        $('#kode_error').html('');
+                    }
+                    if (data.angkatan_error != '') {
+                        $('#angkatan_error').html(data.angkatan_error);
+                    } else {
+                        $('#angkatan_error').html('');
+                    }
+                    $('#id').trigger('focus');
+                } else {
+                    Toast.fire({
+                        type: 'success',
+                        title: ' Data berhasil disimpan.'
+                    });
+                    $('#modal-angkatan').modal('hide');
+                }
+                $('#btn-simpan-angkatan').attr('disabled', false);
+            }
+        });
+        return false;
+    });
+    //end  ajax tombol Simpan modal angkatan
+    // ajax icon hapus table angkatan klik
+    $('.btn-hapus-angkatan').on('click', function (e) {
+        e.preventDefault();
+        var id = $(this).data('id');
+        var info = $(this).data('info');
+        Swal.fire({
+            title: 'Konfirmasi!',
+            text: 'Apakah anda yakin akan menghapus Angkatan -' + info + '- !?!',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'Batal',
+            confirmButtonText: 'Hapus'
+        }).then((result) => {
+            if (result.value) {
+                // Toast.fire({
+                //     type: 'success',
+                //     title: id + "-" + info
+                // });
+                $.ajax({
+                    type: "POST",
+                    url: base_url + "akademik/angkatan/hapus/",
+                    data: {
+                        id: id,
+                        info: info
+                    },
+                    dataType: 'JSON',
+                    success: function (data) {
+                        if (data.status == 'sukses') {
+                            Toast.fire({
+                                type: 'success',
+                                title: ' Data berhasil dihapus!!!.'
+                            });
+                            document.location.reload();
+                        } else {
+                            Toast.fire({
+                                type: 'warning',
+                                title: ' Penghapusan dibatalkan, data sedang digunakan oleh system!!!.'
+                            });
+                        }
+                    }
+                });
+            }
+        })
+    });
+    // end ajax icon hapus table angkatan klik
+    // ajax tombol edit data table angkatan klik
+    $('.btn-edit-angkatan').on('click', function (e) {
+        e.preventDefault();
+        const judul = document.getElementById('judul-modal');
+        judul.innerHTML = 'Ubah Data Angkatan';
+        var id = $(this).data('id');
+        $('#btn-simpan-angkatan').hide();
+        $('#id').attr('disabled', 'disabled');
+        $.ajax({
+            url: base_url + 'akademik/angkatan/ajax_edit/' + id,
+            type: "GET",
+            dataType: "JSON",
+            success: function (data) {
+                $('[name="id"]').val(data.id);
+                $('[name="idubah"]').val(data.id);
+                $('[name="angkatan"]').val(data.angkatan);
+                $('#modal-angkatan').modal('show');
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('Error get data from ajax');
+            }
+        });
+    });
+    //end ajax tombol edit data table angkatan klik
+    // ajax tombol modal ubah angkatan
+    $('#btn-ubah-angkatan').on('click', function (e) {
+        e.preventDefault();
+        const idubah = $('[name="idubah"]').val();
+        const angkatan = $('[name="angkatan"]').val();
+        $.ajax({
+            type: "POST",
+            url: base_url + "akademik/angkatan/ubah/" + idubah,
+            data: {
+                idubah: idubah,
+                angkatan: angkatan
+            },
+            dataType: 'JSON',
+            beforeSend: function () {
+                $('#btn-ubah-angkatan').attr('disabled', 'disabled');
+            },
+            success: function (data) {
+                if (data.status == 'gagal') {
+                    Toast.fire({
+                        type: 'error',
+                        title: ' Input data tidak valid!!!.'
+                    });
+                    if (data.angkatan_error != '') {
+                        $('#angkatan_error').html(data.angkatan_error);
+
+                    } else {
+                        $('#angkatan_error').html('');
+                    }
+                    $('#angkatan').trigger('focus');
+                } else {
+                    Toast.fire({
+                        type: 'success',
+                        title: ' Data berhasil diubah!'
+                    });
+                    $('#modal-angkatan').modal('hide');
+                    //dataTable.ajax.reload();
+                }
+                $('#btn-ubah-angkatan').attr('disabled', false);
+            }
+        });
+        return false;
+    });
+    // end ajax tombol modal ubah angkatan
+    //--------------------------------------/ANGKATAN------------------------------------
 
 
 
