@@ -3026,6 +3026,186 @@ $(document).ready(function () {
     });
     // end ajax tombol modal ubah angkatan
     //--------------------------------------/ANGKATAN------------------------------------
+    //---------------------------------------JENJANG------------------------------------
+
+    //set focus input jenjang saat modal muncul
+    $('#modal-jenjang').on('shown.bs.modal', function () {
+        $('#id').trigger('focus');
+    })
+    //set focus input jenjang saat modal muncul
+    // tombol tambah jenjang table
+    $('#btn-tambah-jenjang').on('click', function (e) {
+        e.preventDefault();
+        const judul = document.getElementById('judul-modal');
+        judul.innerHTML = 'Tambah Data Jenjang Pendidikan';
+        $('#btn-ubah-jenjang').hide();
+        $('#modal-jenjang').modal('show');
+    });
+    // end tombol tambah jenjang table
+    // ajax tombol Simpan modal jenjang
+    $('#btn-simpan-jenjang').on('click', function (e) {
+        e.preventDefault();
+        const id = $('[name="id"]').val();
+        const jenjang = $('[name="jenjang"]').val();
+        // const is_active = $('[name="is_active"]').val();
+        $.ajax({
+
+            type: "POST",
+            url: base_url + "akademik/jenjang/simpan",
+            data: {
+                id: id,
+                jenjang: jenjang,
+            },
+            dataType: "JSON",
+            beforeSend: function () {
+                $('#btn-simpan-jenjang').attr('disabled', 'disabled');
+            },
+            success: function (data) {
+                if (data.status == 'gagal') {
+                    Toast.fire({
+                        type: 'error',
+                        title: ' Input data tidak valid!!!.'
+                    });
+                    if (data.kode_error != '') {
+                        $('#kode_error').html(data.kode_error);
+                    } else {
+                        $('#kode_error').html('');
+                    }
+                    if (data.jenjang_error != '') {
+                        $('#jenjang_error').html(data.jenjang_error);
+                    } else {
+                        $('#jenjang_error').html('');
+                    }
+                    $('#id').trigger('focus');
+                } else {
+                    Toast.fire({
+                        type: 'success',
+                        title: ' Data berhasil disimpan.'
+                    });
+                    $('#modal-jenjang').modal('hide');
+                }
+                $('#btn-simpan-jenjang').attr('disabled', false);
+            }
+        });
+        return false;
+    });
+    //end  ajax tombol Simpan modal jenjang
+    // ajax icon hapus table jenjang klik
+    $('.btn-hapus-jenjang').on('click', function (e) {
+        e.preventDefault();
+        var id = $(this).data('id');
+        var info = $(this).data('info');
+        Swal.fire({
+            title: 'Konfirmasi!',
+            text: 'Apakah anda yakin akan menghapus Jenjang -' + info + '- !?!',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'Batal',
+            confirmButtonText: 'Hapus'
+        }).then((result) => {
+            if (result.value) {
+                // Toast.fire({
+                //     type: 'success',
+                //     title: id + "-" + info
+                // });
+                $.ajax({
+                    type: "POST",
+                    url: base_url + "akademik/jenjang/hapus/",
+                    data: {
+                        id: id,
+                        info: info
+                    },
+                    dataType: 'JSON',
+                    success: function (data) {
+                        if (data.status == 'sukses') {
+                            Toast.fire({
+                                type: 'success',
+                                title: ' Data berhasil dihapus!!!.'
+                            });
+                            document.location.reload();
+                        } else {
+                            Toast.fire({
+                                type: 'warning',
+                                title: ' Penghapusan dibatalkan, data sedang digunakan oleh system!!!.'
+                            });
+                        }
+                    }
+                });
+            }
+        })
+    });
+    // end ajax icon hapus table jenjang klik
+    // ajax tombol edit data table jenjang klik
+    $('.btn-edit-jenjang').on('click', function (e) {
+        e.preventDefault();
+        const judul = document.getElementById('judul-modal');
+        judul.innerHTML = 'Ubah Data Jenjang Pendidikan';
+        var id = $(this).data('id');
+        $('#btn-simpan-jenjang').hide();
+        $('#id').attr('disabled', 'disabled');
+        $.ajax({
+            url: base_url + 'akademik/jenjang/ajax_edit/' + id,
+            type: "GET",
+            dataType: "JSON",
+            success: function (data) {
+                $('[name="id"]').val(data.id);
+                $('[name="idubah"]').val(data.id);
+                $('[name="jenjang"]').val(data.jenjang);
+                $('#modal-jenjang').modal('show');
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('Error get data from ajax');
+            }
+        });
+    });
+    //end ajax tombol edit data table jenjang klik
+    // ajax tombol modal ubah jenjang
+    $('#btn-ubah-jenjang').on('click', function (e) {
+        e.preventDefault();
+        const idubah = $('[name="idubah"]').val();
+        const jenjang = $('[name="jenjang"]').val();
+        $.ajax({
+            type: "POST",
+            url: base_url + "akademik/jenjang/ubah/" + idubah,
+            data: {
+                idubah: idubah,
+                jenjang: jenjang
+            },
+            dataType: 'JSON',
+            beforeSend: function () {
+                $('#btn-ubah-jenjang').attr('disabled', 'disabled');
+            },
+            success: function (data) {
+                if (data.status == 'gagal') {
+                    Toast.fire({
+                        type: 'error',
+                        title: ' Input data tidak valid!!!.'
+                    });
+                    if (data.jenjang_error != '') {
+                        $('#jenjang_error').html(data.jenjang_error);
+
+                    } else {
+                        $('#jenjang_error').html('');
+                    }
+                    $('#jenjang').trigger('focus');
+                } else {
+                    Toast.fire({
+                        type: 'success',
+                        title: ' Data berhasil diubah!'
+                    });
+                    $('#modal-jenjang').modal('hide');
+                    //dataTable.ajax.reload();
+                }
+                $('#btn-ubah-jenjang').attr('disabled', false);
+            }
+        });
+        return false;
+    });
+    // end ajax tombol modal ubah jenjang
+
+    //--------------------------------------/JENJANG------------------------------------
 
 
 
