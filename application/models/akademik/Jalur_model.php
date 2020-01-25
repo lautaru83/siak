@@ -11,6 +11,10 @@ class Jalur_model extends CI_Model
     {
         return $this->db3->get('jalurs')->result_array();
     }
+    public function data_fk()
+    {
+        return $this->db3->get('jalurs')->result_array();
+    }
     public function ambil_data_id($id)
     {
         return $this->db3->get_where('jalurs', ['id' => $id])->row_array();

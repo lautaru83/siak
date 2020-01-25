@@ -4133,6 +4133,231 @@ $(document).ready(function () {
 
 
     //---------------------------------------/JURUSAN-----------------------------------------
+    //----------------------------------------PRODI-----------------------------------------
+
+    //set focus input prodi saat modal muncul
+    $('#modal-prodi').on('shown.bs.modal', function () {
+        $('#id').trigger('focus');
+    })
+    //set focus input prodi saat modal muncul
+    // tombol tambah prodi table
+    $('#btn-tambah-prodi').on('click', function (e) {
+        e.preventDefault();
+        const judul = document.getElementById('judul-modal');
+        judul.innerHTML = 'Tambah Data Program Pendidikan';
+        $('#btn-ubah-prodi').hide();
+        $('#modal-prodi').modal('show');
+    });
+    // end tombol tambah prodi table
+    // ajax tombol Simpan modal prodi
+    $('#btn-simpan-prodi').on('click', function (e) {
+        e.preventDefault();
+        const id = $('[name="id"]').val();
+        const prodi = $('[name="prodi"]').val();
+        const jenjang_id = $('[name="jenjang_id"]').val();
+        const jurusan_id = $('[name="jurusan_id"]').val();
+        const jalur_id = $('[name="jalur_id"]').val();
+        $.ajax({
+
+            type: "POST",
+            url: base_url + "akademik/prodi/simpan",
+            data: {
+                id: id,
+                prodi: prodi,
+                jenjang_id: jenjang_id,
+                jurusan_id: jurusan_id,
+                jalur_id: jalur_id
+            },
+            dataType: "JSON",
+            beforeSend: function () {
+                $('#btn-simpan-prodi').attr('disabled', 'disabled');
+            },
+            success: function (data) {
+                if (data.status == 'gagal') {
+                    Toast.fire({
+                        type: 'error',
+                        title: ' Input data tidak valid!!!.'
+                    });
+                    if (data.kode_error != '') {
+                        $('#kode_error').html(data.kode_error);
+                    } else {
+                        $('#kode_error').html('');
+                    }
+                    if (data.prodi_error != '') {
+                        $('#prodi_error').html(data.prodi_error);
+                    } else {
+                        $('#prodi_error').html('');
+                    }
+                    if (data.jenjang_error != '') {
+                        $('#jenjang_error').html(data.jenjang_error);
+                    } else {
+                        $('#jenjang_error').html('');
+                    }
+                    if (data.jurusan_error != '') {
+                        $('#jurusan_error').html(data.jurusan_error);
+                    } else {
+                        $('#jurusan_error').html('');
+                    }
+                    if (data.jalur_error != '') {
+                        $('#jalur_error').html(data.jalur_error);
+                    } else {
+                        $('#jalur_error').html('');
+                    }
+                    $('#id').trigger('focus');
+                } else {
+                    Toast.fire({
+                        type: 'success',
+                        title: ' Data berhasil disimpan.'
+                    });
+                    $('#modal-prodi').modal('hide');
+                }
+                $('#btn-simpan-prodi').attr('disabled', false);
+            }
+        });
+        return false;
+    });
+    //end  ajax tombol Simpan modal prodi
+    // ajax icon hapus table prodi klik
+    $('.btn-hapus-prodi').on('click', function (e) {
+        e.preventDefault();
+        var id = $(this).data('id');
+        var info = $(this).data('info');
+        Swal.fire({
+            title: 'Konfirmasi!',
+            text: 'Apakah anda yakin akan menghapus Prodi -' + info + '- !?!',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'Batal',
+            confirmButtonText: 'Hapus'
+        }).then((result) => {
+            if (result.value) {
+                // Toast.fire({
+                //     type: 'success',
+                //     title: id + "-" + info
+                // });
+                $.ajax({
+                    type: "POST",
+                    url: base_url + "akademik/prodi/hapus",
+                    data: {
+                        id: id,
+                        info: info
+                    },
+                    dataType: 'JSON',
+                    success: function (data) {
+                        if (data.status == 'sukses') {
+                            Toast.fire({
+                                type: 'success',
+                                title: ' Data berhasil dihapus!!!.'
+                            });
+                            document.location.reload();
+                        } else {
+                            Toast.fire({
+                                type: 'warning',
+                                title: ' Penghapusan dibatalkan, data sedang digunakan oleh system!!!.'
+                            });
+                        }
+                    }
+                });
+            }
+        })
+    });
+    // end ajax icon hapus table prodi klik
+    // ajax tombol edit data table prodi klik
+    $('.btn-edit-prodi').on('click', function (e) {
+        e.preventDefault();
+        const judul = document.getElementById('judul-modal');
+        judul.innerHTML = 'Ubah Data Tahun Pendidikan';
+        var id = $(this).data('id');
+        $('#btn-simpan-prodi').hide();
+        $('#id').attr('disabled', 'disabled');
+        $.ajax({
+            url: base_url + 'akademik/prodi/ajax_edit/' + id,
+            type: "GET",
+            dataType: "JSON",
+            success: function (data) {
+                $('[name="id"]').val(data.id);
+                $('[name="idubah"]').val(data.id);
+                $('[name="prodi"]').val(data.prodi);
+                $('[name="jenjang_id"]').val(data.jenjang_id);
+                $('[name="jurusan_id"]').val(data.jurusan_id);
+                $('[name="jalur_id"]').val(data.jalur_id);
+                $('#modal-prodi').modal('show');
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('Error get data from ajax');
+            }
+        });
+    });
+    //end ajax tombol edit data table prodi klik
+    // ajax tombol modal ubah prodi
+    $('#btn-ubah-prodi').on('click', function (e) {
+        e.preventDefault();
+        const idubah = $('[name="idubah"]').val();
+        const prodi = $('[name="prodi"]').val();
+        const jenjang_id = $('[name="jenjang_id"]').val();
+        const jurusan_id = $('[name="jurusan_id"]').val();
+        const jalur_id = $('[name="jalur_id"]').val();
+        $.ajax({
+            type: "POST",
+            url: base_url + "akademik/prodi/ubah/" + idubah,
+            data: {
+                idubah: idubah,
+                prodi: prodi,
+                jenjang_id: jenjang_id,
+                jurusan_id: jurusan_id,
+                jalur_id: jalur_id
+            },
+            dataType: 'JSON',
+            beforeSend: function () {
+                $('#btn-ubah-prodi').attr('disabled', 'disabled');
+            },
+            success: function (data) {
+                if (data.status == 'gagal') {
+                    Toast.fire({
+                        type: 'error',
+                        title: ' Input data tidak valid!!!.'
+                    });
+                    if (data.prodi_error != '') {
+                        $('#prodi_error').html(data.prodi_error);
+
+                    } else {
+                        $('#prodi_error').html('');
+                    }
+                    if (data.jenjang_error != '') {
+                        $('#jenjang_error').html(data.jenjang_error);
+                    } else {
+                        $('#jenjang_error').html('');
+                    }
+                    if (data.jurusan_error != '') {
+                        $('#jurusan_error').html(data.jurusan_error);
+                    } else {
+                        $('#jurusan_error').html('');
+                    }
+                    if (data.jalur_error != '') {
+                        $('#jalur_error').html(data.jalur_error);
+                    } else {
+                        $('#jalur_error').html('');
+                    }
+                    $('#prodi').trigger('focus');
+                } else {
+                    Toast.fire({
+                        type: 'success',
+                        title: ' Data berhasil diubah!'
+                    });
+                    $('#modal-prodi').modal('hide');
+                    //dataTable.ajax.reload();
+                }
+                $('#btn-ubah-prodi').attr('disabled', false);
+            }
+        });
+        return false;
+    });
+    // end ajax tombol modal ubah prodi
+
+
+    //---------------------------------------/PRODI-----------------------------------------
 
 
 

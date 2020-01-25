@@ -62,9 +62,9 @@
                                             <tr>
                                                 <td class="text-center"><?= $idProdi; ?></td>
                                                 <td><?= $dataProdi['prodi']; ?></td>
-                                                <td><?= $dataProdi['jenjang_id']; ?></td>
-                                                <td><?= $dataProdi['jurusan_id']; ?></td>
-                                                <td><?= $dataProdi['jalur_id']; ?></td>
+                                                <td><?= $dataProdi['jenjang']; ?></td>
+                                                <td><?= $dataProdi['jurusan']; ?></td>
+                                                <td><?= $dataProdi['jalur']; ?></td>
                                                 <td class="text-center"><a href="" class="btn-edit-prodi" data-id="<?= $idProdi; ?>" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fas fa-edit" style="color: olive"></i></a> - <a href="" class="btn-hapus-prodi" data-id="<?= $idProdi; ?>" data-info="<?= $dataProdi['prodi']; ?>" data-toggle="tooltip" data-placement="bottom" title="Hapus"> <i class="far fa-trash-alt" style="color: maroon"></i></a></td>
                                             </tr>
                                     <?php
@@ -87,7 +87,7 @@
             <!-- /.row -->
         </div>
         <!-- /.container-fluid -->
-        <?php //$this->load->view('akuntansi/jenistransaksi/modal');
+        <?php $this->load->view('akademik/prodi/modal');
         ?>
     </section>
     <!-- /.content -->

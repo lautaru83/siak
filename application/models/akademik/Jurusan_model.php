@@ -14,6 +14,10 @@ class Jurusan_model extends CI_Model
         $data = $this->db3->query($sql);
         return $data->result_array();
     }
+    public function data_fk()
+    {
+        return $this->db3->get('jurusans')->result_array();
+    }
     public function ambil_data_id($id)
     {
         return $this->db3->get_where('jurusans', ['id' => $id])->row_array();
