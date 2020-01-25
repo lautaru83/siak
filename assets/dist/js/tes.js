@@ -51,6 +51,177 @@ $(document).ready(function () {
     // });
     // cek data
 
+    //set focus input jalur saat modal muncul
+    $('#modal-jalur').on('shown.bs.modal', function () {
+        $('#jalur').trigger('focus');
+    })
+    //set focus input jalur saat modal muncul
+    // tombol tambah jalur table
+    $('#btn-tambah-jalur').on('click', function (e) {
+        e.preventDefault();
+        const judul = document.getElementById('judul-modal');
+        judul.innerHTML = 'Tambah Data Jalur Pendidikan';
+        $('#btn-ubah-jalur').hide();
+        $('#modal-jalur').modal('show');
+    });
+    // end tombol tambah jalur table
+    // ajax tombol Simpan modal jalur
+    $('#btn-simpan-jalur').on('click', function (e) {
+        e.preventDefault();
+        //const id = $('[name="id"]').val();
+        const jalur = $('[name="jalur"]').val();
+        // const is_active = $('[name="is_active"]').val();
+        $.ajax({
+
+            type: "POST",
+            url: base_url + "akademik/jalur/simpan",
+            data: {
+                jalur: jalur
+            },
+            dataType: "JSON",
+            beforeSend: function () {
+                $('#btn-simpan-jalur').attr('disabled', 'disabled');
+            },
+            success: function (data) {
+                if (data.status == 'gagal') {
+                    Toast.fire({
+                        type: 'error',
+                        title: ' Input data tidak valid!!!.'
+                    });
+                    if (data.jalur_error != '') {
+                        $('#jalur_error').html(data.jalur_error);
+                    } else {
+                        $('#jalur_error').html('');
+                    }
+                    $('#id').trigger('focus');
+                } else {
+                    Toast.fire({
+                        type: 'success',
+                        title: ' Data berhasil disimpan.'
+                    });
+                    $('#modal-jalur').modal('hide');
+                }
+                $('#btn-simpan-jalur').attr('disabled', false);
+            }
+        });
+        return false;
+    });
+    //end  ajax tombol Simpan modal jalur
+    // ajax icon hapus table jalur klik
+    $('.btn-hapus-jalur').on('click', function (e) {
+        e.preventDefault();
+        var id = $(this).data('id');
+        var info = $(this).data('info');
+        Swal.fire({
+            title: 'Konfirmasi!',
+            text: 'Apakah anda yakin akan menghapus Jalur Pendidikan -' + info + '- !?!',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'Batal',
+            confirmButtonText: 'Hapus'
+        }).then((result) => {
+            if (result.value) {
+                // Toast.fire({
+                //     type: 'success',
+                //     title: id + "-" + info
+                // });
+                $.ajax({
+                    type: "POST",
+                    url: base_url + "akademik/jalur/hapus/",
+                    data: {
+                        id: id,
+                        info: info
+                    },
+                    dataType: 'JSON',
+                    success: function (data) {
+                        if (data.status == 'sukses') {
+                            Toast.fire({
+                                type: 'success',
+                                title: ' Data berhasil dihapus!!!.'
+                            });
+                            document.location.reload();
+                        } else {
+                            Toast.fire({
+                                type: 'warning',
+                                title: ' Penghapusan dibatalkan, data sedang digunakan oleh system!!!.'
+                            });
+                        }
+                    }
+                });
+            }
+        })
+    });
+    // end ajax icon hapus table jalur klik
+    // ajax tombol edit data table jalur klik
+    $('.btn-edit-jalur').on('click', function (e) {
+        e.preventDefault();
+        const judul = document.getElementById('judul-modal');
+        judul.innerHTML = 'Ubah Data Jalur Pendidikan';
+        var id = $(this).data('id');
+        $('#btn-simpan-jalur').hide();
+        // $('#id').attr('disabled', 'disabled');
+        $.ajax({
+            url: base_url + 'akademik/jalur/ajax_edit/' + id,
+            type: "GET",
+            dataType: "JSON",
+            success: function (data) {
+                // $('[name="id"]').val(data.id);
+                $('[name="idubah"]').val(data.id);
+                $('[name="jalur"]').val(data.jalur);
+                $('#modal-jalur').modal('show');
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('Error get data from ajax');
+            }
+        });
+    });
+    //end ajax tombol edit data table jalur klik
+    // ajax tombol modal ubah jalur
+    $('#btn-ubah-jalur').on('click', function (e) {
+        e.preventDefault();
+        const idubah = $('[name="idubah"]').val();
+        const jalur = $('[name="jalur"]').val();
+        $.ajax({
+            type: "POST",
+            url: base_url + "akademik/jalur/ubah/" + idubah,
+            data: {
+                idubah: idubah,
+                jalur: jalur
+            },
+            dataType: 'JSON',
+            beforeSend: function () {
+                $('#btn-ubah-jalur').attr('disabled', 'disabled');
+            },
+            success: function (data) {
+                if (data.status == 'gagal') {
+                    Toast.fire({
+                        type: 'error',
+                        title: ' Input data tidak valid!!!.'
+                    });
+                    if (data.jalur_error != '') {
+                        $('#jalur_error').html(data.jalur_error);
+
+                    } else {
+                        $('#jalur_error').html('');
+                    }
+                    $('#jalur').trigger('focus');
+                } else {
+                    Toast.fire({
+                        type: 'success',
+                        title: ' Data berhasil diubah!'
+                    });
+                    $('#modal-jalur').modal('hide');
+                    //dataTable.ajax.reload();
+                }
+                $('#btn-ubah-jalur').attr('disabled', false);
+            }
+        });
+        return false;
+    });
+    // end ajax tombol modal ubah jalur
+
 
     // ---------------------/TES---------------------------
 });
