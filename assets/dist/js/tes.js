@@ -51,37 +51,37 @@ $(document).ready(function () {
     // });
     // cek data
 
-    //set focus input tingkat saat modal muncul
-    $('#modal-tingkat').on('shown.bs.modal', function () {
-        $('#tingkat').trigger('focus');
+    //set focus input semester saat modal muncul
+    $('#modal-semester').on('shown.bs.modal', function () {
+        $('#semester').trigger('focus');
     })
-    //set focus input tingkat saat modal muncul
-    // tombol tambah tingkat table
-    $('#btn-tambah-tingkat').on('click', function (e) {
+    //set focus input semester saat modal muncul
+    // tombol tambah semester table
+    $('#btn-tambah-semester').on('click', function (e) {
         e.preventDefault();
         const judul = document.getElementById('judul-modal');
-        judul.innerHTML = 'Tambah Data Tingkat Pendidikan';
-        $('#btn-ubah-tingkat').hide();
-        $('#modal-tingkat').modal('show');
+        judul.innerHTML = 'Tambah Data Semester Pendidikan';
+        $('#btn-ubah-semester').hide();
+        $('#modal-semester').modal('show');
     });
-    // end tombol tambah tingkat table
-    // ajax tombol Simpan modal tingkat
-    $('#btn-simpan-tingkat').on('click', function (e) {
+    // end tombol tambah semester table
+    // ajax tombol Simpan modal semester
+    $('#btn-simpan-semester').on('click', function (e) {
         e.preventDefault();
-        const id = $('[name="id"]').val();
-        const tingkat = $('[name="tingkat"]').val();
+        //const id = $('[name="id"]').val();
+        const semester = $('[name="semester"]').val();
         // const is_active = $('[name="is_active"]').val();
         $.ajax({
 
             type: "POST",
-            url: base_url + "akademik/tingkat/simpan",
+            url: base_url + "akademik/semester/simpan",
             data: {
-                id: id,
-                tingkat: tingkat,
+                //id: id,
+                semester: semester,
             },
             dataType: "JSON",
             beforeSend: function () {
-                $('#btn-simpan-tingkat').attr('disabled', 'disabled');
+                $('#btn-simpan-semester').attr('disabled', 'disabled');
             },
             success: function (data) {
                 if (data.status == 'gagal') {
@@ -89,15 +89,15 @@ $(document).ready(function () {
                         type: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
-                    if (data.kode_error != '') {
-                        $('#kode_error').html(data.kode_error);
+                    // if (data.kode_error != '') {
+                    //     $('#kode_error').html(data.kode_error);
+                    // } else {
+                    //     $('#kode_error').html('');
+                    // }
+                    if (data.semester_error != '') {
+                        $('#semester_error').html(data.semester_error);
                     } else {
-                        $('#kode_error').html('');
-                    }
-                    if (data.tingkat_error != '') {
-                        $('#tingkat_error').html(data.tingkat_error);
-                    } else {
-                        $('#tingkat_error').html('');
+                        $('#semester_error').html('');
                     }
                     $('#id').trigger('focus');
                 } else {
@@ -105,22 +105,22 @@ $(document).ready(function () {
                         type: 'success',
                         title: ' Data berhasil disimpan.'
                     });
-                    $('#modal-tingkat').modal('hide');
+                    $('#modal-semester').modal('hide');
                 }
-                $('#btn-simpan-tingkat').attr('disabled', false);
+                $('#btn-simpan-semester').attr('disabled', false);
             }
         });
         return false;
     });
-    //end  ajax tombol Simpan modal tingkat
-    // ajax icon hapus table tingkat klik
-    $('.btn-hapus-tingkat').on('click', function (e) {
+    //end  ajax tombol Simpan modal semester
+    // ajax icon hapus table semester klik
+    $('.btn-hapus-semester').on('click', function (e) {
         e.preventDefault();
         var id = $(this).data('id');
         var info = $(this).data('info');
         Swal.fire({
             title: 'Konfirmasi!',
-            text: 'Apakah anda yakin akan menghapus Tingkat Pendidikan -' + info + '- !?!',
+            text: 'Apakah anda yakin akan menghapus Semester Pendidikan -' + info + '- !?!',
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -135,7 +135,7 @@ $(document).ready(function () {
                 // });
                 $.ajax({
                     type: "POST",
-                    url: base_url + "akademik/tingkat/hapus/",
+                    url: base_url + "akademik/semester/hapus/",
                     data: {
                         id: id,
                         info: info
@@ -159,46 +159,46 @@ $(document).ready(function () {
             }
         })
     });
-    // end ajax icon hapus table tingkat klik
-    // ajax tombol edit data table tingkat klik
-    $('.btn-edit-tingkat').on('click', function (e) {
+    // end ajax icon hapus table semester klik
+    // ajax tombol edit data table semester klik
+    $('.btn-edit-semester').on('click', function (e) {
         e.preventDefault();
         const judul = document.getElementById('judul-modal');
-        judul.innerHTML = 'Ubah Data Tingkat Pendidikan';
+        judul.innerHTML = 'Ubah Data Semester Pendidikan';
         var id = $(this).data('id');
-        $('#btn-simpan-tingkat').hide();
+        $('#btn-simpan-semester').hide();
         $('#id').attr('disabled', 'disabled');
         $.ajax({
-            url: base_url + 'akademik/tingkat/ajax_edit/' + id,
+            url: base_url + 'akademik/semester/ajax_edit/' + id,
             type: "GET",
             dataType: "JSON",
             success: function (data) {
                 $('[name="id"]').val(data.id);
                 $('[name="idubah"]').val(data.id);
-                $('[name="tingkat"]').val(data.tingkat);
-                $('#modal-tingkat').modal('show');
+                $('[name="semester"]').val(data.semester);
+                $('#modal-semester').modal('show');
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert('Error get data from ajax');
             }
         });
     });
-    //end ajax tombol edit data table tingkat klik
-    // ajax tombol modal ubah tingkat
-    $('#btn-ubah-tingkat').on('click', function (e) {
+    //end ajax tombol edit data table semester klik
+    // ajax tombol modal ubah semester
+    $('#btn-ubah-semester').on('click', function (e) {
         e.preventDefault();
         const idubah = $('[name="idubah"]').val();
-        const tingkat = $('[name="tingkat"]').val();
+        const semester = $('[name="semester"]').val();
         $.ajax({
             type: "POST",
-            url: base_url + "akademik/tingkat/ubah/" + idubah,
+            url: base_url + "akademik/semester/ubah/" + idubah,
             data: {
                 idubah: idubah,
-                tingkat: tingkat
+                semester: semester
             },
             dataType: 'JSON',
             beforeSend: function () {
-                $('#btn-ubah-tingkat').attr('disabled', 'disabled');
+                $('#btn-ubah-semester').attr('disabled', 'disabled');
             },
             success: function (data) {
                 if (data.status == 'gagal') {
@@ -206,27 +206,28 @@ $(document).ready(function () {
                         type: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
-                    if (data.tingkat_error != '') {
-                        $('#tingkat_error').html(data.tingkat_error);
+                    if (data.semester_error != '') {
+                        $('#semester_error').html(data.semester_error);
 
                     } else {
-                        $('#tingkat_error').html('');
+                        $('#semester_error').html('');
                     }
-                    $('#tingkat').trigger('focus');
+                    $('#semester').trigger('focus');
                 } else {
                     Toast.fire({
                         type: 'success',
                         title: ' Data berhasil diubah!'
                     });
-                    $('#modal-tingkat').modal('hide');
+                    $('#modal-semester').modal('hide');
                     //dataTable.ajax.reload();
                 }
-                $('#btn-ubah-tingkat').attr('disabled', false);
+                $('#btn-ubah-semester').attr('disabled', false);
             }
         });
         return false;
     });
-    // end ajax tombol modal ubah tingkat
+    // end ajax tombol modal ubah semester
+
 
 
     // ---------------------/TES---------------------------
