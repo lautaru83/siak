@@ -8,7 +8,7 @@ class Jenjang extends CI_Controller
         parent::__construct();
         is_logged_in();
         $this->db3 = $this->load->database('akademik', TRUE);
-        $this->load->model(array('akademik/Jenjang_model' => 'Jenjang_model', 'akuntansi/Kodeperkiraan_model' => 'Kodeperkiraan_model'));
+        $this->load->model(array('akademik/Jenjang_model' => 'Jenjang_model'));
     }
     public function index()
     {
@@ -18,31 +18,6 @@ class Jenjang extends CI_Controller
         $data['jenjang'] = $this->Jenjang_model->ambil_data();
         $this->template->display('akademik/jenjang/index', $data);
     }
-    // public function akun($id)
-    // {
-    //     $data['transaksi'] = $this->Jenjang_model->ambil_data_id($id);
-    //     $data['tran_id'] = $id;
-    //     $data['kontenmenu'] = "Master Pembukuan";
-    //     $data['kontensubmenu'] = "Akun Transaksi";
-    //     $data['kodeperkiraan'] = $this->Kodeperkiraan_model->ambil_data();
-    //     //$data['institusi'] = $this->Institusi_model->data_institusi();
-    //     $this->template->display('akuntansi/jenistransaksi/akun', $data);
-    // }
-    // public function ubahakun()
-    // {
-    //     $jenis_transaksi_id = $this->input->post('jenis_transaksi_id');
-    //     $a6level_id = $this->input->post('a6level_id');
-    //     $data = [
-    //         "jenis_transaksi_id" => $jenis_transaksi_id,
-    //         "a6level_id" => $a6level_id
-    //     ];
-    //     $hasil = $this->Jenjang_model->cek_akun($data);
-    //     if ($hasil) {
-    //         $this->Jenjang_model->hapusakun($data);
-    //     } else {
-    //         $this->Jenjang_model->simpanakun($data);
-    //     }
-    // }
     public function simpan()
     {
         $this->_validate();
@@ -50,7 +25,7 @@ class Jenjang extends CI_Controller
             $data = array(
                 'status' => 'gagal',
                 'kode_error' => form_error('id'),
-                'jenis_transaksi_error' => form_error('jenis_transaksi')
+                'jenjang_error' => form_error('jenjang')
             );
         } else {
             $this->Jenjang_model->simpan();
@@ -84,7 +59,7 @@ class Jenjang extends CI_Controller
             $data = array(
                 'status' => 'sukses',
                 'id' => $hasil['id'],
-                'jenis_transaksi' => $hasil['jenis_transaksi']
+                'jenjang' => $hasil['jenjang']
             );
         } else {
             $data = array(
@@ -100,7 +75,7 @@ class Jenjang extends CI_Controller
             $data = array(
                 'status' => 'gagal',
                 'kode_error' => form_error('id'),
-                'jenis_transaksi_error' => form_error('jenis_transaksi'),
+                'jenjang_error' => form_error('jenjang'),
             );
         } else {
             $this->Jenjang_model->ubah($id);
@@ -110,23 +85,23 @@ class Jenjang extends CI_Controller
         }
         echo json_encode($data);
     }
-    // public function cek_unik()
-    // {
-    //     $id = $this->input->post('id');
-    //     $hasil = $this->Jenjang_model->cek_id($id);
-    //     if ($hasil > 0) {
-    //         return false;
-    //     } else {
-    //         return true;
-    //     }
-    // }
+    public function cek_unik()
+    {
+        $id = $this->input->post('id');
+        $hasil = $this->Jenjang_model->cek_id($id);
+        if ($hasil > 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
     private function _validate()
     {
         if (!$this->input->post('idubah')) {
             $this->form_validation->set_rules('id', 'Kode', 'required|trim|exact_length[2]|callback_cek_unik', [
-                'cek_unik' => 'Kode telah digunakan oleh data lain !'
+                'cek_unik' => 'Kode telah digunakan!'
             ]);
         }
-        $this->form_validation->set_rules('jenis_transaksi', 'Jenis Transaksi', 'required|trim');
+        $this->form_validation->set_rules('jenjang', 'Jenjang', 'required|trim');
     }
 }

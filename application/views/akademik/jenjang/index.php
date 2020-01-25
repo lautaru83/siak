@@ -81,7 +81,7 @@
             <!-- /.row -->
         </div>
         <!-- /.container-fluid -->
-        <?php //$this->load->view('akuntansi/jenistransaksi/modal');
+        <?php $this->load->view('akademik/jenjang/modal');
         ?>
     </section>
     <!-- /.content -->

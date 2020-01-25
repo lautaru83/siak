@@ -55,8 +55,4 @@ class Angkatan_model extends CI_Model
         $log_desc = "ubah angkatan -" . $angkatan . "-";
         userLog($log_type, $log_desc);
     }
-    public function cek_akun($data = array())
-    {
-        return $this->db3->get_where('akun_transaksis', $data)->row_array();
-    }
 }
