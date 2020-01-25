@@ -15,6 +15,10 @@ class Tahunanggaran_model extends CI_Model
     {
         return $this->db2->get_where('tahunanggarans', ['id' => $id])->row_array();
     }
+    public function ambil_anggaran_aktif()
+    {
+        return $this->db2->get_where('tahunanggarans', ['is_active' => 1])->row_array();
+    }
     public function cek_hapus($id)
     {
         return $this->db2->get_where('saldoanggarans', ['tahunanggaran_id' => $id])->num_rows();

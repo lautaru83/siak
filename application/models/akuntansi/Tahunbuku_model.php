@@ -15,6 +15,10 @@ class Tahunbuku_model extends CI_Model
     {
         return $this->db2->get_where('tahun_pembukuans', ['id' => $id])->row_array();
     }
+    public function ambil_buku_aktif()
+    {
+        return $this->db2->get_where('tahun_pembukuans', ['is_active' => 1])->row_array();
+    }
     public function cek_hapus($id)
     {
         return $this->db2->get_where('saldoawals', ['tahun_pembukuan_id' => $id])->num_rows();

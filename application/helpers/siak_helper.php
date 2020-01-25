@@ -11,13 +11,13 @@ function is_logged_in()
             $visitLink = $ci->uri->segment(1);
             $queryControl = $ci->db->get_where('submenus', ['url' => $visitLink])->row_array();
             $submenu_id = $queryControl['id'];
-            $userAccess = $ci->db->get_where('accesses', [
-                'role_id' => $role_id,
-                'submenu_id' => $submenu_id
-            ]);
-            if ($userAccess->num_rows() < 1) {
-                redirect('auth/blocked');
-            }
+            // $userAccess = $ci->db->get_where('accesses', [
+            //     'role_id' => $role_id,
+            //     'submenu_id' => $submenu_id
+            // ]);
+            // if ($userAccess->num_rows() < 1) {
+            //     redirect('auth/blocked');
+            // }
         }
     }
 }
@@ -46,6 +46,14 @@ function txt_status($txt)
         return "Non Aktif";
     } else {
         return "Aktif";
+    }
+}
+function txt_gender($gender)
+{
+    if ($gender == "L") {
+        return "Laki-laki";
+    } else {
+        return "Perempuan";
     }
 }
 function icon_aktif($nilai)

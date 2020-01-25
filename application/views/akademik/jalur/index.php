@@ -21,13 +21,14 @@
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
+            <?= $this->session->flashdata('message'); ?>
             <div class="row">
                 <div class="col col-md-12">
                     <div class="card">
                         <div class="card-header bg-gradient-light">
                             <div>
                                 <h4 class="card-title">
-                                    <a href="#" class="text-reset" id="btn-tambah-role"><i class="fas fa-file-alt" style="color: teal"></i> Tambah data </a>
+                                    <a href="#" class="text-reset" id="btn-tambah-jalur" data-aksi="tambah"><i class="fas fa-file-alt" style="color: teal"></i> Tambah data </a>
                                 </h4>
                             </div>
                             <div class="float-right">
@@ -42,30 +43,23 @@
                             <table id="tabel1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <td class="w-1">No</td>
-                                        <td class="w-25">Role</td>
-                                        <td class="w-50">Keterangan</td>
-                                        <td class="w-24 text-center" style="color: grey"><i class="fas fa-cog"></i></td>
+                                        <td width="8%" class="text-center">No</td>
+                                        <td>Jalur Pendidikan</td>
+                                        <td width="10%" class="text-center" style="color: grey"><i class="fas fa-cog"></i></td>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
                                     $no = 1;
-                                    if ($role) {
-                                        foreach ($role as $dataRole) :
-                                            $idrole = $dataRole['id'];
-                                            ?>
+                                    if ($jalur) {
+                                        foreach ($jalur as $dataJalur) :
+                                            $idJalur = $dataJalur['id'];
+                                    ?>
 
                                             <tr>
-                                                <td><?= $no; ?></td>
-                                                <td><?= $dataRole['role']; ?></td>
-                                                <td><?= $dataRole['keterangan']; ?></td>
-                                                <td class="text-center">
-                                                    <a href="<?= site_url('role/access/' . $idrole); ?>" data-id="<?= $dataRole['id']; ?>" data-toggle="tooltip" data-placement="bottom" title="Hak Aksess User"><i class="far fa-list-alt" style="color: teal"></i></a>
-                                                    - <a href="" class="btn-edit-role" data-id="<?= $dataRole['id']; ?>" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fas fa-edit" style="color: olive"></i></a>
-                                                    -
-                                                    <a href="" class="btn-hapus-role" data-id="<?= $dataRole['id']; ?>" data-info="<?= $dataRole['role']; ?>" data-toggle="tooltip" data-placement="bottom" title="Hapus"> <i class="far fa-trash-alt" style="color: maroon"></i></a>
-                                                </td>
+                                                <td class="text-center"><?= $no; ?></td>
+                                                <td><?= $dataJalur['jalur']; ?></td>
+                                                <td class="text-center"><a href="" class="btn-edit-jalur" data-id="<?= $idJalur; ?>" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fas fa-edit" style="color: olive"></i></a> - <a href="" class="btn-hapus-jalur" data-id="<?= $idJalur; ?>" data-info="<?= $dataJalur['jalur']; ?>" data-toggle="tooltip" data-placement="bottom" title="Hapus"> <i class="far fa-trash-alt" style="color: maroon"></i></a></td>
                                             </tr>
                                     <?php
                                             $no++;
@@ -87,7 +81,8 @@
             <!-- /.row -->
         </div>
         <!-- /.container-fluid -->
-        <?php $this->load->view('setting/role/modal'); ?>
+        <?php //$this->load->view('akuntansi/jenistransaksi/modal');
+        ?>
     </section>
     <!-- /.content -->
 </div>

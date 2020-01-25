@@ -29,7 +29,8 @@
                         <div class="card-header bg-gradient-light">
                             <div>
                                 <h4 class="card-title">
-                                    <a class="text-reset" id="kas-masuk">Form Transaksi</a>
+                                    <a class="text-reset" id="kas-masuk">Form Transaksi <?php //$this->session->userdata('anggaran_akhir'); 
+                                                                                        ?></a>
                                 </h4>
                             </div>
                             <div class="float-right">
@@ -66,7 +67,7 @@
                                     <div class="form-group">
                                         <label class="font-weight-normal">Th. Pembukuan</label>
                                         <div class="">
-                                            <input type="text" name="notran" class="form-control" id="notran" autocomplete="off" disabled="disabled">
+                                            <input type="text" name="tahun_pembukuan_id" class="form-control" id="tahun_pembukuan_id" value="<?= $pembukuan_id; ?>" disabled="disabled">
                                         </div>
                                     </div>
                                 </div>
@@ -86,13 +87,13 @@
                                         <div class="">
                                             <select id="unit_id" name="unit_id" class="form-control">
                                                 <?php
-                                                        if ($this->session->userdata['idInstitusi'] <> "01") {
+                                                if ($this->session->userdata['idInstitusi'] <> "01") {
 
                                                 ?>
                                                     <option value="">- Pilih -</option>
                                                 <?php
-                                                        }
-                                                        foreach ($unit as $dataUnit) :
+                                                }
+                                                foreach ($unit as $dataUnit) :
                                                 ?>
                                                     <option value="<?= $dataUnit['id']; ?>"><?= $dataUnit['unit']; ?></option>
                                                 <?php endforeach; ?>

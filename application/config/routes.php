@@ -49,6 +49,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
+// --------------- akuntansi -----------------------------
 $route['default_controller'] = 'auth';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
@@ -58,9 +59,27 @@ $route['kodeperkiraan'] = 'akuntansi/kodeperkiraan';
 $route['kodeanggaran'] = 'akuntansi/kodeanggaran';
 $route['jenistransaksi'] = 'akuntansi/jenistransaksi';
 $route['saldoawal'] = 'akuntansi/saldoawal';
+// --------------- Transaksi -----------------------------
 $route['kasmasuk'] = 'akuntansi/transaksi/kasmasuk';
 $route['kaskeluar'] = 'akuntansi/kaskeluar';
 $route['bankmasuk'] = 'akuntansi/bankmasuk';
 $route['bankkeluar'] = 'akuntansi/bankkeluar';
 $route['nonkasbank'] = 'akuntansi/nonkasbank';
 // $route['bankkeluar'] = 'akuntansi/bankkeluar';
+// --------------- akademik -----------------------------
+$route['angkatan'] = 'akademik/angkatan';
+$route['jenjang'] = 'akademik/jenjang';
+$route['jalur'] = 'akademik/jalur';
+$route['semester'] = 'akademik/semester';
+$route['jurusan'] = 'akademik/jurusan';
+$route['tingkat'] = 'akademik/tingkat';
+$route['prodi'] = 'akademik/prodi';
+$route['tahunajaran'] = 'akademik/tahunajaran';
+$route['tahunajaranaktif'] = 'akademik/tahunajaranaktif';
+$route['mahasiswa'] = 'akademik/mahasiswa';
+$route['kelas'] = 'akademik/kelas';
+$route['detailkelas'] = 'akademik/kelas/detail';
+// --------------- operasional -----------------------------
+$route['kewajiban'] = 'operasional/kewajiban';
+$route['aturbayar'] = 'operasional/aturbayar';
+//$route['kewajiban/akun'] = 'operasional/kewajiban/akun';

@@ -14,6 +14,7 @@ class Transaksi extends CI_Controller
     public function kasmasuk()
     {
         $institusi_id = $this->session->userdata('idInstitusi');
+        $data['pembukuan_id'] = $this->session->userdata('tahun_buku');
         $data['kontenmenu'] = "Transaksi";
         $data['kontensubmenu'] = "Jurnal Kas Masuk";
         $data['unit'] = $this->Unit_model->ambil_data_institusi_id($institusi_id);

@@ -6,6 +6,8 @@ class Auth extends CI_Controller
     {
         parent::__construct();
         $this->load->library('form_validation');
+        $this->db2 = $this->load->database('akuntansi', TRUE);
+        $this->load->model(array('akuntansi/Tahunanggaran_model' => 'Tahunanggaran_model', 'akuntansi/Tahunbuku_model' => 'Tahunbuku_model'));
     }
     public function index()
     {
@@ -28,6 +30,30 @@ class Auth extends CI_Controller
             $this->_login();
         }
     }
+    private function _sesibuku()
+    {
+        $tahun_buku = "0000";
+        $pembukuan = $this->Tahunbuku_model->ambil_buku_aktif();
+        if ($pembukuan) {
+            $tahun_buku = $pembukuan['id'];
+            $buku_awal = $pembukuan['awal_periode'];
+            $buku_akhir = $pembukuan['akhir_periode'];
+        }
+        $anggaran = $this->Tahunanggaran_model->ambil_anggaran_aktif();
+        if ($anggaran) {
+            //$tahun_buku = $pembukuan['id'];
+            $anggaran_awal = $anggaran['awal_periode'];
+            $anggaran_akhir = $anggaran['akhir_periode'];
+        }
+        $data = [
+            'tahun_buku' => $tahun_buku,
+            'buku_awal' => $buku_awal,
+            'buku_akhir' => $buku_akhir,
+            'anggaran_awal' => $anggaran_awal,
+            'anggaran_akhir' => $anggaran_akhir
+        ];
+        $this->session->set_userdata($data);
+    }
     private function _login()
     {
         $email = $this->input->post('email');
@@ -42,18 +68,21 @@ class Auth extends CI_Controller
                 //cek password
                 if (password_verify($password, $user['sandi'])) {
                     //echo "Login Sukses!";
+                    $institusi_id = $user['institusi_id'];
                     $data = [
                         'email' => $user['email'],
                         'xyz' => $user['id'],
                         'role_id' => $user['role_id'],
                         'nama_user' => $user['nama'],
                         'image' => $user['image'],
-                        'idInstitusi' => $user['institusi_id']
+                        'idInstitusi' => $institusi_id
                     ];
                     $this->session->set_userdata($data);
+                    $this->_sesibuku();
                     $log_type = "login";
                     $log_desc = "login User";
                     userLog($log_type, $log_desc);
+
                     if ($user['role_id'] == 1) {
                         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
                     login Admin Sukses!</div>');
