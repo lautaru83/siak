@@ -21,64 +21,49 @@ class Mahasiswa_model extends CI_Model
     }
     public function cek_hapus($id)
     {
-        return $this->db2->get_where('akun_transaksis', ['jenis_transaksi_id' => $id])->num_rows();
+        return $this->db3->get_where('detail_kelases', ['mahasiswa_id' => $id])->num_rows();
     }
-    public function cek_id($id) // cek uniq id
+    public function cek_nim($nim) // cek uniq nim
     {
-        return $this->db2->get_where('mahasiswas', ['id' => $id])->num_rows();
+        return $this->db3->get_where('mahasiswas', ['nim' => $nim])->num_rows();
     }
     public function hapus($id, $info)
     {
-        $this->db2->delete('mahasiswas', ['id' => $id]);
+        $this->db3->delete('mahasiswas', ['id' => $id]);
         $log_type = "hapus";
-        $log_desc = "hapus jenis transaksi - $info";
+        $log_desc = "hapus mahasiswa - $info";
         userLog($log_type, $log_desc);
     }
     public function simpan()
     {
-        $id = $this->input->post('id');
-        $jenis_transaksi = htmlspecialchars($this->input->post('jenis_transaksi'));
+        $nim = $this->input->post('nim');
+        $nama = htmlspecialchars($this->input->post('nama'));
+        $gender = $this->input->post('gender');
+        $angkatan_id = $this->input->post('angkatan_id');
         $data = array(
-            'id' => $id,
-            'jenis_transaksi' => $jenis_transaksi
+            'nim' => $nim,
+            'nama' => $nama,
+            'gender' => $gender,
+            'angkatan_id' => $angkatan_id
         );
-        $this->db2->insert('mahasiswas', $data);
+        $this->db3->insert('mahasiswas', $data);
         $log_type = "tambah";
-        $log_desc = "tambah jenis transaksi -" . $id . "-" . $jenis_transaksi . "-";
+        $log_desc = "tambah Mahasiswa - $nim - $nama - $gender - $angkatan_id";
         userLog($log_type, $log_desc);
     }
     public function ubah($id)
     {
-        $jenis_transaksi = $this->input->post('jenis_transaksi');
+        $nim = $this->input->post('nim');
+        $nama = htmlspecialchars($this->input->post('nama'));
+        $gender = $this->input->post('gender');
         $data = array(
-            'jenis_transaksi' => $jenis_transaksi
+            'nama' => $nama,
+            'gender' => $gender
         );
-        $this->db2->where('id', $id);
-        $this->db2->update('mahasiswas', $data);
+        $this->db3->where('id', $id);
+        $this->db3->update('mahasiswas', $data);
         $log_type = "ubah";
-        $log_desc = "ubah jenis transaksi -" . $jenis_transaksi . "-";
+        $log_desc = "ubah mahasiswa $nim - $nama - $gender ";
         userLog($log_type, $log_desc);
-    }
-    // public function simpanakun($data = array())
-    // {
-    //     $tran_id = $this->input->post('jenis_transaksi_id');
-    //     $level6_id = $this->input->post('a6level_id');
-    //     $this->db2->insert('akun_transaksis', $data);
-    //     $log_type = "simpan";
-    //     $log_desc = "simpan akun transaksi -" . $tran_id . "-" . $level6_id . "-";
-    //     userLog($log_type, $log_desc);
-    // }
-    // public function hapusakun($data = array())
-    // {
-    //     $tran_id = $this->input->post('jenis_transaksi_id');
-    //     $level6_id = $this->input->post('a6level_id');
-    //     $this->db2->delete('akun_transaksis', $data);
-    //     $log_type = "hapus";
-    //     $log_desc = "hapus akun transaksi -" . $tran_id . "-" . $level6_id . "-";
-    //     userLog($log_type, $log_desc);
-    // }
-    public function cek_akun($data = array())
-    {
-        return $this->db2->get_where('akun_transaksis', $data)->row_array();
     }
 }

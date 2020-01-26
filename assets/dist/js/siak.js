@@ -4596,8 +4596,222 @@ $(document).ready(function () {
     });
     // end ajax tombol modal ubah detailtahunajaran
 
+    //----------------------------------/DETAILTAHUNAJARAN-----------------------------------------
+    //-----------------------------------KELAS-----------------------------------------
 
-    //---------------------------------------/DETAILTAHUNAJARAN-----------------------------------------
+    //set focus input kelas saat modal muncul
+    $('#modal-kelas').on('shown.bs.modal', function () {
+        $('#kelas').trigger('focus');
+    })
+    //set focus input kelas saat modal muncul
+    // tombol tambah kelas table
+    $('#btn-tambah-kelas').on('click', function (e) {
+        e.preventDefault();
+        const judul = document.getElementById('judul-modal');
+        judul.innerHTML = 'Tambah Data Kelas';
+        $('#btn-ubah-kelas').hide();
+        $('#modal-kelas').modal('show');
+    });
+    // end tombol tambah kelas table
+    // ajax tombol Simpan modal kelas
+    $('#btn-simpan-kelas').on('click', function (e) {
+        e.preventDefault();
+        //const id = $('[name="id"]').val();
+        const kelas = $('[name="kelas"]').val();
+        const prodi_id = $('[name="prodi_id"]').val();
+        const akademik_id = $('[name="akademik_id"]').val();
+        const tingkat_id = $('[name="tingkat_id"]').val();
+        $.ajax({
+            type: "POST",
+            url: base_url + "akademik/kelas/simpan",
+            data: {
+                kelas: kelas,
+                prodi_id: prodi_id,
+                akademik_id: akademik_id,
+                tingkat_id: tingkat_id
+            },
+            dataType: "JSON",
+            beforeSend: function () {
+                $('#btn-simpan-kelas').attr('disabled', 'disabled');
+            },
+            success: function (data) {
+                if (data.status == 'gagal') {
+                    Toast.fire({
+                        type: 'error',
+                        title: ' Input data tidak valid!!!.'
+                    });
+                    if (data.kelas_error != '') {
+                        $('#kelas_error').html(data.kelas_error);
+                    } else {
+                        $('#kelas_error').html('');
+                    }
+                    if (data.akademik_error != '') {
+                        $('#akademik_error').html(data.akademik_error);
+                    } else {
+                        $('#akademik_error').html('');
+                    }
+                    if (data.prodi_error != '') {
+                        $('#prodi_error').html(data.prodi_error);
+                    } else {
+                        $('#prodi_error').html('');
+                    }
+                    if (data.tingkat_error != '') {
+                        $('#tingkat_error').html(data.tingkat_error);
+                    } else {
+                        $('#tingkat_error').html('');
+                    }
+                    $('#kelas').trigger('focus');
+                } else {
+                    Toast.fire({
+                        type: 'success',
+                        title: ' Data berhasil disimpan.'
+                    });
+                    $('#modal-kelas').modal('hide');
+                }
+                $('#btn-simpan-kelas').attr('disabled', false);
+            }
+        });
+        return false;
+    });
+    //end  ajax tombol Simpan modal kelas
+    // ajax icon hapus table kelas klik
+    $('.btn-hapus-kelas').on('click', function (e) {
+        e.preventDefault();
+        var id = $(this).data('id');
+        var info = $(this).data('info');
+        Swal.fire({
+            title: 'Konfirmasi!',
+            text: 'Apakah anda yakin akan menghapus Kelas -' + info + '- !?!',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'Batal',
+            confirmButtonText: 'Hapus'
+        }).then((result) => {
+            if (result.value) {
+                // Toast.fire({
+                //     type: 'success',
+                //     title: id + "-" + info
+                // });
+                $.ajax({
+                    type: "POST",
+                    url: base_url + "akademik/kelas/hapus",
+                    data: {
+                        id: id,
+                        info: info
+                    },
+                    dataType: 'JSON',
+                    success: function (data) {
+                        if (data.status == 'sukses') {
+                            Toast.fire({
+                                type: 'success',
+                                title: ' Data berhasil dihapus!!!.'
+                            });
+                            document.location.reload();
+                        } else {
+                            Toast.fire({
+                                type: 'warning',
+                                title: ' Penghapusan dibatalkan, data sedang digunakan oleh system!!!.'
+                            });
+                        }
+                    }
+                });
+            }
+        })
+    });
+    // end ajax icon hapus table kelas klik
+    // ajax tombol edit data table kelas klik
+    $('.btn-edit-kelas').on('click', function (e) {
+        e.preventDefault();
+        const judul = document.getElementById('judul-modal');
+        judul.innerHTML = 'Ubah Data Tahun Ajaran';
+        var id = $(this).data('id');
+        $('#btn-simpan-kelas').hide();
+        $('#id').attr('disabled', 'disabled');
+        $.ajax({
+            url: base_url + 'akademik/kelas/ajax_edit/' + id,
+            type: "GET",
+            dataType: "JSON",
+            success: function (data) {
+                $('[name="idubah"]').val(data.id);
+                $('[name="kelas"]').val(data.kelas);
+                $('[name="akademik_id"]').val(data.akademik_id);
+                $('[name="prodi_id"]').val(data.prodi_id);
+                $('[name="tingkat_id"]').val(data.tingkat_id);
+                $('#modal-kelas').modal('show');
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('Error get data from ajax');
+            }
+        });
+    });
+    //end ajax tombol edit data table kelas klik
+    // ajax tombol modal ubah kelas
+    $('#btn-ubah-kelas').on('click', function (e) {
+        e.preventDefault();
+        const idubah = $('[name="idubah"]').val();
+        const kelas = $('[name="kelas"]').val();
+        const prodi_id = $('[name="prodi_id"]').val();
+        const akademik_id = $('[name="akademik_id"]').val();
+        const tingkat_id = $('[name="tingkat_id"]').val();
+        $.ajax({
+            type: "POST",
+            url: base_url + "akademik/kelas/ubah/" + idubah,
+            data: {
+                idubah: idubah,
+                kelas: kelas,
+                prodi_id: prodi_id,
+                akademik_id: akademik_id,
+                tingkat_id: tingkat_id
+            },
+            dataType: 'JSON',
+            beforeSend: function () {
+                $('#btn-ubah-kelas').attr('disabled', 'disabled');
+            },
+            success: function (data) {
+                if (data.status == 'gagal') {
+                    Toast.fire({
+                        type: 'error',
+                        title: ' Input data tidak valid!!!.'
+                    });
+                    if (data.kelas_error != '') {
+                        $('#kelas_error').html(data.kelas_error);
+                    } else {
+                        $('#kelas_error').html('');
+                    }
+                    if (data.akademik_error != '') {
+                        $('#akademik_error').html(data.akademik_error);
+                    } else {
+                        $('#akademik_error').html('');
+                    }
+                    if (data.prodi_error != '') {
+                        $('#prodi_error').html(data.prodi_error);
+                    } else {
+                        $('#prodi_error').html('');
+                    }
+                    if (data.tingkat_error != '') {
+                        $('#tingkat_error').html(data.tingkat_error);
+                    } else {
+                        $('#tingkat_error').html('');
+                    }
+                    $('#kelas').trigger('focus');
+                } else {
+                    Toast.fire({
+                        type: 'success',
+                        title: ' Data berhasil diubah!'
+                    });
+                    $('#modal-kelas').modal('hide');
+                    //dataTable.ajax.reload();
+                }
+                $('#btn-ubah-kelas').attr('disabled', false);
+            }
+        });
+        return false;
+    });
+    // end ajax tombol modal ubah kelas
+
+    //----------------------------------/KELAS-----------------------------------------
 
 
 }); // end document ready

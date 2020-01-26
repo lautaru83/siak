@@ -48,7 +48,6 @@
                                         <td width="12%">NIM</td>
                                         <td>Nama</td>
                                         <td width="15%">Gender</td>
-                                        <td width="10%">Status</td>
                                         <td width="10%" class="text-center" style="color: grey"><i class="fas fa-cog"></i></td>
                                     </tr>
                                 </thead>
@@ -65,7 +64,7 @@
                                                 <td><?= $dataMahasiswa['nim']; ?></td>
                                                 <td><?= $dataMahasiswa['nama']; ?></td>
                                                 <td><?= txt_gender($dataMahasiswa['gender']); ?></td>
-                                                <td><?= txt_status($dataMahasiswa['status_mahasiswa']); ?></td>
+
                                                 <td class="text-center"><a href="" class="btn-edit-mahasiswa" data-id="<?= $idMahasiswa; ?>" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fas fa-edit" style="color: olive"></i></a> - <a href="" class="btn-hapus-mahasiswa" data-id="<?= $idMahasiswa; ?>" data-info="<?= $dataMahasiswa['nama']; ?>" data-toggle="tooltip" data-placement="bottom" title="Hapus"> <i class="far fa-trash-alt" style="color: maroon"></i></a></td>
                                             </tr>
                                     <?php
@@ -88,7 +87,7 @@
             <!-- /.row -->
         </div>
         <!-- /.container-fluid -->
-        <?php //$this->load->view('akuntansi/jenistransaksi/modal');
+        <?php $this->load->view('akademik/mahasiswa/modal');
         ?>
     </section>
     <!-- /.content -->
