@@ -1,4 +1,4 @@
-<div class="modal fade" id="modal-prodi" tabindex="-1">
+<div class="modal fade" id="modal-kelas" tabindex="-1">
     <div class="vertical-alignment-helper">
         <div class="modal-dialog modal-dialog-default">
             <div class="modal-content card">
@@ -8,75 +8,68 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form id="form-prodi" class="form-horizontal">
+                <form id="form-kelas" class="form-horizontal">
                     <div class="modal-body card-body">
                         <div class="form-group">
-                            <label for="id" class="control-label">Kode</label>
+                            <label for="kelas" class="control-label">
+                                Kelas
+                            </label>
                             <div>
                                 <input type="hidden" id="idubah" name="idubah">
-                                <input type="text" name="id" class="form-control" id="id" autocomplete="off" placeholder="Kode Prodi">
-                                <span id="kode_error" class="text-danger"></span>
+                                <input type="text" name="kelas" class="form-control" id="kelas" autocomplete="off" placeholder="Kode kelas">
+                                <span id="kelas_error" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="prodi" class="control-label">
-                                Program Pendidikan
-                            </label>
+                            <label for="akademik_id" class="control-label">Tahun Ajaran</label>
                             <div>
-                                <input type="text" name="prodi" class="form-control" id="prodi" autocomplete="off" placeholder="Nama prodi">
+                                <select id="akademik_id" name="akademik_id" class="form-control">
+                                    <option value="">- Pilih -</option>
+                                    <?php
+                                    foreach ($akademik as $dataAkademik) :
+                                    ?>
+                                        <option value="<?= $dataAkademik['id']; ?>"><?= $dataAkademik['keterangan']; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                                <span id="akademik_error" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="prodi_id" class="control-label">Program Pendidikan</label>
+                            <div>
+                                <select id="prodi_id" name="prodi_id" class="form-control">
+                                    <option value="">- Pilih -</option>
+                                    <?php
+                                    foreach ($prodi as $dataProdi) :
+                                    ?>
+                                        <option value="<?= $dataProdi['id']; ?>"><?= $dataProdi['prodi']; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
                                 <span id="prodi_error" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="jenjang_id" class="control-label">Jenjang</label>
+                            <label for="tingkat_id" class="control-label">Tingkat</label>
                             <div>
-                                <select id="jenjang_id" name="jenjang_id" class="form-control">
+                                <select id="tingkat_id" name="tingkat_id" class="form-control">
                                     <option value="">- Pilih -</option>
                                     <?php
-                                    foreach ($jenjang as $dataJenjang) :
+                                    foreach ($tingkat as $dataTingkat) :
                                     ?>
-                                        <option value="<?= $dataJenjang['id']; ?>"><?= $dataJenjang['jenjang']; ?></option>
+                                        <option value="<?= $dataTingkat['id']; ?>"><?= $dataTingkat['tingkat']; ?></option>
                                     <?php endforeach; ?>
                                 </select>
-                                <span id="jenjang_error" class="text-danger"></span>
+                                <span id="tingkat_error" class="text-danger"></span>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="jurusan_id" class="control-label">Jurusan</label>
-                            <div>
-                                <select id="jurusan_id" name="jurusan_id" class="form-control">
-                                    <option value="">- Pilih -</option>
-                                    <?php
-                                    foreach ($jurusan as $dataJurusan) :
-                                    ?>
-                                        <option value="<?= $dataJurusan['id']; ?>"><?= $dataJurusan['jurusan']; ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                                <span id="jurusan_error" class="text-danger"></span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="jalur_id" class="control-label">Jalur</label>
-                            <div>
-                                <select id="jalur_id" name="jalur_id" class="form-control">
-                                    <option value="">- Pilih -</option>
-                                    <?php
-                                    foreach ($jalur as $dataJalur) :
-                                    ?>
-                                        <option value="<?= $dataJalur['id']; ?>"><?= $dataJalur['jalur']; ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                                <span id="jalur_error" class="text-danger"></span>
-                            </div>
-                        </div>
-
                     </div>
+
                     <div class="modal-footer card-footer">
                         <div>
-                            <button id="btn-ubah-prodi" type="submit" class="btn btn-primary"><i class="far fa-edit"></i> Ubah</button>
+                            <button id="btn-ubah-kelas" type="submit" class="btn btn-primary"><i class="far fa-edit"></i> Ubah</button>
                         </div>
                         <div>
-                            <button id="btn-simpan-prodi" type="submit" class="btn btn-success"><i class="far fa-check-square"></i> Simpan</button>
+                            <button id="btn-simpan-kelas" type="submit" class="btn btn-success"><i class="far fa-check-square"></i> Simpan</button>
                         </div>
                     </div>
                 </form>

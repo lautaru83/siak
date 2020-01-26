@@ -44,7 +44,7 @@
                                 <thead>
                                     <tr>
                                         <td width="8%" class="text-center">No</td>
-                                        <td width="10%">Kode</td>
+                                        <td width="10%">Kelas</td>
                                         <td>Tahun Akademik</td>
                                         <td>Prodi</td>
                                         <td>Tingkat</td>
@@ -62,9 +62,9 @@
                                             <tr>
                                                 <td class="text-center"><?= $no; ?></td>
                                                 <td><?= $dataKelas['kelas']; ?></td>
-                                                <td><?= $dataKelas['akademik_id']; ?></td>
-                                                <td><?= $dataKelas['prodi_id']; ?></td>
-                                                <td><?= $dataKelas['tingkat_id']; ?></td>
+                                                <td><?= $dataKelas['keterangan']; ?></td>
+                                                <td><?= $dataKelas['prodi']; ?></td>
+                                                <td><?= $dataKelas['tingkat']; ?></td>
                                                 <td class="text-center"><a href="<?= site_url('akademik/kelas/detail/' . $idKelas); ?>" data-id="<?= $dataKelas['id']; ?>" data-toggle="tooltip" data-placement="bottom" title="Detail Kelas"><i class="far fa-list-alt" style="color: teal"></i></a>
                                                     - <a href="" class="btn-edit-kelas" data-id="<?= $idKelas; ?>" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fas fa-edit" style="color: olive"></i></a> - <a href="" class="btn-hapus-kelas" data-id="<?= $idKelas; ?>" data-info="<?= $dataKelas['kelas']; ?>" data-toggle="tooltip" data-placement="bottom" title="Hapus"> <i class="far fa-trash-alt" style="color: maroon"></i></a></td>
                                             </tr>
@@ -88,7 +88,7 @@
             <!-- /.row -->
         </div>
         <!-- /.container-fluid -->
-        <?php //$this->load->view('akuntansi/jenistransaksi/modal');
+        <?php $this->load->view('akademik/kelas/modal');
         ?>
     </section>
     <!-- /.content -->
