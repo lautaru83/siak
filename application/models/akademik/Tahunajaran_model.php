@@ -11,6 +11,10 @@ class Tahunajaran_model extends CI_Model
     {
         return $this->db3->get('tahun_ajarans')->result_array();
     }
+    public function data_fk()
+    {
+        return $this->db3->get('tahun_ajarans')->result_array();
+    }
     public function ambil_data_id($id)
     {
         return $this->db3->get_where('tahun_ajarans', ['id' => $id])->row_array();
