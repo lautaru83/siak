@@ -9,7 +9,7 @@ class Saldoawal extends CI_Controller
         is_logged_in();
         $this->db2 = $this->load->database('akuntansi', TRUE);
         //$this->load->model('akuntansi/Tahunbuku_model', 'Tahunbuku_model');
-        $this->load->model(array('Institusi_model' => 'Institusi_model', 'akuntansi/Kodeperkiraan_model' => 'Kodeperkiraan_model', 'akuntansi/Saldoawal_model' => 'Saldoawal_model', 'akuntansi/Tahunbuku_model' => 'Tahunbuku_model', 'akuntansi/Kodeperkiraan_model' => 'Kodeperkiraan_model'));
+        $this->load->model(array('Institusi_model' => 'Institusi_model', 'akuntansi/Kodeperkiraan_model' => 'Kodeperkiraan_model', 'akuntansi/Saldoawal_model' => 'Saldoawal_model', 'akuntansi/Tahunbuku_model' => 'Tahunbuku_model', 'akuntansi/Kodeperkiraan_model' => 'Kodeperkiraan_model', 'akuntansi/Transaksi_model' => 'Transaksi_model'));
     }
     public function index()
     {
@@ -17,6 +17,42 @@ class Saldoawal extends CI_Controller
         $data['kontensubmenu'] = "Saldo Awal";
         $data['tahunbuku'] = $this->Tahunbuku_model->ambil_data();
         $this->template->display('akuntansi/saldoawal/index', $data);
+    }
+    public function konfirmasi($idtahun)
+    {
+        $unit_id = $this->session->userdata('idInstitusi');
+        $th = substr($idtahun, 2, 2);
+        $notran = $th . $unit_id . "000000";
+        $hasil = $this->Transaksi_model->cektransaldo($idtahun, $unit_id);
+        if ($hasil) {
+            $idtransaksi = $hasil['id'];
+            $this->Transaksi_model->hapusdetailsaldo($idtransaksi);
+            $akunsaldo = $this->Kodeperkiraan_model->akunsaldoawal($idtahun, $unit_id);
+            foreach ($akunsaldo as $dataAkunsaldo) :
+                $a6level_id = $dataAkunsaldo['id'];
+                $posisi = $dataAkunsaldo['posisi'];
+                $saldoawal = $dataAkunsaldo['saldoawal'];
+                $this->Transaksi_model->simpandetailsaldo($idtransaksi, $a6level_id, $posisi, $saldoawal);
+            endforeach;
+            // $this->session->set_flashdata('message', '<div class="alert alert-warning" role="alert">
+            // Pengaturan saldo awal berhasil!</div>');
+            // redirect('akuntansi/saldoawal/saldo/' . $idtahun);
+        } else {
+            $this->Transaksi_model->simpantransaksi($idtahun, $notran, $unit_id);
+            $transaksi = $this->Transaksi_model->cektransaldo($idtahun, $unit_id);
+            $idtransaksi = $transaksi['id'];
+            $akunsaldo = $this->Kodeperkiraan_model->akunsaldoawal($idtahun, $unit_id);
+            foreach ($akunsaldo as $dataAkunsaldo) :
+                $a6level_id = $dataAkunsaldo['id'];
+                $posisi = $dataAkunsaldo['posisi'];
+                $saldoawal = $dataAkunsaldo['saldoawal'];
+                $this->Transaksi_model->simpandetailsaldo($idtransaksi, $a6level_id, $posisi, $saldoawal);
+            endforeach;
+            //$this->Transaksi_model->simpandetailsaldo($idtahun);
+        }
+        $this->session->set_flashdata('message', '<div class="alert alert-info" role="alert">
+            Pengaturan saldo awal berhasil!</div>');
+        redirect('akuntansi/saldoawal/saldo/' . $idtahun);
     }
     public function saldo($idtahun)
     {

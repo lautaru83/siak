@@ -6,11 +6,62 @@ class Transaksi_model extends CI_Model
     {
         parent::__construct();
         $this->db2 = $this->load->database('akuntansi', TRUE);
+        //$this->db2 = $this->load->database('akuntansi', TRUE);
     }
-    // public function ceksaldo($thbuku_id, $a6level_id)
-    // {
-    //     return $this->db2->get_where('saldoawals', ['tahun_pembukuan_id' => $thbuku_id, 'a6level_id' => $a6level_id])->row_array();
-    // }
+    public function cektransaldo($thbuku_id, $unit_id)
+    {
+        return $this->db2->get_where('transaksis', ['tahun_buku' => $thbuku_id, 'unit_id' => $unit_id])->row_array();
+    }
+    public function simpantransaksi($thbuku_id, $notran, $unit_id)
+    {
+        $jurnal = "SA";
+        $keterangan = "Saldo Awal";
+        $accounting = "system";
+        $tanggal_transaksi = $thbuku_id . "-01-01";
+        $user_id = $this->session->userdata('xyz');
+        //$notran="";
+        $data = array(
+            'tahun_buku' => $thbuku_id,
+            'jurnal' => $jurnal,
+            'notran' => $notran,
+            'nobukti' => $notran,
+            'tanggal_transaksi' => $tanggal_transaksi,
+            'accounting' => $accounting,
+            'keterangan' => $keterangan,
+            'unit_id' => $unit_id,
+            'total_transaksi' => 0,
+            'is_valid' => 2,
+            'user_id' => $user_id
+        );
+        $this->db2->insert('transaksis', $data);
+        // endforeach
+    }
+    public function hapusdetailsaldo($id)
+    {
+        $this->db2->delete('detail_transaksis', ['transaksi_id' => $id]);
+    }
+    public function simpandetailsaldo($tran_id, $a6level_id, $posisi, $jumlah)
+    {
+        if ($posisi == "D") {
+            $debet = $jumlah;
+            $kredit = 0;
+        } else {
+            $debet = 0;
+            $kredit = $jumlah;
+        }
+        $data = array(
+            'transaksi_id' => $tran_id,
+            'a6levels_id' => $a6level_id,
+            'posisi_akun' => $posisi,
+            'debet' => $debet,
+            'kredit' => $kredit,
+            'jumlah' => $jumlah
+        );
+        $this->db2->insert('detail_transaksis', $data);
+    }
+    public function simpandetailtransaksi($idtahun)
+    {
+    }
     // public function cek_hapus($thbuku_id, $akun_id)
     // {
     //     return $this->db2->get_where('saldoawals', ['tahun_pembukuan_id' => $thbuku_id, 'a6level_id' => $akun_id])->num_rows();

@@ -1,41 +1,40 @@
-
 <!-- 
 -----------------------------------------Content Header -------------------------------
 -->
 
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Dashboard</h1>
-          </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Starter Page</li>
-            </ol>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">Dashboard</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active">Starter Page</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
 
-<!-- 
+  <!-- 
 ----------------------------------------/Content Header--------------------------------
 -->
 
-<!-- 
+  <!-- 
 -----------------------------------------Main Content----------------------------------
 -->
-    <!-- Main content -->
-    <div class="content">
-        <div id="konten-tes">
-          
+  <!-- Main content -->
+  <div class="content">
+    <div id="konten-tes">
+      <?= $this->session->flashdata('message'); ?>
 
-        </div>
+    </div>
 
 
     <!-- 
@@ -97,11 +96,11 @@
           </div>
         </div>
       </div> -->
-    </div>
-    <!-- /.content -->
-
-<!-- 
------------------------------------------/Main Content -------------------------------
--->    
   </div>
-  <!-- /.content-wrapper -->
+  <!-- /.content -->
+
+  <!-- 
+-----------------------------------------/Main Content -------------------------------
+-->
+</div>
+<!-- /.content-wrapper -->

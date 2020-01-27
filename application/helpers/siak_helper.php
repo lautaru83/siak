@@ -123,3 +123,20 @@ function input_uang($uang)
     $uang2 = str_replace(",", ".", $uang1);
     return $uang2;
 }
+function notransaksi()
+{
+    $ci = get_instance();
+    $th = $ci->session->userdata('tahun_buku');
+    $ints = $ci->session->userdata('idInstitusi');
+    $char = substr($th, 2, 2) . $ints;
+    $hasil = $ci->db->query("select max(a.notran) as maxnotran from siak_akuntansi.transaksis a where a.tahun_buku=$th")->row_array();
+    if ($hasil) {
+        $nomor = $hasil['maxnotran'];
+        $noUrut = (int) substr($nomor, 4, 6);
+        $noUrut++;
+        $notran = $char . sprintf("%06s", $noUrut);
+    } else {
+        $notran = $char . "000001";
+    }
+    return $notran;
+}

@@ -1,5 +1,6 @@
 var tabelRole;
 $(document).ready(function () {
+    // $("input:text").focus();
     $('#awal_periode').daterangepicker({
         singleDatePicker: true,
         locale: {

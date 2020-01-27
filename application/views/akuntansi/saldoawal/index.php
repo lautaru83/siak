@@ -20,8 +20,10 @@
 
     <!-- Main content -->
     <section class="content">
+
         <div class="container-fluid">
-            <?= $this->session->flashdata('message'); ?>
+            <?php $this->session->flashdata('message');
+            ?>
             <div class="row">
                 <div class="col col-md-12">
                     <div class="card">
@@ -57,7 +59,7 @@
                                     if ($tahunbuku) {
                                         foreach ($tahunbuku as $dataTahunbuku) :
                                             $idtahun = $dataTahunbuku['id'];
-                                            ?>
+                                    ?>
 
                                             <tr>
                                                 <td><?= $dataTahunbuku['id']; ?></td>

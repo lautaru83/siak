@@ -43,7 +43,7 @@
                                     <div class="form-group">
                                         <label class="font-weight-normal">Tanggal</label>
                                         <div class="">
-                                            <input type="text" name="tanggal_transaksi" id="tanggal_transaksi" class="form-control" id="notran" autocomplete="off">
+                                            <input type="text" name="tanggal_transaksi" id="tanggal_transaksi" class="form-control" id="notran" autocomplete="off" tabindex="1">
                                         </div>
                                     </div>
                                 </div>
@@ -51,7 +51,7 @@
                                     <div class="form-group">
                                         <label class="font-weight-normal">No. Bukti</label>
                                         <div class="">
-                                            <input type="text" name="notran" class="form-control" id="notran" autocomplete="off">
+                                            <input type="text" name="nobukti" class="form-control" id="nobukti" tabindex="2">
                                         </div>
                                     </div>
                                 </div>
@@ -59,7 +59,7 @@
                                     <div class="form-group">
                                         <label class="font-weight-normal">No. Transaksi</label>
                                         <div class="">
-                                            <input type="text" name="notran" class="form-control" id="notran" autocomplete="off" disabled="disabled">
+                                            <input type="text" name="notran" class="form-control" id="notran" value="<?= notransaksi(); ?>" autocomplete="off" disabled="disabled">
                                         </div>
                                     </div>
                                 </div>
@@ -72,12 +72,14 @@
                                     </div>
                                 </div>
                             </div>
+
+
                             <div class="row">
                                 <div class="col-sm-9">
                                     <div class="form-group">
                                         <label class="font-weight-normal">Uraian</label>
                                         <div class="">
-                                            <input type="text" name="notran" class="form-control" id="notran" autocomplete="off">
+                                            <input type="text" name="notran" class="form-control" id="notran" autocomplete="off" tabindex="3">
                                         </div>
                                     </div>
                                 </div>
@@ -85,7 +87,7 @@
                                     <div class="form-group">
                                         <label class="font-weight-normal">Unit Usaha</label>
                                         <div class="">
-                                            <select id="unit_id" name="unit_id" class="form-control">
+                                            <select id="unit_id" name="unit_id" class="form-control" tabindex="4">
                                                 <?php
                                                 if ($this->session->userdata['idInstitusi'] <> "01") {
 
@@ -101,26 +103,23 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <table class="table table-bordered table-hover">
-                                        <thead>
-                                            <tr>
-                                                <td width="5%">No</td>
-                                                <td width="8%">Kode</td>
-                                                <td width="47%">Nama Akun</td>
-                                                <td width="15%">Debet</td>
-                                                <td width="15%">Kredit</td>
-                                                <td class="text-center" style="color: grey" width="10%"><i class="fas fa-cog"></i></td>
-                                            </tr>
-                                        </thead>
-                                    </table>
-
-                                </div>
+                                <!-- tombol -->
+                                <!-- <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label class="font-weight-normal"> </label>
+                                        <div class="">
+                                            <button id="btn-simpan-kasmasuk" type="submit" class="btn btn-success btn-sm"><i class="far fa-check-square"></i> Simpan</button>
+                                        </div>
+                                    </div>
+                                </div> -->
                             </div>
                         </div>
                         <!-- /.card-body -->
+                        <!-- <div class="modal-footer card-footer">
+                            <div class="pull-right">
+                                <button id="btn-simpan-kasmasuk" type="submit" class="btn btn-success btn-sm"><i class="far fa-check-square"></i> Simpan</button>
+                            </div>
+                        </div> -->
                     </div>
                     <!-- /.card-->
                 </div>
@@ -133,10 +132,13 @@
                         <div class="card-header bg-gradient-light">
                             <div>
                                 <h4 class="card-title">
-                                    <a class="text-reset" id="kas-masuk">Riwayat Transaksi</a>
+                                    <a href="#" class="text-reset" id="btn-tambah-rincian" data-aksi="tambah" tabindex="5"><i class="fas fa-file-alt" style="color: teal"></i> Tambah Rincian</a>
                                 </h4>
                             </div>
                             <div class="float-right">
+                                <h4 class="card-title" disabled="disabled">
+                                    <a href="" class="text-reset" id="kas-masuk">Tambah Rincian <i class="fas fa-file-alt" style="color: teal"></i></a>
+                                </h4>
                             </div>
                         </div>
                         <!-- /.card-header -->
@@ -145,10 +147,11 @@
                                 <thead>
                                     <tr>
                                         <td width="5%">No</td>
-                                        <td width="10%">Tanggal</td>
-                                        <td width="10%">No.Bukti</td>
-                                        <td width="50%">Uraian</td>
-                                        <td width="15%">Nominal</td>
+                                        <td width="8%">Kode</td>
+                                        <td width="47%">Nama Akun</td>
+                                        <td width="15%">Debet</td>
+                                        <td width="15%">Kredit</td>
+                                        <td class="text-center" style="color: grey" width="10%"><i class="fas fa-cog"></i></td>
                                     </tr>
                                 </thead>
                             </table>
