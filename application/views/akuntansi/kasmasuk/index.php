@@ -29,8 +29,7 @@
                         <div class="card-header bg-gradient-light">
                             <div>
                                 <h4 class="card-title">
-                                    <a class="text-reset" id="kas-masuk">Form Transaksi <?php //$this->session->userdata('anggaran_akhir'); 
-                                                                                        ?></a>
+                                    <a class="text-reset" id="kas-masuk">Form Transaksi </a>
                                 </h4>
                             </div>
                             <div class="float-right">
@@ -41,7 +40,7 @@
                                     if ($totaldebet == $totalkredit) {
                                 ?>
                                         <h4 class="card-title" disabled="disabled">
-                                            <a href="" class="text-reset" id="btn-selesai-transaksi" data-id="<?= $tran_id; ?>" data-status="<?= $status; ?>" tabindex="9">Selesai <i class="far fa-check-square" style="color: teal"></i></a>
+                                            <a href="" class="text-reset" id="btn-selesai-kasmasuk" data-id="<?= $tran_id; ?>" data-total="<?= rupiah($totaldebet); ?>" data-status="<?= $status; ?>" tabindex="9">Selesai <i class="far fa-check-square" style="color: teal"></i></a>
                                         </h4>
                                 <?php
                                     }
@@ -97,7 +96,7 @@
                                     <div class="form-group">
                                         <label class="font-weight-normal">Uraian</label>
                                         <div class="">
-                                            <input type="text" name="keterangan" class="form-control" id="keterangan" value="<?= $keterangan; ?>" tabindex="3">
+                                            <input type="text" name="keterangan" class="form-control" id="keterangan" autocomplete="off" value="<?= $keterangan; ?>" tabindex="3">
                                             <span id="keterangan_error" class="text-danger"></span>
                                         </div>
                                     </div>
@@ -115,8 +114,9 @@
                                                 <?php
                                                 }
                                                 foreach ($unit as $dataUnit) :
+                                                    $idunit = $dataUnit['id'];
                                                 ?>
-                                                    <option value="<?= $dataUnit['id']; ?>"><?= $dataUnit['unit']; ?></option>
+                                                    <option value="<?= $dataUnit['id']; ?>" <?php cek_combo($unit_id, $idunit); ?>><?= $dataUnit['unit']; ?></option>
                                                 <?php endforeach; ?>
                                             </select>
                                             <span id="unit_error" class="text-danger"></span>
@@ -138,13 +138,13 @@
                         <div class="card-header bg-gradient-light">
                             <div>
                                 <h4 class="card-title">
-                                    <a href="#" class="text-reset" id="btn-simpan-transaksi" data-aksi="tambah" tabindex="5"><i class="fas fa-save" style="color: teal"></i> Simpan Transaksi</a>
+                                    <a href="#" class="text-reset" id="btn-simpan-kasmasuk" data-aksi="tambah" data-status="<?= $status; ?>" tabindex="5"><i class="fas fa-save" style="color: teal"></i> Simpan Transaksi</a>
                                 </h4>
                             </div>
 
                             <div class="float-right">
                                 <h4 class="card-title" disabled="disabled">
-                                    <a href="" class="text-reset" id="btn-tambah-rincian" data-status="<?= $status; ?>" tabindex="6">Tambah Rincian <i class="fas fa-file-alt" style="color: teal"></i></a>
+                                    <a href="" class="text-reset" id="btn-tambah-rinciankasmasuk" data-status="<?= $status; ?>" tabindex="6">Tambah Rincian <i class="fas fa-file-alt" style="color: teal"></i></a>
                                 </h4>
                             </div>
                         </div>
@@ -178,7 +178,7 @@
                                                 <td class="text-right"><?= rupiah($dataDetail['debet']); ?></td>
                                                 <td class="text-right"><?= rupiah($dataDetail['kredit']); ?></td>
                                                 <td class="text-center">
-                                                    <a href="" class="btn-edit-detailtransaksi" data-id="<?= $idDetail; ?>" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fas fa-edit" style="color: olive"></i></a> - <a href="" class="btn-hapus-detailtransaksi" data-id="<?= $idDetail; ?>" data-info="<?= $dataDetail['level6']; ?>" data-toggle="tooltip" data-placement="bottom" title="Hapus"> <i class="far fa-trash-alt" style="color: maroon"></i></a>
+                                                    <a href="" class="btn-edit-detailkasmasuk" data-id="<?= $idDetail; ?>" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fas fa-edit" style="color: olive"></i></a> - <a href="" class="btn-hapus-detailkasmasuk" data-id="<?= $idDetail; ?>" data-info="<?= $dataDetail['level6']; ?>" data-toggle="tooltip" data-placement="bottom" title="Hapus"> <i class="far fa-trash-alt" style="color: maroon"></i></a>
                                                 </td>
                                             </tr>
 
@@ -198,6 +198,64 @@
                                             <td colspan="6" class="text-center">Data Tidak Ditemukan</td>
                                         </tr>
 
+                                    <?php
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                </div>
+                <!-- /.col col-lg-12-->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col col-lg-12">
+                    <div class="card">
+                        <div class="card-header bg-gradient-light">
+                            <div>
+                                <h4 class="card-title">
+                                    Riwayat Transaksi
+                                </h4>
+                            </div>
+                            <div class="float-right">
+                            </div>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table class="table table-bordered table-hover table-striped">
+                                <thead>
+                                    <tr>
+                                        <td width="5%" class="text-center">No</td>
+                                        <td width="10%" class="text-center">Tanggal</td>
+                                        <td width="10%" class="text-center">No. Bukti</td>
+                                        <td class="text-center">Uraian</td>
+                                        <td width="15%" class="text-center">Jumlah Transaksi (Rp.)</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $nor = 1;
+                                    if ($riwayat) {
+                                        foreach ($riwayat as $dataRiwayat) :
+                                    ?>
+                                            <tr>
+                                                <td class="text-center"><?= $nor; ?></td>
+                                                <td class="text-center"><?= $dataRiwayat['tanggal_transaksi']; ?></td>
+                                                <td><?= $dataRiwayat['nobukti']; ?></td>
+                                                <td><?= $dataRiwayat['keterangan']; ?></td>
+                                                <td width="15%" class="text-right"><?= rupiah($dataRiwayat['total_transaksi']); ?></td>
+                                            </tr>
+                                        <?php
+                                            $nor++;
+                                        endforeach;
+                                    } else {
+                                        ?>
+
+                                        <tr>
+                                            <td colspan="5" class="text-center">Data Tidak Ditemukan</td>
+                                        </tr>
                                     <?php
                                     }
                                     ?>

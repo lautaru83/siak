@@ -26,7 +26,11 @@ class Transaksi_model extends CI_Model
     {
         return $this->db2->get_where('detail_transaksis', ['id' => $id])->row_array();
     }
-
+    public function riwayat_transaksi($jurnal)
+    {
+        $user_id = $this->session->userdata('xyz');
+        return $this->db2->query("SELECT * FROM transaksis where jurnal='$jurnal' and is_valid=1 and user_id=$user_id order by id desc LIMIT 0, 5 ")->result_array();
+    }
     public function simpantransaksi($thbuku_id, $notran, $unit_id)
     {
         $jurnal = "SA";
@@ -173,13 +177,17 @@ class Transaksi_model extends CI_Model
     {
         return $this->db2->query("Select sum(debet)as debet,sum(kredit) as kredit from detail_transaksis where transaksi_id=$id group by transaksi_id")->row_array();
     }
-    public function selesaitransaksi($id)
+    public function selesaitransaksi()
     {
+        $id = $this->input->post('transaksi_id');
+        $total = $this->input->post('total_transaksi');
         $data = array(
-            'is_valid' => 1
+            'is_valid' => 1,
+            'total_transaksi' => input_uang($total)
         );
         $this->db2->where('id', $id);
         $this->db2->update('transaksis', $data);
+        //return "ok";
     }
 
     // public function simpan()

@@ -150,3 +150,10 @@ function padding_akun($posisi)
         echo "class='pl-5'";
     }
 }
+
+function cek_combo($opt1,$opt2)
+{
+    if ($opt1 == $opt2) {
+        echo "selected";
+    }
+}

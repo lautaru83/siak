@@ -31,6 +31,7 @@ class Kasmasuk extends CI_Controller
             //$data['idubah'] = $idtransaksi;
             $data['keterangan'] = $hasil['keterangan'];
             $data['nobukti'] = $hasil['nobukti'];
+            $data['unit_id'] = $hasil['unit_id'];
             $data['notran'] = $hasil['notran'];
             $data['tanggal_transaksi'] = tanggal_indo($hasil['tanggal_transaksi']);
             $data['totaltransaksi'] = $this->Transaksi_model->cektotaltransaksi($idtransaksi);
@@ -39,12 +40,14 @@ class Kasmasuk extends CI_Controller
             $data['status'] = "0";
             $data['tran_id'] = "";
             $data['nobukti'] = "";
+            $data['unit_id'] = "";
             $data['transaksi_id'] = "";
             $data['keterangan'] = "";
             $data['notran'] = notransaksi();
             $data['tanggal_transaksi'] = date("d/m/Y");
         }
         $data['akun'] = $this->Kodeperkiraan_model->akunjurnal();
+        $data['riwayat'] = $this->Transaksi_model->riwayat_transaksi($jrnl);
         $this->template->display('akuntansi/kasmasuk/index', $data);
     }
     public function simpan()
@@ -55,7 +58,7 @@ class Kasmasuk extends CI_Controller
                 'status' => 'gagal',
                 'nobukti_error' => form_error('nobukti'),
                 'keterangan_error' => form_error('keterangan'),
-                'institusi_error' => form_error('institusi_id'),
+                'unit_error' => form_error('unit_id'),
                 'tanggal_error' => form_error('tanggal_transaksi')
             );
         } else {
@@ -66,10 +69,39 @@ class Kasmasuk extends CI_Controller
         }
         echo json_encode($data);
     }
+    public function ubah($id)
+    {
+        $this->_validate();
+        if ($this->form_validation->run() == false) {
+            $data = array(
+                'status' => 'gagal',
+                'nobukti_error' => form_error('nobukti'),
+                'keterangan_error' => form_error('keterangan'),
+                'unit_error' => form_error('unit_id'),
+                'tanggal_error' => form_error('tanggal_transaksi')
+            );
+        } else {
+            $this->Transaksi_model->ubah($id);
+            $data = array(
+                'status' => 'sukses'
+            );
+        }
+        echo json_encode($data);
+    }
     public function selesaitransaksi()
     {
-        $tran_id = $this->input->post('transaksi_id');
-        $this->Transaksi_model->selesaitransaksi($tran_id);
+        //$tran_id = $this->input->post('transaksi_id');
+        $hasil = $this->Transaksi_model->selesaitransaksi();
+        if (!$hasil) {
+            $data = array(
+                'status' => 'sukses'
+            );
+        } else {
+            $data = array(
+                'status' => 'gagal'
+            );
+        }
+        echo json_encode($data);
     }
     public function simpandetail()
     {

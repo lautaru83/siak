@@ -1,4 +1,4 @@
-<div class="modal fade" id="modal-rincian" tabindex="-1">
+<div class="modal fade" id="modal-kasmasuk" tabindex="-1">
     <div class="vertical-alignment-helper">
         <div class="modal-dialog modal-dialog-default">
             <div class="modal-content card">
@@ -8,7 +8,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form id="form-rincian" class="form-horizontal">
+                <form id="form-kasmasuk" class="form-horizontal">
                     <div class="modal-body card-body">
                         <div class="form-group">
                             <label for="a6level_id" class="control-label">Kode Perkiran</label>
@@ -52,10 +52,10 @@
                     </div>
                     <div class="modal-footer card-footer">
                         <div>
-                            <button id="btn-ubah-detailtransaksi" type="submit" class="btn btn-primary"><i class="far fa-edit"></i> Ubah</button>
+                            <button id="btn-ubah-detailkasmasuk" type="submit" class="btn btn-primary"><i class="far fa-edit"></i> Ubah</button>
                         </div>
                         <div>
-                            <button id="btn-simpan-detailtransaksi" type="submit" class="btn btn-success"><i class="far fa-check-square"></i> Simpan</button>
+                            <button id="btn-simpan-detailkasmasuk" type="submit" class="btn btn-success"><i class="far fa-check-square"></i> Simpan</button>
                         </div>
                     </div>
                 </form>

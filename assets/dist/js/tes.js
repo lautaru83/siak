@@ -55,24 +55,24 @@ $(document).ready(function () {
 
 
     // tombol tambah rinciantransaksi table
-    $('#btn-tambah-rincian').on('click', function (e) {
+    $('#btn-tambah-rinciankasmasuk').on('click', function (e) {
         e.preventDefault();
         const tran_id = $('[name="tran_id"]').val();
         if (tran_id == '') {
             Toast.fire({
-                type: 'error',
-                title: ' Form Transaksi harap diisi!!!.'
+                type: 'warning',
+                title: ' Harap isi dan simpan form transaksi terlebih dahulu!!!.'
             });
         } else {
             const judul = document.getElementById('judul-modal');
             judul.innerHTML = 'Tambah Rincian Transaksi';
-            $('#btn-ubah-detailtransaksi').hide();
-            $('#modal-rincian').modal('show');
+            $('#btn-ubah-detailkasmasuk').hide();
+            $('#modal-kasmasuk').modal('show');
         }
     });
     // end tombol tambah rinciantransaksi table
-    // tombol simpan detailtransaksi table
-    $('#btn-simpan-detailtransaksi').on('click', function (e) {
+    // tombol simpan detailkasmasuk table
+    $('#btn-simpan-detailkasmasuk').on('click', function (e) {
         e.preventDefault();
         const transaksi_id = $('[name="transaksi_id"]').val();
         const a6level_id = $('[name="a6level_id"]').val();
@@ -93,7 +93,7 @@ $(document).ready(function () {
             },
             dataType: "JSON",
             beforeSend: function () {
-                $('#btn-simpan-detailtransaksi').attr('disabled', 'disabled');
+                $('#btn-simpan-detailkasmasuk').attr('disabled', 'disabled');
             },
             success: function (data) {
                 if (data.status == 'gagal') {
@@ -127,16 +127,16 @@ $(document).ready(function () {
                     document.location.reload();
                     //$('#modal-kasmasuk').modal('show');
                 }
-                $('#btn-simpan-detailtransaksi').attr('disabled', false);
+                $('#btn-simpan-detailkasmasuk').attr('disabled', false);
             }
         });
         return false;
 
 
     });
-    // end tombol simpan detailtransaksi table
+    // end tombol simpan detailkasmasuk table
     // tombol ubah detailtransaksi table
-    $('#btn-ubah-detailtransaksi').on('click', function (e) {
+    $('#btn-ubah-detailkasmasuk').on('click', function (e) {
         e.preventDefault();
         const idubah = $('[name="idubah"]').val();
         const transaksi_id = $('[name="transaksi_id"]').val();
@@ -157,7 +157,7 @@ $(document).ready(function () {
             },
             dataType: "JSON",
             beforeSend: function () {
-                $('#btn-ubah-detailtransaksi').attr('disabled', 'disabled');
+                $('#btn-ubah-detailkasmasuk').attr('disabled', 'disabled');
             },
             success: function (data) {
                 if (data.status == 'gagal') {
@@ -189,9 +189,9 @@ $(document).ready(function () {
                         title: ' Data berhasil disimpan!'
                     });
                     //document.location.reload();
-                    $('#modal-rincian').modal('hide');
+                    $('#modal-kasmasuk').modal('hide');
                 }
-                $('#btn-ubah-detailtransaksi').attr('disabled', false);
+                $('#btn-ubah-detailkasmasuk').attr('disabled', false);
             }
         });
         return false;
@@ -199,12 +199,12 @@ $(document).ready(function () {
     });
     // end tombol ubah detailtransaksi table
     // ajax tombol edit data table kelas klik
-    $('.btn-edit-detailtransaksi').on('click', function (e) {
+    $('.btn-edit-detailkasmasuk').on('click', function (e) {
         e.preventDefault();
         const judul = document.getElementById('judul-modal');
         judul.innerHTML = 'Ubah Rincian Transaksi';
         var id = $(this).data('id');
-        $('#btn-simpan-detailtransaksi').hide();
+        $('#btn-simpan-detailkasmasuk').hide();
         $('#id').attr('disabled', 'disabled');
         $.ajax({
             url: base_url + 'akuntansi/kasmasuk/ajax_editrincian/' + id,
@@ -216,7 +216,7 @@ $(document).ready(function () {
                 $('[name="idakun"]').val(data.a6level_id);
                 $('[name="posisi_akun"]').val(data.posisi_akun);
                 $('[name="jumlah"]').val(data.jumlah);
-                $('#modal-rincian').modal('show');
+                $('#modal-kasmasuk').modal('show');
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert('Error get data from ajax');
@@ -225,7 +225,7 @@ $(document).ready(function () {
     });
     //end ajax tombol edit data table kelas klik
     // ajax icon hapus table rincian klik
-    $('.btn-hapus-detailtransaksi').on('click', function (e) {
+    $('.btn-hapus-detailkasmasuk').on('click', function (e) {
         e.preventDefault();
         var id = $(this).data('id');
         var info = $(this).data('info');
@@ -267,8 +267,8 @@ $(document).ready(function () {
         })
     });
     // end ajax icon hapus table rincian klik
-    // tombol simpan transaksi 
-    $('#btn-simpan-transaksi').on('click', function (e) {
+    // tombol simpan kasmasuk
+    $('#btn-simpan-kasmasuk').on('click', function (e) {
         e.preventDefault();
         const notran = $('[name="notran"]').val();
         const tahun_pembukuan_id = $('[name="tahun_pembukuan_id"]').val();
@@ -277,7 +277,7 @@ $(document).ready(function () {
         const nobukti = $('[name="nobukti"]').val();
         const tanggal_transaksi = $('[name="tanggal_transaksi"]').val();
         const keterangan = $('[name="keterangan"]').val();
-        const status = $('[name="status"]').val();
+        const status = $(this).data('status');
         if (status == 0) {
             $.ajax({
                 type: "POST",
@@ -293,7 +293,7 @@ $(document).ready(function () {
                 },
                 dataType: "JSON",
                 beforeSend: function () {
-                    $('#btn-simpan-transaksi').attr('disabled', 'disabled');
+                    $('#btn-simpan-kasmasuk').attr('disabled', 'disabled');
                 },
                 success: function (data) {
                     if (data.status == 'gagal') {
@@ -332,7 +332,7 @@ $(document).ready(function () {
                         document.location.reload();
                         //$('#modal-kasmasuk').modal('show');
                     }
-                    $('#btn-simpan-transaksi').attr('disabled', false);
+                    $('#btn-simpan-kasmasuk').attr('disabled', false);
                 }
             });
             return false;
@@ -353,7 +353,7 @@ $(document).ready(function () {
                 },
                 dataType: "JSON",
                 beforeSend: function () {
-                    $('#btn-simpan-transaksi').attr('disabled', 'disabled');
+                    $('#btn-simpan-kasmasuk').attr('disabled', 'disabled');
                 },
                 success: function (data) {
                     if (data.status == 'gagal') {
@@ -392,21 +392,22 @@ $(document).ready(function () {
                         document.location.reload();
                         //$('#modal-kasmasuk').modal('show');
                     }
-                    $('#btn-simpan-transaksi').attr('disabled', false);
+                    $('#btn-simpan-kasmasuk').attr('disabled', false);
                 }
             });
             return false;
         }
     });
-    // end tombol simpan transaksi
-    // ajax icon selesai transaksi
-    $('#btn-selesai-transaksi').on('click', function (e) {
+    // end tombol simpan kasmasuk
+    // ajax icon selesai kasmasuk
+    $('#btn-selesai-kasmasuk').on('click', function (e) {
         e.preventDefault();
         var transaksi_id = $(this).data('id');
+        var total_transaksi = $(this).data('total');
         //var info = $(this).data('info');
         Swal.fire({
             title: 'Konfirmasi!',
-            text: 'Apakah anda yakin data telah benar!?!',
+            text: 'Apakah anda yakin data telah benar!?!' + total_transaksi,
             type: 'question',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -419,7 +420,8 @@ $(document).ready(function () {
                     type: "POST",
                     url: base_url + "akuntansi/kasmasuk/selesaitransaksi",
                     data: {
-                        transaksi_id: transaksi_id
+                        transaksi_id: transaksi_id,
+                        total_transaksi: total_transaksi
                     },
                     dataType: 'JSON',
                     success: function (data) {
@@ -440,7 +442,7 @@ $(document).ready(function () {
             }
         })
     });
-    // end ajax icon selesai transaksi
+    // end ajax icon selesai kasmasuk
     // ---------------------/TES---------------------------
 });
 
