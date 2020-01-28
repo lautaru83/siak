@@ -53,7 +53,7 @@ $(document).ready(function () {
     // cek data
 
     // tombol tambah rinciantransaksi table
-    $('#btn-tambah-rinciankaskeluar').on('click', function (e) {
+    $('#btn-tambah-rincianbankmasuk').on('click', function (e) {
         e.preventDefault();
         const tran_id = $('[name="tran_id"]').val();
         if (tran_id == '') {
@@ -64,13 +64,13 @@ $(document).ready(function () {
         } else {
             const judul = document.getElementById('judul-modal');
             judul.innerHTML = 'Tambah Rincian Transaksi';
-            $('#btn-ubah-detailkaskeluar').hide();
-            $('#modal-kaskeluar').modal('show');
+            $('#btn-ubah-detailbankmasuk').hide();
+            $('#modal-bankmasuk').modal('show');
         }
     });
     // end tombol tambah rinciantransaksi table
-    // tombol simpan detailkaskeluar table
-    $('#btn-simpan-detailkaskeluar').on('click', function (e) {
+    // tombol simpan detailbankmasuk table
+    $('#btn-simpan-detailbankmasuk').on('click', function (e) {
         e.preventDefault();
         const transaksi_id = $('[name="transaksi_id"]').val();
         const a6level_id = $('[name="a6level_id"]').val();
@@ -80,7 +80,7 @@ $(document).ready(function () {
         const jumlah = $('[name="jumlah"]').val();
         $.ajax({
             type: "POST",
-            url: base_url + "akuntansi/kaskeluar/simpandetail",
+            url: base_url + "akuntansi/bankmasuk/simpandetail",
             data: {
                 idakun: idakun,
                 idubah: idubah,
@@ -91,7 +91,7 @@ $(document).ready(function () {
             },
             dataType: "JSON",
             beforeSend: function () {
-                $('#btn-simpan-detailkaskeluar').attr('disabled', 'disabled');
+                $('#btn-simpan-detailbankmasuk').attr('disabled', 'disabled');
             },
             success: function (data) {
                 if (data.status == 'gagal') {
@@ -123,18 +123,18 @@ $(document).ready(function () {
                         title: ' Data berhasil disimpan!'
                     });
                     document.location.reload();
-                    //$('#modal-kaskeluar').modal('show');
+                    //$('#modal-bankmasuk').modal('show');
                 }
-                $('#btn-simpan-detailkaskeluar').attr('disabled', false);
+                $('#btn-simpan-detailbankmasuk').attr('disabled', false);
             }
         });
         return false;
 
 
     });
-    // end tombol simpan detailkaskeluar table
+    // end tombol simpan detailbankmasuk table
     // tombol ubah detailtransaksi table
-    $('#btn-ubah-detailkaskeluar').on('click', function (e) {
+    $('#btn-ubah-detailbankmasuk').on('click', function (e) {
         e.preventDefault();
         const idubah = $('[name="idubah"]').val();
         const transaksi_id = $('[name="transaksi_id"]').val();
@@ -144,7 +144,7 @@ $(document).ready(function () {
         const jumlah = $('[name="jumlah"]').val();
         $.ajax({
             type: "POST",
-            url: base_url + "akuntansi/kaskeluar/ubahdetail/" + idubah,
+            url: base_url + "akuntansi/bankmasuk/ubahdetail/" + idubah,
             data: {
                 idubah: idubah,
                 idakun: idakun,
@@ -155,7 +155,7 @@ $(document).ready(function () {
             },
             dataType: "JSON",
             beforeSend: function () {
-                $('#btn-ubah-detailkaskeluar').attr('disabled', 'disabled');
+                $('#btn-ubah-detailbankmasuk').attr('disabled', 'disabled');
             },
             success: function (data) {
                 if (data.status == 'gagal') {
@@ -187,9 +187,9 @@ $(document).ready(function () {
                         title: ' Data berhasil disimpan!'
                     });
                     //document.location.reload();
-                    $('#modal-kaskeluar').modal('hide');
+                    $('#modal-bankmasuk').modal('hide');
                 }
-                $('#btn-ubah-detailkaskeluar').attr('disabled', false);
+                $('#btn-ubah-detailbankmasuk').attr('disabled', false);
             }
         });
         return false;
@@ -197,15 +197,15 @@ $(document).ready(function () {
     });
     // end tombol ubah detailtransaksi table
     // ajax tombol edit data table kelas klik
-    $('.btn-edit-detailkaskeluar').on('click', function (e) {
+    $('.btn-edit-detailbankmasuk').on('click', function (e) {
         e.preventDefault();
         const judul = document.getElementById('judul-modal');
         judul.innerHTML = 'Ubah Rincian Transaksi';
         var id = $(this).data('id');
-        $('#btn-simpan-detailkaskeluar').hide();
+        $('#btn-simpan-detailbankmasuk').hide();
         $('#id').attr('disabled', 'disabled');
         $.ajax({
-            url: base_url + 'akuntansi/kaskeluar/ajax_editrincian/' + id,
+            url: base_url + 'akuntansi/bankmasuk/ajax_editrincian/' + id,
             type: "GET",
             dataType: "JSON",
             success: function (data) {
@@ -214,7 +214,7 @@ $(document).ready(function () {
                 $('[name="idakun"]').val(data.a6level_id);
                 $('[name="posisi_akun"]').val(data.posisi_akun);
                 $('[name="jumlah"]').val(data.jumlah);
-                $('#modal-kaskeluar').modal('show');
+                $('#modal-bankmasuk').modal('show');
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert('Error get data from ajax');
@@ -223,7 +223,7 @@ $(document).ready(function () {
     });
     //end ajax tombol edit data table kelas klik
     // ajax icon hapus table rincian klik
-    $('.btn-hapus-detailkaskeluar').on('click', function (e) {
+    $('.btn-hapus-detailbankmasuk').on('click', function (e) {
         e.preventDefault();
         var id = $(this).data('id');
         var info = $(this).data('info');
@@ -240,7 +240,7 @@ $(document).ready(function () {
             if (result.value) {
                 $.ajax({
                     type: "POST",
-                    url: base_url + "akuntansi/kaskeluar/hapusrincian",
+                    url: base_url + "akuntansi/bankmasuk/hapusrincian",
                     data: {
                         id: id,
                         info: info
@@ -265,8 +265,8 @@ $(document).ready(function () {
         })
     });
     // end ajax icon hapus table rincian klik
-    // tombol simpan kaskeluar
-    $('#btn-simpan-kaskeluar').on('click', function (e) {
+    // tombol simpan bankmasuk
+    $('#btn-simpan-bankmasuk').on('click', function (e) {
         e.preventDefault();
         const notran = $('[name="notran"]').val();
         const tahun_pembukuan_id = $('[name="tahun_pembukuan_id"]').val();
@@ -279,7 +279,7 @@ $(document).ready(function () {
         if (status == 0) {
             $.ajax({
                 type: "POST",
-                url: base_url + "akuntansi/kaskeluar/simpan",
+                url: base_url + "akuntansi/bankmasuk/simpan",
                 data: {
                     nobukti: nobukti,
                     tanggal_transaksi: tanggal_transaksi,
@@ -291,7 +291,7 @@ $(document).ready(function () {
                 },
                 dataType: "JSON",
                 beforeSend: function () {
-                    $('#btn-simpan-kaskeluar').attr('disabled', 'disabled');
+                    $('#btn-simpan-bankmasuk').attr('disabled', 'disabled');
                 },
                 success: function (data) {
                     if (data.status == 'gagal') {
@@ -328,9 +328,9 @@ $(document).ready(function () {
                             title: ' Data berhasil disimpan!'
                         });
                         document.location.reload();
-                        //$('#modal-kaskeluar').modal('show');
+                        //$('#modal-bankmasuk').modal('show');
                     }
-                    $('#btn-simpan-kaskeluar').attr('disabled', false);
+                    $('#btn-simpan-bankmasuk').attr('disabled', false);
                 }
             });
             return false;
@@ -342,7 +342,7 @@ $(document).ready(function () {
             const keterangan = $('[name="keterangan"]').val();
             $.ajax({
                 type: "POST",
-                url: base_url + "akuntansi/kaskeluar/ubah/" + transaksi_id,
+                url: base_url + "akuntansi/bankmasuk/ubah/" + transaksi_id,
                 data: {
                     nobukti: nobukti,
                     tanggal_transaksi: tanggal_transaksi,
@@ -351,7 +351,7 @@ $(document).ready(function () {
                 },
                 dataType: "JSON",
                 beforeSend: function () {
-                    $('#btn-simpan-kaskeluar').attr('disabled', 'disabled');
+                    $('#btn-simpan-bankmasuk').attr('disabled', 'disabled');
                 },
                 success: function (data) {
                     if (data.status == 'gagal') {
@@ -388,24 +388,24 @@ $(document).ready(function () {
                             title: ' Data berhasil diubah!'
                         });
                         document.location.reload();
-                        //$('#modal-kaskeluar').modal('show');
+                        //$('#modal-bankmasuk').modal('show');
                     }
-                    $('#btn-simpan-kaskeluar').attr('disabled', false);
+                    $('#btn-simpan-bankmasuk').attr('disabled', false);
                 }
             });
             return false;
         }
     });
-    // end tombol simpan kaskeluar
-    // ajax icon selesai kaskeluar
-    $('#btn-selesai-kaskeluar').on('click', function (e) {
+    // end tombol simpan bankmasuk
+    // ajax icon selesai bankmasuk
+    $('#btn-selesai-bankmasuk').on('click', function (e) {
         e.preventDefault();
         var transaksi_id = $(this).data('id');
         var total_transaksi = $(this).data('total');
         //var info = $(this).data('info');
         Swal.fire({
             title: 'Konfirmasi!',
-            text: 'Apakah anda yakin data telah benar!?!' + total_transaksi,
+            text: 'Apakah anda yakin data telah benar!?!',
             type: 'question',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -416,7 +416,7 @@ $(document).ready(function () {
             if (result.value) {
                 $.ajax({
                     type: "POST",
-                    url: base_url + "akuntansi/kaskeluar/selesaitransaksi",
+                    url: base_url + "akuntansi/bankmasuk/selesaitransaksi",
                     data: {
                         transaksi_id: transaksi_id,
                         total_transaksi: total_transaksi
@@ -440,8 +440,7 @@ $(document).ready(function () {
             }
         })
     });
-    // end ajax icon selesai kaskeluar
-
+    // end ajax icon selesai bankmasuk
 
     // ---------------------/TES---------------------------
 });
