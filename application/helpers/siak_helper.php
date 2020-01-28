@@ -1,3 +1,4 @@
+
 <?php
 
 function is_logged_in()
@@ -129,14 +130,23 @@ function notransaksi()
     $th = $ci->session->userdata('tahun_buku');
     $ints = $ci->session->userdata('idInstitusi');
     $char = substr($th, 2, 2) . $ints;
-    $hasil = $ci->db->query("select max(a.notran) as maxnotran from siak_akuntansi.transaksis a where a.tahun_buku=$th")->row_array();
+    $hasil = $ci->db->query("select max(a.notran) as maxnotran from siak_akuntansi.transaksis a join siak_setting.units b on b.id=a.unit_id join siak_setting.institusis c on c.id=b.institusi_id where a.tahun_buku='2019' and c.id=$ints")->row_array();
     if ($hasil) {
         $nomor = $hasil['maxnotran'];
         $noUrut = (int) substr($nomor, 4, 6);
         $noUrut++;
         $notran = $char . sprintf("%06s", $noUrut);
+        //$notran = $noUrut;
     } else {
         $notran = $char . "000001";
     }
     return $notran;
+}
+function padding_akun($posisi)
+{
+    if ($posisi == "D") {
+        echo "";
+    } else {
+        echo "class='pl-5'";
+    }
 }
