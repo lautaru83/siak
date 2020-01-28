@@ -5012,6 +5012,398 @@ $(document).ready(function () {
     });
     // end ajax tombol modal ubah mahasiswa
     //----------------------------------/MAHASISWA-----------------------------------------
+    //----------------------------------/KASMASUK-----------------------------------------
+    
+    // tombol tambah rinciantransaksi table
+    $('#btn-tambah-rinciankasmasuk').on('click', function (e) {
+        e.preventDefault();
+        const tran_id = $('[name="tran_id"]').val();
+        if (tran_id == '') {
+            Toast.fire({
+                type: 'warning',
+                title: ' Harap isi dan simpan form transaksi terlebih dahulu!!!.'
+            });
+        } else {
+            const judul = document.getElementById('judul-modal');
+            judul.innerHTML = 'Tambah Rincian Transaksi';
+            $('#btn-ubah-detailkasmasuk').hide();
+            $('#modal-kasmasuk').modal('show');
+        }
+    });
+    // end tombol tambah rinciantransaksi table
+    // tombol simpan detailkasmasuk table
+    $('#btn-simpan-detailkasmasuk').on('click', function (e) {
+        e.preventDefault();
+        const transaksi_id = $('[name="transaksi_id"]').val();
+        const a6level_id = $('[name="a6level_id"]').val();
+        const posisi_akun = $('[name="posisi_akun"]').val();
+        const idakun = $('[name="idakun"]').val();
+        const idubah = $('[name="idubah"]').val();
+        const jumlah = $('[name="jumlah"]').val();
+        $.ajax({
+            type: "POST",
+            url: base_url + "akuntansi/kasmasuk/simpandetail",
+            data: {
+                idakun: idakun,
+                idubah: idubah,
+                transaksi_id: transaksi_id,
+                a6level_id: a6level_id,
+                posisi_akun: posisi_akun,
+                jumlah: jumlah
+            },
+            dataType: "JSON",
+            beforeSend: function () {
+                $('#btn-simpan-detailkasmasuk').attr('disabled', 'disabled');
+            },
+            success: function (data) {
+                if (data.status == 'gagal') {
+                    Toast.fire({
+                        type: 'error',
+                        title: ' Input data tidak valid!!!.'
+                    });
+                    if (data.akun_error != '') {
+                        $('#akun_error').html(data.akun_error);
+                    } else {
+                        $('#akun_error').html('');
+                    }
+                    if (data.posisi_error != '') {
+                        $('#posisi_error').html(data.posisi_error);
+                    } else {
+                        $('#posisi_error').html('');
+                    }
+                    if (data.jumlah_error != '') {
+                        $('#jumlah_error').html(data.jumlah_error);
+                    } else {
+                        $('#jumlah_error').html('');
+                    }
+
+                    $('#a6level_id').trigger('focus');
+                } else {
+                    //$('#btn-simpan-transaksi').attr('disabled', false);
+                    Toast.fire({
+                        type: 'success',
+                        title: ' Data berhasil disimpan!'
+                    });
+                    document.location.reload();
+                    //$('#modal-kasmasuk').modal('show');
+                }
+                $('#btn-simpan-detailkasmasuk').attr('disabled', false);
+            }
+        });
+        return false;
+
+
+    });
+    // end tombol simpan detailkasmasuk table
+    // tombol ubah detailtransaksi table
+    $('#btn-ubah-detailkasmasuk').on('click', function (e) {
+        e.preventDefault();
+        const idubah = $('[name="idubah"]').val();
+        const transaksi_id = $('[name="transaksi_id"]').val();
+        const a6level_id = $('[name="a6level_id"]').val();
+        const idakun = $('[name="idakun"]').val();
+        const posisi_akun = $('[name="posisi_akun"]').val();
+        const jumlah = $('[name="jumlah"]').val();
+        $.ajax({
+            type: "POST",
+            url: base_url + "akuntansi/kasmasuk/ubahdetail/" + idubah,
+            data: {
+                idubah: idubah,
+                idakun: idakun,
+                transaksi_id: transaksi_id,
+                a6level_id: a6level_id,
+                posisi_akun: posisi_akun,
+                jumlah: jumlah
+            },
+            dataType: "JSON",
+            beforeSend: function () {
+                $('#btn-ubah-detailkasmasuk').attr('disabled', 'disabled');
+            },
+            success: function (data) {
+                if (data.status == 'gagal') {
+                    Toast.fire({
+                        type: 'error',
+                        title: ' Input data tidak valid!!!.'
+                    });
+                    if (data.akun_error != '') {
+                        $('#akun_error').html(data.akun_error);
+                    } else {
+                        $('#akun_error').html('');
+                    }
+                    if (data.posisi_error != '') {
+                        $('#posisi_error').html(data.posisi_error);
+                    } else {
+                        $('#posisi_error').html('');
+                    }
+                    if (data.jumlah_error != '') {
+                        $('#jumlah_error').html(data.jumlah_error);
+                    } else {
+                        $('#jumlah_error').html('');
+                    }
+
+                    $('#a6level_id').trigger('focus');
+                } else {
+                    //$('#btn-simpan-transaksi').attr('disabled', false);
+                    Toast.fire({
+                        type: 'success',
+                        title: ' Data berhasil disimpan!'
+                    });
+                    //document.location.reload();
+                    $('#modal-kasmasuk').modal('hide');
+                }
+                $('#btn-ubah-detailkasmasuk').attr('disabled', false);
+            }
+        });
+        return false;
+
+    });
+    // end tombol ubah detailtransaksi table
+    // ajax tombol edit data table kelas klik
+    $('.btn-edit-detailkasmasuk').on('click', function (e) {
+        e.preventDefault();
+        const judul = document.getElementById('judul-modal');
+        judul.innerHTML = 'Ubah Rincian Transaksi';
+        var id = $(this).data('id');
+        $('#btn-simpan-detailkasmasuk').hide();
+        $('#id').attr('disabled', 'disabled');
+        $.ajax({
+            url: base_url + 'akuntansi/kasmasuk/ajax_editrincian/' + id,
+            type: "GET",
+            dataType: "JSON",
+            success: function (data) {
+                $('[name="idubah"]').val(data.id);
+                $('[name="a6level_id"]').val(data.a6level_id);
+                $('[name="idakun"]').val(data.a6level_id);
+                $('[name="posisi_akun"]').val(data.posisi_akun);
+                $('[name="jumlah"]').val(data.jumlah);
+                $('#modal-kasmasuk').modal('show');
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('Error get data from ajax');
+            }
+        });
+    });
+    //end ajax tombol edit data table kelas klik
+    // ajax icon hapus table rincian klik
+    $('.btn-hapus-detailkasmasuk').on('click', function (e) {
+        e.preventDefault();
+        var id = $(this).data('id');
+        var info = $(this).data('info');
+        Swal.fire({
+            title: 'Konfirmasi!',
+            text: 'Apakah anda yakin akan menghapus Rincian -' + info + '- !?!',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'Batal',
+            confirmButtonText: 'Hapus'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    type: "POST",
+                    url: base_url + "akuntansi/kasmasuk/hapusrincian",
+                    data: {
+                        id: id,
+                        info: info
+                    },
+                    dataType: 'JSON',
+                    success: function (data) {
+                        if (data.status == 'sukses') {
+                            Toast.fire({
+                                type: 'success',
+                                title: ' Data berhasil dihapus!!!.'
+                            });
+                            document.location.reload();
+                        } else {
+                            Toast.fire({
+                                type: 'warning',
+                                title: ' Penghapusan gagal!!!.'
+                            });
+                        }
+                    }
+                });
+            }
+        })
+    });
+    // end ajax icon hapus table rincian klik
+    // tombol simpan kasmasuk
+    $('#btn-simpan-kasmasuk').on('click', function (e) {
+        e.preventDefault();
+        const notran = $('[name="notran"]').val();
+        const tahun_pembukuan_id = $('[name="tahun_pembukuan_id"]').val();
+        const jurnal = $('[name="jurnal"]').val();
+        const unit_id = $('[name="unit_id"]').val();
+        const nobukti = $('[name="nobukti"]').val();
+        const tanggal_transaksi = $('[name="tanggal_transaksi"]').val();
+        const keterangan = $('[name="keterangan"]').val();
+        const status = $(this).data('status');
+        if (status == 0) {
+            $.ajax({
+                type: "POST",
+                url: base_url + "akuntansi/kasmasuk/simpan",
+                data: {
+                    nobukti: nobukti,
+                    tanggal_transaksi: tanggal_transaksi,
+                    keterangan: keterangan,
+                    unit_id: unit_id,
+                    jurnal: jurnal,
+                    notran: notran,
+                    tahun_buku: tahun_pembukuan_id
+                },
+                dataType: "JSON",
+                beforeSend: function () {
+                    $('#btn-simpan-kasmasuk').attr('disabled', 'disabled');
+                },
+                success: function (data) {
+                    if (data.status == 'gagal') {
+                        Toast.fire({
+                            type: 'error',
+                            title: ' Input data tidak valid!!!.'
+                        });
+                        if (data.nobukti_error != '') {
+                            $('#nobukti_error').html(data.nobukti_error);
+                        } else {
+                            $('#nobukti_error').html('');
+                        }
+                        if (data.keterangan_error != '') {
+                            $('#keterangan_error').html(data.keterangan_error);
+                        } else {
+                            $('#keterangan_error').html('');
+                        }
+                        if (data.tanggal_error != '') {
+                            $('#tanggal_error').html(data.tanggal_error);
+                        } else {
+                            $('#tanggal_error').html('');
+                        }
+                        if (data.unit_error != '') {
+                            $('#unit_error').html(data.unit_error);
+                        } else {
+                            $('#unit_error').html('');
+                        }
+
+                        $('#nobukti').trigger('focus');
+                    } else {
+                        //$('#btn-simpan-transaksi').attr('disabled', false);
+                        Toast.fire({
+                            type: 'success',
+                            title: ' Data berhasil disimpan!'
+                        });
+                        document.location.reload();
+                        //$('#modal-kasmasuk').modal('show');
+                    }
+                    $('#btn-simpan-kasmasuk').attr('disabled', false);
+                }
+            });
+            return false;
+        } else {
+            const transaksi_id = $('[name="tran_id"]').val();
+            const unit_id = $('[name="unit_id"]').val();
+            const nobukti = $('[name="nobukti"]').val();
+            const tanggal_transaksi = $('[name="tanggal_transaksi"]').val();
+            const keterangan = $('[name="keterangan"]').val();
+            $.ajax({
+                type: "POST",
+                url: base_url + "akuntansi/kasmasuk/ubah/" + transaksi_id,
+                data: {
+                    nobukti: nobukti,
+                    tanggal_transaksi: tanggal_transaksi,
+                    keterangan: keterangan,
+                    unit_id: unit_id
+                },
+                dataType: "JSON",
+                beforeSend: function () {
+                    $('#btn-simpan-kasmasuk').attr('disabled', 'disabled');
+                },
+                success: function (data) {
+                    if (data.status == 'gagal') {
+                        Toast.fire({
+                            type: 'error',
+                            title: ' Input data tidak valid!!!.'
+                        });
+                        if (data.nobukti_error != '') {
+                            $('#nobukti_error').html(data.nobukti_error);
+                        } else {
+                            $('#nobukti_error').html('');
+                        }
+                        if (data.keterangan_error != '') {
+                            $('#keterangan_error').html(data.keterangan_error);
+                        } else {
+                            $('#keterangan_error').html('');
+                        }
+                        if (data.tanggal_error != '') {
+                            $('#tanggal_error').html(data.tanggal_error);
+                        } else {
+                            $('#tanggal_error').html('');
+                        }
+                        if (data.unit_error != '') {
+                            $('#unit_error').html(data.unit_error);
+                        } else {
+                            $('#unit_error').html('');
+                        }
+
+                        $('#nobukti').trigger('focus');
+                    } else {
+                        //$('#btn-simpan-transaksi').attr('disabled', false);
+                        Toast.fire({
+                            type: 'success',
+                            title: ' Data berhasil diubah!'
+                        });
+                        document.location.reload();
+                        //$('#modal-kasmasuk').modal('show');
+                    }
+                    $('#btn-simpan-kasmasuk').attr('disabled', false);
+                }
+            });
+            return false;
+        }
+    });
+    // end tombol simpan kasmasuk
+    // ajax icon selesai kasmasuk
+    $('#btn-selesai-kasmasuk').on('click', function (e) {
+        e.preventDefault();
+        var transaksi_id = $(this).data('id');
+        var total_transaksi = $(this).data('total');
+        //var info = $(this).data('info');
+        Swal.fire({
+            title: 'Konfirmasi!',
+            text: 'Apakah anda yakin data telah benar!?!' + total_transaksi,
+            type: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'Batal',
+            confirmButtonText: 'Confirm'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    type: "POST",
+                    url: base_url + "akuntansi/kasmasuk/selesaitransaksi",
+                    data: {
+                        transaksi_id: transaksi_id,
+                        total_transaksi: total_transaksi
+                    },
+                    dataType: 'JSON',
+                    success: function (data) {
+                        if (data.status == 'sukses') {
+                            Toast.fire({
+                                type: 'success',
+                                title: ' Data berhasil disimpan!!!.'
+                            });
+                            document.location.reload();
+                        } else {
+                            Toast.fire({
+                                type: 'warning',
+                                title: ' Kesalahan dalam menyelesaikan transaksi!!!.'
+                            });
+                        }
+                    }
+                });
+            }
+        })
+    });
+    // end ajax icon selesai kasmasuk
+    //----------------------------------/KASMASUK-----------------------------------------
 
 
 }); // end document ready

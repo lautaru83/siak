@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Kasmasuk extends CI_Controller
+class Kaskeluar extends CI_Controller
 {
     public function __construct()
     {
@@ -16,9 +16,9 @@ class Kasmasuk extends CI_Controller
         $institusi_id = $this->session->userdata('idInstitusi');
         $data['pembukuan_id'] = $this->session->userdata('tahun_buku');
         $data['kontenmenu'] = "Transaksi";
-        $jrnl = "KM";
-        $data['jurnal'] = "KM";
-        $data['kontensubmenu'] = "Jurnal Kas Masuk";
+        $jrnl = "KK";
+        $data['jurnal'] = "KK";
+        $data['kontensubmenu'] = "Jurnal Kas Keluar";
         $data['unit'] = $this->Unit_model->ambil_data_institusi_id($institusi_id);
         $hasil = $this->Transaksi_model->cektranuser($jrnl);
         $data['totaltransaksi'] = "";
@@ -48,7 +48,7 @@ class Kasmasuk extends CI_Controller
         }
         $data['akun'] = $this->Kodeperkiraan_model->akunjurnal($jrnl);
         $data['riwayat'] = $this->Transaksi_model->riwayat_transaksi($jrnl);
-        $this->template->display('akuntansi/kasmasuk/index', $data);
+        $this->template->display('akuntansi/kaskeluar/index', $data);
     }
     public function simpan()
     {

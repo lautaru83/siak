@@ -11,9 +11,10 @@ class Kodeperkiraan_model extends CI_Model
     {
         return $this->db2->get_where('a5levels', ['id' => $id])->row_array();
     }
-    public function akunjurnal()
+    public function akunjurnal($jenis)
     {
-        return $this->db2->get('a6levels')->result_array();
+        $idinstitusi = $this->session->userdata('idInstitusi');
+        return $this->db2->query("select a.id as id,a.level6 as level6 from a6levels a join akun_transaksis b on a.id=b.a6level_id where b.jenis_transaksi_id='$jenis' and a.institusi_id='$idinstitusi' ")->result_array();
     }
     public function ambil_data_id6($id)
     {
