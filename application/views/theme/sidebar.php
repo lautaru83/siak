@@ -100,14 +100,14 @@
 
 
          <!-- end menu db -->
-         <li class="nav-item">
-           <a href="<?= site_url('tes/tes') ?>" class="nav-link" id="tes-halaman">
+         <!-- <li class="nav-item">
+           <a href="" class="nav-link" id="tes-halaman">
              <i class="nav-icon fas fa-th"></i>
              <p>
                Tes Halaman
              </p>
            </a>
-         </li>
+         </li> -->
          <!-- <li class="nav-item">
             <a href="#" class="nav-link" id="tes-halaman2">
               <i class="nav-icon fas fa-th"></i>
