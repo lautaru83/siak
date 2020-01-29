@@ -59,6 +59,10 @@ $route['kodeperkiraan'] = 'akuntansi/kodeperkiraan';
 $route['kodeanggaran'] = 'akuntansi/kodeanggaran';
 $route['jenistransaksi'] = 'akuntansi/jenistransaksi';
 $route['saldoawal'] = 'akuntansi/saldoawal';
+$route['laporan'] = 'akuntansi/laporan';
+$route['jurnal'] = 'akuntansi/jurnal';
+$route['neracasaldo'] = 'akuntansi/neracasaldo';
+//$route['jurnal'] = 'akuntansi/laporan/jurnal';
 // --------------- Transaksi -----------------------------
 // $route['kasmasuk1'] = 'akuntansi/transaksi/kasmasuk';
 $route['kasmasuk'] = 'akuntansi/kasmasuk';

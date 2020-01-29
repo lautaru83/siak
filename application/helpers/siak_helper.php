@@ -157,3 +157,13 @@ function cek_combo($opt1,$opt2)
         echo "selected";
     }
 }
+function rupiah_positif($angka){
+    if($angka<0){
+        $angka_positif=abs($angka);
+        echo "(".rupiah($angka_positif).")";
+    }else{
+         echo rupiah($angka);
+
+    }
+
+}

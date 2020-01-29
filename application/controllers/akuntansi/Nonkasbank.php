@@ -18,7 +18,7 @@ class Nonkasbank extends CI_Controller
         $data['kontenmenu'] = "Transaksi";
         $jrnl = "NN";
         $data['jurnal'] = "NN";
-        $data['kontensubmenu'] = "Jurnal Bank Keluar";
+        $data['kontensubmenu'] = "Jurnal Umum (Non Kas)";
         $data['unit'] = $this->Unit_model->ambil_data_institusi_id($institusi_id);
         $hasil = $this->Transaksi_model->cektranuser($jrnl);
         $data['totaltransaksi'] = "";
