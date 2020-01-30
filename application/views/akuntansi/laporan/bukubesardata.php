@@ -58,7 +58,7 @@
                                                 foreach ($akunbuku as $dataAkunbuku) :
                                                     $akun_id = $dataAkunbuku['id'];
                                             ?>
-                                                    <option value="<?= $dataAkunbuku['id']; ?>" <?= cek_combo($akun_id, $a6level_id); ?>><?= $dataAkunbuku['id']; ?> - <?= $dataAkunbuku['level6']; ?></option>
+                                                    <option value="<?= $dataAkunbuku['id']; ?>" <?= cek_combo($akun_id,$a6level_id); ?>><?= $dataAkunbuku['id']; ?> - <?= $dataAkunbuku['level6']; ?></option>
                                             <?php
                                                 endforeach;
                                             }
