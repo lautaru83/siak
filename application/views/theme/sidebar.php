@@ -50,7 +50,7 @@
                       $querySubMenu = "select * from submenus where menu_id=$menuId and is_active=1";
                     } else {
                       $querySubMenu = "select distinct a.submenu as submenu,a.url as url,a.icon as icon
-                     from submenus a join accesses b on a.id=b.submenu_id where a.menu_id=$menuId and b.role_id=$jabatan and b.is_active=1";
+                     from submenus a join accesses b on a.id=b.submenu_id where a.menu_id=$menuId and b.role_id=$jabatan and a.is_active=1";
                     }
                     $subMenu = $this->db->query($querySubMenu)->result_array();
                     ?>

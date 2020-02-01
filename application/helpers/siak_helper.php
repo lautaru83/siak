@@ -150,7 +150,6 @@ function padding_akun($posisi)
         echo "class='pl-5'";
     }
 }
-
 function cek_combo($opt1,$opt2)
 {
     if ($opt1 == $opt2) {
@@ -167,3 +166,12 @@ function rupiah_positif($angka){
     }
 
 }
+function sembunyikan_input($institusi)
+{
+    if ($institusi == "01") {
+        echo "class='form-check form-check-inline mx-sm-2 mb-2'";
+    }else{
+        echo "class='form-check form-check-inline mx-sm-2 mb-2 invisible'";
+    }
+}
+
