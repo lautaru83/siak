@@ -34,6 +34,15 @@ class Saldoawal extends CI_Controller
                 $saldoawal = $dataAkunsaldo['saldoawal'];
                 $this->Transaksi_model->simpandetailsaldo($idtransaksi, $a6level_id, $posisi, $saldoawal);
             endforeach;
+            $akunKhusus = $this->Kodeperkiraan_model->akunkhusus($unit_id);
+            if ($akunKhusus) {
+                foreach ($akunKhusus as $dataAkunKhusus) :
+                    $a6level_id = $dataAkunKhusus['id'];
+                    $posisi = "K";
+                    $saldoawal = 0;
+                    $this->Transaksi_model->simpandetailsaldo($idtransaksi, $a6level_id, $posisi, $saldoawal);
+                endforeach;
+            }
             // $this->session->set_flashdata('message', '<div class="alert alert-warning" role="alert">
             // Pengaturan saldo awal berhasil!</div>');
             // redirect('akuntansi/saldoawal/saldo/' . $idtahun);
@@ -48,6 +57,15 @@ class Saldoawal extends CI_Controller
                 $saldoawal = $dataAkunsaldo['saldoawal'];
                 $this->Transaksi_model->simpandetailsaldo($idtransaksi, $a6level_id, $posisi, $saldoawal);
             endforeach;
+            $akunKhusus = $this->Kodeperkiraan_model->akunkhusus($unit_id);
+            if ($akunKhusus) {
+                foreach ($akunKhusus as $dataAkunKhusus) :
+                    $a6level_id = $dataAkunKhusus['id'];
+                    $posisi = "K";
+                    $saldoawal = 0;
+                    $this->Transaksi_model->simpandetailsaldo($idtransaksi, $a6level_id, $posisi, $saldoawal);
+                endforeach;
+            }
             //$this->Transaksi_model->simpandetailsaldo($idtahun);
         }
         $this->session->set_flashdata('message', '<div class="alert alert-info" role="alert">

@@ -106,7 +106,7 @@ $(document).ready(function () {
                         cache: false,
                         url: base_url + "akuntansi/neraca/viewdata",
                         data: {
-                            tanggal: tanggal,
+                            akhir_periode: tanggal,
                             jenis: jenis
                         },
                         success: function (data) {

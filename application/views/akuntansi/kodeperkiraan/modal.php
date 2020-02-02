@@ -92,7 +92,7 @@
                                     <?php
                                     if ($institusi) {
                                         foreach ($institusi as $dataInstitusi) :
-                                            ?>
+                                    ?>
                                             <option value="<?= $dataInstitusi['id']; ?>"><?= $dataInstitusi['institusi']; ?></option>
                                     <?php
                                         endforeach;
@@ -109,10 +109,11 @@
                                     <option value="">- Pilih -</option>
                                     <option value="D">Debet</option>
                                     <option value="K">Kredit</option>
+                                    <option value="S">Saldo</option>
                                 </select>
                             </div>
                             <span id="posisi_error" class="text-danger"></span>
-                        </div>         
+                        </div>
                     </div>
                     <div class="modal-footer card-footer">
                         <div>

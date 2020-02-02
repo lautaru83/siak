@@ -69,8 +69,10 @@ function posisi_akun($posisi)
 {
     if ($posisi == "D") {
         return "Debet";
-    } else {
+    } elseif($posisi=="K") {
         return "Kredit";
+    }else{
+        return "Akumulasi";
     }
 }
 function tanggal_indo($tgl)

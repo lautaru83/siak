@@ -53,16 +53,22 @@ class Neraca extends CI_Controller
     public function viewdata()
     {
         $jenis = $this->input->post('jenis');
-        //$data['tanggal'] = $tanggal;
+        $data['tanggal'] = tanggal_input($this->input->post('akhir_periode'));
+        $data['neraca'] = "1";
         //$data['jurnal'] = $this->Institusi_model->ambil_data();
         if ($jenis == "4") {
-            $this->load->view('akuntansi/laporan/neraca/lengkap');
+            $this->load->view('akuntansi/laporan/neraca/lengkap', $data);
         } elseif ($jenis == "3") {
-            $this->load->view('akuntansi/laporan/neraca/konsolidasi');
+            $this->load->view('akuntansi/laporan/neraca/konsolidasi', $data);
         } elseif ($jenis == "2") {
-            $this->load->view('akuntansi/laporan/neraca/komparatif');
+            $this->load->view('akuntansi/laporan/neraca/komparatif', $data);
         } else {
-            $this->load->view('akuntansi/laporan/neraca/institusi');
+            $data['asetLancar'] = $this->Laporan_model->asetLancarInstitusi();
+            $data['asetTidakLancar'] = $this->Laporan_model->asetTidakLancarInstitusi();
+            $data['kewajiban'] = $this->Laporan_model->kewajibanInstitusi();
+            $data['bersihTidakTerikat'] = $this->Laporan_model->bersihTidakTerikatInstitusi();
+            $data['bersihTerikat'] = $this->Laporan_model->bersihTerikatInstitusi();
+            $this->load->view('akuntansi/laporan/neraca/institusi', $data);
         }
     }
     public function cekinput()

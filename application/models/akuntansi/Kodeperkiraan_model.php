@@ -33,6 +33,10 @@ class Kodeperkiraan_model extends CI_Model
     {
         return $this->db2->query("select a3levels.id as id,a1levels.level1 as level1,a2levels.level2 as level2, a3levels.level3 as level3 from a1levels join a2levels on a1levels.id=a2levels.a1level_id join a3levels on a2levels.id=a3levels.a2level_id where a1levels.id IN(100,200,300) order by a3levels.id asc")->result_array();
     }
+    public function akunkhusus($institusi_id)
+    {
+        return $this->db2->query("select * from a6levels where posisi='S' and institusi_id='$institusi_id'")->result_array();
+    }
     public function akunsaldoawal($idtahun, $institusi_id)
     {
         return $this->db2->query("select a.id as id,a.posisi as posisi,b.saldoawal as saldoawal from a6levels a join saldoawals b on a.id=b.a6level_id where a.institusi_id=$institusi_id and b.tahun_pembukuan_id=$idtahun ")->result_array();
