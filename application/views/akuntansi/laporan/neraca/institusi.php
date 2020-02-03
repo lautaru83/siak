@@ -21,25 +21,32 @@
                 <?php
                 if ($neraca) {
                 ?>
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <span class="text-uppercase font-weight-bolder"><?php if ($institusi) {
+                                                                                echo $institusi['keterangan'];
+                                                                            } ?></span>
+                        </div>
+                        <div class="col-md-12 text-center">
+                            <span class="font-weight-bolder">NERACA</span>
+                        </div>
+                    </div>
                     <table id="tabel3" class="table table-sm table-borderless table-hover">
                         <thead>
                             <tr>
-                                <td width="5%" class="text-center"></td>
+                                <td class="text-center"></td>
                                 <td class="text-center" colspan="4">
-                                    <h4> LAPORAN NERACA</h4>
+                                    Untuk Tahun Yang Berakhir <?= format_indo($this->session->userdata('buku_akhir')); ?><br>
+                                    (Dinyatakan dalam Rupiah, kecuali dinyatakan lain)
+
                                 </td>
-                                <td width="5%" class="text-center"></td>
-                            </tr>
-                            <tr>
-                                <td class="text-center"></td>
-                                <td class="text-center" colspan="4">Untuk Tahun Yang Berakhir <?= format_indo($this->session->userdata('buku_akhir')); ?></td>
                                 <td class="text-center"></td>
                             </tr>
-                            <tr>
+                            <!-- <tr>
                                 <td class="text-center"></td>
-                                <td class="text-center" colspan="4">(Dinyatakan dalam Rupiah, kecuali dinyatakan lain)</td>
+                                <td class="text-center" colspan="4"></td>
                                 <td class="text-center"></td>
-                            </tr>
+                            </tr> -->
                             <tr>
                                 <td class="text-center"></td>
                                 <td class="text-center border-bottom" colspan="4"></td>
@@ -53,14 +60,14 @@
                             <tr>
                                 <td class="text-center"></td>
                                 <td class="text-center" colspan="2"></td>
-                                <td width="15%" class="text-center font-weight-normal my-1">
-                                    Catatan<div class="border-top"></div>
-                                    <div class="my-2"></div>
+                                <td width="15%" class="text-center font-weight-normal">
+                                    <span class="font-weight-normal my-auto">Catatan</span>
+                                    <div class="border-top my-1"></div>
                                 </td>
                                 <td width="15%" class="text-center">
-                                    <h6 class="font-weight-normal my-auto">Per <?= format_indo($tanggal); ?><div class="border-top my-1"></div>
-                                        <div class="my-1">(Rp.)</div>
-                                    </h6>
+                                    <span class="font-weight-normal my-auto"><?= format_indo($tanggal); ?><div class="border-top my-1"></div>
+                                        <div class="my-1">(Rp)</div>
+                                    </span>
                                 </td>
                                 <td class="text-center"></td>
                             </tr>
@@ -69,14 +76,14 @@
                             <tr>
                                 <td class="text-center"></td>
                                 <td colspan="4">
-                                    <h6 class="font-weight-bolder my-auto">ASET</h6>
+                                    <span class="font-weight-bolder text-md">ASET</span>
                                 </td>
                                 <td class="text-right"></td>
                             </tr>
                             <tr>
                                 <td class="text-center"></td>
                                 <td colspan="4">
-                                    <h6 class="font-weight-bolder my-auto">Aset Lancar</h6>
+                                    <span class="font-weight-bolder text-md">Aset Lancar</span>
                                 </td>
                                 <td class="text-right"></td>
                             </tr>
@@ -109,7 +116,7 @@
                             <tr>
                                 <td class="text-center"></td>
                                 <td colspan="2">
-                                    <h6 class="font-weight-normal my-auto pl-4">Jumlah Aset Lancar</h6>
+                                    <span class="font-weight-normal pl-4">Jumlah Aset Lancar</span>
                                 </td>
                                 <td></td>
                                 <td class="border-top border-bottom text-right">
@@ -120,7 +127,7 @@
                             <tr>
                                 <td class="text-center"></td>
                                 <td colspan="4">
-                                    <h6 class="font-weight-bolder my-auto">Aset Tidak Lancar</h6>
+                                    <span class="font-weight-bolder text-md">Aset Tidak Lancar</span>
                                 </td>
                                 <td class="text-right"></td>
                             </tr>
@@ -153,7 +160,7 @@
                             <tr>
                                 <td class="text-center"></td>
                                 <td colspan="2">
-                                    <h6 class="font-weight-normal my-auto pl-4 ">Jumlah Aset Tidak Lancar</h6>
+                                    <span class="font-weight-normal my-auto pl-4 ">Jumlah Aset Tidak Lancar</span>
                                 </td>
                                 <td></td>
                                 <td class="border-top border-top  text-right">
@@ -164,34 +171,36 @@
                             <tr>
                                 <td class="text-center"></td>
                                 <td colspan="3">
-                                    <h6 class="font-weight-bolder my-auto">JUMLAH ASET</h6>
+                                    <span class="font-weight-bolder text-md">JUMLAH ASET</span>
                                 </td>
-                                <td class="border-top border-bottom font-weight-bolder text-right">
-                                    <?php
-                                    $jumlahAset = $totalAsetLancar + $totalAsetTidakLancar;
-                                    echo rupiah_positif($jumlahAset);
-                                    ?>
-                                </td>
-                                <td class="text-right"></td>
-                            </tr>
-                            <tr>
-                                <td class="text-center"></td>
-                                <td colspan="4">
-                                    <h6 class="font-weight-bolder my-auto">KEWAJIBAN DAN ASET BERSIH</h6>
+                                <td class="border-top border-bottom  text-right">
+                                    <span class="font-weight-bolder">
+                                        <?php
+                                        $jumlahAset = $totalAsetLancar + $totalAsetTidakLancar;
+                                        echo rupiah_positif($jumlahAset);
+                                        ?>
+                                    </span>
                                 </td>
                                 <td class="text-right"></td>
                             </tr>
                             <tr>
                                 <td class="text-center"></td>
                                 <td colspan="4">
-                                    <h6 class="font-weight-bolder my-auto">KEWAJIBAN</h6>
+                                    <span class="font-weight-bolder text-md">KEWAJIBAN DAN ASET BERSIH</span>
                                 </td>
                                 <td class="text-right"></td>
                             </tr>
                             <tr>
                                 <td class="text-center"></td>
                                 <td colspan="4">
-                                    <h6 class="font-weight-bolder my-auto">Kewajiban Jangka Pendek</h6>
+                                    <span class="font-weight-bolder text-md">KEWAJIBAN</span>
+                                </td>
+                                <td class="text-right"></td>
+                            </tr>
+                            <tr>
+                                <td class="text-center"></td>
+                                <td colspan="4">
+                                    <span class="font-weight-bolder text-md">Kewajiban Jangka Pendek</span>
                                 </td>
                                 <td class="text-right"></td>
                             </tr>
@@ -224,7 +233,7 @@
                             <tr>
                                 <td class="text-center"></td>
                                 <td colspan="2">
-                                    <h6 class="font-weight-normal my-auto pl-4">Jumlah Kewajiban</h6>
+                                    <span class="font-weight-normal my-auto pl-4">Jumlah Kewajiban</span>
                                 </td>
                                 <td></td>
                                 <td class="text-right border-top border-bottom">
@@ -235,29 +244,34 @@
                             <tr>
                                 <td class="text-center"></td>
                                 <td colspan="4">
-                                    <h6 class="font-weight-bolder my-auto">ASET BERSIH</h6>
+                                    <span class="font-weight-bolder text-md">ASET BERSIH</span>
                                 </td>
                                 <td class="text-right"></td>
                             </tr>
                             <tr>
                                 <td class="text-center"></td>
                                 <td colspan="4">
-                                    <h6 class="font-weight-bolder my-auto">Aset Bersih Tidak Terikat</h6>
+                                    <span class="font-weight-bolder text-md">Aset Bersih Tidak Terikat</span>
                                 </td>
                                 <td class="text-right"></td>
                             </tr>
                             <?php
-
+                            $jumlahAbtt = 0;
                             $jumlahBersihTidakTerikat = 0;
                             $totalBersihTidakTerikat = 0;
                             $jumlahDebet = 0;
                             $jumlahKredit = 0;
                             if ($bersihTidakTerikat) {
+                                $jumlahAbtt = asetbersihTb($tanggal);
                                 foreach ($bersihTidakTerikat as $dataBersihTidakTerikat) :
                                     $posisi = $dataBersihTidakTerikat['posisi'];
                                     $jumlahDebet = $dataBersihTidakTerikat['debet'];
                                     $jumlahKredit = $dataBersihTidakTerikat['kredit'];
-                                    $jumlahBersihTidakTerikat = $jumlahKredit - $jumlahDebet;
+                                    if ($posisi == "S") {
+                                        $jumlahBersihTidakTerikat = $jumlahKredit + $jumlahAbtt - $jumlahDebet;
+                                    } else {
+                                        $jumlahBersihTidakTerikat = $jumlahKredit - $jumlahDebet;
+                                    }
                                     $totalBersihTidakTerikat = $totalBersihTidakTerikat + $jumlahBersihTidakTerikat;
                             ?>
                                     <tr>
@@ -286,7 +300,7 @@
                             <tr>
                                 <td class="text-center"></td>
                                 <td colspan="4">
-                                    <h6 class="font-weight-bolder my-auto">Aset Bersih Terikat</h6>
+                                    <span class="font-weight-bolder text-md">Aset Bersih Terikat</span>
                                 </td>
                                 <td class="text-right"></td>
                             </tr>
@@ -321,7 +335,7 @@
                             <tr>
                                 <td class="text-center"></td>
                                 <td colspan="2">
-                                    <h6 class="font-weight-normal my-auto pl-4">Jumlah Aset Bersih Terikat</h6>
+                                    <h6 class="my-auto pl-4">Jumlah Aset Bersih Terikat</h6>
                                 </td>
                                 <td></td>
                                 <td class="text-right border-top border-bottom">
@@ -332,13 +346,15 @@
                             <tr>
                                 <td class="text-center"></td>
                                 <td colspan="3">
-                                    <h6 class="font-weight-bolder my-auto">JUMLAH KEWAJIBAN DAN ASET BERSIH</h6>
+                                    <span class="font-weight-bolder text-md">JUMLAH KEWAJIBAN DAN ASET BERSIH</span>
                                 </td>
-                                <td class="font-weight-bolder text-right border-top border-bottom">
-                                    <?php
-                                    $jumlahKewajibanBersih = $totalKewajiban + $totalBersihTidakTerikat + $totalBersihTerikat;
-                                    echo rupiah_positif($jumlahKewajibanBersih);
-                                    ?>
+                                <td class="text-right border-top border-bottom">
+                                    <span class="font-weight-bolder">
+                                        <?php
+                                        $jumlahKewajibanBersih = $totalKewajiban + $totalBersihTidakTerikat + $totalBersihTerikat;
+                                        echo rupiah_positif($jumlahKewajibanBersih);
+                                        ?>
+                                    </span>
                                 </td>
                                 <td class="text-right"></td>
                             </tr>

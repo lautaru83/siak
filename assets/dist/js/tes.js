@@ -51,6 +51,7 @@ $(document).ready(function () {
     //     });
     // });
     // cek data
+    // --------------------------------------NERACA----------------------------
     $('#btn-tampil-neraca').on('click', function (e) {
         e.preventDefault();
         var laporan = $(this).data('laporan');
@@ -88,7 +89,7 @@ $(document).ready(function () {
             },
             dataType: "JSON",
             beforeSend: function () {
-                $('#btn-tampil-laporanutama').attr('disabled', 'disabled');
+                $('#btn-tampil-neraca').attr('disabled', 'disabled');
             },
             success: function (response) {
                 if (response.status == 'gagal') {
@@ -114,11 +115,84 @@ $(document).ready(function () {
                         }
                     });
                 }
-                $('#btn-tampil-laporanutama').attr('disabled', false);
+                $('#btn-tampil-neraca').attr('disabled', false);
             }
         });
         return false;
     });
+    // -------------------------------------/NERACA----------------------------
+    // --------------------------------------AKTIVITAS-------------------------
+    $('#btn-tampil-activitas').on('click', function (e) {
+        e.preventDefault();
+        var laporan = $(this).data('laporan');
+        var jenis = "";
+        var idInstitusi = $(this).data('id');
+        //const akhir_periode = $('[name="akhir_periode"]').val();
+        const tanggal = $('[name="akhir_periode"]').val();
+        // const buku_awal = $(this).data('tgl1');
+        // const buku_akhir = $(this).data('tgl2');
+        const ckKonsolidasi = document.getElementById("ckkonsolidasi");
+        const ckKomparatif = document.getElementById("ckkomparatif");
+        if (idInstitusi == '01') {
+            if (ckKonsolidasi.checked == true && ckKomparatif.checked == false) {
+                jenis = "3"; //konsolidasi
+            } else if (ckKonsolidasi.checked == false && ckKomparatif.checked == true) {
+                jenis = "2"; //komparatif
+            } else if (ckKonsolidasi.checked == true && ckKomparatif.checked == true) {
+                jenis = "4"; //konsolidasi komparatif
+            } else {
+                jenis = "1"; //institusi
+            }
+        } else {
+            if (ckKomparatif.checked == true) {
+                jenis = "2"; //komparatif
+            } else {
+                jenis = "1"; //institusi
+            }
+        }
+        $.ajax({
+            cache: false,
+            type: "POST",
+            url: base_url + "akuntansi/activitas/cekinput",
+            data: {
+                akhir_periode: tanggal
+            },
+            dataType: "JSON",
+            beforeSend: function () {
+                $('#btn-tampil-laporanutama').attr('disabled', 'disabled');
+            },
+            success: function (response) {
+                if (response.status == 'gagal') {
+                    Toast.fire({
+                        type: 'warning',
+                        title: 'Tanggal diluar periode pembukuan!!!'
+                    });
+                } else {
+                    $.ajax({
+                        type: "POST",
+                        cache: false,
+                        url: base_url + "akuntansi/activitas/viewdata",
+                        data: {
+                            akhir_periode: tanggal,
+                            jenis: jenis
+                        },
+                        success: function (data) {
+                            $("#data").html(data);
+                        }
+                    });
+                    // Toast.fire({
+                    //     type: 'success',
+                    //     title: ' Tampilkan laporan!!!. aaaaa' + jenis
+                    // });
+                }
+                $('#btn-tampil-activitas').attr('disabled', false);
+            }
+        });
+        return false;
+    });
+    // -------------------------------------/AKTIVITAS-------------------------
+
+
     // ---------------------/TES---------------------------
 });
 

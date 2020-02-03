@@ -69,9 +69,9 @@ function posisi_akun($posisi)
 {
     if ($posisi == "D") {
         return "Debet";
-    } elseif($posisi=="K") {
+    } elseif ($posisi == "K") {
         return "Kredit";
-    }else{
+    } else {
         return "Akumulasi";
     }
 }
@@ -115,6 +115,31 @@ function ambilsaldo($thbukuid, $akunid)
         echo "0,00";
     }
 }
+function asetbersihTb($tanggal)
+{
+    //Mengambil aset bersih tidak terikat tahun berjalan
+    $ci = get_instance();
+    $ci->db2 = $ci->load->database('akuntansi', TRUE);
+    $institusi_id = $ci->session->userdata('idInstitusi');
+    $buku_awal = $ci->session->userdata('buku_awal');
+    $tahun_buku = $ci->session->userdata('tahun_buku');
+    $akhir_periode = tanggal_input($tanggal);
+    // $ci->db->where('submenu_id', $submenu_id);
+    $hasil = $ci->db2->query("SELECT a.posisi as posisi, SUM(b.debet) as debet, SUM(b.kredit) as kredit,b.tanggal_transaksi as tanggal_transaksi FROM view_kodeperkiraans AS a INNER JOIN view_transaksis AS b ON a.a6level_id = b.a6level_id WHERE a.a1level_id BETWEEN '400' AND '700' AND b.tahun_buku='$tahun_buku' AND a.institusi_id='$institusi_id' AND b.tanggal_transaksi BETWEEN '$buku_awal' AND '$akhir_periode' AND is_valid BETWEEN 1 AND 2 GROUP BY b.tahun_buku")->result_array();
+    $debet = 0;
+    $kredit = 0;
+    $jumlah = 0;
+    if ($hasil) {
+        foreach ($hasil as $dataHasil) :
+            $debet = $dataHasil['debet'];
+            $kredit = $dataHasil['kredit'];
+            $jumlah = $kredit - $debet;
+        endforeach;
+        return $jumlah;
+    } else {
+        return $jumlah;
+    }
+}
 function rupiah($angka)
 {
     $hasil_rupiah = number_format($angka, 2, ',', '.');
@@ -152,28 +177,28 @@ function padding_akun($posisi)
         echo "class='pl-5'";
     }
 }
-function cek_combo($opt1,$opt2)
+function cek_combo($opt1, $opt2)
 {
     if ($opt1 == $opt2) {
         echo "selected";
     }
 }
-function rupiah_positif($angka){
-    if($angka<0){
-        $angka_positif=abs($angka);
-        echo "(".rupiah($angka_positif).")";
-    }else{
-         echo rupiah($angka);
-
+function rupiah_positif($angka)
+{
+    if ($angka < 0) {
+        $angka_positif = abs($angka);
+        echo "(" . rupiah($angka_positif) . ")";
+    } elseif ($angka == 0) {
+        echo "-";
+    } else {
+        echo rupiah($angka);
     }
-
 }
 function sembunyikan_input($institusi)
 {
     if ($institusi == "01") {
         echo "class='form-check form-check-inline mx-sm-2 mb-2'";
-    }else{
+    } else {
         echo "class='form-check form-check-inline mx-sm-2 mb-2 invisible'";
     }
 }
-
