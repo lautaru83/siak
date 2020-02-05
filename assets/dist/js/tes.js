@@ -324,7 +324,9 @@ $(document).ready(function () {
 
     // ---------------------/TES---------------------------
 });
-
+// error: function (jqXHR, textStatus, errorThrown) {
+//     alert('Error get data from ajax');
+// }
 
 //------LOAD VIEW 
 // $.ajax({

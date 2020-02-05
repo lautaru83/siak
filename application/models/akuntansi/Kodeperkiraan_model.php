@@ -73,6 +73,11 @@ class Kodeperkiraan_model extends CI_Model
         $institusi_id = $this->session->userdata('idInstitusi');
         return $this->db2->query("select siak_akuntansi.a6levels.id as id,siak_akuntansi.a6levels.a5level_id as a5level_id,siak_akuntansi.a6levels.kode6 as kode6,siak_akuntansi.a6levels.level6 as level6, siak_akuntansi.a6levels.posisi as posisi,siak_setting.institusis.institusi as institusi from siak_akuntansi.a6levels join siak_setting.institusis on siak_setting.institusis.id=siak_akuntansi.a6levels.institusi_id  where siak_akuntansi.a6levels.a5level_id='$id' and siak_akuntansi.a6levels.institusi_id='$institusi_id' order by siak_akuntansi.a6levels.id ASC  ")->result_array();
     }
+    public function akun6Institusi()
+    {
+        $institusi_id = $this->session->userdata('idInstitusi');
+        return $this->db2->query("select * from a6levels where institusi_id='$institusi_id' order by id ASC")->result_array();
+    }
     // public function ambil_data_id($id)
     // {
     //     return $this->db2->get_where('jenis_transaksis', ['id' => $id])->row_array();

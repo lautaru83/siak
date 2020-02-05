@@ -1392,7 +1392,7 @@ $(document).ready(function () {
     //---------------------------------------TAHUN ANGGARAN------------------------------------
     //set focus input tahunanggaran saat modal muncul
     $('#modal-tahunanggaran').on('shown.bs.modal', function () {
-        $('#tahun_anggaran').trigger('focus');
+        $('#tahunanggaran').trigger('focus');
     })
     //set focus input tahunanggaran saat modal muncul
     // tombol tambah tahunanggaran table
@@ -1407,7 +1407,7 @@ $(document).ready(function () {
     // ajax tombol Simpan modal tahunanggaran
     $('#btn-simpan-tahunanggaran').on('click', function (e) {
         e.preventDefault();
-        const tahunAnggaran = $('[name="tahun_anggaran"]').val();
+        const tahunAnggaran = $('[name="tahunanggaran"]').val();
         const awalPeriode = $('[name="awal_periode"]').val();
         const akhirPeriode = $('[name="akhir_periode"]').val();
         const keterangan = $('[name="keterangan"]').val();
@@ -1417,7 +1417,7 @@ $(document).ready(function () {
             type: "POST",
             url: base_url + "akuntansi/tahunanggaran/simpan",
             data: {
-                tahun_anggaran: tahunAnggaran,
+                tahunanggaran: tahunAnggaran,
                 awal_periode: awalPeriode,
                 akhir_periode: akhirPeriode,
                 keterangan: keterangan
@@ -1432,10 +1432,10 @@ $(document).ready(function () {
                         type: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
-                    if (data.tahun_anggaran_error != '') {
-                        $('#tahun_anggaran_error').html(data.tahun_anggaran_error);
+                    if (data.tahunanggaran_error != '') {
+                        $('#tahunanggaran_error').html(data.tahunanggaran_error);
                     } else {
-                        $('#tahun_anggaran_error').html('');
+                        $('#tahunanggaran_error').html('');
                     }
                     if (data.awal_periode_error != '') {
                         $('#awal_periode_error').html(data.awal_periode_error);
@@ -1457,7 +1457,7 @@ $(document).ready(function () {
                     // } else {
                     //     $('#status_error').html('');
                     // }
-                    $('#tahun_anggaran').trigger('focus');
+                    $('#tahunanggaran').trigger('focus');
                 } else {
                     Toast.fire({
                         type: 'success',
@@ -1528,7 +1528,7 @@ $(document).ready(function () {
             dataType: "JSON",
             success: function (data) {
                 $('[name="idubah"]').val(data.id);
-                $('[name="tahun_anggaran"]').val(data.tahun_anggaran);
+                $('[name="tahunanggaran"]').val(data.tahunanggaran);
                 $('[name="awal_periode"]').val(data.awal_periode);
                 $('[name="akhir_periode"]').val(data.akhir_periode);
                 $('[name="keterangan"]').val(data.keterangan);
@@ -1547,7 +1547,7 @@ $(document).ready(function () {
     $('#btn-ubah-tahunanggaran').on('click', function (e) {
         e.preventDefault();
         const idubah = $('[name="idubah"]').val();
-        const tahunAnggaran = $('[name="tahun_anggaran"]').val();
+        const tahunAnggaran = $('[name="tahunanggaran"]').val();
         const awalPeriode = $('[name="awal_periode"]').val();
         const akhirPeriode = $('[name="akhir_periode"]').val();
         const keterangan = $('[name="keterangan"]').val();
@@ -1557,7 +1557,7 @@ $(document).ready(function () {
             data: {
                 idubah: idubah,
                 awal_periode: awalPeriode,
-                tahun_anggaran: tahunAnggaran,
+                tahunanggaran: tahunAnggaran,
                 akhir_periode: akhirPeriode,
                 keterangan: keterangan
             },
@@ -1571,11 +1571,11 @@ $(document).ready(function () {
                         type: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
-                    if (data.tahun_anggaran_error != '') {
-                        $('#tahun_anggaran_error').html(data.tahun_anggaran_error);
+                    if (data.tahunanggaran_error != '') {
+                        $('#tahunanggaran_error').html(data.tahunanggaran_error);
 
                     } else {
-                        $('#tahun_anggaran_error').html('');
+                        $('#tahunanggaran_error').html('');
                     }
                     if (data.awal_periode_error != '') {
                         $('#awal_periode_error').html(data.awal_periode_error);
@@ -2258,224 +2258,102 @@ $(document).ready(function () {
     //--------------------------------------/AKUN TRANSAKSI CEKBOX----------------------------
     //---------------------------------------KODE ANGGARAN------------------------------------
     //set focus input unitanggaran saat modal muncul
-    $('#modal-unitanggaran').on('shown.bs.modal', function () {
-        $('#kodeunit').trigger('focus');
+    $('#modal-akunanggaran').on('shown.bs.modal', function () {
+        $('#a6level_id').trigger('focus');
     })
     //set focus input unitanggaran saat modal muncul
     // tombol tambah unitanggaran table
-    $('.btn-tambah-unitanggaran').on('click', function (e) {
+    $('.btn-tambah-akunanggaran').on('click', function (e) {
         e.preventDefault();
         const info = $(this).data('info');
-        const idkelompok = $(this).data('idkelompok');
+        const anggaran_id = $(this).data('id');
         const judul = document.getElementById('judul-modal');
-        judul.innerHTML = 'Tambah Akun ' + info;
-        $('[name="kelompokanggaran_id"]').val(idkelompok);
-        $('#btn-ubah-unitanggaran').hide();
-        $('#modal-unitanggaran').modal('show');
+        judul.innerHTML = 'Kodeperkiraan Anggaran' + info;
+        $('[name="anggaran_id"]').val(anggaran_id);
+        $('#modal-akunanggaran').modal('show');
     });
     // end tombol tambah unitanggaran table
-    // btn simpan unitanggaran modal
-    $('#btn-simpan-unitanggaran').on('click', function (e) {
-        e.preventDefault();
-        const kelompokanggaran_id = $('[name="kelompokanggaran_id"]').val();
-        const kodeunit = $('[name="kodeunit"]').val();
-        const idubahunit = $('[name="idubahunit"]').val();
-        const unit_anggaran = $('[name="unit_anggaran"]').val();
-        const id = kodeunit;
-        $.ajax({
-            type: "POST",
-            url: base_url + "akuntansi/kodeanggaran/simpanunit",
-            data: {
-                id: id,
-                kelompokanggaran_id: kelompokanggaran_id,
-                kodeunit: kodeunit,
-                idubahunit: idubahunit,
-                unit_anggaran: unit_anggaran
-            },
-            dataType: "JSON",
-            beforeSend: function () {
-                $('#btn-simpan-unitanggaran').attr('disabled', 'disabled');
-            },
-            success: function (data) {
-                if (data.status == 'gagal') {
-                    Toast.fire({
-                        type: 'error',
-                        title: ' Input data tidak valid!!!.'
-                    });
-                    if (data.kodeunit_error != '') {
-                        $('#kodeunit_error').html(data.kodeunit_error);
-                    } else {
-                        $('#kodeunit_error').html('');
-                    }
-                    if (data.unit_error != '') {
-                        $('#unit_error').html(data.unit_error);
-                    } else {
-                        $('#unit_error').html('');
-                    }
-                    $('#kodeunit').trigger('focus');
-                } else {
-                    Toast.fire({
-                        type: 'success',
-                        title: ' Data berhasil disimpan.'
-                    });
-                    $('#modal-unitanggaran').modal('hide');
-                }
-                $('#btn-simpan-unitanggaran').attr('disabled', false);
-            }
-        });
-        return false;
 
-    });
-    // end btn simpan unitanggaran modal
-    // ajax icon hapus table unitanggaran klik
-    $('.btn-hapus-unitanggaran').on('click', function (e) {
-        e.preventDefault();
-        var id = $(this).data('id');
-        var info = $(this).data('info');
-        Swal.fire({
-            title: 'Konfirmasi!',
-            text: 'Apakah anda yakin akan menghapus Akun -' + info + '- !?!',
-            type: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            cancelButtonText: 'Batal',
-            confirmButtonText: 'Hapus'
-        }).then((result) => {
-            if (result.value) {
-                $.ajax({
-                    type: "POST",
-                    url: base_url + "akuntansi/kodeanggaran/hapusunit/",
-                    data: {
-                        id: id,
-                        info: info
-                    },
-                    dataType: 'JSON',
-                    success: function (data) {
-                        if (data.status == 'sukses') {
-                            Toast.fire({
-                                type: 'success',
-                                title: ' Data berhasil dihapus!!!.'
-                            });
-                            document.location.reload();
-                        } else {
-                            Toast.fire({
-                                type: 'warning',
-                                title: ' Penghapusan dibatalkan, data sedang digunakan oleh system!!!.'
-                            });
-                        }
-                    }
-                });
-            }
-        })
-    });
-    // end ajax icon hapus table unitanggaran klik
-    // ajax tombol edit data table unitanggaran klik
-    $('.btn-edit-unitanggaran').on('click', function (e) {
-        e.preventDefault();
-        const judul = document.getElementById('judul-modal');
-        judul.innerHTML = 'Ubah Data Akun Anggaran';
-        var id = $(this).data('id');
-        $('#btn-simpan-unitanggaran').hide();
-        $('#kodeunit').attr('disabled', 'disabled');
-        $.ajax({
-            url: base_url + 'akuntansi/kodeanggaran/ajax_editunit/' + id,
-            type: "GET",
-            dataType: "JSON",
-            success: function (data) {
-                $('[name="kelompokanggaran_id"]').val(data.kelompokanggaran_id);
-                $('[name="idubahunit"]').val(data.id);
-                $('[name="kodeunit"]').val(data.id);
-                $('[name="unit_anggaran"]').val(data.unit_anggaran);
-                $('#modal-unitanggaran').modal('show');
-                $('#unit_anggaran').trigger('focus');
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                alert('Error get data from ajax');
-            }
-        });
-    });
-    //end ajax tombol edit data table unitanggaran klik
-    // ajax tombol modal ubah unitanggaran
-    $('#btn-ubah-unitanggaran').on('click', function (e) {
-        e.preventDefault();
-        const idubahunit = $('[name="idubahunit"]').val();
-        const unit_anggaran = $('[name="unit_anggaran"]').val();
-        $.ajax({
-            type: "POST",
-            url: base_url + "akuntansi/kodeanggaran/ubahunit/" + idubahunit,
-            data: {
-                idubahunit: idubahunit,
-                unit_anggaran: unit_anggaran
-            },
-            dataType: 'JSON',
-            beforeSend: function () {
-                $('#btn-ubah-unitanggaran').attr('disabled', 'disabled');
-            },
-            success: function (data) {
-                if (data.status == 'gagal') {
-                    Toast.fire({
-                        type: 'error',
-                        title: ' Input data tidak valid!!!.'
-                    });
-                    if (data.unit_error != '') {
-                        $('#unit_error').html(data.unit_error);
-                    } else {
-                        $('#unit_error').html('');
-                    }
-                    $('#unit_anggaran').trigger('focus');
-                } else {
-                    Toast.fire({
-                        type: 'success',
-                        title: ' Data berhasil diubah!'
-                    });
-                    $('#modal-unitanggaran').modal('hide');
-                    //dataTable.ajax.reload();
-                }
-                $('#btn-ubah-unitanggaran').attr('disabled', false);
-            }
-        });
-        return false;
-    });
-    // end ajax tombol modal ubah unitanggaran
     //set focus input anggaran saat modal muncul
     $('#modal-anggaran').on('shown.bs.modal', function () {
-        $('#kodeanggaran').trigger('focus');
+        $('#anggaran').trigger('focus');
     })
     //set focus input anggaran saat modal muncul
     // tombol tambah anggaran table
     $('.btn-tambah-anggaran').on('click', function (e) {
         e.preventDefault();
         const info = $(this).data('info');
-        const idunit = $(this).data('idunit');
+        const idkelompok = $(this).data('idkelompok');
         const judul = document.getElementById('judul-modal-anggaran');
         judul.innerHTML = 'Tambah Akun ' + info;
-        const kodeUnit = document.getElementById('kdunit');
-        kodeUnit.innerHTML = idunit + ".";
-        $('[name="unitanggaran_id"]').val(idunit);
+        // const kodeUnit = document.getElementById('kdunit');
+        // kodeUnit.innerHTML = idunit + ".";
+        $('[name="kelompok_id"]').val(idkelompok);
         $('#btn-ubah-anggaran').hide();
         $('#modal-anggaran').modal('show');
     });
     // end tombol tambah anggaran table
+    // btn simpan akunanggaran
+    $('#btn-simpan-akunanggaran').on('click', function (e) {
+        e.preventDefault();
+        // const unitanggaran_id = $('[name="unitanggaran_id"]').val();
+        // const kodeanggaran = $('[name="kodeanggaran"]').val();
+        const anggaran_id = $('[name="anggaran_id"]').val();
+        const a6level_id = $('[name="a6level_id"]').val();
+        $.ajax({
+            type: "POST",
+            url: base_url + "akuntansi/akunanggaran/simpanakun",
+            data: {
+                anggaran_id: anggaran_id,
+                a6level_id: a6level_id
+            },
+            dataType: "JSON",
+            beforeSend: function () {
+                $('#btn-simpan-anggaran').attr('disabled', 'disabled');
+            },
+            success: function (data) {
+                if (data.status == 'gagal') {
+                    Toast.fire({
+                        type: 'error',
+                        title: ' Input data tidak valid!!!.'
+                    });
+
+                    if (data.akun_error != '') {
+                        $('#akun_error').html(data.akun_error);
+                    } else {
+                        $('#akun_error').html('');
+                    }
+                    $('#a6level_id').trigger('focus');
+                } else {
+                    Toast.fire({
+                        type: 'success',
+                        title: ' Data berhasil disimpan.'
+                    });
+                    $('#modal-akunanggaran').modal('hide');
+                }
+                $('#btn-simpan-akunanggaran').attr('disabled', false);
+            }
+        });
+        return false;
+    });
+    // end btn simpan akunanggaran
     // btn simpan anggaran modal
     $('#btn-simpan-anggaran').on('click', function (e) {
         e.preventDefault();
-        const unitanggaran_id = $('[name="unitanggaran_id"]').val();
-        const kodeanggaran = $('[name="kodeanggaran"]').val();
-        const idubahanggaran = $('[name="idubahanggaran"]').val();
-        const nama_anggaran = $('[name="nama_anggaran"]').val();
+        // const unitanggaran_id = $('[name="unitanggaran_id"]').val();
+        // const kodeanggaran = $('[name="kodeanggaran"]').val();
+        const idubah = $('[name="idubah"]').val();
+        const anggaran = $('[name="anggaran"]').val();
         const posisi = $('[name="posisi"]').val();
         const institusi_id = $('[name="institusi_id"]').val();
-        const id = unitanggaran_id + "." + kodeanggaran;
+        const kelompok_id = $('[name="kelompok_id"]').val();
         $.ajax({
             type: "POST",
-            url: base_url + "akuntansi/kodeanggaran/simpananggaran",
+            url: base_url + "akuntansi/akunanggaran/simpananggaran",
             data: {
-                id: id,
-                unitanggaran_id: unitanggaran_id,
-                kodeanggaran: kodeanggaran,
-                idubahanggaran: idubahanggaran,
-                nama_anggaran: nama_anggaran,
+                kelompok_id: kelompok_id,
+                idubah: idubah,
+                anggaran: anggaran,
                 posisi: posisi,
                 institusi_id: institusi_id
             },
@@ -2489,11 +2367,7 @@ $(document).ready(function () {
                         type: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
-                    if (data.kodeanggaran_error != '') {
-                        $('#kodeanggaran_error').html(data.kodeanggaran_error);
-                    } else {
-                        $('#kodeanggaran_error').html('');
-                    }
+
                     if (data.anggaran_error != '') {
                         $('#anggaran_error').html(data.anggaran_error);
                     } else {
@@ -2504,12 +2378,7 @@ $(document).ready(function () {
                     } else {
                         $('#posisi_error').html('');
                     }
-                    if (data.institusi_error != '') {
-                        $('#institusi_error').html(data.institusi_error);
-                    } else {
-                        $('#institusi_error').html('');
-                    }
-                    $('#kodeanggaran').trigger('focus');
+                    $('#anggaran').trigger('focus');
                 } else {
                     Toast.fire({
                         type: 'success',
@@ -2542,7 +2411,7 @@ $(document).ready(function () {
             if (result.value) {
                 $.ajax({
                     type: "POST",
-                    url: base_url + "akuntansi/kodeanggaran/hapusanggaran",
+                    url: base_url + "akuntansi/akunanggaran/hapusanggaran",
                     data: {
                         id: id,
                         info: info
@@ -2570,27 +2439,21 @@ $(document).ready(function () {
     // ajax tombol edit data table anggaran klik
     $('.btn-edit-anggaran').on('click', function (e) {
         e.preventDefault();
-        const idunit = $(this).data('idunit');
         const judul = document.getElementById('judul-modal-anggaran');
-        judul.innerHTML = 'Ubah Data Akun Anggaran';
-        const kodeUnit = document.getElementById('kdunit');
-        kodeUnit.innerHTML = idunit + ".";
+        judul.innerHTML = 'Ubah Data Anggaran';
         var id = $(this).data('id');
         $('#btn-simpan-anggaran').hide();
-        $('#kodeanggaran').attr('disabled', 'disabled');
         $.ajax({
-            url: base_url + 'akuntansi/kodeanggaran/ajax_editanggaran/' + id,
+            url: base_url + 'akuntansi/akunanggaran/ajax_editanggaran/' + id,
             type: "GET",
             dataType: "JSON",
             success: function (data) {
-                $('[name="unitanggaran_id"]').val(data.unitanggaran_id);
-                $('[name="idubahanggaran"]').val(data.id);
-                $('[name="kodeanggaran"]').val(data.kode);
-                $('[name="nama_anggaran"]').val(data.nama_anggaran);
+                $('[name="kelompok_id"]').val(data.kelompok_id);
+                $('[name="idubah"]').val(data.id);
+                $('[name="anggaran"]').val(data.anggaran);
                 $('[name="posisi"]').val(data.posisi);
-                $('[name="institusi_id"]').val(data.institusi_id);
                 $('#modal-anggaran').modal('show');
-                $('#nama_anggaran').trigger('focus');
+                $('#anggaran').trigger('focus');
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert('Error get data from ajax');
@@ -2601,18 +2464,16 @@ $(document).ready(function () {
     // ajax tombol modal ubah anggaran
     $('#btn-ubah-anggaran').on('click', function (e) {
         e.preventDefault();
-        const idubahanggaran = $('[name="idubahanggaran"]').val();
-        const nama_anggaran = $('[name="nama_anggaran"]').val();
+        const idubah = $('[name="idubah"]').val();
+        const anggaran = $('[name="anggaran"]').val();
         const posisi = $('[name="posisi"]').val();
-        const institusi_id = $('[name="institusi_id"]').val();
         $.ajax({
             type: "POST",
-            url: base_url + "akuntansi/kodeanggaran/ubahanggaran/" + idubahanggaran,
+            url: base_url + "akuntansi/akunanggaran/ubahanggaran",
             data: {
-                idubahanggaran: idubahanggaran,
-                nama_anggaran: nama_anggaran,
-                posisi: posisi,
-                institusi_id: institusi_id
+                idubah: idubah,
+                anggaran: anggaran,
+                posisi: posisi
             },
             dataType: 'JSON',
             beforeSend: function () {
@@ -2624,11 +2485,6 @@ $(document).ready(function () {
                         type: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
-                    if (data.kodeanggaran_error != '') {
-                        $('#kodeanggaran_error').html(data.kodeanggaran_error);
-                    } else {
-                        $('#kodeanggaran_error').html('');
-                    }
                     if (data.anggaran_error != '') {
                         $('#anggaran_error').html(data.anggaran_error);
                     } else {
@@ -2639,12 +2495,7 @@ $(document).ready(function () {
                     } else {
                         $('#posisi_error').html('');
                     }
-                    if (data.institusi_error != '') {
-                        $('#institusi_error').html(data.institusi_error);
-                    } else {
-                        $('#institusi_error').html('');
-                    }
-                    $('#nama_anggaran').trigger('focus');
+                    $('#anggaran').trigger('focus');
                 } else {
                     Toast.fire({
                         type: 'success',

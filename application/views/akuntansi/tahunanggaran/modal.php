@@ -11,11 +11,11 @@
                 <form id="form-tahunanggaran" class="form-horizontal">
                     <div class="modal-body card-body">
                         <div class="form-group">
-                            <label for="tahun_anggaran" class="control-label">Tahun Anggaran</label>
+                            <label for="tahunanggaran" class="control-label">Tahun Anggaran</label>
                             <div>
                                 <input type="hidden" id="idubah" name="idubah">
-                                <input type="text" name="tahun_anggaran" class="form-control" id="tahun_anggaran" autocomplete="off" placeholder="Nama tahun anggaran">
-                                <span id="tahun_anggaran_error" class="text-danger"></span>
+                                <input type="text" name="tahunanggaran" class="form-control" id="tahunanggaran" autocomplete="off" placeholder="Nama tahun anggaran">
+                                <span id="tahunanggaran_error" class="text-danger"></span>
                             </div>
                         </div>
                         <!-- Date awal periode -->

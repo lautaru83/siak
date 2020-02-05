@@ -23,7 +23,7 @@ class Tahunanggaran extends CI_Controller
         if ($this->form_validation->run() == false) {
             $data = array(
                 'status' => 'gagal',
-                'tahun_anggaran_error' => form_error('tahun_anggaran'),
+                'tahunanggaran_error' => form_error('tahunanggaran'),
                 'awal_periode_error' => form_error('awal_periode'),
                 'akhir_periode_error' => form_error('akhir_periode'),
                 'keterangan_error' => form_error('keterangan')
@@ -61,7 +61,7 @@ class Tahunanggaran extends CI_Controller
             $data = array(
                 'status' => 'sukses',
                 'id' => $hasil['id'],
-                'tahun_anggaran' => $hasil['tahun_anggaran'],
+                'tahunanggaran' => $hasil['tahunanggaran'],
                 'awal_periode' => tanggal_indo($hasil['awal_periode']),
                 'akhir_periode' => tanggal_indo($hasil['akhir_periode']),
                 'keterangan' => $hasil['keterangan']
@@ -85,7 +85,7 @@ class Tahunanggaran extends CI_Controller
         if ($this->form_validation->run() == false) {
             $data = array(
                 'status' => 'gagal',
-                'tahun_anggaran_error' => form_error('tahun_anggaran'),
+                'tahunanggaran_error' => form_error('tahunanggaran'),
                 'awal_periode_error' => form_error('awal_periode'),
                 'akhir_periode_error' => form_error('akhir_periode'),
                 'keterangan_error' => form_error('keterangan')
@@ -100,7 +100,7 @@ class Tahunanggaran extends CI_Controller
     }
     private function _validate()
     {
-        $this->form_validation->set_rules('tahun_anggaran', 'Tahun Anggaran', 'required|trim');
+        $this->form_validation->set_rules('tahunanggaran', 'Tahun Anggaran', 'required|trim');
         $this->form_validation->set_rules('awal_periode', 'Awal Periode', 'required|trim');
         $this->form_validation->set_rules('akhir_periode', 'Akhir Periode', 'required|trim');
         $this->form_validation->set_rules('keterangan', 'Keterangan', 'required|trim');

@@ -32,12 +32,12 @@ class Tahunanggaran_model extends CI_Model
     }
     public function simpan()
     {
-        $tahun_anggaran = $this->input->post('tahun_anggaran');
+        $tahunanggaran = $this->input->post('tahunanggaran');
         $awal_periode = tanggal_input($this->input->post('awal_periode'));
         $akhir_periode = tanggal_input($this->input->post('akhir_periode'));
         $keterangan = htmlspecialchars($this->input->post('keterangan'));
         $data = array(
-            'tahun_anggaran' => $tahun_anggaran,
+            'tahunanggaran' => $tahunanggaran,
             'awal_periode' => $awal_periode,
             'akhir_periode' => $akhir_periode,
             'keterangan' => $keterangan,
@@ -45,7 +45,7 @@ class Tahunanggaran_model extends CI_Model
         );
         $this->db2->insert('tahunanggarans', $data);
         $log_type = "tambah";
-        $log_desc = "tambah tahun anggaran -" . $tahun_anggaran . "-" . $awal_periode . "-" . $akhir_periode . "-";
+        $log_desc = "tambah tahun anggaran -" . $tahunanggaran . "-" . $awal_periode . "-" . $akhir_periode . "-";
         userLog($log_type, $log_desc);
     }
     public function tahunaktif($id, $info)
@@ -62,12 +62,12 @@ class Tahunanggaran_model extends CI_Model
     }
     public function ubah($id)
     {
-        $tahun_anggaran = $this->input->post('tahun_anggaran');
+        $tahunanggaran = $this->input->post('tahunanggaran');
         $awal_periode = tanggal_input($this->input->post('awal_periode'));
         $akhir_periode = tanggal_input($this->input->post('akhir_periode'));
         $keterangan = htmlspecialchars($this->input->post('keterangan'));
         $data = array(
-            'tahun_anggaran' => $tahun_anggaran,
+            'tahunanggaran' => $tahunanggaran,
             'awal_periode' => $awal_periode,
             'akhir_periode' => $akhir_periode,
             'keterangan' => $keterangan
@@ -75,7 +75,7 @@ class Tahunanggaran_model extends CI_Model
         $this->db2->where('id', $id);
         $this->db2->update('tahunanggarans', $data);
         $log_type = "ubah";
-        $log_desc = "ubah tahun anggaran -" . $tahun_anggaran . "-" . $awal_periode . "-" . $akhir_periode . "-" . $keterangan . "-";
+        $log_desc = "ubah tahun anggaran -" . $tahunanggaran . "-" . $awal_periode . "-" . $akhir_periode . "-" . $keterangan . "-";
         userLog($log_type, $log_desc);
     }
 }

@@ -39,17 +39,18 @@
 
                         </div>
                         <!-- /.card-header -->
+                        <!-- <div class="card-body" id="tabel-data"> -->
                         <div class="card-body" id="tabel-data">
                             <table id="tabel1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <td class="w-1">No</td>
+                                        <td width="5%" class="text-center">No</td>
                                         <td class="w-10">Tahun Anggaran</td>
                                         <td class="w-10">Awal Periode</td>
                                         <td class="w-10">Akhir Periode</td>
                                         <td class="w-35">Keterangan</td>
                                         <td class="w-10">Status</td>
-                                        <td class="w-24 text-center" style="color: grey"><i class="fas fa-cog"></i></td>
+                                        <td class="text-center" style="color: grey"><i class="fas fa-cog"></i></td>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -57,16 +58,16 @@
                                     $no = 1;
                                     if ($tahunanggaran) {
                                         foreach ($tahunanggaran as $dataTahunanggaran) :
-                                            ?>
+                                    ?>
 
                                             <tr>
                                                 <td><?= $no; ?></td>
-                                                <td><?= $dataTahunanggaran['tahun_anggaran']; ?></td>
+                                                <td><?= $dataTahunanggaran['tahunanggaran']; ?></td>
                                                 <td><?= tanggal_indo($dataTahunanggaran['awal_periode']); ?></td>
                                                 <td><?= tanggal_indo($dataTahunanggaran['akhir_periode']); ?></td>
                                                 <td><?= $dataTahunanggaran['keterangan']; ?></td>
                                                 <td><?= txt_status($dataTahunanggaran['is_active']); ?></td>
-                                                <td class="text-center"><a href="" class="btn-aktif-tahunanggaran" data-id="<?= $dataTahunanggaran['id']; ?>" data-aktif="<?= $dataTahunanggaran['is_active']; ?>" data-info="<?= $dataTahunanggaran['tahun_anggaran']; ?>" data-toggle="tooltip" data-placement="bottom" title="Set Aktif"><i class="far fa-calendar-check" <?= icon_aktif($dataTahunanggaran['is_active']); ?>></i></a> - <a href="" class="btn-edit-tahunanggaran" data-id="<?= $dataTahunanggaran['id']; ?>" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fas fa-edit" style="color: olive"></i></a> - <a href="" class="btn-hapus-tahunanggaran" data-id="<?= $dataTahunanggaran['id']; ?>" data-info="<?= $dataTahunanggaran['tahun_anggaran']; ?>" data-toggle="tooltip" data-placement="bottom" title="Hapus"> <i class="far fa-trash-alt" style="color: maroon"></i></a></td>
+                                                <td class="text-center"><a href="" class="btn-aktif-tahunanggaran" data-id="<?= $dataTahunanggaran['id']; ?>" data-aktif="<?= $dataTahunanggaran['is_active']; ?>" data-info="<?= $dataTahunanggaran['tahunanggaran']; ?>" data-toggle="tooltip" data-placement="bottom" title="Set Aktif"><i class="far fa-calendar-check" <?= icon_aktif($dataTahunanggaran['is_active']); ?>></i></a> - <a href="" class="btn-edit-tahunanggaran" data-id="<?= $dataTahunanggaran['id']; ?>" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fas fa-edit" style="color: olive"></i></a> - <a href="" class="btn-hapus-tahunanggaran" data-id="<?= $dataTahunanggaran['id']; ?>" data-info="<?= $dataTahunanggaran['tahunanggaran']; ?>" data-toggle="tooltip" data-placement="bottom" title="Hapus"> <i class="far fa-trash-alt" style="color: maroon"></i></a></td>
                                             </tr>
                                     <?php
                                             $no++;
