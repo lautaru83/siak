@@ -15,13 +15,14 @@
                             <div>
                                 <input type="hidden" id="idubah" name="idubah">
                                 <input type="hidden" id="idakun" name="idakun">
+                                <input type="hidden" id="tgl2" name="tgl2" value="<?= $tanggal_transaksi; ?>">
                                 <input type="hidden" id="transaksi_id" name="transaksi_id" value="<?= $tran_id; ?>">
                                 <select id="a6level_id" name="a6level_id" class="form-control">
                                     <option value="">- Pilih -</option>
                                     <?php
                                     foreach ($akun as $dataAkun) :
                                     ?>
-                                        <option value="<?= $dataAkun['id']; ?>"><?= $dataAkun['level6']; ?></option>
+                                        <option value="<?= $dataAkun['id']; ?>"><span class="font-weight-normal text-md"><?= $dataAkun['id']; ?> - <?= $dataAkun['level6']; ?></span></option>
                                     <?php endforeach; ?>
                                 </select>
                                 <span id="akun_error" class="text-danger"></span>

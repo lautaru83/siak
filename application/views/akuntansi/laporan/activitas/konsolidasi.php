@@ -4,7 +4,7 @@
             <div class="card-header bg-gradient-light">
                 <div>
                     <h4 class="card-title">
-                        Activitas Institusi
+                        Activitas Konsolidasi
                     </h4>
                 </div>
                 <div class="float-right">
@@ -28,7 +28,7 @@
                                                                             } ?></span>
                         </div>
                         <div class="col-md-12 text-center">
-                            <span class="font-weight-bolder">LAPORAN ACTIVITAS</span>
+                            <span class="font-weight-bolder">LAPORAN ACTIVITAS KONSOLIDASI</span>
                         </div>
                     </div>
                     <table id="tabel3" class="table table-sm table-borderless table-hover">

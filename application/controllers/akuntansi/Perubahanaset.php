@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Neraca extends CI_Controller
+class Perubahanaset extends CI_Controller
 {
     public function __construct()
     {
@@ -15,40 +15,41 @@ class Neraca extends CI_Controller
     public function index()
     {
         $data['kontenmenu'] = "Laporan";
-        $data['kontensubmenu'] = "Neraca";
+        $data['kontensubmenu'] = "Perubahan Aset Bersih";
         $pembukuan_id = $this->session->userdata('tahun_buku');
         $data['institusi_id'] = $this->idinstitusi;
         $data['pembukuan_id'] = $this->session->userdata('tahun_buku');
         $data['buku_awal'] = tanggal_indo($this->session->userdata('buku_awal'));
         $data['buku_akhir'] = tanggal_indo($this->session->userdata('buku_akhir'));
-        $this->template->display('akuntansi/laporan/neraca', $data);
+        $this->template->display('akuntansi/laporan/perubahanaset', $data);
     }
     public function viewdata()
     {
         $jenis = $this->input->post('jenis');
         $data['tanggal'] = tanggal_input($this->input->post('akhir_periode'));
-        $data['neraca'] = "1";
+        $data['activitas'] = "1";
         $institusi_id = $this->session->userdata('idInstitusi');
         $data['institusi'] = $this->Institusi_model->ambil_data_id($institusi_id);
         // $data['institusi'] = $this->Institusi_model->ambil_data();
         if ($jenis == "4") {
-            $this->load->view('akuntansi/laporan/neraca/lengkap', $data);
+            $this->load->view('akuntansi/laporan/perubahanaset/institusi', $data);
         } elseif ($jenis == "3") {
-            $data['asetLancar'] = $this->Laporan_model->asetLancarKonsolidasi();
-            $data['asetTidakLancar'] = $this->Laporan_model->asetTidakLancarKonsolidasi();
-            $data['kewajiban'] = $this->Laporan_model->kewajibanKonsolidasi();
-            $data['bersihTidakTerikat'] = $this->Laporan_model->bersihTidakTerikatKonsolidasi();
-            $data['bersihTerikat'] = $this->Laporan_model->bersihTerikatKonsolidasi();
-            $this->load->view('akuntansi/laporan/neraca/konsolidasi', $data);
+            $data['pttb'] = $this->Laporan_model->pttbKonsolidasi();
+            $data['badu'] = $this->Laporan_model->baduKonsolidasi();
+            $data['bpdp'] = $this->Laporan_model->bpdpKonsolidasi();
+            $data['bpda'] = $this->Laporan_model->bpdaKonsolidasi();
+            $data['pbll'] = $this->Laporan_model->pbllKonsolidasi();
+            $this->load->view('akuntansi/laporan/perubahanaset/konsolidasi', $data);
         } elseif ($jenis == "2") {
-            $this->load->view('akuntansi/laporan/neraca/komparatif', $data);
+            $this->load->view('akuntansi/laporan/perubahanaset/institusi', $data);
         } else {
             $data['asetLancar'] = $this->Laporan_model->asetLancarInstitusi();
-            $data['asetTidakLancar'] = $this->Laporan_model->asetTidakLancarInstitusi();
-            $data['kewajiban'] = $this->Laporan_model->kewajibanInstitusi();
-            $data['bersihTidakTerikat'] = $this->Laporan_model->bersihTidakTerikatInstitusi();
-            $data['bersihTerikat'] = $this->Laporan_model->bersihTerikatInstitusi();
-            $this->load->view('akuntansi/laporan/neraca/institusi', $data);
+            $data['pttb'] = $this->Laporan_model->pttbInstitusi();
+            $data['badu'] = $this->Laporan_model->baduInstitusi();
+            $data['bpdp'] = $this->Laporan_model->bpdpInstitusi();
+            $data['bpda'] = $this->Laporan_model->bpdaInstitusi();
+            $data['pbll'] = $this->Laporan_model->pbllInstitusi();
+            $this->load->view('akuntansi/laporan/perubahanaset/institusi', $data);
         }
     }
     public function cekinput()

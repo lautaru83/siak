@@ -202,6 +202,53 @@ class Bankmasuk extends CI_Controller
             }
         }
     }
+    public function cek_saldo()
+    {
+        $jumlah = 0;
+        $jumlah = input_uang($this->input->post('jumlah'));
+        $akun_id = $this->input->post('a6level_id');
+        $posisiakun = $this->Kodeperkiraan_model->cek_posisiakun($akun_id);
+        $posakun = $posisiakun['posisi'];
+        $postran = $this->input->post('posisi_akun');
+        $hasil = $this->Transaksi_model->ceksaldotransaksi($akun_id);
+        $saldo = 0;
+        if ($hasil) {
+            foreach ($hasil as $dataHasil) :
+                $posisi = $dataHasil['posisi'];
+                $debet = $dataHasil['debet'];
+                $kredit = $dataHasil['kredit'];
+                if ($posisi == "D") {
+                    $sal = $debet - $kredit;
+                } else {
+                    $sal = $kredit - $debet;
+                }
+            endforeach;
+            $saldo = input_uang($sal);
+        } else {
+            $saldo = 0;
+        }
+        if ($posakun == "D") {
+            if ($postran == "D") {
+                return true;
+            } else {
+                if ($jumlah > $saldo) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+        } else {
+            if ($postran == "K") {
+                return true;
+            } else {
+                if ($jumlah > $saldo) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+        }
+    }
     public function cek_tanggal()
     {
         $tanggal = tanggal_input($this->input->post('tanggal_transaksi'));
@@ -229,8 +276,9 @@ class Bankmasuk extends CI_Controller
         $this->form_validation->set_rules('a6level_id', 'Kodeperkiraan', 'required|trim|callback_cek_akun', [
             'cek_akun' => 'Akun telah digunakan sebelumnya!!'
         ]);
-        $this->form_validation->set_rules('jumlah', 'Jumlah', 'required|trim|callback_cek_jumlah', [
-            'cek_jumlah' => 'Jumlah transaksi tidak valid!!'
+        $this->form_validation->set_rules('jumlah', 'Jumlah', 'required|trim|callback_cek_jumlah|callback_cek_saldo', [
+            'cek_jumlah' => 'Jumlah transaksi tidak valid!!',
+            'cek_saldo' => 'Saldo akun tidak mencukupi!!'
         ]);
         $this->form_validation->set_rules('posisi_akun', 'Posisi', 'required|trim');
     }

@@ -4,7 +4,7 @@
             <div class="card-header bg-gradient-light">
                 <div>
                     <h4 class="card-title">
-                        Activitas Institusi
+                        Perubahan Aset Institusi
                     </h4>
                 </div>
                 <div class="float-right">
@@ -17,6 +17,7 @@
                 </div>
                 <?php
                 //var_dump($pbll);
+                //echo saldoAkun6($tanggal);
                 ?>
                 <?php
                 if ($activitas) {
@@ -28,7 +29,7 @@
                                                                             } ?></span>
                         </div>
                         <div class="col-md-12 text-center">
-                            <span class="font-weight-bolder">LAPORAN ACTIVITAS</span>
+                            <span class="font-weight-bolder">LAPORAN PERUBAHAN ASET BERSIH</span>
                         </div>
                     </div>
                     <table id="tabel3" class="table table-sm table-borderless table-hover">
@@ -114,11 +115,11 @@
                             <tr>
                                 <td class="text-center"></td>
                                 <td colspan="2">
-                                    <span class="font-weight-normal">Jumlah</span>
+                                    <span class="font-weight-bolder">Jumlah</span>
                                 </td>
                                 <td></td>
                                 <td class="border-top border-bottom text-right">
-                                    <span class="font-weight-normal"><?= rupiah_positif($totalPttb); ?></span>
+                                    <span class="font-weight-bolder"><?= rupiah_positif($totalPttb); ?></span>
                                 </td>
                                 <td class="text-right"></td>
                             </tr>
@@ -139,7 +140,13 @@
                                 <td colspan="2">
                                     <span class="font-weight-bolder text-md">Beban Administrasi dan Umum</span>
                                 </td>
-                                <td class="text-center">521</td>
+                                <td class="text-center">
+                                    <?php
+                                    if ($badu) {
+                                        echo "512";
+                                    }
+                                    ?>
+                                </td>
                                 <td></td>
                                 <td class="text-right"></td>
                             </tr>
@@ -331,7 +338,7 @@
                                     <span class="font-weight-bolder">Jumlah Beban dan Kerugian </span>
                                 </td>
                                 <td></td>
-                                <td class="border-top border-top  text-right">
+                                <td class="border-top border-bottom text-right">
                                     <span class="font-weight-bolder">
                                         <?php
                                         $totalBebanKerugian = 0;
@@ -343,29 +350,38 @@
                                 <td class="text-right"></td>
                             </tr>
                             <tr>
+                                <td>
+                                    <div class="row my-1"></div>
+                                </td>
+                            </tr>
+                            <tr>
                                 <td class="text-center"></td>
                                 <td colspan="2">
-                                    <span class="font-weight-normal">HASIL USAHA SEBELUM PAJAK</span>
+                                    <span class="font-weight-bolder">Kenaikan (Penurunan) Aset Bersih tidak terikat</span>
                                 </td>
                                 <td></td>
-                                <td class="border-top border-top  text-right">
-                                    <span class="font-weight-normal">
+                                <td class="border-top border-bottom  text-right">
+                                    <span class="font-weight-bolder">
                                         <?php
-                                        $hasilSebelumPajak = 0;
-                                        $hasilSebelumPajak = $totalPttb - $totalBebanKerugian;
-                                        echo rupiah_positif($hasilSebelumPajak);
+                                        $asetSebelumPajak = 0;
+                                        $asetSebelumPajak = $totalPttb - $totalBebanKerugian;
+                                        echo rupiah_positif($asetSebelumPajak);
                                         ?>
                                     </span>
                                 </td>
                                 <td class="text-right"></td>
                             </tr>
+
+
                             <tr>
                                 <td class="text-center"></td>
                                 <td colspan="2">
-                                    <span class="font-weight-normal">PAJAK PENGHASILAN</span>
+                                    <span class="font-weight-normal">
+                                        Pajak penghasilan Atas Kenaikan Aset Bersih Tidak Terikat
+                                    </span>
                                 </td>
                                 <td></td>
-                                <td class="border-top border-top  text-right">
+                                <td class="border-top  text-right">
                                     <span class="font-weight-normal">
                                         <?php
                                         $jumlahPajakPenghasilan = 0;
@@ -378,15 +394,82 @@
                             <tr>
                                 <td class="text-center"></td>
                                 <td colspan="2">
-                                    <span class="font-weight-bolder">HASIL USAHA SETELAH PAJAK</span>
+                                    <span class="font-weight-normal">
+                                        Kenaikan (Penurunan) Aset Bersih Tidak Terikat
+                                    </span>
+                                </td>
+                                <td></td>
+                                <td class="text-right">
+                                    <span class="font-weight-normal">
+                                        <?php
+                                        $idakun3 = "313";
+                                        $saldoAsetMutasi = saldoAkun6Laporan($tanggal, $idakun3);
+                                        echo rupiah_positif($saldoAsetMutasi);
+                                        ?>
+                                    </span>
+                                </td>
+                                <td class="text-right"></td>
+                            </tr>
+                            <tr>
+                                <td class="text-center"></td>
+                                <td colspan="2">
+                                    <span class="font-weight-bolder">Kenaikan (Penurunan) Aset Tidak Terikat Bersih Setelah Pajak</span>
                                 </td>
                                 <td></td>
                                 <td class="border-top border-bottom text-right">
                                     <span class="font-weight-bolder">
                                         <?php
-                                        $hasilSetelahPajak = 0;
-                                        $hasilSetelahPajak = $hasilSebelumPajak - $jumlahPajakPenghasilan;
-                                        echo rupiah_positif($hasilSetelahPajak);
+                                        $asetSetelahPajak = 0;
+                                        $asetSetelahPajak = $asetSebelumPajak + $saldoAsetMutasi - $jumlahPajakPenghasilan;
+                                        echo rupiah_positif($asetSetelahPajak);
+                                        ?>
+                                    </span>
+                                </td>
+                                <td class="text-right"></td>
+                            </tr>
+                            <tr>
+                                <td class="text-center"></td>
+                                <td colspan="2">
+                                    <span class="font-weight-normal">Jumlah Kenaikan Aset Bersih</span>
+                                </td>
+                                <td></td>
+                                <td class="text-right">
+                                    <span class="font-weight-normal">
+                                        <?php
+                                        echo rupiah_positif($asetSetelahPajak);
+                                        ?>
+                                    </span>
+                                </td>
+                                <td class="text-right"></td>
+                            </tr>
+                            <tr>
+                                <td class="text-center"></td>
+                                <td colspan="2">
+                                    <span class="font-weight-normal">Aset Bersih Awal tahun</span>
+                                </td>
+                                <td></td>
+                                <td class="text-right">
+                                    <span class="font-weight-normal">
+                                        <?php
+                                        $idakun2 = "310";
+                                        $saldoAsetAwalTahun = saldoAwalAbttInstitusi($idakun2);
+                                        echo rupiah_positif($saldoAsetAwalTahun);
+                                        ?>
+                                    </span>
+                                </td>
+                                <td class="text-right"></td>
+                            </tr>
+                            <tr>
+                                <td class="text-center"></td>
+                                <td colspan="2">
+                                    <span class="font-weight-bolder">Aset Bersih Akhir tahun</span>
+                                </td>
+                                <td></td>
+                                <td class="border-top border-bottom text-right">
+                                    <span class="font-weight-bolder">
+                                        <?php
+                                        $asetAkhirTahun = $asetSetelahPajak + $saldoAsetAwalTahun;
+                                        echo rupiah_positif($asetAkhirTahun);
                                         ?>
                                     </span>
                                 </td>

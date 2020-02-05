@@ -59,7 +59,7 @@
                                 }
                                 ?>
 
-                                <button type="submit" id="btn-tampil-neraca" data-id="<?= $institusi_id; ?>" data-tgl1="<?= $buku_awal; ?>" data-tgl2="<?= $buku_akhir; ?>" data-laporan="neraca" class="btn btn-primary my-1 mx-sm-2">Tampilkan</button>
+                                <button type="submit" id="btn-tampil-perubahanaset" data-id="<?= $institusi_id; ?>" data-tgl1="<?= $buku_awal; ?>" data-tgl2="<?= $buku_akhir; ?>" data-laporan="activitas" class="btn btn-primary my-1 mx-sm-2">Tampilkan</button>
 
                             </form>
                             <!-- /.form inline -->

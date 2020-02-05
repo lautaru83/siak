@@ -44,10 +44,10 @@
                                     <label class="font-weight-normal my-2 mr-2">Akhir Periode :</label>
                                     <input type="text" name="akhir_periode" id="akhir_periode" class="form-control" autocomplete="off">
                                 </div>
-                                <div class="form-check form-check-inline my-2 mx-sm-3">
-                                    <input class="form-check-input font-weight-normal" type="checkbox" id="ckkomparatif" disabled>
-                                    <label class="form-check-label" for="ckkomparatif" disabled>Komparatif</label>
-                                </div>
+                                <!-- <div class="form-check form-check-inline my-2 mx-sm-3">
+                                    <input class="form-check-input font-weight-normal" type="checkbox" id="ckkomparatif">
+                                    <label class="form-check-label" for="ckkomparatif">Komparatif</label>
+                                </div> -->
                                 <?php
                                 if ($institusi_id == "01") {
                                 ?>
@@ -59,7 +59,7 @@
                                 }
                                 ?>
 
-                                <button type="submit" id="btn-tampil-neraca" data-id="<?= $institusi_id; ?>" data-tgl1="<?= $buku_awal; ?>" data-tgl2="<?= $buku_akhir; ?>" data-laporan="neraca" class="btn btn-primary my-1 mx-sm-2">Tampilkan</button>
+                                <button type="submit" id="btn-tampil-perubahanarus" data-id="<?= $institusi_id; ?>" data-tgl1="<?= $buku_awal; ?>" data-tgl2="<?= $buku_akhir; ?>" data-laporan="activitas" class="btn btn-primary my-1 mx-sm-2">Tampilkan</button>
 
                             </form>
                             <!-- /.form inline -->

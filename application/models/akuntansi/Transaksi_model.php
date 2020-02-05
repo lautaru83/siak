@@ -31,6 +31,13 @@ class Transaksi_model extends CI_Model
         $user_id = $this->session->userdata('xyz');
         return $this->db2->query("SELECT * FROM transaksis where jurnal='$jurnal' and is_valid=1 and user_id=$user_id order by id desc LIMIT 0, 5 ")->result_array();
     }
+    public function ceksaldotransaksi($akun_id)
+    {
+        $tahun_buku = $this->session->userdata('tahun_buku');
+        $tgl1 = tanggal_input($this->session->userdata('buku_awal'));
+        $tgl2 = tanggal_input($this->input->post('tgl2'));
+        return $this->db2->query("select a6level_id,level6,posisi,tanggal_transaksi,sum(debet) as debet,sum(kredit) as kredit from view_detailtransaksis WHERE a6level_id='$akun_id' AND is_valid BETWEEN 1 AND 2  AND tahun_buku='$tahun_buku' AND tanggal_transaksi BETWEEN '$tgl1' AND '$tgl2' GROUP BY a6level_id")->result_array();
+    }
     public function simpantransaksi($thbuku_id, $notran, $unit_id)
     {
         $jurnal = "SA";

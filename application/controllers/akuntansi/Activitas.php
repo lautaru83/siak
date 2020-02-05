@@ -34,24 +34,20 @@ class Activitas extends CI_Controller
         if ($jenis == "4") {
             $this->load->view('akuntansi/laporan/activitas/institusi', $data);
         } elseif ($jenis == "3") {
-            $this->load->view('akuntansi/laporan/activitas/institusi', $data);
+            $data['pttb'] = $this->Laporan_model->pttbKonsolidasi();
+            $data['badu'] = $this->Laporan_model->baduKonsolidasi();
+            $data['bpdp'] = $this->Laporan_model->bpdpKonsolidasi();
+            $data['bpda'] = $this->Laporan_model->bpdaKonsolidasi();
+            $data['pbll'] = $this->Laporan_model->pbllKonsolidasi();
+            $this->load->view('akuntansi/laporan/activitas/konsolidasi', $data);
         } elseif ($jenis == "2") {
             $this->load->view('akuntansi/laporan/activitas/institusi', $data);
         } else {
-            $data['asetLancar'] = $this->Laporan_model->asetLancarInstitusi();
             $data['pttb'] = $this->Laporan_model->pttbInstitusi();
             $data['badu'] = $this->Laporan_model->baduInstitusi();
             $data['bpdp'] = $this->Laporan_model->bpdpInstitusi();
             $data['bpda'] = $this->Laporan_model->bpdaInstitusi();
             $data['pbll'] = $this->Laporan_model->pbllInstitusi();
-            $data['asetTidakLancar'] = "";
-            $data['kewajiban'] = "";
-            $data['bersihTidakTerikat'] = "";
-            $data['bersihTerikat'] = "";
-            // $data['asetTidakLancar'] = $this->Laporan_model->asetTidakLancarInstitusi();
-            // $data['kewajiban'] = $this->Laporan_model->kewajibanInstitusi();
-            // $data['bersihTidakTerikat'] = $this->Laporan_model->bersihTidakTerikatInstitusi();
-            // $data['bersihTerikat'] = $this->Laporan_model->bersihTerikatInstitusi();
             $this->load->view('akuntansi/laporan/activitas/institusi', $data);
         }
     }

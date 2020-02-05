@@ -19,7 +19,7 @@ class Kodeperkiraan_model extends CI_Model
     public function akunjurnal($jenis)
     {
         $idinstitusi = $this->session->userdata('idInstitusi');
-        return $this->db2->query("select a.id as id,a.level6 as level6 from a6levels a join akun_transaksis b on a.id=b.a6level_id where b.jenis_transaksi_id='$jenis' and a.institusi_id='$idinstitusi' ")->result_array();
+        return $this->db2->query("select a.id as id,a.level6 as level6 from a6levels a join akun_transaksis b on a.id=b.a6level_id where b.jenis_transaksi_id='$jenis' and a.institusi_id='$idinstitusi' order by a.id ASC")->result_array();
     }
     public function ambil_data_id6($id)
     {
@@ -32,6 +32,10 @@ class Kodeperkiraan_model extends CI_Model
     public function akun_saldo()
     {
         return $this->db2->query("select a3levels.id as id,a1levels.level1 as level1,a2levels.level2 as level2, a3levels.level3 as level3 from a1levels join a2levels on a1levels.id=a2levels.a1level_id join a3levels on a2levels.id=a3levels.a2level_id where a1levels.id IN(100,200,300) order by a3levels.id asc")->result_array();
+    }
+    public function cek_posisiakun($akun_id)
+    {
+        return $this->db2->query("select posisi from a6levels where id='$akun_id'")->row_array();
     }
     public function akunkhusus($institusi_id)
     {

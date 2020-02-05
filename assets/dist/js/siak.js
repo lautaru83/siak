@@ -5038,9 +5038,11 @@ $(document).ready(function () {
         const a6level_id = $('[name="a6level_id"]').val();
         const posisi_akun = $('[name="posisi_akun"]').val();
         const idakun = $('[name="idakun"]').val();
+        const tgl2 = $('[name="tgl2"]').val();
         const idubah = $('[name="idubah"]').val();
         const jumlah = $('[name="jumlah"]').val();
         $.ajax({
+            cache: false,
             type: "POST",
             url: base_url + "akuntansi/kasmasuk/simpandetail",
             data: {
@@ -5049,6 +5051,7 @@ $(document).ready(function () {
                 transaksi_id: transaksi_id,
                 a6level_id: a6level_id,
                 posisi_akun: posisi_akun,
+                tgl2: tgl2,
                 jumlah: jumlah
             },
             dataType: "JSON",
@@ -5102,9 +5105,11 @@ $(document).ready(function () {
         const transaksi_id = $('[name="transaksi_id"]').val();
         const a6level_id = $('[name="a6level_id"]').val();
         const idakun = $('[name="idakun"]').val();
+        const tgl2 = $('[name="tgl2"]').val();
         const posisi_akun = $('[name="posisi_akun"]').val();
         const jumlah = $('[name="jumlah"]').val();
         $.ajax({
+            cache: false,
             type: "POST",
             url: base_url + "akuntansi/kasmasuk/ubahdetail/" + idubah,
             data: {
@@ -5113,6 +5118,7 @@ $(document).ready(function () {
                 transaksi_id: transaksi_id,
                 a6level_id: a6level_id,
                 posisi_akun: posisi_akun,
+                tgl2: tgl2,
                 jumlah: jumlah
             },
             dataType: "JSON",
@@ -5431,8 +5437,10 @@ $(document).ready(function () {
         const posisi_akun = $('[name="posisi_akun"]').val();
         const idakun = $('[name="idakun"]').val();
         const idubah = $('[name="idubah"]').val();
+        const tgl2 = $('[name="tgl2"]').val();
         const jumlah = $('[name="jumlah"]').val();
         $.ajax({
+            cache: false,
             type: "POST",
             url: base_url + "akuntansi/kaskeluar/simpandetail",
             data: {
@@ -5441,6 +5449,7 @@ $(document).ready(function () {
                 transaksi_id: transaksi_id,
                 a6level_id: a6level_id,
                 posisi_akun: posisi_akun,
+                tgl2: tgl2,
                 jumlah: jumlah
             },
             dataType: "JSON",
@@ -5494,9 +5503,11 @@ $(document).ready(function () {
         const transaksi_id = $('[name="transaksi_id"]').val();
         const a6level_id = $('[name="a6level_id"]').val();
         const idakun = $('[name="idakun"]').val();
+        const tgl2 = $('[name="tgl2"]').val();
         const posisi_akun = $('[name="posisi_akun"]').val();
         const jumlah = $('[name="jumlah"]').val();
         $.ajax({
+            cache: false,
             type: "POST",
             url: base_url + "akuntansi/kaskeluar/ubahdetail/" + idubah,
             data: {
@@ -5505,6 +5516,7 @@ $(document).ready(function () {
                 transaksi_id: transaksi_id,
                 a6level_id: a6level_id,
                 posisi_akun: posisi_akun,
+                tgl2: tgl2,
                 jumlah: jumlah
             },
             dataType: "JSON",
@@ -5822,10 +5834,12 @@ $(document).ready(function () {
         const transaksi_id = $('[name="transaksi_id"]').val();
         const a6level_id = $('[name="a6level_id"]').val();
         const posisi_akun = $('[name="posisi_akun"]').val();
+        const tgl2 = $('[name="tgl2"]').val();
         const idakun = $('[name="idakun"]').val();
         const idubah = $('[name="idubah"]').val();
         const jumlah = $('[name="jumlah"]').val();
         $.ajax({
+            cache: false,
             type: "POST",
             url: base_url + "akuntansi/bankmasuk/simpandetail",
             data: {
@@ -5834,6 +5848,7 @@ $(document).ready(function () {
                 transaksi_id: transaksi_id,
                 a6level_id: a6level_id,
                 posisi_akun: posisi_akun,
+                tgl2: tgl2,
                 jumlah: jumlah
             },
             dataType: "JSON",
@@ -5887,9 +5902,11 @@ $(document).ready(function () {
         const transaksi_id = $('[name="transaksi_id"]').val();
         const a6level_id = $('[name="a6level_id"]').val();
         const idakun = $('[name="idakun"]').val();
+        const tgl2 = $('[name="tgl2"]').val();
         const posisi_akun = $('[name="posisi_akun"]').val();
         const jumlah = $('[name="jumlah"]').val();
         $.ajax({
+            cache: false,
             type: "POST",
             url: base_url + "akuntansi/bankmasuk/ubahdetail/" + idubah,
             data: {
@@ -5898,6 +5915,7 @@ $(document).ready(function () {
                 transaksi_id: transaksi_id,
                 a6level_id: a6level_id,
                 posisi_akun: posisi_akun,
+                tgl2: tgl2,
                 jumlah: jumlah
             },
             dataType: "JSON",
@@ -6216,6 +6234,7 @@ $(document).ready(function () {
         const a6level_id = $('[name="a6level_id"]').val();
         const posisi_akun = $('[name="posisi_akun"]').val();
         const idakun = $('[name="idakun"]').val();
+        const tgl2 = $('[name="tgl2"]').val();
         const idubah = $('[name="idubah"]').val();
         const jumlah = $('[name="jumlah"]').val();
         $.ajax({
@@ -6227,6 +6246,7 @@ $(document).ready(function () {
                 transaksi_id: transaksi_id,
                 a6level_id: a6level_id,
                 posisi_akun: posisi_akun,
+                tgl2: tgl2,
                 jumlah: jumlah
             },
             dataType: "JSON",
@@ -6279,10 +6299,12 @@ $(document).ready(function () {
         const idubah = $('[name="idubah"]').val();
         const transaksi_id = $('[name="transaksi_id"]').val();
         const a6level_id = $('[name="a6level_id"]').val();
+        const tgl2 = $('[name="tgl2"]').val();
         const idakun = $('[name="idakun"]').val();
         const posisi_akun = $('[name="posisi_akun"]').val();
         const jumlah = $('[name="jumlah"]').val();
         $.ajax({
+            cache: false,
             type: "POST",
             url: base_url + "akuntansi/bankkeluar/ubahdetail/" + idubah,
             data: {
@@ -6291,6 +6313,7 @@ $(document).ready(function () {
                 transaksi_id: transaksi_id,
                 a6level_id: a6level_id,
                 posisi_akun: posisi_akun,
+                tgl2: tgl2,
                 jumlah: jumlah
             },
             dataType: "JSON",
@@ -6607,11 +6630,13 @@ $(document).ready(function () {
         e.preventDefault();
         const transaksi_id = $('[name="transaksi_id"]').val();
         const a6level_id = $('[name="a6level_id"]').val();
+        const tgl2 = $('[name="tgl2"]').val();
         const posisi_akun = $('[name="posisi_akun"]').val();
         const idakun = $('[name="idakun"]').val();
         const idubah = $('[name="idubah"]').val();
         const jumlah = $('[name="jumlah"]').val();
         $.ajax({
+            cache: false,
             type: "POST",
             url: base_url + "akuntansi/nonkasbank/simpandetail",
             data: {
@@ -6620,6 +6645,7 @@ $(document).ready(function () {
                 transaksi_id: transaksi_id,
                 a6level_id: a6level_id,
                 posisi_akun: posisi_akun,
+                tgl2: tgl2,
                 jumlah: jumlah
             },
             dataType: "JSON",
@@ -6673,9 +6699,11 @@ $(document).ready(function () {
         const transaksi_id = $('[name="transaksi_id"]').val();
         const a6level_id = $('[name="a6level_id"]').val();
         const idakun = $('[name="idakun"]').val();
+        const tgl2 = $('[name="tgl2"]').val();
         const posisi_akun = $('[name="posisi_akun"]').val();
         const jumlah = $('[name="jumlah"]').val();
         $.ajax({
+            cache: false,
             type: "POST",
             url: base_url + "akuntansi/nonkasbank/ubahdetail/" + idubah,
             data: {
@@ -6684,6 +6712,7 @@ $(document).ready(function () {
                 transaksi_id: transaksi_id,
                 a6level_id: a6level_id,
                 posisi_akun: posisi_akun,
+                tgl2: tgl2,
                 jumlah: jumlah
             },
             dataType: "JSON",
