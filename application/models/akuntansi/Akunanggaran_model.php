@@ -27,6 +27,48 @@ class Akunanggaran_model extends CI_Model
     {
         return $this->db2->get_where('anggarans', ['kelompok_id' => $id])->result_array();
     }
+    public function rencanasubakun($id)
+    {
+        $institusi_id = $this->session->userdata('idInstitusi');
+        // $anggaran_id = $this->input->post('idanggaran');
+        $this->db2->where('institusi_id', $institusi_id);
+        $this->db2->where('kelompok_id', $id);
+        $this->db2->order_by('id', 'ASC');
+        $hasil = $this->db2->get('anggarans')->result_array();
+        $output = '<option value=""> - Pilih Kegiatan - </option>';
+        if ($hasil) {
+            foreach ($hasil as $dataHasil) :
+                $idAnggaran = $dataHasil['id'];
+                $anggaran = $dataHasil['anggaran'];
+                $output .= '<option value="' . $idAnggaran . '">' . $anggaran . '</option>';
+            endforeach;
+        }
+        return $output;
+    }
+    public function rencanasubakunedit($id)
+    {
+        $institusi_id = $this->session->userdata('idInstitusi');
+        $anggaran_id = $this->input->post('anggaran_id');
+        $this->db2->where('institusi_id', $institusi_id);
+        $this->db2->where('kelompok_id', $id);
+        $this->db2->order_by('id', 'ASC');
+        $hasil = $this->db2->get('anggarans')->result_array();
+        // $query = $this->db2->get_where('anggarans', array('kelompok_id' => $id, 'institusi_id' => $institusi_id));
+        // return $query;
+        $output = '<option value=""> - Pilih Kegiatan - </option>';
+        if ($hasil) {
+            foreach ($hasil as $dataHasil) :
+                $idAnggaran = $dataHasil['id'];
+                $anggaran = $dataHasil['anggaran'];
+                if ($anggaran_id == $idAnggaran) {
+                    $output .= '<option value="' . $idAnggaran . '" selected>' . $anggaran . '</option>';
+                } else {
+                    $output .= '<option value="' . $idAnggaran . '">' . $anggaran . '</option>';
+                }
+            endforeach;
+        }
+        return $output;
+    }
     public function cek_unikakun()
     {
         $anggaran_id = $this->input->post('anggaran_id');
@@ -35,7 +77,7 @@ class Akunanggaran_model extends CI_Model
     }
     public function daftarAkun($anggaran_id)
     {
-        return $this->db2->query("select a.id as anggaran_id,b.id as id,c.id as a6level_id, c.level6 as level6 from anggarans a join akun_anggarans b on a.id=b.anggaran_id join a6levels c on c.id=b.a6level_id where b.anggaran_id=$anggaran_id")->result_array();
+        return $this->db2->query("select a.id as anggaran_id,b.id as id,c.id as a6level_id, c.level6 as level6 from anggarans a join akun_anggarans b on a.id=b.anggaran_id join a6levels c on c.id=b.a6level_id where b.anggaran_id=$anggaran_id order by c.id asc")->result_array();
     }
     // public function ambil_data_id($id)
     // {
@@ -57,13 +99,13 @@ class Akunanggaran_model extends CI_Model
     {
         return $this->db2->get_where('anggarans', ['id' => $id])->num_rows();
     }
-    // public function hapusunit($id, $info)
-    // {
-    //     $this->db2->delete('unitanggarans', ['id' => $id]);
-    //     $log_type = "hapus";
-    //     $log_desc = "hapus unit anggaran - $info";
-    //     userLog($log_type, $log_desc);
-    // }
+    public function hapusakun($id, $info)
+    {
+        $this->db2->delete('akun_anggarans', ['id' => $id]);
+        $log_type = "hapus";
+        $log_desc = "hapus kodeperkiraan anggaran - $info";
+        userLog($log_type, $log_desc);
+    }
     public function hapusanggaran($id, $info)
     {
         $this->db2->delete('anggarans', ['id' => $id]);
@@ -90,7 +132,7 @@ class Akunanggaran_model extends CI_Model
         $kelompok_id = $this->input->post('kelompok_id');
         $anggaran = htmlspecialchars($this->input->post('anggaran'));
         $posisi = $this->input->post('posisi');
-        $institusi_id = $this->input->post('institusi_id');
+        $institusi_id = $this->session->userdata('idInstitusi');
         $data = array(
             'anggaran' => $anggaran,
             'kelompok_id' => $kelompok_id,

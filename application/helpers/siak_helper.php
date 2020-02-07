@@ -57,6 +57,32 @@ function txt_gender($gender)
         return "Perempuan";
     }
 }
+function txt_roman($angka)
+{
+    if ($angka == 1) {
+        return "I";
+    } elseif ($angka == 2) {
+        return "II";
+    } elseif ($angka == 3) {
+        return "III";
+    } elseif ($angka == 4) {
+        return "IV";
+    } elseif ($angka == 5) {
+        return "V";
+    } elseif ($angka == 6) {
+        return "VI";
+    } elseif ($angka == 7) {
+        return "VII";
+    } elseif ($angka == 8) {
+        return "VIII";
+    } elseif ($angka == 9) {
+        return "IX";
+    } elseif ($angka == 10) {
+        return "X";
+    } else {
+        return "-";
+    }
+}
 function icon_aktif($nilai)
 {
     if ($nilai == 1) {

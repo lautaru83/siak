@@ -14,7 +14,7 @@ class Akunanggaran extends CI_Controller
     public function index()
     {
         $data['kontenmenu'] = "Master Pembukuan";
-        $data['kontensubmenu'] = "Akun Anggaran";
+        $data['kontensubmenu'] = "Kegiatan Anggaran";
         $data['institusi_id'] = $this->session->userdata('idInstitusi');
         $data['kelompok'] = $this->Akunanggaran_model->kelompok_data();
         $data['akun'] = $this->Kodeperkiraan_model->akun6Institusi();
@@ -53,23 +53,16 @@ class Akunanggaran extends CI_Controller
         }
         echo json_encode($data);
     }
-    // public function hapusunit()
-    // {
-    //     $id = $this->input->post('id');
-    //     $info = $this->input->post('info');
-    //     $hasil = $this->Akunanggaran_model->cek_hapusunit($id);
-    //     if ($hasil > 0) {
-    //         $data = array(
-    //             'status' => 'gagal'
-    //         );
-    //     } else {
-    //         $this->Akunanggaran_model->hapusunit($id, $info);
-    //         $data = array(
-    //             'status' => 'sukses'
-    //         );
-    //     }
-    //     echo json_encode($data);
-    // }
+    public function hapusakunanggaran()
+    {
+        $id = $this->input->post('id');
+        $info = $this->input->post('info');
+        $this->Akunanggaran_model->hapusakun($id, $info);
+        $data = array(
+            'status' => 'sukses'
+        );
+        echo json_encode($data);
+    }
     public function hapusanggaran()
     {
         $id = $this->input->post('id');
@@ -173,7 +166,7 @@ class Akunanggaran extends CI_Controller
     {
 
         $this->form_validation->set_rules('a6level_id', 'Akun', 'required|trim|callback_cek_unikakun', [
-            'cek_unikakun' => 'Kode telah digunakan oleh data lain !'
+            'cek_unikakun' => 'Kode perkiraan telah digunakan!'
         ]);
     }
     // public function cek_unikanggaran()

@@ -320,14 +320,301 @@ $(document).ready(function () {
         return false;
     });
     // -------------------------------------/PERUBAHAN ASET-------------------------
+    // -------------------------------------/RAPB-------------------------
+    $('.modal-akunanggaran').on('shown.bs.modal', function () {
+        $('#a6level_id').trigger('focus');
+    })
+    // btn - tambah - rapb
+    // tombol tambah rapb table
+    $('#btn-tambah-rapb').on('click', function (e) {
+        e.preventDefault();
+        const th = $(this).data('th');
+        const tahunanggaran_id = $(this).data('id');
+        const judul = document.getElementById('judul-modal');
+        judul.innerHTML = 'Tambah RAPB' + '   ' + th;
+        $('#btn-ubah-rapb').hide();
+        $('[name="tahunanggaran_id"]').val(tahunanggaran_id);
+        $('#modal-rapb').modal('show');
+    });
+
+    // end tombol tambah rapb table
+    // combo anggaran klik modal rencana anggaran
+    $('#rapb-kelompok-id').change(function () {
+        var kelompok_id = $('[name="kelompok_id"]').val();
+        var anggaran_id = $('[name="idanggaran"]').val();
+        if (kelompok_id != '') {
+            $.ajax({
+                cache: false,
+                method: "POST",
+                url: base_url + "akuntansi/rapb/anggarandata",
+                data: {
+                    kelompok_id: kelompok_id,
+                    anggaran_id: anggaran_id
+                },
+                success: function (data) {
+                    $("#rapb-anggaran-id").html(data);
+                }
+
+            });
+        }
+    });
+    // end combo anggaran klik modal rencana anggaran
+    // btn simpan rapb modal
+    $('#btn-simpan-rapb').on('click', function (e) {
+        e.preventDefault();
+        const rencana = $('[name="rencana"]').val();
+        const anggaran_id = $('[name="anggaran_id"]').val();
+        const tahunanggaran_id = $('[name="tahunanggaran_id"]').val();
+        const kelompok_id = $('[name="kelompok_id"]').val();
+        const resaldo = $('[name="resaldo"]').val();
+        const terealisasi = $('[name="terealisasi"]').val();
+        const noref = $('[name="noref"]').val();
+        $.ajax({
+            type: "POST",
+            url: base_url + "akuntansi/rapb/simpan",
+            data: {
+                rencana: rencana,
+                anggaran_id: anggaran_id,
+                kelompok_id: kelompok_id,
+                tahunanggaran_id: tahunanggaran_id,
+                resaldo: resaldo,
+                terealisasi: terealisasi,
+                noref: noref
+            },
+            dataType: "JSON",
+            beforeSend: function () {
+                $('#btn-simpan-rapb').attr('disabled', 'disabled');
+            },
+            success: function (data) {
+                if (data.status == 'gagal') {
+                    Toast.fire({
+                        type: 'error',
+                        title: ' Input data tidak valid!!!.' + rencana
+                    });
+                    if (data.rencana_error != '') {
+                        $('#rencana_error').html(data.rencana_error);
+                    } else {
+                        $('#rencana_error').html('');
+                    }
+                    if (data.kelompok_error != '') {
+                        $('#kelompok_error').html(data.kelompok_error);
+                    } else {
+                        $('#kelompok_error').html('');
+                    }
+                    if (data.anggaran_error != '') {
+                        $('#anggaran_error').html(data.anggaran_error);
+                    } else {
+                        $('#anggaran_error').html('');
+                    }
+                    if (data.resaldo_error != '') {
+                        $('#resaldo_error').html(data.resaldo_error);
+                    } else {
+                        $('#resaldo_error').html('');
+                    }
+                    $('#rencana').trigger('focus');
+                } else {
+                    Toast.fire({
+                        type: 'success',
+                        title: ' Data berhasil disimpan.'
+                    });
+                    $('#modal-rapb').modal('hide');
+                }
+                $('#btn-simpan-rapb').attr('disabled', false);
+            }
+        });
+        return false;
+    });
+    // end btn simpan rapb modal
+    // ajax icon hapus table rapb klik
+    $('.btn-hapus-rapb').on('click', function (e) {
+        e.preventDefault();
+        var id = $(this).data('id');
+        var info = $(this).data('info');
+        Swal.fire({
+            title: 'Konfirmasi!',
+            text: 'Apakah anda yakin akan menghapus RAPB -' + info + '- !?!',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'Batal',
+            confirmButtonText: 'Hapus'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    type: "POST",
+                    url: base_url + "akuntansi/rapb/hapus/",
+                    data: {
+                        id: id,
+                        info: info
+                    },
+                    dataType: 'JSON',
+                    success: function (data) {
+                        if (data.status == 'sukses') {
+                            Toast.fire({
+                                type: 'success',
+                                title: ' Data berhasil dihapus!!!.'
+                            });
+                            document.location.reload();
+                        } else {
+                            Toast.fire({
+                                type: 'warning',
+                                title: ' Penghapusan dibatalkan, data sedang digunakan oleh system!!!.'
+                            });
+                        }
+                    }
+                });
+            }
+        })
+    });
+    // end ajax icon hapus table rapb klik
+    //  ajax tombol edit data table rapb klik
+    $('.btn-edit-rapb').on('click', function (e) {
+        e.preventDefault();
+        const judul = document.getElementById('judul-modal');
+        judul.innerHTML = 'Ubah Data RAPB';
+        var id = $(this).data('id');
+        var idKel = $(this).data('idkel');
+        var anggaran_id = $(this).data('idanggaran');
+        //var alamat = base_url + 'akuntansi/rapb/ajax_edit/' + id + '/' + idKel;
+        $('#btn-simpan-rapb').hide();
+        $.ajax({
+            url: base_url + 'akuntansi/rapb/ajax_edit',
+            method: "POST",
+            data: {
+                id: id,
+                kelompok_id: idKel
+            },
+            dataType: "JSON",
+            success: function (data) {
+                $('[name="idanggaran"]').val(data.anggaran_id);
+                $('[name="kelompok_id"]').val(data.kelompok_id);
+                $('[name="rencana"]').val(data.rencana);
+                $('[name="idubah"]').val(data.id);
+                //$('[name="anggaran_id"]').val(data.anggaran_id).trigger('change');
+                $('[name="tahunanggaran_id"]').val(data.tahunanggaran_id);
+                $('[name="resaldo"]').val(data.resaldo);
+                $('[name="terealisasi"]').val(data.terealisasi);
+                $('[name="noref"]').val(data.noref);
+                //$('[name="anggaran_id"]').val(data.anggaran_id).trigger('change');
+                // $('#modal-rapb').modal('show');
+                // $('#rencana').trigger('focus');
+                $.ajax({
+                    url: base_url + "akuntansi/rapb/anggarandataedit",
+                    method: "POST",
+                    data: {
+                        kelompok_id: idKel,
+                        anggaran_id: anggaran_id
+                    },
+                    success: function (data2) {
+                        $("#rapb-anggaran-id").html(data2);
+                        $('#modal-rapb').modal('show');
+                        $('#rencana').trigger('focus');
+                    }
+                })
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                // Toast.fire({
+                //     type: 'success',
+                //     title: ' simpan!!!.' + alamat
+                // });
+                alert('Error get data from ajax');
+            }
+        });
+    });
+    // end ajax tombol edit data table rapb klik
+    // ajax tombol modal ubah rapb
+    $('#btn-ubah-rapb').on('click', function (e) {
+        e.preventDefault();
+        const idubah = $('[name="idubah"]').val();
+        const rencana = $('[name="rencana"]').val();
+        const anggaran_id = $('[name="anggaran_id"]').val();
+        const tahunanggaran_id = $('[name="tahunanggaran_id"]').val();
+        const kelompok_id = $('[name="kelompok_id"]').val();
+        const resaldo = $('[name="resaldo"]').val();
+        const terealisasi = $('[name="terealisasi"]').val();
+        const noref = $('[name="noref"]').val();
+        $.ajax({
+            type: "POST",
+            url: base_url + "akuntansi/rapb/ubah",
+            data: {
+                idubah: idubah,
+                rencana: rencana,
+                anggaran_id: anggaran_id,
+                kelompok_id: kelompok_id,
+                tahunanggaran_id: tahunanggaran_id,
+                resaldo: resaldo,
+                terealisasi: terealisasi,
+                noref: noref
+            },
+            dataType: 'JSON',
+            beforeSend: function () {
+                $('#btn-ubah-rapb').attr('disabled', 'disabled');
+            },
+            success: function (data) {
+                if (data.status == 'gagal') {
+                    Toast.fire({
+                        type: 'error',
+                        title: ' Input data tidak valid!!!.'
+                    });
+                    if (data.rencana_error != '') {
+                        $('#rencana_error').html(data.rencana_error);
+                    } else {
+                        $('#rencana_error').html('');
+                    }
+                    if (data.kelompok_error != '') {
+                        $('#kelompok_error').html(data.kelompok_error);
+                    } else {
+                        $('#kelompok_error').html('');
+                    }
+                    if (data.anggaran_error != '') {
+                        $('#anggaran_error').html(data.anggaran_error);
+                    } else {
+                        $('#anggaran_error').html('');
+                    }
+                    if (data.resaldo_error != '') {
+                        $('#resaldo_error').html(data.resaldo_error);
+                    } else {
+                        $('#resaldo_error').html('');
+                    }
+                    $('#rencana').trigger('focus');
+                } else {
+                    Toast.fire({
+                        type: 'success',
+                        title: ' Data berhasil diubah!'
+                    });
+                    $('#modal-rapb').modal('hide');
+                    //dataTable.ajax.reload();
+                }
+                $('#btn-ubah-rapb').attr('disabled', false);
+            }
+        });
+        return false;
+    });
+    // end ajax tombol modal ubah rapb
+
+
+    // -------------------------------------/RAPB-------------------------
+
+
+
+
+
+
 
 
     // ---------------------/TES---------------------------
 });
+ // $('#btn-tes-modal').on('click', function (e) {
+    //     e.preventDefault();
+    //     $('#modal-rapb-pendapatan').modal('show');
+    // });
 // error: function (jqXHR, textStatus, errorThrown) {
 //     alert('Error get data from ajax');
 // }
-
+//------PENTING 
+// onclick="return false;" // fungsi pada tag html untuk disable aksi
+//------PENTING 
 //------LOAD VIEW 
 // $.ajax({
         //     type: "POST",
@@ -351,7 +638,7 @@ $(document).ready(function () {
         //     title: ' Input data tidak valid!!!.' + nobukti + '-' + tanggal_transaksi + '-' + notran + '-' + tahun_pembukuan_id + '-' + jurnal + '-' + unit_id + '-' + keterangan
         // });
 // Toast.fire({
-//     type: 'error',
+//     type: 'success',
 //     title: ' simpan!!!.'
 // });
 // js mengambil nilai atribut sebuah tag

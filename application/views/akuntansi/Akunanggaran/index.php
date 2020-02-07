@@ -42,8 +42,8 @@
                             <table class="table table-bordered table-hover">
                                 <thead>
                                     <tr class="">
-                                        <td width="5%" class="text-center">No</td>
-                                        <td colspan="3">Kode Anggaran</td>
+                                        <td class="text-center" style="color: grey" width="5%"><i class="fas fa-cog"></i></td>
+                                        <td colspan="3">Kegiatan Anggaran</td>
                                         <td width="10%" class="text-center">Posisi</td>
                                         <td class="text-center" style="color: grey" width="10%"><i class="fas fa-cog"></i></td>
                                     </tr>
@@ -56,7 +56,7 @@
                                             $idKelompok = $dataKelompok['id'];
                                     ?>
                                             <tr class="bg-light">
-                                                <td class="text-center">
+                                                <td class="text-center" width="5%">
                                                     <a href="" class="btn-tambah-anggaran" data-idkelompok="<?= $dataKelompok['id'] ?>" data-info="<?= $dataKelompok['kelompok'] ?>" data-toggle="tooltip" data-placement="bottom" title="Anggaran baru"><i class="fas fa-file-alt" style="color: teal"></i></a>
                                                 </td>
                                                 <td colspan="5"><?= $dataKelompok['kelompok'] ?></td>
@@ -69,7 +69,7 @@
                                             ?>
                                                     <tr>
                                                         <td></td>
-                                                        <td width="5%">
+                                                        <td width="5%" class="text-center">
                                                             <a href="" class="btn-tambah-akunanggaran" data-id="<?= $dataSubakun['id']; ?>" data-info="<?= $dataSubakun['anggaran']; ?>" data-toggle="tooltip" data-placement="bottom" title="Tambah Kodeperkiraan"><i class="fas fa-file-alt" style="color: teal"></i></a>
                                                         </td>
                                                         <td colspan="2"><?= $dataSubakun['anggaran']; ?></td>
@@ -88,7 +88,10 @@
                                                             <tr>
                                                                 <td></td>
                                                                 <td></td>
-                                                                <td><?= $dataDaftar['level6']; ?></td>
+                                                                <td colspan="3"><?= $dataDaftar['a6level_id']; ?> - <?= $dataDaftar['level6']; ?></td>
+                                                                <td class="text-center">
+                                                                    <a href="" class="btn-hapus-akunanggaran" data-id="<?= $dataDaftar['id']; ?>" data-info="<?= $dataDaftar['level6']; ?>" data-toggle="tooltip" data-placement="bottom" title="Hapus"> <i class="far fa-trash-alt" style="color: maroon"></i></a>
+                                                                </td>
                                                             </tr>
                                             <?php
                                                         endforeach;
@@ -96,9 +99,6 @@
                                                 endforeach;
                                             }
                                             ?>
-
-
-
 
                                         <?php
                                         //$no++;
