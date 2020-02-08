@@ -40,14 +40,17 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body" id="tabel-data">
-                            <table id="tabel1" class="table table-bordered table-striped">
+                            <?php
+                            //var_dump($kelas);
+                            ?>
+                            <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <td width="8%" class="text-center">No</td>
-                                        <td width="10%">Kelas</td>
-                                        <td>Tahun Akademik</td>
-                                        <td>Prodi</td>
-                                        <td>Tingkat</td>
+                                        <td width="5%" class="text-center">No</td>
+                                        <td width="8%">Kode</td>
+                                        <td width="20%">Prodi</td>
+                                        <td width="8%">Angkatan</td>
+                                        <td>Keterangan</td>
                                         <td width="10%" class="text-center" style="color: grey"><i class="fas fa-cog"></i></td>
                                     </tr>
                                 </thead>
@@ -61,12 +64,11 @@
 
                                             <tr>
                                                 <td class="text-center"><?= $no; ?></td>
-                                                <td><?= $dataKelas['kelas']; ?></td>
-                                                <td><?= $dataKelas['keterangan']; ?></td>
+                                                <td><?= $dataKelas['id']; ?></td>
                                                 <td><?= $dataKelas['prodi']; ?></td>
-                                                <td><?= $dataKelas['tingkat']; ?></td>
-                                                <td class="text-center"><a href="<?= site_url('akademik/kelas/detail/' . $idKelas); ?>" data-id="<?= $dataKelas['id']; ?>" data-toggle="tooltip" data-placement="bottom" title="Detail Kelas"><i class="far fa-list-alt" style="color: teal"></i></a>
-                                                    - <a href="" class="btn-edit-kelas" data-id="<?= $idKelas; ?>" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fas fa-edit" style="color: olive"></i></a> - <a href="" class="btn-hapus-kelas" data-id="<?= $idKelas; ?>" data-info="<?= $dataKelas['kelas']; ?>" data-toggle="tooltip" data-placement="bottom" title="Hapus"> <i class="far fa-trash-alt" style="color: maroon"></i></a></td>
+                                                <td><?= $dataKelas['angkatan']; ?></td>
+                                                <td><?= $dataKelas['keterangan']; ?></td>
+                                                <td class="text-center"><a href="" class="btn-edit-kelas" data-id="<?= $idKelas; ?>" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fas fa-edit" style="color: olive"></i></a> - <a href="" class="btn-hapus-kelas" data-id="<?= $idKelas; ?>" data-info="<?= $dataKelas['keterangan']; ?>" data-toggle="tooltip" data-placement="bottom" title="Hapus"> <i class="far fa-trash-alt" style="color: maroon"></i></a></td>
                                             </tr>
                                     <?php
                                             $no++;

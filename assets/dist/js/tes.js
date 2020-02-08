@@ -336,7 +336,6 @@ $(document).ready(function () {
         $('[name="tahunanggaran_id"]').val(tahunanggaran_id);
         $('#modal-rapb').modal('show');
     });
-
     // end tombol tambah rapb table
     // combo anggaran klik modal rencana anggaran
     $('#rapb-kelompok-id').change(function () {
@@ -476,7 +475,6 @@ $(document).ready(function () {
         var id = $(this).data('id');
         var idKel = $(this).data('idkel');
         var anggaran_id = $(this).data('idanggaran');
-        //var alamat = base_url + 'akuntansi/rapb/ajax_edit/' + id + '/' + idKel;
         $('#btn-simpan-rapb').hide();
         $.ajax({
             url: base_url + 'akuntansi/rapb/ajax_edit',
@@ -491,14 +489,10 @@ $(document).ready(function () {
                 $('[name="kelompok_id"]').val(data.kelompok_id);
                 $('[name="rencana"]').val(data.rencana);
                 $('[name="idubah"]').val(data.id);
-                //$('[name="anggaran_id"]').val(data.anggaran_id).trigger('change');
                 $('[name="tahunanggaran_id"]').val(data.tahunanggaran_id);
                 $('[name="resaldo"]').val(data.resaldo);
                 $('[name="terealisasi"]').val(data.terealisasi);
                 $('[name="noref"]').val(data.noref);
-                //$('[name="anggaran_id"]').val(data.anggaran_id).trigger('change');
-                // $('#modal-rapb').modal('show');
-                // $('#rencana').trigger('focus');
                 $.ajax({
                     url: base_url + "akuntansi/rapb/anggarandataedit",
                     method: "POST",
@@ -514,10 +508,6 @@ $(document).ready(function () {
                 })
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                // Toast.fire({
-                //     type: 'success',
-                //     title: ' simpan!!!.' + alamat
-                // });
                 alert('Error get data from ajax');
             }
         });
@@ -584,7 +574,6 @@ $(document).ready(function () {
                         title: ' Data berhasil diubah!'
                     });
                     $('#modal-rapb').modal('hide');
-                    //dataTable.ajax.reload();
                 }
                 $('#btn-ubah-rapb').attr('disabled', false);
             }
@@ -592,8 +581,6 @@ $(document).ready(function () {
         return false;
     });
     // end ajax tombol modal ubah rapb
-
-
     // -------------------------------------/RAPB-------------------------
 
 
@@ -916,3 +903,33 @@ $(document).ready(function () {
     //     });
     // });
     //end ajax tombol edit data table level5 klik
+
+    // combo anggaran klik modal rencana anggaran
+//----------------------------------AUTO COMPLETE KOMBOBOX----------------------------
+    // $('#rapb-kelompok-id').change(function () {
+    //     var kelompok_id = $('[name="kelompok_id"]').val();
+    //     var anggaran_id = $('[name="idanggaran"]').val();
+    //     if (kelompok_id != '') {
+    //         $.ajax({
+    //             cache: false,
+    //             method: "POST",
+    //             url: base_url + "akuntansi/rapb/anggarandata",
+    //             data: {
+    //                 kelompok_id: kelompok_id,
+    //                 anggaran_id: anggaran_id
+    //             },
+    //             success: function (data) {
+    //                 $("#rapb-anggaran-id").html(data);
+    //             }
+
+    //         });
+    //     }
+    // });
+    // end combo anggaran klik modal rencana anggaran
+
+
+
+    // Toast.fire({
+    //     type: 'warning',
+    //     title: 'Sesi login habis!!refresh halaman dan login kembali!!!.'
+    // });

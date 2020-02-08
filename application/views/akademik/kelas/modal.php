@@ -11,27 +11,13 @@
                 <form id="form-kelas" class="form-horizontal">
                     <div class="modal-body card-body">
                         <div class="form-group">
-                            <label for="kelas" class="control-label">
-                                Kelas
+                            <label for="id" class="control-label">
+                                Kode Kelas
                             </label>
                             <div>
                                 <input type="hidden" id="idubah" name="idubah">
-                                <input type="text" name="kelas" class="form-control" id="kelas" autocomplete="off" placeholder="Kode kelas">
-                                <span id="kelas_error" class="text-danger"></span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="akademik_id" class="control-label">Tahun Ajaran</label>
-                            <div>
-                                <select id="akademik_id" name="akademik_id" class="form-control">
-                                    <option value="">- Pilih -</option>
-                                    <?php
-                                    foreach ($akademik as $dataAkademik) :
-                                    ?>
-                                        <option value="<?= $dataAkademik['id']; ?>"><?= $dataAkademik['keterangan']; ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                                <span id="akademik_error" class="text-danger"></span>
+                                <input type="text" name="id" class="form-control" id="id" autocomplete="off" placeholder="Kode kelas">
+                                <span id="kode_error" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="form-group">
@@ -42,24 +28,33 @@
                                     <?php
                                     foreach ($prodi as $dataProdi) :
                                     ?>
-                                        <option value="<?= $dataProdi['id']; ?>"><?= $dataProdi['prodi']; ?></option>
+                                        <option value="<?= $dataProdi['id']; ?>"><?= $dataProdi['id']; ?> - <?= $dataProdi['prodi']; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                                 <span id="prodi_error" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="tingkat_id" class="control-label">Tingkat</label>
+                            <label for="angkatan_id" class="control-label">Angkatan</label>
                             <div>
-                                <select id="tingkat_id" name="tingkat_id" class="form-control">
+                                <select id="angkatan_id" name="angkatan_id" class="form-control">
                                     <option value="">- Pilih -</option>
                                     <?php
-                                    foreach ($tingkat as $dataTingkat) :
+                                    foreach ($angkatan as $dataAngkatan) :
                                     ?>
-                                        <option value="<?= $dataTingkat['id']; ?>"><?= $dataTingkat['tingkat']; ?></option>
+                                        <option value="<?= $dataAngkatan['id']; ?>"><?= $dataAngkatan['angkatan']; ?></option>
                                     <?php endforeach; ?>
                                 </select>
-                                <span id="tingkat_error" class="text-danger"></span>
+                                <span id="angkatan_error" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="keterangan" class="control-label">
+                                Keterangan
+                            </label>
+                            <div>
+                                <input type="text" name="keterangan" class="form-control" id="keterangan" autocomplete="off" placeholder="Keterangan">
+                                <span id="keterangan_error" class="text-danger"></span>
                             </div>
                         </div>
                     </div>

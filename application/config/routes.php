@@ -85,6 +85,7 @@ $route['jurusan'] = 'akademik/jurusan';
 $route['tingkat'] = 'akademik/tingkat';
 $route['prodi'] = 'akademik/prodi';
 $route['tahunajaran'] = 'akademik/tahunajaran';
+$route['tahunakademik'] = 'akademik/tahunakademik';
 $route['detailtahunajaran'] = 'akademik/detailtahunajaran';
 $route['mahasiswa'] = 'akademik/mahasiswa';
 $route['kelas'] = 'akademik/kelas';

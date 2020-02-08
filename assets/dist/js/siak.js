@@ -1670,7 +1670,6 @@ $(document).ready(function () {
         const jenis_transaksi = $('[name="jenis_transaksi"]').val();
         // const is_active = $('[name="is_active"]').val();
         $.ajax({
-
             type: "POST",
             url: base_url + "akuntansi/jenistransaksi/simpan",
             data: {
@@ -2337,8 +2336,8 @@ $(document).ready(function () {
         return false;
     });
     // end btn simpan akunanggaran
-     // ajax icon hapus table anggaran klik
-     $('.btn-hapus-akunanggaran').on('click', function (e) {
+    // ajax icon hapus table anggaran klik
+    $('.btn-hapus-akunanggaran').on('click', function (e) {
         e.preventDefault();
         var id = $(this).data('id');
         var info = $(this).data('info');
@@ -4496,7 +4495,7 @@ $(document).ready(function () {
 
     //set focus input kelas saat modal muncul
     $('#modal-kelas').on('shown.bs.modal', function () {
-        $('#kelas').trigger('focus');
+        $('#id').trigger('focus');
     })
     //set focus input kelas saat modal muncul
     // tombol tambah kelas table
@@ -4512,18 +4511,18 @@ $(document).ready(function () {
     $('#btn-simpan-kelas').on('click', function (e) {
         e.preventDefault();
         //const id = $('[name="id"]').val();
-        const kelas = $('[name="kelas"]').val();
+        const id = $('[name="id"]').val();
         const prodi_id = $('[name="prodi_id"]').val();
-        const akademik_id = $('[name="akademik_id"]').val();
-        const tingkat_id = $('[name="tingkat_id"]').val();
+        const angkatan_id = $('[name="angkatan_id"]').val();
+        const keterangan = $('[name="keterangan"]').val();
         $.ajax({
             type: "POST",
             url: base_url + "akademik/kelas/simpan",
             data: {
-                kelas: kelas,
+                id: id,
                 prodi_id: prodi_id,
-                akademik_id: akademik_id,
-                tingkat_id: tingkat_id
+                angkatan_id: angkatan_id,
+                keterangan: keterangan
             },
             dataType: "JSON",
             beforeSend: function () {
@@ -4535,27 +4534,27 @@ $(document).ready(function () {
                         type: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
-                    if (data.kelas_error != '') {
-                        $('#kelas_error').html(data.kelas_error);
+                    if (data.kode_error != '') {
+                        $('#kode_error').html(data.kode_error);
                     } else {
-                        $('#kelas_error').html('');
+                        $('#kode_error').html('');
                     }
-                    if (data.akademik_error != '') {
-                        $('#akademik_error').html(data.akademik_error);
+                    if (data.angkatan_error != '') {
+                        $('#angkatan_error').html(data.angkatan_error);
                     } else {
-                        $('#akademik_error').html('');
+                        $('#angkatan_error').html('');
                     }
                     if (data.prodi_error != '') {
                         $('#prodi_error').html(data.prodi_error);
                     } else {
                         $('#prodi_error').html('');
                     }
-                    if (data.tingkat_error != '') {
-                        $('#tingkat_error').html(data.tingkat_error);
+                    if (data.keterangan_error != '') {
+                        $('#keterangan_error').html(data.keterangan_error);
                     } else {
-                        $('#tingkat_error').html('');
+                        $('#keterangan_error').html('');
                     }
-                    $('#kelas').trigger('focus');
+                    $('#id').trigger('focus');
                 } else {
                     Toast.fire({
                         type: 'success',
@@ -4585,10 +4584,6 @@ $(document).ready(function () {
             confirmButtonText: 'Hapus'
         }).then((result) => {
             if (result.value) {
-                // Toast.fire({
-                //     type: 'success',
-                //     title: id + "-" + info
-                // });
                 $.ajax({
                     type: "POST",
                     url: base_url + "akademik/kelas/hapus",
@@ -4630,14 +4625,17 @@ $(document).ready(function () {
             dataType: "JSON",
             success: function (data) {
                 $('[name="idubah"]').val(data.id);
-                $('[name="kelas"]').val(data.kelas);
-                $('[name="akademik_id"]').val(data.akademik_id);
+                $('[name="id"]').val(data.id);
+                $('[name="angkatan_id"]').val(data.angkatan_id);
                 $('[name="prodi_id"]').val(data.prodi_id);
-                $('[name="tingkat_id"]').val(data.tingkat_id);
+                $('[name="keterangan"]').val(data.keterangan);
                 $('#modal-kelas').modal('show');
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                alert('Error get data from ajax');
+                Toast.fire({
+                    type: 'warning',
+                    title: 'Sesi login habis!!refresh halaman dan login kembali!!!.'
+                });
             }
         });
     });
@@ -4646,19 +4644,18 @@ $(document).ready(function () {
     $('#btn-ubah-kelas').on('click', function (e) {
         e.preventDefault();
         const idubah = $('[name="idubah"]').val();
-        const kelas = $('[name="kelas"]').val();
+        // const id = $('[name="id"]').val();
         const prodi_id = $('[name="prodi_id"]').val();
-        const akademik_id = $('[name="akademik_id"]').val();
-        const tingkat_id = $('[name="tingkat_id"]').val();
+        const angkatan_id = $('[name="angkatan_id"]').val();
+        const keterangan = $('[name="keterangan"]').val();
         $.ajax({
             type: "POST",
-            url: base_url + "akademik/kelas/ubah/" + idubah,
+            url: base_url + "akademik/kelas/ubah",
             data: {
                 idubah: idubah,
-                kelas: kelas,
                 prodi_id: prodi_id,
-                akademik_id: akademik_id,
-                tingkat_id: tingkat_id
+                angkatan_id: angkatan_id,
+                keterangan: keterangan
             },
             dataType: 'JSON',
             beforeSend: function () {
@@ -4670,27 +4667,22 @@ $(document).ready(function () {
                         type: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
-                    if (data.kelas_error != '') {
-                        $('#kelas_error').html(data.kelas_error);
+                    if (data.angkatan_error != '') {
+                        $('#angkatan_error').html(data.angkatan_error);
                     } else {
-                        $('#kelas_error').html('');
-                    }
-                    if (data.akademik_error != '') {
-                        $('#akademik_error').html(data.akademik_error);
-                    } else {
-                        $('#akademik_error').html('');
+                        $('#angkatan_error').html('');
                     }
                     if (data.prodi_error != '') {
                         $('#prodi_error').html(data.prodi_error);
                     } else {
                         $('#prodi_error').html('');
                     }
-                    if (data.tingkat_error != '') {
-                        $('#tingkat_error').html(data.tingkat_error);
+                    if (data.keterangan_error != '') {
+                        $('#keterangan_error').html(data.keterangan_error);
                     } else {
-                        $('#tingkat_error').html('');
+                        $('#keterangan_error').html('');
                     }
-                    $('#kelas').trigger('focus');
+                    $('#prodi').trigger('focus');
                 } else {
                     Toast.fire({
                         type: 'success',
