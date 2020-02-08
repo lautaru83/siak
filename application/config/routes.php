@@ -84,12 +84,13 @@ $route['semester'] = 'akademik/semester';
 $route['jurusan'] = 'akademik/jurusan';
 $route['tingkat'] = 'akademik/tingkat';
 $route['prodi'] = 'akademik/prodi';
-$route['tahunajaran'] = 'akademik/tahunajaran';
 $route['tahunakademik'] = 'akademik/tahunakademik';
+$route['periodeakademik'] = 'akademik/periodeakademik';
 $route['detailtahunajaran'] = 'akademik/detailtahunajaran';
 $route['mahasiswa'] = 'akademik/mahasiswa';
 $route['kelas'] = 'akademik/kelas';
 $route['detailkelas'] = 'akademik/kelas/detail';
+$route['tahunajaran'] = 'akademik/tahunajaran';
 // --------------- operasional -----------------------------
 $route['kewajiban'] = 'operasional/kewajiban';
 $route['aturbayar'] = 'operasional/aturbayar';

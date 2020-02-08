@@ -21,7 +21,7 @@ class Tahunakademik_model extends CI_Model
     }
     public function cek_hapus($id)
     {
-        return $this->db3->get_where('akademiks', ['tahun_ajaran_id' => $id])->num_rows();
+        return $this->db3->get_where('periodeakademiks', ['tahunakademik_id' => $id])->num_rows();
     }
     public function cek_id($id) // cek uniq id
     {
@@ -31,40 +31,42 @@ class Tahunakademik_model extends CI_Model
     {
         $this->db3->delete('tahunakademiks', ['id' => $id]);
         $log_type = "hapus";
-        $log_desc = "hapus Tahun ajaran - $info";
+        $log_desc = "hapus Tahun akademik - $info";
         userLog($log_type, $log_desc);
     }
     public function simpan()
     {
-        //$id = $this->input->post('id');
+        $id = $this->input->post('id');
+        // $tahunakademik = $this->input->post('tahunakademik');
         $awal_periode = tanggal_input($this->input->post('awal_periode'));
         $akhir_periode = tanggal_input($this->input->post('akhir_periode'));
-        $tahun_ajaran = htmlspecialchars($this->input->post('tahun_ajaran'));
+        $tahunakademik = htmlspecialchars($this->input->post('tahunakademik'));
         $data = array(
-            'tahun_ajaran' => $tahun_ajaran,
+            'id' => $id,
+            'tahunakademik' => $tahunakademik,
             'awal_periode' => $awal_periode,
             'akhir_periode' => $akhir_periode,
             'is_active' => 0
         );
         $this->db3->insert('tahunakademiks', $data);
         $log_type = "tambah";
-        $log_desc = "tambah Tahun ajaran -  $tahun_ajaran - $awal_periode - $akhir_periode";
+        $log_desc = "tambah Tahun akademik -  $id - $tahunakademik - $awal_periode - $akhir_periode";
         userLog($log_type, $log_desc);
     }
     public function ubah($id)
     {
         $awal_periode = tanggal_input($this->input->post('awal_periode'));
         $akhir_periode = tanggal_input($this->input->post('akhir_periode'));
-        $tahun_ajaran = htmlspecialchars($this->input->post('tahun_ajaran'));
+        $tahunakademik = htmlspecialchars($this->input->post('tahunakademik'));
         $data = array(
-            'tahun_ajaran' => $tahun_ajaran,
+            'tahunakademik' => $tahunakademik,
             'awal_periode' => $awal_periode,
             'akhir_periode' => $akhir_periode
         );
         $this->db3->where('id', $id);
         $this->db3->update('tahunakademiks', $data);
         $log_type = "ubah";
-        $log_desc = "ubah Tahun ajaran -  $tahun_ajaran - $awal_periode - $akhir_periode";
+        $log_desc = "ubah Tahun akademik -  $tahunakademik - $awal_periode - $akhir_periode";
         userLog($log_type, $log_desc);
     }
 }

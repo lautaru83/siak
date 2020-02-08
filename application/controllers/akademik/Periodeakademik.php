@@ -1,22 +1,24 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Tahunakademik extends CI_Controller
+class Periodeakademik extends CI_Controller
 {
     public function __construct()
     {
         parent::__construct();
         is_logged_in();
         $this->db3 = $this->load->database('akademik', TRUE);
-        $this->load->model(array('akademik/Tahunakademik_model' => 'Tahunakademik_model'));
+        $this->load->model(array('akademik/Tahunakademik_model' => 'Tahunakademik_model', 'akademik/Periodeakademik_model' => 'Periodeakademik_model', 'akademik/Semester_model' => 'Semester_model'));
     }
     public function index()
     {
         //echo "Angkatan";
         $data['kontenmenu'] = "Master Akademik";
-        $data['kontensubmenu'] = "Tahun Akademik";
-        $data['tahunakademik'] = $this->Tahunakademik_model->ambil_data();
-        $this->template->display('akademik/tahunakademik/index', $data);
+        $data['kontensubmenu'] = "Periode Akademik";
+        $data['tahunakademik'] = $this->Tahunakademik_model->data_fk();
+        $data['semester'] = $this->Semester_model->data_fk();
+        $data['periodeakademik'] = $this->Periodeakademik_model->ambil_data();
+        $this->template->display('akademik/Periodeakademik/index', $data);
     }
     public function simpan()
     {
@@ -27,10 +29,12 @@ class Tahunakademik extends CI_Controller
                 'kode_error' => form_error('id'),
                 'awal_periode_error' => form_error('awal_periode'),
                 'akhir_periode_error' => form_error('akhir_periode'),
-                'tahunakademik_error' => form_error('tahunakademik')
+                'semester_error' => form_error('semester_id'),
+                'tahunakademik_error' => form_error('tahunakademik_id'),
+                'keterangan_error' => form_error('keterangan')
             );
         } else {
-            $this->Tahunakademik_model->simpan();
+            $this->Periodeakademik_model->simpan();
             $data = array(
                 'status' => 'sukses'
             );
@@ -41,13 +45,13 @@ class Tahunakademik extends CI_Controller
     {
         $id = $this->input->post('id');
         $info = $this->input->post('info');
-        $hasil = $this->Tahunakademik_model->cek_hapus($id);
+        $hasil = $this->Periodeakademik_model->cek_hapus($id);
         if ($hasil > 0) {
             $data = array(
                 'status' => 'gagal'
             );
         } else {
-            $this->Tahunakademik_model->hapus($id, $info);
+            $this->Periodeakademik_model->hapus($id, $info);
             $data = array(
                 'status' => 'sukses'
             );
@@ -56,14 +60,16 @@ class Tahunakademik extends CI_Controller
     }
     public function ajax_edit($id)
     {
-        $hasil = $this->Tahunakademik_model->ambil_data_id($id);
+        $hasil = $this->Periodeakademik_model->ambil_data_id($id);
         if ($hasil) {
             $data = array(
                 'status' => 'sukses',
                 'id' => $hasil['id'],
-                'awal_periode' => tanggal_indo($hasil['awal_periode']),
-                'akhir_periode' => tanggal_indo($hasil['akhir_periode']),
-                'tahunakademik' => $hasil['tahunakademik']
+                'tahunakademik_id' => $hasil['tahunakademik_id'],
+                'semester_id' => $hasil['semester_id'],
+                'keterangan' => $hasil['keterangan'],
+                'awal_periode' => tanggal_indo($hasil['awal_semester']),
+                'akhir_periode' => tanggal_indo($hasil['akhir_semester'])
             );
         } else {
             $data = array(
@@ -81,10 +87,12 @@ class Tahunakademik extends CI_Controller
                 'status' => 'gagal',
                 'awal_periode_error' => form_error('awal_periode'),
                 'akhir_periode_error' => form_error('akhir_periode'),
-                'tahunakademik_error' => form_error('tahunakademik')
+                'semester_error' => form_error('semester_id'),
+                'tahunakademik_error' => form_error('tahunakademik_id'),
+                'keterangan_error' => form_error('keterangan')
             );
         } else {
-            $this->Tahunakademik_model->ubah($id);
+            $this->Periodeakademik_model->ubah($id);
             $data = array(
                 'status' => 'sukses'
             );
@@ -94,7 +102,7 @@ class Tahunakademik extends CI_Controller
     public function cek_unik()
     {
         $id = $this->input->post('id');
-        $hasil = $this->Tahunakademik_model->cek_id($id);
+        $hasil = $this->Periodeakademik_model->cek_id($id);
         if ($hasil > 0) {
             return false;
         } else {
@@ -104,11 +112,13 @@ class Tahunakademik extends CI_Controller
     private function _validate()
     {
         if (!$this->input->post('idubah')) {
-            $this->form_validation->set_rules('id', 'Kode', 'required|trim|exact_length[4]|callback_cek_unik', [
+            $this->form_validation->set_rules('id', 'Kode', 'required|trim|exact_length[6]|callback_cek_unik', [
                 'cek_unik' => 'Kode telah digunakan oleh data lain !'
             ]);
         }
-        $this->form_validation->set_rules('tahunakademik', 'Tahun Akademik', 'required|trim');
+        $this->form_validation->set_rules('tahunakademik_id', 'Tahun Akademik', 'required|trim');
+        $this->form_validation->set_rules('semester_id', 'Semester', 'required|trim');
+        $this->form_validation->set_rules('keterangan', 'Keterangan', 'required|trim');
         $this->form_validation->set_rules('awal_periode', 'Awal Periode', 'required|trim');
         $this->form_validation->set_rules('akhir_periode', 'Akhir Periode', 'required|trim');
     }

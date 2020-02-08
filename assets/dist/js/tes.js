@@ -582,6 +582,242 @@ $(document).ready(function () {
     });
     // end ajax tombol modal ubah rapb
     // -------------------------------------/RAPB-------------------------
+    // -------------------------------------/PERIODE AKADEMIK-------------------------
+    //set focus input periodeakademik saat modal muncul
+    $('#modal-periodeakademik').on('shown.bs.modal', function () {
+        $('#id').trigger('focus');
+    })
+    //set focus input periodeakademik saat modal muncul
+    // tombol tambah periodeakademik table
+    $('#btn-tambah-periodeakademik').on('click', function (e) {
+        e.preventDefault();
+        const judul = document.getElementById('judul-modal');
+        judul.innerHTML = 'Tambah Data Periode Akademik';
+        $('#btn-ubah-periodeakademik').hide();
+        $('#modal-periodeakademik').modal('show');
+    });
+    // end tombol tambah periodeakademik table
+    // ajax tombol Simpan modal periodeakademik
+    $('#btn-simpan-periodeakademik').on('click', function (e) {
+        e.preventDefault();
+        const id = $('[name="id"]').val();
+        const tahunakademik_id = $('[name="tahunakademik_id"]').val();
+        const semester_id = $('[name="semester_id"]').val();
+        const keterangan = $('[name="keterangan"]').val();
+        const awalPeriode = $('[name="awal_periode"]').val();
+        const akhirPeriode = $('[name="akhir_periode"]').val();
+        $.ajax({
+            type: "POST",
+            url: base_url + "akademik/periodeakademik/simpan",
+            data: {
+                id: id,
+                tahunakademik_id: tahunakademik_id,
+                semester_id: semester_id,
+                keterangan: keterangan,
+                awal_periode: awalPeriode,
+                akhir_periode: akhirPeriode
+            },
+            dataType: "JSON",
+            beforeSend: function () {
+                $('#btn-simpan-periodeakademik').attr('disabled', 'disabled');
+            },
+            success: function (data) {
+                if (data.status == 'gagal') {
+                    Toast.fire({
+                        type: 'error',
+                        title: ' Input data tidak valid!!!.'
+                    });
+                    if (data.kode_error != '') {
+                        $('#kode_error').html(data.kode_error);
+                    } else {
+                        $('#kode_error').html('');
+                    }
+                    if (data.tahunakademik_error != '') {
+                        $('#tahunakademik_error').html(data.tahunakademik_error);
+                    } else {
+                        $('#tahunakademik_error').html('');
+                    }
+                    if (data.semester_error != '') {
+                        $('#semester_error').html(data.semester_error);
+                    } else {
+                        $('#semester_error').html('');
+                    }
+                    if (data.keterangan_error != '') {
+                        $('#keterangan_error').html(data.keterangan_error);
+                    } else {
+                        $('#keterangan_error').html('');
+                    }
+                    if (data.awal_periode_error != '') {
+                        $('#awal_periode_error').html(data.awal_periode_error);
+                    } else {
+                        $('#awal_periode_error').html('');
+                    }
+                    if (data.akhir_periode_error != '') {
+                        $('#akhir_periode_error').html(data.akhir_periode_error);
+                    } else {
+                        $('#akhir_periode_error').html('');
+                    }
+                    $('#id').trigger('focus');
+                } else {
+                    Toast.fire({
+                        type: 'success',
+                        title: ' Data berhasil disimpan.'
+                    });
+                    $('#modal-periodeakademik').modal('hide');
+                }
+                $('#btn-simpan-periodeakademik').attr('disabled', false);
+            }
+        });
+        return false;
+    });
+    //end  ajax tombol Simpan modal periodeakademik
+    // ajax icon hapus table periodeakademik klik
+    $('.btn-hapus-periodeakademik').on('click', function (e) {
+        e.preventDefault();
+        var id = $(this).data('id');
+        var info = $(this).data('info');
+        Swal.fire({
+            title: 'Konfirmasi!',
+            text: 'Apakah anda yakin akan menghapus Periode Akademik -' + info + '- !?!',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'Batal',
+            confirmButtonText: 'Hapus'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    type: "POST",
+                    url: base_url + "akademik/periodeakademik/hapus/",
+                    data: {
+                        id: id,
+                        info: info
+                    },
+                    dataType: 'JSON',
+                    success: function (data) {
+                        if (data.status == 'sukses') {
+                            Toast.fire({
+                                type: 'success',
+                                title: ' Data berhasil dihapus!!!.'
+                            });
+                            document.location.reload();
+                        } else {
+                            Toast.fire({
+                                type: 'warning',
+                                title: ' Penghapusan dibatalkan, data sedang digunakan oleh system!!!.'
+                            });
+                        }
+                    }
+                });
+            }
+        })
+    });
+    // end ajax icon hapus table periodeakademik klik
+    // ajax tombol edit data table periodeakademik klik
+    $('.btn-edit-periodeakademik').on('click', function (e) {
+        e.preventDefault();
+        const judul = document.getElementById('judul-modal');
+        judul.innerHTML = 'Ubah Data Periode Akademik';
+        var id = $(this).data('id');
+        $('#btn-simpan-periodeakademik').hide();
+        $('#id').attr('disabled', 'disabled');
+        $.ajax({
+            url: base_url + 'akademik/periodeakademik/ajax_edit/' + id,
+            type: "GET",
+            dataType: "JSON",
+            success: function (data) {
+                $('[name="idubah"]').val(data.id);
+                $('[name="id"]').val(data.id);
+                $('[name="tahunakademik_id"]').val(data.tahunakademik_id);
+                $('[name="semester_id"]').val(data.semester_id);
+                $('[name="keterangan"]').val(data.keterangan);
+                $('[name="awal_periode"]').val(data.awal_periode);
+                $('[name="akhir_periode"]').val(data.akhir_periode);
+                $('#modal-periodeakademik').modal('show');
+                $('#tahunakademik_id').trigger('focus');
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('Error get data from ajax');
+            }
+        });
+    });
+    //end ajax tombol edit data table periodeakademik klik
+    // ajax tombol modal ubah periodeakademik
+    $('#btn-ubah-periodeakademik').on('click', function (e) {
+        e.preventDefault();
+        const idubah = $('[name="idubah"]').val();
+        const tahunakademik_id = $('[name="tahunakademik_id"]').val();
+        const semester_id = $('[name="semester_id"]').val();
+        const keterangan = $('[name="keterangan"]').val();
+        const awalPeriode = $('[name="awal_periode"]').val();
+        const akhirPeriode = $('[name="akhir_periode"]').val();
+        $.ajax({
+            type: "POST",
+            url: base_url + "akademik/periodeakademik/ubah",
+            data: {
+                idubah: idubah,
+                tahunakademik_id: tahunakademik_id,
+                semester_id: semester_id,
+                keterangan: keterangan,
+                awal_periode: awalPeriode,
+                akhir_periode: akhirPeriode
+            },
+            dataType: 'JSON',
+            beforeSend: function () {
+                $('#btn-ubah-periodeakademik').attr('disabled', 'disabled');
+            },
+            success: function (data) {
+                if (data.status == 'gagal') {
+                    Toast.fire({
+                        type: 'error',
+                        title: ' Input data tidak valid!!!.'
+                    });
+                    if (data.tahunakademik_error != '') {
+                        $('#tahunakademik_error').html(data.tahunakademik_error);
+
+                    } else {
+                        $('#tahunakademik_error').html('');
+                    }
+                    if (data.semester_error != '') {
+                        $('#semester_error').html(data.semester_error);
+
+                    } else {
+                        $('#semester_error').html('');
+                    }
+                    if (data.keterangan_error != '') {
+                        $('#keterangan_error').html(data.keterangan_error);
+
+                    } else {
+                        $('#keterangan_error').html('');
+                    }
+                    if (data.awal_periode_error != '') {
+                        $('#awal_periode_error').html(data.awal_periode_error);
+                    } else {
+                        $('#awal_periode_error').html('');
+                    }
+                    if (data.akhir_periode_error != '') {
+                        $('#akhir_periode_error').html(data.akhir_periode_error);
+                    } else {
+                        $('#akhir_periode_error').html('');
+                    }
+                    $('#tahunakademik_id').trigger('focus');
+                } else {
+                    Toast.fire({
+                        type: 'success',
+                        title: ' Data berhasil diubah!'
+                    });
+                    $('#modal-periodeakademik').modal('hide');
+                    //dataTable.ajax.reload();
+                }
+                $('#btn-ubah-periodeakademik').attr('disabled', false);
+            }
+        });
+        return false;
+    });
+    // end ajax tombol modal ubah periodeakademik
+
+    // -------------------------------------/PERIODE AKADEMIK-------------------------
 
 
 
@@ -592,6 +828,7 @@ $(document).ready(function () {
 
     // ---------------------/TES---------------------------
 });
+// document.location.reload();
  // $('#btn-tes-modal').on('click', function (e) {
     //     e.preventDefault();
     //     $('#modal-rapb-pendapatan').modal('show');
