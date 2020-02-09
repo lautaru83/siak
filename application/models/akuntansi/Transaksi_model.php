@@ -69,8 +69,8 @@ class Transaksi_model extends CI_Model
         $unit_id = $this->input->post('unit_id');
         $tahun_buku = $this->input->post('tahun_buku');
         $jurnal = $this->input->post('jurnal');
-        //$notran = $this->input->post('notran');
-        $notran = notransaksi();
+        $noref = $this->input->post('noref');
+        $notran = no_tran($jurnal);
         $tanggal_transaksi = tanggal_input($this->input->post('tanggal_transaksi'));
         $keterangan = htmlspecialchars($this->input->post('keterangan'));
         $nobukti = htmlspecialchars($this->input->post('nobukti'));
@@ -79,6 +79,7 @@ class Transaksi_model extends CI_Model
             'jurnal' => $jurnal,
             'notran' => $notran,
             'nobukti' => $nobukti,
+            'noref' => $noref,
             'tanggal_transaksi' => $tanggal_transaksi,
             'accounting' => $accounting,
             'keterangan' => $keterangan,
@@ -92,6 +93,7 @@ class Transaksi_model extends CI_Model
     public function ubah($id)
     {
         $unit_id = $this->input->post('unit_id');
+        $noref = $this->input->post('noref');
         $tanggal_transaksi = tanggal_input($this->input->post('tanggal_transaksi'));
         $keterangan = htmlspecialchars($this->input->post('keterangan'));
         $nobukti = htmlspecialchars($this->input->post('nobukti'));
@@ -99,6 +101,7 @@ class Transaksi_model extends CI_Model
             'nobukti' => $nobukti,
             'tanggal_transaksi' => $tanggal_transaksi,
             'keterangan' => $keterangan,
+            'noref' => $noref,
             'unit_id' => $unit_id
         );
         $this->db2->where('id', $id);
@@ -159,6 +162,12 @@ class Transaksi_model extends CI_Model
         $a6level_id = $this->input->post('a6level_id');
         $posisi = $this->input->post('posisi_akun');
         $jumlah = input_uang($this->input->post('jumlah'));
+        $jurnal = $this->input->post('idjt');
+        $is_anggaran = "";
+        if ($jurnal <> "NN") {
+            $is_anggaran = 1;
+        }
+
         if ($posisi == "D") {
             $debet = $jumlah;
             $kredit = 0;
@@ -172,6 +181,7 @@ class Transaksi_model extends CI_Model
             'posisi_akun' => $posisi,
             'debet' => $debet,
             'kredit' => $kredit,
+            'is_anggaran' => $is_anggaran,
             'jumlah' => $jumlah
         );
         $this->db2->insert('detail_transaksis', $data);

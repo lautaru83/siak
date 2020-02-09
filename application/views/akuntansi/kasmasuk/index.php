@@ -29,7 +29,7 @@
                         <div class="card-header bg-gradient-light">
                             <div>
                                 <h4 class="card-title">
-                                    <a class="text-reset" id="kas-masuk">Form Transaksi </a>
+                                    <a class="text-reset" id="kas-masuk">Tahun Pembukuan <?= $pembukuan_id ?> </a>
                                 </h4>
                             </div>
                             <div class="float-right">
@@ -58,6 +58,7 @@
                                             <input type="hidden" id="jurnal" name="jurnal" value="<?= $jurnal; ?>">
                                             <input type="hidden" id="status" name="status" value="<?= $status; ?>">
                                             <input type="hidden" id="tran_id" name="tran_id" value="<?= $tran_id; ?>">
+                                            <input type="hidden" id="tahun_pembukuan_id" name="tahun_pembukuan_id" value="<?= $pembukuan_id; ?>">
                                             <input type="text" name="tanggal_transaksi" id="tanggal_transaksi" class="form-control" autocomplete="off" tabindex="1" value="<?= $tanggal_transaksi; ?>">
                                             <span id="tanggal_error" class="text-danger"></span>
                                         </div>
@@ -74,20 +75,21 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
+                                        <label class="font-weight-normal">No. Referensi</label>
+                                        <div class="">
+                                            <input type="text" name="noref" class="form-control" id="noref" value="<?= $noref; ?>" tabindex="3">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
                                         <label class="font-weight-normal">No. Transaksi</label>
                                         <div class="">
                                             <input type="text" name="notran" class="form-control" id="notran" value="<?= $notran; ?>" disabled="disabled">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-3">
-                                    <div class="form-group">
-                                        <label class="font-weight-normal">Th. Pembukuan</label>
-                                        <div class="">
-                                            <input type="text" name="tahun_pembukuan_id" class="form-control" id="tahun_pembukuan_id" value="<?= $pembukuan_id; ?>" disabled="disabled">
-                                        </div>
-                                    </div>
-                                </div>
+
                             </div>
 
 
@@ -96,7 +98,7 @@
                                     <div class="form-group">
                                         <label class="font-weight-normal">Uraian</label>
                                         <div class="">
-                                            <input type="text" name="keterangan" class="form-control" id="keterangan" autocomplete="off" value="<?= $keterangan; ?>" tabindex="3">
+                                            <input type="text" name="keterangan" class="form-control" id="keterangan" autocomplete="off" value="<?= $keterangan; ?>" tabindex="4">
                                             <span id="keterangan_error" class="text-danger"></span>
                                         </div>
                                     </div>
@@ -105,7 +107,7 @@
                                     <div class="form-group">
                                         <label class="font-weight-normal">Unit Usaha</label>
                                         <div class="">
-                                            <select id="unit_id" name="unit_id" class="form-control" tabindex="4">
+                                            <select id="unit_id" name="unit_id" class="form-control" tabindex="5">
                                                 <?php
                                                 if ($this->session->userdata['idInstitusi'] <> "01") {
 
@@ -138,13 +140,13 @@
                         <div class="card-header bg-gradient-light">
                             <div>
                                 <h4 class="card-title">
-                                    <a href="#" class="text-reset" id="btn-simpan-kasmasuk" data-aksi="tambah" data-status="<?= $status; ?>" tabindex="5"><i class="fas fa-save" style="color: teal"></i> Simpan Transaksi</a>
+                                    <a href="#" class="text-reset" id="btn-simpan-kasmasuk" data-aksi="tambah" data-status="<?= $status; ?>" tabindex="6"><i class="fas fa-save" style="color: teal"></i> Simpan Transaksi</a>
                                 </h4>
                             </div>
 
                             <div class="float-right">
                                 <h4 class="card-title" disabled="disabled">
-                                    <a href="" class="text-reset" id="btn-tambah-rinciankasmasuk" data-status="<?= $status; ?>" tabindex="6">Tambah Rincian <i class="fas fa-file-alt" style="color: teal"></i></a>
+                                    <a href="" class="text-reset" id="btn-tambah-rinciankasmasuk" data-status="<?= $status; ?>" tabindex="7">Tambah Rincian <i class="fas fa-file-alt" style="color: teal"></i></a>
                                 </h4>
                             </div>
                         </div>

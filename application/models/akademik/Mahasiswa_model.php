@@ -15,13 +15,14 @@ class Mahasiswa_model extends CI_Model
     {
         return $this->db3->get_where('mahasiswas', ['id' => $id])->row_array();
     }
-    public function ambil_data_by_angkatan_id($id)
+    public function ambil_data_by_kelas_id($id)
     {
-        return $this->db3->get_where('mahasiswas', ['angkatan_id' => $id])->result_array();
+        return $this->db3->get_where('mahasiswas', ['kelas_id' => $id])->result_array();
     }
     public function cek_hapus($id)
     {
-        return $this->db3->get_where('detail_kelases', ['mahasiswa_id' => $id])->num_rows();
+        //return $this->db3->get_where('detail_kelases', ['mahasiswa_id' => $id])->num_rows();
+        return "";
     }
     public function cek_nim($nim) // cek uniq nim
     {
@@ -38,32 +39,32 @@ class Mahasiswa_model extends CI_Model
     {
         $nim = $this->input->post('nim');
         $nama = htmlspecialchars($this->input->post('nama'));
-        $gender = $this->input->post('gender');
-        $angkatan_id = $this->input->post('angkatan_id');
+        $is_active = $this->input->post('is_active');
+        $kelas_id = $this->input->post('kelas_id');
         $data = array(
             'nim' => $nim,
             'nama' => $nama,
-            'gender' => $gender,
-            'angkatan_id' => $angkatan_id
+            'is_active' => $is_active,
+            'kelas_id' => $kelas_id
         );
         $this->db3->insert('mahasiswas', $data);
         $log_type = "tambah";
-        $log_desc = "tambah Mahasiswa - $nim - $nama - $gender - $angkatan_id";
+        $log_desc = "tambah Mahasiswa - $nim - $nama - $kelas_id - $is_active";
         userLog($log_type, $log_desc);
     }
     public function ubah($id)
     {
         $nim = $this->input->post('nim');
         $nama = htmlspecialchars($this->input->post('nama'));
-        $gender = $this->input->post('gender');
+        $is_active = $this->input->post('is_active');
         $data = array(
             'nama' => $nama,
-            'gender' => $gender
+            'is_active' => $is_active
         );
         $this->db3->where('id', $id);
         $this->db3->update('mahasiswas', $data);
         $log_type = "ubah";
-        $log_desc = "ubah mahasiswa $nim - $nama - $gender ";
+        $log_desc = "ubah mahasiswa $nim - $nama - $is_active ";
         userLog($log_type, $log_desc);
     }
 }

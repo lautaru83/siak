@@ -17,7 +17,7 @@ class Kasmasuk extends CI_Controller
         $data['pembukuan_id'] = $this->session->userdata('tahun_buku');
         $data['kontenmenu'] = "Transaksi";
         $jrnl = "KM";
-        $data['jurnal'] = "KM";
+        $data['jurnal'] = $jrnl;
         $data['kontensubmenu'] = "Jurnal Kas Masuk";
         $data['unit'] = $this->Unit_model->ambil_data_institusi_id($institusi_id);
         $hasil = $this->Transaksi_model->cektranuser($jrnl);
@@ -28,7 +28,7 @@ class Kasmasuk extends CI_Controller
             $idtransaksi = $hasil['id'];
             $data['status'] = "1";
             $data['tran_id'] = $idtransaksi;
-            //$data['idubah'] = $idtransaksi;
+            $data['noref'] = $hasil['noref'];
             $data['keterangan'] = $hasil['keterangan'];
             $data['nobukti'] = $hasil['nobukti'];
             $data['unit_id'] = $hasil['unit_id'];
@@ -39,11 +39,12 @@ class Kasmasuk extends CI_Controller
         } else {
             $data['status'] = "0";
             $data['tran_id'] = "";
+            $data['noref'] = "";
             $data['nobukti'] = "";
             $data['unit_id'] = "";
             $data['transaksi_id'] = "";
             $data['keterangan'] = "";
-            $data['notran'] = notransaksi();
+            $data['notran'] = no_tran($jrnl);
             $data['tanggal_transaksi'] = date("d/m/Y");
         }
         $data['akun'] = $this->Kodeperkiraan_model->akunjurnal($jrnl);

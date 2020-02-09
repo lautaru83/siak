@@ -1,7 +1,9 @@
  <!-- Main Sidebar Container -->
  <aside class="main-sidebar sidebar-dark-secondary elevation-2 sidebar-no-expand">
    <!-- Brand Logo -->
-   <a href="#" class="brand-link">
+   <!-- <a href="#" class="brand-link"> -->
+   <!-- class="nav-link" data-widget="pushmenu" href="#" -->
+   <a href="#" data-widget="pushmenu" class="brand-link nav-link">
      <img src="<?= base_url('assets/') ?>dist/img/Windows.png" alt="AdminLTE Logo" class="brand-image elevation-1" style="opacity: .8">
      <span class="brand-text">SIAK APP</span>
    </a>
@@ -34,7 +36,7 @@
           $menu = $this->db->query($queryMenu)->result_array();
           foreach ($menu as $m) :
             if ($menu) {
-              ?>
+          ?>
              <li class="nav-item has-treeview" data-toggle="tooltip" data-placement="bottom" title="<?= $m['menu']; ?>">
                <a href="#" class="nav-link">
                  <i class="nav-icon <?= $m['icon']; ?>"></i>
@@ -44,25 +46,25 @@
                  </p>
                </a>
                <?php
-                    $menuId = $m['id'];
-                    //$jabatan = $this->session->userdata('role_id');;
-                    if ($jabatan == 1) {
-                      $querySubMenu = "select * from submenus where menu_id=$menuId and is_active=1";
-                    } else {
-                      $querySubMenu = "select distinct a.submenu as submenu,a.url as url,a.icon as icon
+                $menuId = $m['id'];
+                //$jabatan = $this->session->userdata('role_id');;
+                if ($jabatan == 1) {
+                  $querySubMenu = "select * from submenus where menu_id=$menuId and is_active=1";
+                } else {
+                  $querySubMenu = "select distinct a.submenu as submenu,a.url as url,a.icon as icon
                      from submenus a join accesses b on a.id=b.submenu_id where a.menu_id=$menuId and b.role_id=$jabatan and a.is_active=1";
-                    }
-                    $subMenu = $this->db->query($querySubMenu)->result_array();
-                    ?>
+                }
+                $subMenu = $this->db->query($querySubMenu)->result_array();
+                ?>
                <?php
-                    if ($subMenu) {
-                      ?>
+                if ($subMenu) {
+                ?>
                  <ul class="nav nav-treeview">
                    <?php
-                          foreach ($subMenu as $sm) :
-                            $url = $sm['url'];
+                    foreach ($subMenu as $sm) :
+                      $url = $sm['url'];
 
-                            ?>
+                    ?>
                      <li class="nav-item" data-toggle="tooltip" data-placement="bottom" title="<?= $sm['submenu']; ?>">
                        <a href="<?= site_url($url); ?>" class="nav-link" id="load-page">
                          <i class="<?= $sm['icon']; ?> nav-icon"></i>
@@ -70,13 +72,13 @@
                        </a>
                      </li>
                    <?php
-                          endforeach;
-                          ?>
+                    endforeach;
+                    ?>
                  </ul>
 
                <?php
-                    }
-                    ?>
+                }
+                ?>
              </li>
 
          <?php

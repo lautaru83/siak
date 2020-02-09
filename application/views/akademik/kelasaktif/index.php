@@ -5,7 +5,7 @@
         <!-- <div class="container-fluid"> -->
         <div class="row">
             <div class="col-sm-6">
-                <h3 class="ml-3"><?= $kontensubmenu; ?></h3>
+                <h3 class="ml-3">Pengaturan <?= $kontensubmenu; ?></h3>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right mr-4">
@@ -28,14 +28,14 @@
                         <div class="card-header bg-gradient-light">
                             <div>
                                 <h4 class="card-title">
-                                    <a class="text-reset" id="" data-aksi="tambah">Pilih Kelas Mahasiswa </a>
+                                    <a href="#" class="text-reset" id="btn-tambah-periodeakademik" data-aksi="tambah"><i class="fas fa-file-alt" style="color: teal"></i> Tambah data </a>
                                 </h4>
                             </div>
-                            <!-- <div class="float-right">
+                            <div class="float-right">
                                 <h4 class="card-title" disabled="disabled">
                                     Cetak <i class="fas fa-print" style="color: teal"></i>
                                 </h4>
-                            </div> -->
+                            </div>
 
                         </div>
                         <!-- /.card-header -->
@@ -43,26 +43,38 @@
                             <table id="tabel1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
+                                        <td width="5%" class="text-center">No</td>
                                         <td width="8%" class="text-center">Kode</td>
-                                        <td>Angkatan</td>
-                                        <td width="10%" class="text-center" style="color: grey"><i class="fas fa-cog"></i></td>
+                                        <td width="12%">Tahun Akademik</td>
+                                        <td width="8%">Semester</td>
+                                        <td width="12%">Awal Semester</td>
+                                        <td width="12%">Akhir Semester</td>
+                                        <td>Keterangan</td>
+                                        <td width="10%">Status</td>
+                                        <td width="8%" class="text-center" style="color: grey"><i class="fas fa-cog"></i></td>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
                                     $no = 1;
-                                    if ($kelas) {
-                                        foreach ($kelas as $dataKelas) :
-                                            $idKelas = $dataKelas['id'];
+                                    if ($kelasaktif) {
+                                        foreach ($kelasaktif as $dataKelasaktif) :
+                                            $idKelasaktif = $dataKelasaktif['id'];
                                     ?>
 
                                             <tr>
-                                                <td class="text-center"><?= $dataKelas['id']; ?></td>
-                                                <td><?= $dataKelas['keterangan']; ?></td>
-                                                <td class="text-center"><a href="<?= site_url('akademik/mahasiswa/data/'); ?><?= $idKelas; ?>" class="btn-pilih-angkatan" data-id="<?= $idKelas; ?>" data-toggle="tooltip" data-placement="bottom" title="Pilih Kelas <?= $dataKelas['keterangan']; ?>"><i class="far fa-list-alt" style="color: teal"></i></a></td>
+                                                <td class="text-center"><?= $no; ?></td>
+                                                <td class="text-center"><?= $idKelasaktif; ?></td>
+                                                <td><?= $dataKelasaktif['tahunakademik']; ?></td>
+                                                <td><?= $dataKelasaktif['semester']; ?></td>
+                                                <td><?= tanggal_indo($dataKelasaktif['awal_semester']); ?></td>
+                                                <td><?= tanggal_indo($dataKelasaktif['akhir_semester']); ?></td>
+                                                <td><?= $dataKelasaktif['keterangan']; ?></td>
+                                                <td><?= txt_status($dataKelasaktif['is_active']); ?></td>
+                                                <td class="text-center"><a href="" class="btn-edit-periodeakademik" data-id="<?= $idKelasaktif; ?>" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fas fa-edit" style="color: olive"></i></a> - <a href="" class="btn-hapus-periodeakademik" data-id="<?= $idKelasaktif; ?>" data-info="<?= $dataKelasaktif['tahunakademik']; ?>" data-toggle="tooltip" data-placement="bottom" title="Hapus"> <i class="far fa-trash-alt" style="color: maroon"></i></a></td>
                                             </tr>
                                     <?php
-                                        //$no++;
+                                            $no++;
                                         endforeach;
                                     }
                                     ?>
@@ -81,7 +93,7 @@
             <!-- /.row -->
         </div>
         <!-- /.container-fluid -->
-        <?php //$this->load->view('akuntansi/jenistransaksi/modal');
+        <?php $this->load->view('akademik/kelasaktif/modal');
         ?>
     </section>
     <!-- /.content -->

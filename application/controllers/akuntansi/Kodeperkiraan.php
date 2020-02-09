@@ -19,6 +19,14 @@ class Kodeperkiraan extends CI_Controller
         $data['institusi'] = $this->Institusi_model->data_institusi();
         $this->template->display('akuntansi/kodeperkiraan/index', $data);
     }
+    public function data()
+    {
+        $data['kontenmenu'] = "Master Pembukuan";
+        $data['kontensubmenu'] = "Data Kode Perkiraan";
+        //$data['kodeperkiraan'] = $this->Kodeperkiraan_model->ambil_data();
+        $data['institusi'] = $this->Institusi_model->data_institusi();
+        $this->template->display('akuntansi/kodeperkiraan/data', $data);
+    }
     public function simpanakun5()
     {
         $this->_akun5validate();

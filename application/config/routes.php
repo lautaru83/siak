@@ -89,6 +89,7 @@ $route['periodeakademik'] = 'akademik/periodeakademik';
 $route['detailtahunajaran'] = 'akademik/detailtahunajaran';
 $route['mahasiswa'] = 'akademik/mahasiswa';
 $route['kelas'] = 'akademik/kelas';
+$route['kelasaktif'] = 'akademik/kelasaktif';
 $route['detailkelas'] = 'akademik/kelas/detail';
 $route['tahunajaran'] = 'akademik/tahunajaran';
 // --------------- operasional -----------------------------

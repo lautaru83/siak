@@ -17,7 +17,7 @@ class Bankkeluar extends CI_Controller
         $data['pembukuan_id'] = $this->session->userdata('tahun_buku');
         $data['kontenmenu'] = "Transaksi";
         $jrnl = "BK";
-        $data['jurnal'] = "BK";
+        $data['jurnal'] = $jrnl;
         $data['kontensubmenu'] = "Jurnal Bank Keluar";
         $data['unit'] = $this->Unit_model->ambil_data_institusi_id($institusi_id);
         $hasil = $this->Transaksi_model->cektranuser($jrnl);
@@ -28,7 +28,7 @@ class Bankkeluar extends CI_Controller
             $idtransaksi = $hasil['id'];
             $data['status'] = "1";
             $data['tran_id'] = $idtransaksi;
-            //$data['idubah'] = $idtransaksi;
+            $data['noref'] = $hasil['noref'];
             $data['keterangan'] = $hasil['keterangan'];
             $data['nobukti'] = $hasil['nobukti'];
             $data['unit_id'] = $hasil['unit_id'];
@@ -41,9 +41,10 @@ class Bankkeluar extends CI_Controller
             $data['tran_id'] = "";
             $data['nobukti'] = "";
             $data['unit_id'] = "";
+            $data['noref'] = "";
             $data['transaksi_id'] = "";
             $data['keterangan'] = "";
-            $data['notran'] = notransaksi();
+            $data['notran'] = no_tran($jrnl);
             $data['tanggal_transaksi'] = date("d/m/Y");
         }
         $data['akun'] = $this->Kodeperkiraan_model->akunjurnal($jrnl);

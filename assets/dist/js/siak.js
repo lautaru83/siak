@@ -4722,16 +4722,16 @@ $(document).ready(function () {
         //const id = $('[name="id"]').val();
         const nim = $('[name="nim"]').val();
         const nama = $('[name="nama"]').val();
-        const gender = $('[name="gender"]').val();
-        const angkatan_id = $('[name="angkatan_id"]').val();
+        const is_active = $('[name="is_active"]').val();
+        const kelas_id = $('[name="kelas_id"]').val();
         $.ajax({
             type: "POST",
             url: base_url + "akademik/mahasiswa/simpan",
             data: {
                 nim: nim,
                 nama: nama,
-                gender: gender,
-                angkatan_id: angkatan_id
+                is_active: is_active,
+                kelas_id: kelas_id
             },
             dataType: "JSON",
             beforeSend: function () {
@@ -4753,10 +4753,10 @@ $(document).ready(function () {
                     } else {
                         $('#nama_error').html('');
                     }
-                    if (data.gender_error != '') {
-                        $('#gender_error').html(data.gender_error);
+                    if (data.status_error != '') {
+                        $('#status_error').html(data.status_error);
                     } else {
-                        $('#gender_error').html('');
+                        $('#status_error').html('');
                     }
                     $('#nim').trigger('focus');
                 } else {
@@ -4835,7 +4835,7 @@ $(document).ready(function () {
                 $('[name="idubah"]').val(data.id);
                 $('[name="nim"]').val(data.nim);
                 $('[name="nama"]').val(data.nama);
-                $('[name="gender"]').val(data.gender);
+                $('[name="is_active"]').val(data.is_active);
                 $('#modal-mahasiswa').modal('show');
             },
             error: function (jqXHR, textStatus, errorThrown) {
@@ -4850,7 +4850,7 @@ $(document).ready(function () {
         const idubah = $('[name="idubah"]').val();
         const nim = $('[name="nim"]').val();
         const nama = $('[name="nama"]').val();
-        const gender = $('[name="gender"]').val();
+        const is_active = $('[name="is_active"]').val();
         $.ajax({
             type: "POST",
             url: base_url + "akademik/mahasiswa/ubah/" + idubah,
@@ -4858,7 +4858,7 @@ $(document).ready(function () {
                 idubah: idubah,
                 nim: nim,
                 nama: nama,
-                gender: gender
+                is_active: is_active
             },
             dataType: 'JSON',
             beforeSend: function () {
@@ -4880,10 +4880,10 @@ $(document).ready(function () {
                     } else {
                         $('#nama_error').html('');
                     }
-                    if (data.gender_error != '') {
-                        $('#gender_error').html(data.gender_error);
+                    if (data.status_error != '') {
+                        $('#status_error').html(data.status_error);
                     } else {
-                        $('#gender_error').html('');
+                        $('#status_error').html('');
                     }
                     $('#nim').trigger('focus');
                 } else {
@@ -4927,6 +4927,7 @@ $(document).ready(function () {
         const a6level_id = $('[name="a6level_id"]').val();
         const posisi_akun = $('[name="posisi_akun"]').val();
         const idakun = $('[name="idakun"]').val();
+        const idjt = $('[name="idjt"]').val();
         const tgl2 = $('[name="tgl2"]').val();
         const idubah = $('[name="idubah"]').val();
         const jumlah = $('[name="jumlah"]').val();
@@ -4938,6 +4939,7 @@ $(document).ready(function () {
                 idakun: idakun,
                 idubah: idubah,
                 transaksi_id: transaksi_id,
+                idjt: idjt,
                 a6level_id: a6level_id,
                 posisi_akun: posisi_akun,
                 tgl2: tgl2,
@@ -5129,6 +5131,7 @@ $(document).ready(function () {
         const tahun_pembukuan_id = $('[name="tahun_pembukuan_id"]').val();
         const jurnal = $('[name="jurnal"]').val();
         const unit_id = $('[name="unit_id"]').val();
+        const noref = $('[name="noref"]').val();
         const nobukti = $('[name="nobukti"]').val();
         const tanggal_transaksi = $('[name="tanggal_transaksi"]').val();
         const keterangan = $('[name="keterangan"]').val();
@@ -5142,6 +5145,7 @@ $(document).ready(function () {
                     tanggal_transaksi: tanggal_transaksi,
                     keterangan: keterangan,
                     unit_id: unit_id,
+                    noref: noref,
                     jurnal: jurnal,
                     notran: notran,
                     tahun_buku: tahun_pembukuan_id
@@ -5195,6 +5199,7 @@ $(document).ready(function () {
             const transaksi_id = $('[name="tran_id"]').val();
             const unit_id = $('[name="unit_id"]').val();
             const nobukti = $('[name="nobukti"]').val();
+            const noref = $('[name="noref"]').val();
             const tanggal_transaksi = $('[name="tanggal_transaksi"]').val();
             const keterangan = $('[name="keterangan"]').val();
             $.ajax({
@@ -5204,6 +5209,7 @@ $(document).ready(function () {
                     nobukti: nobukti,
                     tanggal_transaksi: tanggal_transaksi,
                     keterangan: keterangan,
+                    noref: noref,
                     unit_id: unit_id
                 },
                 dataType: "JSON",
@@ -5325,6 +5331,7 @@ $(document).ready(function () {
         const a6level_id = $('[name="a6level_id"]').val();
         const posisi_akun = $('[name="posisi_akun"]').val();
         const idakun = $('[name="idakun"]').val();
+        const idjt = $('[name="idjt"]').val();
         const idubah = $('[name="idubah"]').val();
         const tgl2 = $('[name="tgl2"]').val();
         const jumlah = $('[name="jumlah"]').val();
@@ -5335,6 +5342,7 @@ $(document).ready(function () {
             data: {
                 idakun: idakun,
                 idubah: idubah,
+                idjt: idjt,
                 transaksi_id: transaksi_id,
                 a6level_id: a6level_id,
                 posisi_akun: posisi_akun,
@@ -5527,6 +5535,7 @@ $(document).ready(function () {
         const tahun_pembukuan_id = $('[name="tahun_pembukuan_id"]').val();
         const jurnal = $('[name="jurnal"]').val();
         const unit_id = $('[name="unit_id"]').val();
+        const noref = $('[name="noref"]').val();
         const nobukti = $('[name="nobukti"]').val();
         const tanggal_transaksi = $('[name="tanggal_transaksi"]').val();
         const keterangan = $('[name="keterangan"]').val();
@@ -5540,6 +5549,7 @@ $(document).ready(function () {
                     tanggal_transaksi: tanggal_transaksi,
                     keterangan: keterangan,
                     unit_id: unit_id,
+                    noref: noref,
                     jurnal: jurnal,
                     notran: notran,
                     tahun_buku: tahun_pembukuan_id
@@ -5593,6 +5603,7 @@ $(document).ready(function () {
             const transaksi_id = $('[name="tran_id"]').val();
             const unit_id = $('[name="unit_id"]').val();
             const nobukti = $('[name="nobukti"]').val();
+            const noref = $('[name="noref"]').val();
             const tanggal_transaksi = $('[name="tanggal_transaksi"]').val();
             const keterangan = $('[name="keterangan"]').val();
             $.ajax({
@@ -5600,6 +5611,7 @@ $(document).ready(function () {
                 url: base_url + "akuntansi/kaskeluar/ubah/" + transaksi_id,
                 data: {
                     nobukti: nobukti,
+                    noref: noref,
                     tanggal_transaksi: tanggal_transaksi,
                     keterangan: keterangan,
                     unit_id: unit_id
@@ -5725,6 +5737,7 @@ $(document).ready(function () {
         const posisi_akun = $('[name="posisi_akun"]').val();
         const tgl2 = $('[name="tgl2"]').val();
         const idakun = $('[name="idakun"]').val();
+        const idjt = $('[name="idjt"]').val();
         const idubah = $('[name="idubah"]').val();
         const jumlah = $('[name="jumlah"]').val();
         $.ajax({
@@ -5734,6 +5747,7 @@ $(document).ready(function () {
             data: {
                 idakun: idakun,
                 idubah: idubah,
+                idjt: idjt,
                 transaksi_id: transaksi_id,
                 a6level_id: a6level_id,
                 posisi_akun: posisi_akun,
@@ -5926,6 +5940,7 @@ $(document).ready(function () {
         const tahun_pembukuan_id = $('[name="tahun_pembukuan_id"]').val();
         const jurnal = $('[name="jurnal"]').val();
         const unit_id = $('[name="unit_id"]').val();
+        const noref = $('[name="noref"]').val();
         const nobukti = $('[name="nobukti"]').val();
         const tanggal_transaksi = $('[name="tanggal_transaksi"]').val();
         const keterangan = $('[name="keterangan"]').val();
@@ -5939,6 +5954,7 @@ $(document).ready(function () {
                     tanggal_transaksi: tanggal_transaksi,
                     keterangan: keterangan,
                     unit_id: unit_id,
+                    noref: noref,
                     jurnal: jurnal,
                     notran: notran,
                     tahun_buku: tahun_pembukuan_id
@@ -5991,6 +6007,7 @@ $(document).ready(function () {
         } else {
             const transaksi_id = $('[name="tran_id"]').val();
             const unit_id = $('[name="unit_id"]').val();
+            const noref = $('[name="noref"]').val();
             const nobukti = $('[name="nobukti"]').val();
             const tanggal_transaksi = $('[name="tanggal_transaksi"]').val();
             const keterangan = $('[name="keterangan"]').val();
@@ -5999,6 +6016,7 @@ $(document).ready(function () {
                 url: base_url + "akuntansi/bankmasuk/ubah/" + transaksi_id,
                 data: {
                     nobukti: nobukti,
+                    noref: noref,
                     tanggal_transaksi: tanggal_transaksi,
                     keterangan: keterangan,
                     unit_id: unit_id
@@ -6123,6 +6141,7 @@ $(document).ready(function () {
         const a6level_id = $('[name="a6level_id"]').val();
         const posisi_akun = $('[name="posisi_akun"]').val();
         const idakun = $('[name="idakun"]').val();
+        const idjt = $('[name="idjt"]').val();
         const tgl2 = $('[name="tgl2"]').val();
         const idubah = $('[name="idubah"]').val();
         const jumlah = $('[name="jumlah"]').val();
@@ -6132,6 +6151,7 @@ $(document).ready(function () {
             data: {
                 idakun: idakun,
                 idubah: idubah,
+                idjt: idjt,
                 transaksi_id: transaksi_id,
                 a6level_id: a6level_id,
                 posisi_akun: posisi_akun,
@@ -6178,8 +6198,6 @@ $(document).ready(function () {
             }
         });
         return false;
-
-
     });
     // end tombol simpan detailbankkeluar table
     // tombol ubah detailtransaksi table
@@ -6323,6 +6341,7 @@ $(document).ready(function () {
         const notran = $('[name="notran"]').val();
         const tahun_pembukuan_id = $('[name="tahun_pembukuan_id"]').val();
         const jurnal = $('[name="jurnal"]').val();
+        const noref = $('[name="noref"]').val();
         const unit_id = $('[name="unit_id"]').val();
         const nobukti = $('[name="nobukti"]').val();
         const tanggal_transaksi = $('[name="tanggal_transaksi"]').val();
@@ -6337,6 +6356,7 @@ $(document).ready(function () {
                     tanggal_transaksi: tanggal_transaksi,
                     keterangan: keterangan,
                     unit_id: unit_id,
+                    noref: noref,
                     jurnal: jurnal,
                     notran: notran,
                     tahun_buku: tahun_pembukuan_id
@@ -6389,6 +6409,7 @@ $(document).ready(function () {
         } else {
             const transaksi_id = $('[name="tran_id"]').val();
             const unit_id = $('[name="unit_id"]').val();
+            const noref = $('[name="noref"]').val();
             const nobukti = $('[name="nobukti"]').val();
             const tanggal_transaksi = $('[name="tanggal_transaksi"]').val();
             const keterangan = $('[name="keterangan"]').val();
@@ -6397,6 +6418,7 @@ $(document).ready(function () {
                 url: base_url + "akuntansi/bankkeluar/ubah/" + transaksi_id,
                 data: {
                     nobukti: nobukti,
+                    noref: noref,
                     tanggal_transaksi: tanggal_transaksi,
                     keterangan: keterangan,
                     unit_id: unit_id
@@ -6522,6 +6544,7 @@ $(document).ready(function () {
         const tgl2 = $('[name="tgl2"]').val();
         const posisi_akun = $('[name="posisi_akun"]').val();
         const idakun = $('[name="idakun"]').val();
+        const idjt = $('[name="idjt"]').val();
         const idubah = $('[name="idubah"]').val();
         const jumlah = $('[name="jumlah"]').val();
         $.ajax({
@@ -6531,6 +6554,7 @@ $(document).ready(function () {
             data: {
                 idakun: idakun,
                 idubah: idubah,
+                idjt: idjt,
                 transaksi_id: transaksi_id,
                 a6level_id: a6level_id,
                 posisi_akun: posisi_akun,
@@ -6577,8 +6601,6 @@ $(document).ready(function () {
             }
         });
         return false;
-
-
     });
     // end tombol simpan detailnonkasbank table
     // tombol ubah detailtransaksi table
@@ -6723,6 +6745,7 @@ $(document).ready(function () {
         const tahun_pembukuan_id = $('[name="tahun_pembukuan_id"]').val();
         const jurnal = $('[name="jurnal"]').val();
         const unit_id = $('[name="unit_id"]').val();
+        const noref = $('[name="noref"]').val();
         const nobukti = $('[name="nobukti"]').val();
         const tanggal_transaksi = $('[name="tanggal_transaksi"]').val();
         const keterangan = $('[name="keterangan"]').val();
@@ -6736,6 +6759,7 @@ $(document).ready(function () {
                     tanggal_transaksi: tanggal_transaksi,
                     keterangan: keterangan,
                     unit_id: unit_id,
+                    noref: noref,
                     jurnal: jurnal,
                     notran: notran,
                     tahun_buku: tahun_pembukuan_id
@@ -6788,6 +6812,7 @@ $(document).ready(function () {
         } else {
             const transaksi_id = $('[name="tran_id"]').val();
             const unit_id = $('[name="unit_id"]').val();
+            const noref = $('[name="noref"]').val();
             const nobukti = $('[name="nobukti"]').val();
             const tanggal_transaksi = $('[name="tanggal_transaksi"]').val();
             const keterangan = $('[name="keterangan"]').val();
@@ -6796,6 +6821,7 @@ $(document).ready(function () {
                 url: base_url + "akuntansi/nonkasbank/ubah/" + transaksi_id,
                 data: {
                     nobukti: nobukti,
+                    noref: noref,
                     tanggal_transaksi: tanggal_transaksi,
                     keterangan: keterangan,
                     unit_id: unit_id

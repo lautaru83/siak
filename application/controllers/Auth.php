@@ -7,7 +7,7 @@ class Auth extends CI_Controller
         parent::__construct();
         $this->load->library('form_validation');
         $this->db2 = $this->load->database('akuntansi', TRUE);
-        $this->load->model(array('akuntansi/Tahunanggaran_model' => 'Tahunanggaran_model', 'akuntansi/Tahunbuku_model' => 'Tahunbuku_model'));
+        $this->load->model(array('akuntansi/Tahunanggaran_model' => 'Tahunanggaran_model', 'akuntansi/Tahunbuku_model' => 'Tahunbuku_model', 'akademik/Periodeakademik_model' => 'Periodeakademik_model'));
     }
     public function index()
     {
@@ -39,9 +39,21 @@ class Auth extends CI_Controller
             $buku_awal = $pembukuan['awal_periode'];
             $buku_akhir = $pembukuan['akhir_periode'];
         }
+        $akademik = $this->Periodeakademik_model->ambil_akademik_aktif();
+        if ($akademik) {
+            $idTahunAkademik = $akademik['tahunakademik_id'];
+            $idPeriodeAkademik = $akademik['periodeakademik_id'];
+            $akademik_awal = $akademik['awal_periode'];
+            $akademik_akhir = $akademik['akhir_periode'];
+            $semester_awal = $akademik['awal_semester'];
+            $semester_akhir = $akademik['akhir_semester'];
+            $tahunAkademik = $akademik['tahunakademik'];
+            $periodeAkademik = $akademik['periodeakademik'];
+        }
         $anggaran = $this->Tahunanggaran_model->ambil_anggaran_aktif();
         if ($anggaran) {
-            //$tahun_buku = $pembukuan['id'];
+            $idTahunAnggaran = $anggaran['id'];
+            $Tahun_Anggaran = $anggaran['keterangan'];
             $anggaran_awal = $anggaran['awal_periode'];
             $anggaran_akhir = $anggaran['akhir_periode'];
         }
@@ -50,7 +62,18 @@ class Auth extends CI_Controller
             'buku_awal' => $buku_awal,
             'buku_akhir' => $buku_akhir,
             'anggaran_awal' => $anggaran_awal,
-            'anggaran_akhir' => $anggaran_akhir
+            'anggaran_akhir' => $anggaran_akhir,
+            'idTahan' => $idTahunAnggaran,
+            'tahun_anggaran' => $Tahun_Anggaran,
+            'tahun_akademik' => $tahunAkademik,
+            'periode_akademik' => $periodeAkademik,
+            'idPerak' => $idPeriodeAkademik,
+            'idTakad' => $idTahunAkademik,
+            'akademik_awal' => $akademik_awal,
+            'akademik_akhir' => $akademik_akhir,
+            'semester_awal' => $semester_awal,
+            'semester_akhir' => $semester_akhir,
+
         ];
         $this->session->set_userdata($data);
     }

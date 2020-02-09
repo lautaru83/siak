@@ -11,6 +11,10 @@ class Kelas_model extends CI_Model
     {
         return $this->db3->query("SELECT a.id AS id, b.angkatan AS angkatan, c.prodi AS prodi, a.angkatan_id AS angkatan_id, a.prodi_id AS prodi_id, a.keterangan AS keterangan FROM kelases AS a INNER JOIN angkatans AS b ON b.id = a.angkatan_id INNER JOIN prodis AS c ON c.id = a.prodi_id order by a.id DESC")->result_array();
     }
+    public function detail_kelas_by_id($id)
+    {
+        return $this->db3->query("SELECT a.id AS id, b.angkatan AS angkatan, c.prodi AS prodi, a.angkatan_id AS angkatan_id, a.prodi_id AS prodi_id, a.keterangan AS keterangan FROM kelases AS a INNER JOIN angkatans AS b ON b.id = a.angkatan_id INNER JOIN prodis AS c ON c.id = a.prodi_id  where a.id='$id'")->row_array();
+    }
     public function data_fk()
     {
         return $this->db3->get('kelases')->result_array();

@@ -5,7 +5,7 @@
         <!-- <div class="container-fluid"> -->
         <div class="row">
             <div class="col-sm-6">
-                <h3 class="ml-3"><?= $kontensubmenu; ?></h3>
+                <h3 class="ml-3"><?= $kontensubmenu; ?> Mahasiswa</h3>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right mr-4">
@@ -29,6 +29,42 @@
                         <div class="card-header bg-gradient-light">
                             <div>
                                 <h4 class="card-title">
+                                    Data Kelas
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <?php
+                            if ($detailkelas) {
+                                //$idKelas = $detailkelas['id'];
+                            ?>
+                                <table class="table table-borderless">
+                                    <tr>
+                                        <td width="4%">Kelas</td>
+                                        <td width="1%">:</td>
+                                        <td width="10%"><?= $detailkelas['id']; ?></td>
+                                        <td width="4%">Prodi</td>
+                                        <td width="1%">:</td>
+                                        <td width="15%"><?= $detailkelas['prodi']; ?></td>
+                                        <td width="4%">Angkatan</td>
+                                        <td width="1%">:</td>
+                                        <td width="10%"><?= $detailkelas['angkatan']; ?></td>
+                                        <td></td>
+                                    </tr>
+                                </table>
+                            <?php
+                            }
+                            ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-md-12">
+                    <div class="card">
+                        <div class="card-header bg-gradient-light">
+                            <div>
+                                <h4 class="card-title">
                                     <a href="#" class="text-reset" id="btn-tambah-mahasiswa" data-aksi="tambah"><i class="fas fa-file-alt" style="color: teal"></i> Tambah data </a>
                                 </h4>
                             </div>
@@ -41,13 +77,13 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body" id="tabel-data">
-                            <table id="tabel1" class="table table-bordered table-striped">
+                            <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <td width="8%" class="text-center">No</td>
                                         <td width="12%">NIM</td>
                                         <td>Nama</td>
-                                        <td width="15%">Gender</td>
+                                        <td width="10%">Status</td>
                                         <td width="10%" class="text-center" style="color: grey"><i class="fas fa-cog"></i></td>
                                     </tr>
                                 </thead>
@@ -63,8 +99,7 @@
                                                 <td class="text-center"><?= $no; ?></td>
                                                 <td><?= $dataMahasiswa['nim']; ?></td>
                                                 <td><?= $dataMahasiswa['nama']; ?></td>
-                                                <td><?= txt_gender($dataMahasiswa['gender']); ?></td>
-
+                                                <td><?= txt_status($dataMahasiswa['is_active']); ?></td>
                                                 <td class="text-center"><a href="" class="btn-edit-mahasiswa" data-id="<?= $idMahasiswa; ?>" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fas fa-edit" style="color: olive"></i></a> - <a href="" class="btn-hapus-mahasiswa" data-id="<?= $idMahasiswa; ?>" data-info="<?= $dataMahasiswa['nama']; ?>" data-toggle="tooltip" data-placement="bottom" title="Hapus"> <i class="far fa-trash-alt" style="color: maroon"></i></a></td>
                                             </tr>
                                     <?php

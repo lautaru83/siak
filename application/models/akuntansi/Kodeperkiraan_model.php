@@ -11,6 +11,18 @@ class Kodeperkiraan_model extends CI_Model
     {
         return $this->db2->get_where('a5levels', ['id' => $id])->row_array();
     }
+    public function data_level1()
+    {
+        return $this->db2->get('a1levels')->result_array();
+    }
+    public function data_level2($id)
+    {
+        return $this->db2->get_where('a2levels', ['a1level_id' => $id])->result_array();
+    }
+    public function data_level3($id)
+    {
+        return $this->db2->get_where('a3levels', ['a2level_id' => $id])->result_array();
+    }
     public function akun_bukubesar()
     {
         $institusi_id = $this->session->userdata('idInstitusi');
@@ -28,6 +40,10 @@ class Kodeperkiraan_model extends CI_Model
     public function ambil_data()
     {
         return $this->db2->query("select a3levels.id as id,a1levels.level1 as level1,a2levels.level2 as level2, a3levels.level3 as level3 from a1levels join a2levels on a1levels.id=a2levels.a1level_id join a3levels on a2levels.id=a3levels.a2level_id order by a3levels.id asc")->result_array();
+    }
+    public function level1saldo()
+    {
+        return $this->db2->query("select * from a1levels where id in('100','200','300')")->result_array();
     }
     public function akun_saldo()
     {

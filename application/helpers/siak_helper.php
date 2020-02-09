@@ -357,13 +357,13 @@ function notransaksi()
     }
     return $notran;
 }
-function notrans($jurnal)
+function no_tran($jurnal)
 {
     $ci = get_instance();
     $th = $ci->session->userdata('tahun_buku');
     $ints = $ci->session->userdata('idInstitusi');
     $char = $jurnal . substr($th, 2, 2) . $ints;
-    $hasil = $ci->db->query("select max(a.notran) as maxnotran from siak_akuntansi.transaksis a join siak_setting.units b on b.id=a.unit_id join siak_setting.institusis c on c.id=b.institusi_id where a.tahun_buku='2019' and c.jurnal='$jurnal' and c.id='$ints'")->row_array();
+    $hasil = $ci->db->query("select max(a.notran) as maxnotran from siak_akuntansi.transaksis a join siak_setting.units b on b.id=a.unit_id join siak_setting.institusis c on c.id=b.institusi_id where a.tahun_buku='2019' and a.jurnal='$jurnal' and c.id='$ints'")->row_array();
     if ($hasil) {
         $nomor = $hasil['maxnotran'];
         $noUrut = (int) substr($nomor, 6, 4);

@@ -15,6 +15,7 @@
                             <div>
                                 <input type="hidden" id="idubah" name="idubah">
                                 <input type="hidden" id="idakun" name="idakun">
+                                <input type="hidden" id="idjt" name="idjt" value="<?= $jurnal ?>">
                                 <input type="hidden" id="transaksi_id" name="transaksi_id" value="<?= $tran_id; ?>">
                                 <input type="hidden" id="tgl2" name="tgl2" value="<?= $tanggal_transaksi; ?>">
                                 <select id="a6level_id" name="a6level_id" class="form-control">

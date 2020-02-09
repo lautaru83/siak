@@ -16,7 +16,7 @@
                             </label>
                             <div>
                                 <input type="hidden" id="idubah" name="idubah">
-                                <input type="hidden" id="angkatan_id" name="angkatan_id" value="<?= $idAngkatan; ?>">
+                                <input type="hidden" id="kelas_id" name="kelas_id" value="<?= $kelas_id; ?>">
                                 <input type="text" name="nim" class="form-control" id="nim" autocomplete="off" placeholder="NIM Mahasiswa">
                                 <span id="nim_error" class="text-danger"></span>
                             </div>
@@ -31,14 +31,14 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="gender" class="control-label">Gender</label>
+                            <label for="is_active" class="control-label">Status</label>
                             <div>
-                                <select id="gender" name="gender" class="form-control">
+                                <select id="is_active" name="is_active" class="form-control">
                                     <option value="">- Pilih -</option>
-                                    <option value="L">Laki-laki</option>
-                                    <option value="P">Perempuan</option>
+                                    <option value="1">Aktif</option>
+                                    <option value="0">Non Aktif</option>
                                 </select>
-                                <span id="gender_error" class="text-danger"></span>
+                                <span id="status_error" class="text-danger"></span>
                             </div>
                         </div>
                     </div>

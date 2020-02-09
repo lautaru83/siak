@@ -1,23 +1,25 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Periodeakademik extends CI_Controller
+class Kelasaktif extends CI_Controller
 {
     public function __construct()
     {
         parent::__construct();
         is_logged_in();
         $this->db3 = $this->load->database('akademik', TRUE);
-        $this->load->model(array('akademik/Tahunakademik_model' => 'Tahunakademik_model', 'akademik/Periodeakademik_model' => 'Periodeakademik_model', 'akademik/Semester_model' => 'Semester_model'));
+        $this->load->model(array('akademik/Tahunakademik_model' => 'Tahunakademik_model', 'akademik/Periodeakademik_model' => 'Periodeakademik_model', 'akademik/Kelas_model' => 'Kelas_model'));
     }
     public function index()
     {
-        $data['kontenmenu'] = "Master Akademik";
-        $data['kontensubmenu'] = "Periode Akademik";
-        $data['tahunakademik'] = $this->Tahunakademik_model->data_fk();
-        $data['semester'] = $this->Semester_model->data_fk();
-        $data['periodeakademik'] = $this->Periodeakademik_model->ambil_data();
-        $this->template->display('akademik/periodeakademik/index', $data);
+        //echo "Angkatan";
+        $data['kontenmenu'] = "Pengaturan";
+        $data['kontensubmenu'] = "Kelas Aktif";
+        $data['kelasaktif'] = "";
+        // $data['tahunakademik'] = $this->Tahunakademik_model->data_fk();
+        $data['kelas'] = $this->Semester_model->data_fk();
+        $data['periodeakademik'] = $this->Periodeakademik_model->data_fk();
+        $this->template->display('akademik/kelasaktif/index', $data);
     }
     public function simpan()
     {

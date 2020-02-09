@@ -18,6 +18,14 @@ class Saldoawal extends CI_Controller
         $data['tahunbuku'] = $this->Tahunbuku_model->ambil_data();
         $this->template->display('akuntansi/saldoawal/index', $data);
     }
+    public function data()
+    {
+        $data['kontenmenu'] = "Master Akuntansi";
+        $data['kontensubmenu'] = "Data Saldo Awal";
+        $data['idtahun'] = $this->session->userdata('tahun_buku');
+        //$data['tahunbuku'] = $this->Tahunbuku_model->ambil_data();
+        $this->template->display('akuntansi/saldoawal/data', $data);
+    }
     public function konfirmasi($idtahun)
     {
         $unit_id = $this->session->userdata('idInstitusi');
