@@ -17,6 +17,13 @@ class Jenistransaksi extends CI_Controller
         $data['jenistransaksi'] = $this->Jenistransaksi_model->ambil_data();
         $this->template->display('akuntansi/jenistransaksi/index', $data);
     }
+    public function data()
+    {
+        $data['kontenmenu'] = "Master Pembukuan";
+        $data['kontensubmenu'] = "Data Akun Transaksi";
+        $data['jenistransaksi'] = $this->Jenistransaksi_model->ambil_data();
+        $this->template->display('akuntansi/jenistransaksi/data', $data);
+    }
     public function akun($id)
     {
         $data['transaksi'] = $this->Jenistransaksi_model->ambil_data_id($id);
