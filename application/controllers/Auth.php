@@ -23,9 +23,7 @@ class Auth extends CI_Controller
             'required' => 'Password harap diisi!'
         ]);
         if ($this->form_validation->run() == false) {
-            //$this->load->view('Auth/header', $data);
-            $this->load->view('Auth/login');
-            //$this->load->view('Auth/footer');
+            $this->load->view('login/login');
         } else {
             $this->_login();
         }
