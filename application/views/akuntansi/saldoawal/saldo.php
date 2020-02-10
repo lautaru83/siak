@@ -45,14 +45,15 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body" id="tabel-data">
-                            <table class="table table-bordered table-hover">
+                            <table class="table table-bordered table-hover table-sm">
                                 <thead>
                                     <tr class="">
                                         <!-- <td class="col-1 text-center">Kode</td> -->
-                                        <td colspan="7">Daftar Kode Perkiraan</td>
+                                        <td colspan="6">Daftar Kode Perkiraan</td>
                                         <!-- <td>Posisi</td> -->
-                                        <td class="text-center" width="15%">Saldo Awal ( Rp. )</td>
-                                        <td class="text-center" width="10%" style="color: grey" width="8%"><i class="fas fa-cog"></i></td>
+                                        <td class="text-center" width="10%">Posisi</td>
+                                        <td class="text-center" width="13%">Saldo Awal ( Rp. )</td>
+                                        <td class="text-center" width="10%" style="color: grey" width="5%"><i class="fas fa-cog"></i></td>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -102,16 +103,18 @@
                                                             if ($level6) {
                                                                 foreach ($level6 as $dataLevel6) :
                                                                     $idakun6 = $dataLevel6['id'];
+                                                                    $posisi = $dataLevel6['posisi'];
                                                             ?>
                                                                     <tr>
                                                                         <td></td>
                                                                         <td></td>
                                                                         <td></td>
                                                                         <td width="8%"><?= $dataLevel6['id']; ?></td>
-                                                                        <td colspan="3"><?= $dataLevel6['level6']; ?></td>
-                                                                        <td class="text-right"><?= ambilsaldo($idtahun, $idakun6) ?></td>
+                                                                        <td colspan="2"><?= $dataLevel6['level6']; ?></td>
+                                                                        <td class="text-center"><?= posisi_akun($dataLevel6['posisi']); ?></td>
+                                                                        <td class="text-right"><?= ambilsaldo($idtahun, $idakun6, $posisi) ?></td>
                                                                         <td class="text-center">
-                                                                            <a href="" class="btn-edit-saldoawal" data-akunid="<?= $dataLevel6['id']; ?>" data-thbukuid="<?= $idtahun; ?>" data-info="<?= $dataLevel6['level6']; ?>" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fas fa-edit" style="color: olive"></i></a> - <a href="" class="btn-hapus-saldoawal" data-akunid="<?= $dataLevel6['id']; ?>" data-thbukuid="<?= $idtahun; ?>" data-info="<?= $dataLevel6['level6']; ?>" data-toggle="tooltip" data-placement="bottom" title="Hapus Saldo"> <i class="far fa-trash-alt" style="color: maroon"></i></a>
+                                                                            <a href="" class="btn-edit-saldoawal" data-akunid="<?= $dataLevel6['id']; ?>" data-thbukuid="<?= $idtahun; ?>" data-posisi="<?= $posisi; ?>" data-info="<?= $dataLevel6['level6']; ?>" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fas fa-edit" style="color: olive"></i></a> - <a href="" class="btn-hapus-saldoawal" data-akunid="<?= $dataLevel6['id']; ?>" data-thbukuid="<?= $idtahun; ?>" data-info="<?= $dataLevel6['level6']; ?>" data-toggle="tooltip" data-placement="bottom" title="Hapus Saldo"> <i class="far fa-trash-alt" style="color: maroon"></i></a>
                                                                         </td>
                                                                     </tr>
                                                             <?php

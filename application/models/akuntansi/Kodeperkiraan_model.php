@@ -59,7 +59,7 @@ class Kodeperkiraan_model extends CI_Model
     }
     public function akunsaldoawal($idtahun, $institusi_id)
     {
-        return $this->db2->query("select a.id as id,a.posisi as posisi,b.saldoawal as saldoawal from a6levels a join saldoawals b on a.id=b.a6level_id where a.institusi_id=$institusi_id and b.tahun_pembukuan_id=$idtahun ")->result_array();
+        return $this->db2->query("select a.id as id,a.posisi as posisi,b.saldoawal as saldoawal,b.debet as debet,b.kredit as kredit from a6levels a join saldoawals b on a.id=b.a6level_id where a.institusi_id='$institusi_id' and b.tahun_pembukuan_id=$idtahun")->result_array();
     }
     public function level4($id)
     {

@@ -20,6 +20,17 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label for="posisi_saldo" class="control-label">Posisi</label>
+                            <div>
+                                <select id="posisi_saldo" name="posisi_saldo" class="form-control">
+                                    <option value="">- Pilih -</option>
+                                    <option value="D">Debet</option>
+                                    <option value="K">Kredit</option>
+                                </select>
+                                <span id="posisi_error" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label for="saldoawal" class="control-label">
                                 Saldo Awal
                             </label>

@@ -18,7 +18,7 @@ class Neracasaldo extends CI_Controller
         $institusi_id = $this->session->userdata('idInstitusi');
         $pembukuan_id = $this->session->userdata('tahun_buku');
         $data['pembukuan_id'] = $this->session->userdata('tahun_buku');
-
+        $data['neracasaldo'] = "";
         $data['awal_periode'] = tanggal_indo($this->session->userdata('buku_awal'));
         $data['akhir_periode'] = tanggal_indo($this->session->userdata('buku_akhir'));
         $data['jurnal'] = "";

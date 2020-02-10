@@ -115,15 +115,15 @@ class Transaksi_model extends CI_Model
     {
         $this->db2->delete('detail_transaksis', ['transaksi_id' => $id]);
     }
-    public function simpandetailsaldo($tran_id, $a6level_id, $posisi, $jumlah)
+    public function simpandetailsaldo($tran_id, $a6level_id, $posisi, $jumlah, $debet, $kredit)
     {
-        if ($posisi == "D") {
-            $debet = $jumlah;
-            $kredit = 0;
-        } else {
-            $debet = 0;
-            $kredit = $jumlah;
-        }
+        // if ($posisi == "D") {
+        //     $debet = $jumlah;
+        //     $kredit = 0;
+        // } else {
+        //     $debet = 0;
+        //     $kredit = $jumlah;
+        // }
         $data = array(
             'transaksi_id' => $tran_id,
             'a6level_id' => $a6level_id,

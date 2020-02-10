@@ -128,15 +128,22 @@ function userLog($type, $desc)
     //save to database
     $ci->db->insert('userlogs', $log_data);
 }
-function ambilsaldo($thbukuid, $akunid)
+function ambilsaldo($thbukuid, $akunid, $posisi)
 {
     $ci = get_instance();
-    // $ci->db->where('role_id', $role_id);
-    // $ci->db->where('submenu_id', $submenu_id);
-    $result = $ci->db->query("select siak_akuntansi.saldoawals.saldoawal as saldoawal from siak_akuntansi.saldoawals where siak_akuntansi.saldoawals.tahun_pembukuan_id='$thbukuid' and siak_akuntansi.saldoawals.a6level_id='$akunid'")->row_array();
+    $ci->db2 = $ci->load->database('akuntansi', TRUE);
+    // $akun = $ci->db2->query("select posisi from a6levels where id='$akunid'")->row_array();
+    // $posisi=$akun['posisi'];
+    $result = $ci->db2->query("select * from saldoawals where tahun_pembukuan_id='$thbukuid' and a6level_id='$akunid'")->row_array();
     if ($result) {
-        //echo $result['saldoawal'];
-        echo rupiah($result['saldoawal']);
+        $debet = $result['debet'];
+        $kredit = $result['kredit'];
+        if ($posisi == "D") {
+            $saldoawal = $debet - $kredit;
+        } else {
+            $saldoawal = $kredit - $debet;
+        }
+        echo rupiah_positif($saldoawal);
     } else {
         echo "0,00";
     }

@@ -118,6 +118,7 @@
                                                         $level6 = $this->Kodeperkiraan_model->level6institusi($idLevel5);
                                                         foreach ($level6 as $dataLevel6) :
                                                             $idLevel6 = $dataLevel6['id'];
+                                                            $posisi = $dataLevel6['posisi'];
                                                         ?>
                                                             <tr>
                                                                 <!-- <td width="3%" class="text-center"></td> -->
@@ -126,7 +127,7 @@
                                                                 <td></td>
                                                                 <td width="10%" class="text-center"><?= $dataLevel6['id']; ?></td>
                                                                 <td colspan="2" class="text-md"><?= $dataLevel6['level6']; ?></td>
-                                                                <td class="text-center"><?= ambilsaldo($idtahun, $idLevel6) ?></td>
+                                                                <td class="text-center"><?= ambilsaldo($idtahun, $idLevel6, $posisi) ?></td>
                                                                 <!-- <td width="3%" class="text-center"></td> -->
                                                             </tr>
 

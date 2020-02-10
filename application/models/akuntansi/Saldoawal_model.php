@@ -27,15 +27,26 @@ class Saldoawal_model extends CI_Model
         $thbuku_id = $this->input->post('tahun_pembukuan_id');
         $akun_id = $this->input->post('a6level_id');
         $saldo = input_uang($this->input->post('saldoawal'));
+        $posisi = $this->input->post('posisi_saldo');
+        if ($posisi == "D") {
+            $debet = input_uang($this->input->post('saldoawal'));
+            $kredit = 0;
+        } else {
+            $debet = 0;
+            $kredit = input_uang($this->input->post('saldoawal'));
+        }
         $data = array(
             'tahun_pembukuan_id' => $thbuku_id,
             'a6level_id' => $akun_id,
             'saldoawal' => $saldo,
+            'posisi_saldo' => $posisi,
+            'debet' => $debet,
+            'kredit' => $kredit,
             'is_valid' => 0
         );
         $this->db2->insert('saldoawals', $data);
         $log_type = "tambah";
-        $log_desc = "tambah saldoawal -" . $thbuku_id . "-" . $akun_id . "-" . $saldo . "-";
+        $log_desc = "tambah saldoawal -" . $thbuku_id . "-" . $posisi . "-" . $akun_id . "-" . $saldo . "-";
         userLog($log_type, $log_desc);
     }
     public function ubah($id)
@@ -43,10 +54,21 @@ class Saldoawal_model extends CI_Model
         $thbuku_id = $this->input->post('tahun_pembukuan_id');
         $a6level_id = $this->input->post('a6level_id');
         $saldo = input_uang($this->input->post('saldoawal'));
+        $posisi = $this->input->post('posisi_saldo');
+        if ($posisi == "D") {
+            $debet = input_uang($this->input->post('saldoawal'));
+            $kredit = 0;
+        } else {
+            $debet = 0;
+            $kredit = input_uang($this->input->post('saldoawal'));
+        }
         $data = array(
             'tahun_pembukuan_id' => $thbuku_id,
             'a6level_id' => $a6level_id,
+            'posisi_saldo' => $posisi,
             'saldoawal' => $saldo,
+            'debet' => $debet,
+            'kredit' => $kredit,
             'is_valid' => 0
         );
         $this->db2->where('id', $id);

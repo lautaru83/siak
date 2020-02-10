@@ -2565,12 +2565,14 @@ $(document).ready(function () {
         e.preventDefault();
         const a6level_id = $('[name="a6level_id"]').val();
         const tahunbuku = $('[name="tahun_pembukuan_id"]').val();
+        const posisi_saldo = $('[name="posisi_saldo"]').val();
         const saldo = $('[name="saldoawal"]').val();
         $.ajax({
             type: "POST",
             url: base_url + "akuntansi/saldoawal/simpan",
             data: {
                 a6level_id: a6level_id,
+                posisi_saldo: posisi_saldo,
                 tahun_pembukuan_id: tahunbuku,
                 saldoawal: saldo
             },
@@ -2588,6 +2590,11 @@ $(document).ready(function () {
                         $('#saldoawal_error').html(data.saldoawal_error);
                     } else {
                         $('#saldoawal_error').html('');
+                    }
+                    if (data.posisi_error != '') {
+                        $('#posisi_error').html(data.posisi_error);
+                    } else {
+                        $('#posisi_error').html('');
                     }
                     $('#saldoawal').trigger('focus');
                 } else {
@@ -2612,13 +2619,15 @@ $(document).ready(function () {
         const thbuku_id = $(this).data('thbukuid');
         const akun_id = $(this).data('akunid');
         const level6 = $(this).data('info');
+        const posisi = $(this).data('posisi');
         $.ajax({
             url: base_url + 'akuntansi/saldoawal/ajax_edit',
             type: "POST",
             data: {
                 a6level_id: akun_id,
                 tahun_pembukuan_id: thbuku_id,
-                level6: level6
+                level6: level6,
+                posisi: posisi
             },
             dataType: "JSON",
             success: function (data) {
@@ -2626,6 +2635,7 @@ $(document).ready(function () {
                     $('[name="idubah"]').val(data.id);
                     $('[name="a6level_id"]').val(data.a6level_id);
                     $('[name="level6"]').val(data.level6);
+                    $('[name="posisi_saldo"]').val(data.posisi_saldo);
                     $('[name="tahun_pembukuan_id"]').val(data.tahun_pembukuan_id);
                     $('[name="saldoawal"]').val(data.saldoawal);
                     $('[name="saldo"]').val(data.saldoawal);
@@ -2635,6 +2645,7 @@ $(document).ready(function () {
                 } else {
                     $('[name="a6level_id"]').val(data.a6level_id);
                     $('[name="level6"]').val(data.level6);
+                    $('[name="posisi_saldo"]').val(data.posisi_saldo);
                     $('[name="tahun_pembukuan_id"]').val(data.tahun_pembukuan_id);
                     $('#btn-ubah-saldoawal').hide();
                     $('#modal-saldoawal').modal('show');
@@ -2697,6 +2708,7 @@ $(document).ready(function () {
     $('#btn-ubah-saldoawal').on('click', function (e) {
         e.preventDefault();
         const idubah = $('[name="idubah"]').val();
+        const posisi_saldo = $('[name="posisi_saldo"]').val();
         const thbuku_id = $('[name="tahun_pembukuan_id"]').val();
         const akun_id = $('[name="a6level_id"]').val();
         const saldo = $('[name="saldoawal"]').val();
@@ -2707,6 +2719,7 @@ $(document).ready(function () {
                 id: idubah,
                 tahun_pembukuan_id: thbuku_id,
                 a6level_id: akun_id,
+                posisi_saldo: posisi_saldo,
                 saldoawal: saldo
             },
             dataType: 'JSON',
@@ -2719,6 +2732,12 @@ $(document).ready(function () {
                         type: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
+                    if (data.posisi_error != '') {
+                        $('#posisi_error').html(data.posisi_error);
+
+                    } else {
+                        $('#posisi_error').html('');
+                    }
                     if (data.saldoawal_error != '') {
                         $('#saldoawal_error').html(data.saldoawal_error);
 

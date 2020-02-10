@@ -28,44 +28,45 @@ class Saldoawal extends CI_Controller
     }
     public function konfirmasi($idtahun)
     {
-        $unit_id = $this->session->userdata('idInstitusi');
+        $institusi_id = $this->session->userdata('idInstitusi');
         $th = substr($idtahun, 2, 2);
-        $notran = $th . $unit_id . "000000";
-        $hasil = $this->Transaksi_model->cektransaldo($idtahun, $unit_id);
+        $notran = $th . $institusi_id . "000000";
+        $hasil = $this->Transaksi_model->cektransaldo($idtahun, $institusi_id);
         if ($hasil) {
             $idtransaksi = $hasil['id'];
             $this->Transaksi_model->hapusdetailsaldo($idtransaksi);
-            $akunsaldo = $this->Kodeperkiraan_model->akunsaldoawal($idtahun, $unit_id);
+            $akunsaldo = $this->Kodeperkiraan_model->akunsaldoawal($idtahun, $institusi_id);
             foreach ($akunsaldo as $dataAkunsaldo) :
                 $a6level_id = $dataAkunsaldo['id'];
                 $posisi = $dataAkunsaldo['posisi'];
+                $debet = $dataAkunsaldo['debet'];
+                $kredit = $dataAkunsaldo['kredit'];
                 $saldoawal = $dataAkunsaldo['saldoawal'];
-                $this->Transaksi_model->simpandetailsaldo($idtransaksi, $a6level_id, $posisi, $saldoawal);
+                $this->Transaksi_model->simpandetailsaldo($idtransaksi, $a6level_id, $posisi, $saldoawal, $debet, $kredit);
             endforeach;
-            $akunKhusus = $this->Kodeperkiraan_model->akunkhusus($unit_id);
+            $akunKhusus = $this->Kodeperkiraan_model->akunkhusus($institusi_id);
             if ($akunKhusus) {
                 foreach ($akunKhusus as $dataAkunKhusus) :
                     $a6level_id = $dataAkunKhusus['id'];
                     $posisi = "K";
                     $saldoawal = 0;
-                    $this->Transaksi_model->simpandetailsaldo($idtransaksi, $a6level_id, $posisi, $saldoawal);
+                    $debet = 0;
+                    $kredit = 0;
+                    $this->Transaksi_model->simpandetailsaldo($idtransaksi, $a6level_id, $posisi, $saldoawal, $debet, $kredit);
                 endforeach;
             }
-            // $this->session->set_flashdata('message', '<div class="alert alert-warning" role="alert">
-            // Pengaturan saldo awal berhasil!</div>');
-            // redirect('akuntansi/saldoawal/saldo/' . $idtahun);
         } else {
-            $this->Transaksi_model->simpantransaksi($idtahun, $notran, $unit_id);
-            $transaksi = $this->Transaksi_model->cektransaldo($idtahun, $unit_id);
+            $this->Transaksi_model->simpantransaksi($idtahun, $notran, $institusi_id);
+            $transaksi = $this->Transaksi_model->cektransaldo($idtahun, $institusi_id);
             $idtransaksi = $transaksi['id'];
-            $akunsaldo = $this->Kodeperkiraan_model->akunsaldoawal($idtahun, $unit_id);
+            $akunsaldo = $this->Kodeperkiraan_model->akunsaldoawal($idtahun, $institusi_id);
             foreach ($akunsaldo as $dataAkunsaldo) :
                 $a6level_id = $dataAkunsaldo['id'];
                 $posisi = $dataAkunsaldo['posisi'];
                 $saldoawal = $dataAkunsaldo['saldoawal'];
                 $this->Transaksi_model->simpandetailsaldo($idtransaksi, $a6level_id, $posisi, $saldoawal);
             endforeach;
-            $akunKhusus = $this->Kodeperkiraan_model->akunkhusus($unit_id);
+            $akunKhusus = $this->Kodeperkiraan_model->akunkhusus($institusi_id);
             if ($akunKhusus) {
                 foreach ($akunKhusus as $dataAkunKhusus) :
                     $a6level_id = $dataAkunKhusus['id'];
@@ -96,7 +97,8 @@ class Saldoawal extends CI_Controller
         if ($this->form_validation->run() == false) {
             $data = array(
                 'status' => 'gagal',
-                'saldoawal_error' => form_error('saldoawal')
+                'saldoawal_error' => form_error('saldoawal'),
+                'posisi_error' => form_error('posisi_saldo')
             );
         } else {
             $this->Saldoawal_model->ubah($id);
@@ -112,7 +114,8 @@ class Saldoawal extends CI_Controller
         if ($this->form_validation->run() == false) {
             $data = array(
                 'status' => 'gagal',
-                'saldoawal_error' => form_error('saldoawal')
+                'saldoawal_error' => form_error('saldoawal'),
+                'posisi_error' => form_error('posisi_saldo')
             );
         } else {
             $this->Saldoawal_model->simpan();
@@ -145,14 +148,20 @@ class Saldoawal extends CI_Controller
         $thbuku_id = $this->input->post('tahun_pembukuan_id');
         $a6level_id = $this->input->post('a6level_id');
         $level6 = $this->input->post('level6');
+        $pos = $this->input->post('posisi');
+        if ($pos == "S") {
+            $posisi = "K";
+        } else {
+            $posisi = $this->input->post('posisi');
+        }
         $hasil = $this->Saldoawal_model->ceksaldo($thbuku_id, $a6level_id);
         if ($hasil) {
             $data = array(
                 'status' => 'ubah',
                 'id' => $hasil['id'],
+                'posisi_saldo' => $hasil['posisi_saldo'],
                 'tahun_pembukuan_id' => $thbuku_id,
                 'a6level_id' => $a6level_id,
-
                 'level6' => $level6,
                 'saldoawal' => $hasil['saldoawal']
             );
@@ -161,6 +170,7 @@ class Saldoawal extends CI_Controller
                 'status' => 'simpan',
                 'tahun_pembukuan_id' => $thbuku_id,
                 'level6' => $level6,
+                'posisi_saldo' => $posisi,
                 'a6level_id' => $a6level_id
             );
         }
@@ -200,6 +210,7 @@ class Saldoawal extends CI_Controller
     // }
     private function _validate()
     {
+        $this->form_validation->set_rules('posisi_saldo', 'posisi', 'required|trim');
         $this->form_validation->set_rules('saldoawal', 'Saldo Awal', 'required|trim');
     }
 }
