@@ -132,8 +132,6 @@ function ambilsaldo($thbukuid, $akunid, $posisi)
 {
     $ci = get_instance();
     $ci->db2 = $ci->load->database('akuntansi', TRUE);
-    // $akun = $ci->db2->query("select posisi from a6levels where id='$akunid'")->row_array();
-    // $posisi=$akun['posisi'];
     $result = $ci->db2->query("select * from saldoawals where tahun_pembukuan_id='$thbukuid' and a6level_id='$akunid'")->row_array();
     if ($result) {
         $debet = $result['debet'];
@@ -146,6 +144,25 @@ function ambilsaldo($thbukuid, $akunid, $posisi)
         echo rupiah_positif($saldoawal);
     } else {
         echo "0,00";
+    }
+}
+function ambilsaldoawal($thbukuid, $akunid, $posisi)
+{
+    $ci = get_instance();
+    $saldoawal = 0;
+    $ci->db2 = $ci->load->database('akuntansi', TRUE);
+    $result = $ci->db2->query("select * from saldoawals where tahun_pembukuan_id='$thbukuid' and a6level_id='$akunid'")->row_array();
+    if ($result) {
+        $debet = $result['debet'];
+        $kredit = $result['kredit'];
+        if ($posisi == "D") {
+            $saldoawal = $debet - $kredit;
+        } else {
+            $saldoawal = $kredit - $debet;
+        }
+        return $saldoawal;
+    } else {
+        return $saldoawal;
     }
 }
 function saldoAwalAbttInstitusi($a2level_id)

@@ -45,6 +45,25 @@ class Kodeperkiraan_model extends CI_Model
     {
         return $this->db2->query("select * from a1levels where id in('100','200','300')")->result_array();
     }
+    //--------------------------------------------------------Saldo Awal--------------------
+    public function asetsaldo()
+    {
+        return $this->db2->query("select * from a1levels where id='100'")->result_array();
+    }
+    public function kewajibansaldo()
+    {
+        return $this->db2->query("select * from a1levels where id='200'")->result_array();
+    }
+    public function asetbersihsaldo()
+    {
+        return $this->db2->query("select * from a1levels where id='300'")->result_array();
+    }
+    public function akunlevel6saldo($id1)
+    {
+        $institusi_id = $this->session->userdata('idInstitusi');
+        return $this->db2->query("select a6level_id,level6,posisi from view_kodeperkiraans where a1level_id='$id1' and institusi_id='$institusi_id' order by a6level_id ASC")->result_array();
+    }
+    //--------------------------------------------------------Saldo Awal--------------------
     public function akun_saldo()
     {
         return $this->db2->query("select a3levels.id as id,a1levels.level1 as level1,a2levels.level2 as level2, a3levels.level3 as level3 from a1levels join a2levels on a1levels.id=a2levels.a1level_id join a3levels on a2levels.id=a3levels.a2level_id where a1levels.id IN(100,200,300) order by a3levels.id asc")->result_array();
@@ -53,8 +72,9 @@ class Kodeperkiraan_model extends CI_Model
     {
         return $this->db2->query("select posisi from a6levels where id='$akun_id'")->row_array();
     }
-    public function akunkhusus($institusi_id)
+    public function akunkhusus()
     {
+        $institusi_id = $this->session->userdata('idInstitusi');
         return $this->db2->query("select * from a6levels where posisi='S' and institusi_id='$institusi_id'")->result_array();
     }
     public function akunsaldoawal($idtahun, $institusi_id)

@@ -44,7 +44,7 @@ class Saldoawal extends CI_Controller
                 $saldoawal = $dataAkunsaldo['saldoawal'];
                 $this->Transaksi_model->simpandetailsaldo($idtransaksi, $a6level_id, $posisi, $saldoawal, $debet, $kredit);
             endforeach;
-            $akunKhusus = $this->Kodeperkiraan_model->akunkhusus($institusi_id);
+            $akunKhusus = $this->Kodeperkiraan_model->akunkhusus();
             if ($akunKhusus) {
                 foreach ($akunKhusus as $dataAkunKhusus) :
                     $a6level_id = $dataAkunKhusus['id'];
@@ -56,6 +56,7 @@ class Saldoawal extends CI_Controller
                 endforeach;
             }
         } else {
+            $institusi_id = $this->session->userdata('idInstitusi');
             $this->Transaksi_model->simpantransaksi($idtahun, $notran, $institusi_id);
             $transaksi = $this->Transaksi_model->cektransaldo($idtahun, $institusi_id);
             $idtransaksi = $transaksi['id'];
@@ -64,15 +65,19 @@ class Saldoawal extends CI_Controller
                 $a6level_id = $dataAkunsaldo['id'];
                 $posisi = $dataAkunsaldo['posisi'];
                 $saldoawal = $dataAkunsaldo['saldoawal'];
-                $this->Transaksi_model->simpandetailsaldo($idtransaksi, $a6level_id, $posisi, $saldoawal);
+                $debet = $dataAkunsaldo['debet'];
+                $kredit = $dataAkunsaldo['kredit'];
+                $this->Transaksi_model->simpandetailsaldo($idtransaksi, $a6level_id, $posisi, $saldoawal, $debet, $kredit);
             endforeach;
-            $akunKhusus = $this->Kodeperkiraan_model->akunkhusus($institusi_id);
+            $akunKhusus = $this->Kodeperkiraan_model->akunkhusus();
             if ($akunKhusus) {
                 foreach ($akunKhusus as $dataAkunKhusus) :
                     $a6level_id = $dataAkunKhusus['id'];
                     $posisi = "K";
                     $saldoawal = 0;
-                    $this->Transaksi_model->simpandetailsaldo($idtransaksi, $a6level_id, $posisi, $saldoawal);
+                    $debet = 0;
+                    $kredit = 0;
+                    $this->Transaksi_model->simpandetailsaldo($idtransaksi, $a6level_id, $posisi, $saldoawal, $debet, $kredit);
                 endforeach;
             }
             //$this->Transaksi_model->simpandetailsaldo($idtahun);
@@ -89,6 +94,15 @@ class Saldoawal extends CI_Controller
         $data['tahunbuku'] = $this->Tahunbuku_model->ambil_data();
         $data['kodeperkiraan'] = $this->Kodeperkiraan_model->akun_saldo();
         $this->template->display('akuntansi/saldoawal/saldo', $data);
+    }
+    public function saldo2($idtahun)
+    {
+        $data['idtahun'] = $idtahun;
+        $data['kontenmenu'] = "Pengaturan";
+        $data['kontensubmenu'] = "Saldo Awal";
+        $data['tahunbuku'] = $this->Tahunbuku_model->ambil_data();
+        $data['kodeperkiraan'] = $this->Kodeperkiraan_model->akun_saldo();
+        $this->template->display('akuntansi/saldoawal/saldo2', $data);
     }
     public function ubah()
     {

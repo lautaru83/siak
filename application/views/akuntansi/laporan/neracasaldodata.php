@@ -96,35 +96,37 @@
                                                 $no = 1;
                                                 $saldodebet = 0;
                                                 $saldokredit = 0;
-                                                foreach ($neracasaldo as $dataNeracasaldo) :
-                                                    $posisi = $dataNeracasaldo['posisi'];
-                                                    $debet = $dataNeracasaldo['debet'];
-                                                    $kredit = $dataNeracasaldo['kredit'];
-                                                    if ($posisi == "D") {
-                                                        $saldodebet = $debet - $kredit;
-                                                        $saldokredit = 0;
-                                                    } else {
-                                                        $saldodebet = 0;
-                                                        $saldokredit = $kredit - $debet;
-                                                    }
+                                                if ($neracasaldo) {
+                                                    foreach ($neracasaldo as $dataNeracasaldo) :
+                                                        $posisi = $dataNeracasaldo['posisi'];
+                                                        $debet = $dataNeracasaldo['debet'];
+                                                        $kredit = $dataNeracasaldo['kredit'];
+                                                        if ($posisi == "D") {
+                                                            $saldodebet = $debet - $kredit;
+                                                            $saldokredit = 0;
+                                                        } else {
+                                                            $saldodebet = 0;
+                                                            $saldokredit = $kredit - $debet;
+                                                        }
 
 
-                                                    //$id = $dataNeracasaldo['id'];
+                                                        //$id = $dataNeracasaldo['id'];
                                                 ?>
-                                                    <tr class="font-weight-normal">
-                                                        <td width="5%" class="text-center"><?= $no; ?></td>
-                                                        <td width="10%" class="text-center"><?= $dataNeracasaldo['id']; ?></td>
-                                                        <td><?= $dataNeracasaldo['level6']; ?></td>
-                                                        <td class="text-right">
-                                                            <?php rupiah_positif($saldodebet); ?>
-                                                        </td>
-                                                        <td class="text-right">
-                                                            <?php rupiah_positif($saldokredit); ?>
-                                                        </td>
-                                                    </tr>
+                                                        <tr class="font-weight-normal">
+                                                            <td width="5%" class="text-center"><?= $no; ?></td>
+                                                            <td width="10%" class="text-center"><?= $dataNeracasaldo['id']; ?></td>
+                                                            <td><?= $dataNeracasaldo['level6']; ?></td>
+                                                            <td class="text-right">
+                                                                <?php rupiah_positif($saldodebet); ?>
+                                                            </td>
+                                                            <td class="text-right">
+                                                                <?php rupiah_positif($saldokredit); ?>
+                                                            </td>
+                                                        </tr>
                                                 <?php
-                                                    $no++;
-                                                endforeach;
+                                                        $no++;
+                                                    endforeach;
+                                                }
                                                 ?>
                                             </tbody>
                                         </table>

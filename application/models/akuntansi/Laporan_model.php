@@ -179,14 +179,6 @@ class Laporan_model extends CI_Model
         $thbuku = $this->session->userdata('tahun_buku');
         return $this->db2->query("SELECT a.level3 as level3,a.level4 as level4,a.a3level_id as catatan_id, a.posisi as posisi, SUM(b.debet) as debet, SUM(b.kredit) as kredit FROM view_kodeperkiraans AS a INNER JOIN view_transaksis AS b ON a.a6level_id = b.a6level_id WHERE a.a3level_id='521' AND b.tahun_buku='$thbuku' AND b.tanggal_transaksi BETWEEN '$tgl1' AND '$tgl2' AND b.is_valid BETWEEN 1 AND 2 GROUP BY a.a4level_id,b.tahun_buku ORDER BY a.a6level_id ASC ")->result_array();
     }
-    // public function bpdpKonsolidasi()
-    // {
-    //     $tgl1 = tanggal_input($this->session->userdata('buku_awal'));
-    //     $tgl2 = tanggal_input($this->input->post('akhir_periode'));
-    //     //$institusi_id = $this->session->userdata('idInstitusi');
-    //     $thbuku = $this->session->userdata('tahun_buku');
-    //     return $this->db2->query("SELECT a.level3 as level3,a.a3level_id as catatan_id, a.posisi as posisi, SUM(b.debet) as debet, SUM(b.kredit) as kredit FROM view_kodeperkiraans AS a INNER JOIN view_transaksis AS b ON a.a6level_id = b.a6level_id WHERE a.a3level_id='531' AND b.tahun_buku='$thbuku' AND b.tanggal_transaksi BETWEEN '$tgl1' AND '$tgl2' AND b.is_valid BETWEEN 1 AND 2 GROUP BY b.tahun_buku")->result_array();
-    // }
     public function bpdpInstitusi()
     {
         $tgl1 = tanggal_input($this->session->userdata('buku_awal'));
@@ -286,6 +278,45 @@ class Laporan_model extends CI_Model
         return $this->db2->query("SELECT a.level3 as level3,a.a3level_id as catatan_id, a.posisi as posisi, SUM(b.debet) as debet, SUM(b.kredit) as kredit FROM view_kodeperkiraans AS a INNER JOIN view_transaksis AS b ON a.a6level_id = b.a6level_id WHERE a3level_id IN('121','122','123') AND b.tahun_buku='$thbuku' AND b.tanggal_transaksi BETWEEN '$tgl1' AND '$tgl2' AND b.is_valid=1 GROUP BY a.a3level_id,b.tahun_buku ORDER BY a.a6level_id ASC ")->result_array();
     }
     // ------------------------------/PERUBAHAN ARUS ----------------------------------
+    // ------------------------------/CALK ----------------------------------
+    public function calkAkun3Institusi()
+    {
+        $tgl1 = tanggal_input($this->session->userdata('buku_awal'));
+        $tgl2 = tanggal_input($this->input->post('akhir_periode'));
+        $institusi_id = $this->session->userdata('idInstitusi');
+        $thbuku = $this->session->userdata('tahun_buku');
+        return $this->db2->query("SELECT a.a1level_id as a1level_id,a.level3 as level3,a.a3level_id as catatan_id, a.posisi as posisi, SUM(b.debet) as debet, SUM(b.kredit) as kredit FROM view_kodeperkiraans AS a INNER JOIN view_transaksis AS b ON a.a6level_id = b.a6level_id WHERE b.tahun_buku='$thbuku' AND a.institusi_id='$institusi_id' AND b.tanggal_transaksi BETWEEN '$tgl1' AND '$tgl2' AND b.is_valid BETWEEN 1 AND 2 GROUP BY a.a3level_id,b.tahun_buku ORDER BY a.a3level_id ASC ")->result_array();
+    }
+    public function calkAkun6Institusi($id)
+    {
+        $tgl1 = tanggal_input($this->session->userdata('buku_awal'));
+        $tgl2 = tanggal_input($this->input->post('akhir_periode'));
+        $institusi_id = $this->session->userdata('idInstitusi');
+        $thbuku = $this->session->userdata('tahun_buku');
+        return $this->db2->query("SELECT a.a6level_id as a6level_id,a.level6 as level6, a.posisi as posisi, SUM(b.debet) as debet, SUM(b.kredit) as kredit FROM view_kodeperkiraans AS a INNER JOIN view_transaksis AS b ON a.a6level_id = b.a6level_id WHERE b.tahun_buku='$thbuku' AND a.institusi_id='$institusi_id' AND b.tanggal_transaksi BETWEEN '$tgl1' AND '$tgl2' AND b.is_valid BETWEEN 1 AND 2 AND a3level_id='$id' GROUP BY a.a6level_id,b.tahun_buku ORDER BY a.a3level_id ASC ")->result_array();
+    }
+    public function calkAkun3Konsolidasi()
+    {
+        $tgl1 = tanggal_input($this->session->userdata('buku_awal'));
+        $tgl2 = tanggal_input($this->input->post('akhir_periode'));
+        $thbuku = $this->session->userdata('tahun_buku');
+        return $this->db2->query("SELECT a.a1level_id as a1level_id,a.level3 as level3,a.a3level_id as catatan_id, a.posisi as posisi, SUM(b.debet) as debet, SUM(b.kredit) as kredit FROM view_kodeperkiraans AS a INNER JOIN view_transaksis AS b ON a.a6level_id = b.a6level_id WHERE b.tahun_buku='$thbuku' AND b.tanggal_transaksi BETWEEN '$tgl1' AND '$tgl2' AND b.is_valid BETWEEN 1 AND 2 GROUP BY a.a3level_id,b.tahun_buku ORDER BY a.a3level_id ASC ")->result_array();
+    }
+    public function calkAkun4Konsolidasi($id3)
+    {
+        $tgl1 = tanggal_input($this->session->userdata('buku_awal'));
+        $tgl2 = tanggal_input($this->input->post('akhir_periode'));
+        $thbuku = $this->session->userdata('tahun_buku');
+        return $this->db2->query("SELECT a.a4level_id as a4level_id,a.level4 as level4, a.posisi as posisi, SUM(b.debet) as debet, SUM(b.kredit) as kredit FROM view_kodeperkiraans AS a INNER JOIN view_transaksis AS b ON a.a6level_id = b.a6level_id WHERE b.tahun_buku='$thbuku' AND b.tanggal_transaksi BETWEEN '$tgl1' AND '$tgl2' AND b.is_valid BETWEEN 1 AND 2 AND a3level_id='$id3' GROUP BY a.a4level_id,b.tahun_buku ORDER BY a.a4level_id ASC ")->result_array();
+    }
+    public function calkAkun5Konsolidasi($id4)
+    {
+        $tgl1 = tanggal_input($this->session->userdata('buku_awal'));
+        $tgl2 = tanggal_input($this->input->post('akhir_periode'));
+        $thbuku = $this->session->userdata('tahun_buku');
+        return $this->db2->query("SELECT a.a5level_id as a5level_id,a.level5 as level5, a.posisi as posisi, SUM(b.debet) as debet, SUM(b.kredit) as kredit FROM view_kodeperkiraans AS a INNER JOIN view_transaksis AS b ON a.a6level_id = b.a6level_id WHERE b.tahun_buku='$thbuku' AND b.tanggal_transaksi BETWEEN '$tgl1' AND '$tgl2' AND b.is_valid BETWEEN 1 AND 2 AND a4level_id='$id4' GROUP BY a.a5level_id,b.tahun_buku ORDER BY a.a5level_id ASC ")->result_array();
+    }
+    // ------------------------------/CALK ----------------------------------
 
 
 

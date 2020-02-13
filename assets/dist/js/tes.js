@@ -121,6 +121,76 @@ $(document).ready(function () {
         return false;
     });
     // -------------------------------------/NERACA----------------------------
+    // --------------------------------------CALK----------------------------
+    $('#btn-tampil-catatan').on('click', function (e) {
+        e.preventDefault();
+        var laporan = $(this).data('laporan');
+        var jenis = "";
+        var idInstitusi = $(this).data('id');
+        //const akhir_periode = $('[name="akhir_periode"]').val();
+        const tanggal = $('[name="akhir_periode"]').val();
+        // const buku_awal = $(this).data('tgl1');
+        // const buku_akhir = $(this).data('tgl2');
+        const ckKonsolidasi = document.getElementById("ckkonsolidasi");
+        const ckKomparatif = document.getElementById("ckkomparatif");
+        if (idInstitusi == '01') {
+            if (ckKonsolidasi.checked == true && ckKomparatif.checked == false) {
+                jenis = "3"; //konsolidasi
+            } else if (ckKonsolidasi.checked == false && ckKomparatif.checked == true) {
+                jenis = "2"; //komparatif
+            } else if (ckKonsolidasi.checked == true && ckKomparatif.checked == true) {
+                jenis = "4"; //konsolidasi komparatif
+            } else {
+                jenis = "1"; //institusi
+            }
+        } else {
+            if (ckKomparatif.checked == true) {
+                jenis = "2"; //komparatif
+            } else {
+                jenis = "1"; //institusi
+            }
+        }
+        $.ajax({
+            cache: false,
+            type: "POST",
+            url: base_url + "akuntansi/catatan/cekinput",
+            data: {
+                akhir_periode: tanggal
+            },
+            dataType: "JSON",
+            beforeSend: function () {
+                $('#btn-tampil-catatan').attr('disabled', 'disabled');
+            },
+            success: function (response) {
+                if (response.status == 'gagal') {
+                    Toast.fire({
+                        type: 'warning',
+                        title: 'Tanggal diluar periode pembukuan!!!'
+                    });
+                } else {
+                    Toast.fire({
+                        type: 'success',
+                        title: ' Menampilkan laporan!!!.' + jenis
+                    });
+                    $.ajax({
+                        type: "POST",
+                        cache: false,
+                        url: base_url + "akuntansi/catatan/viewdata",
+                        data: {
+                            akhir_periode: tanggal,
+                            jenis: jenis
+                        },
+                        success: function (data) {
+                            $("#data").html(data);
+                        }
+                    });
+                }
+                $('#btn-tampil-catatan').attr('disabled', false);
+            }
+        });
+        return false;
+    });
+    // -------------------------------------/CALK----------------------------
     // --------------------------------------AKTIVITAS-------------------------
     $('#btn-tampil-activitas').on('click', function (e) {
         e.preventDefault();

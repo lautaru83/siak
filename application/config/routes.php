@@ -68,6 +68,7 @@ $route['activitas'] = 'akuntansi/activitas';
 $route['perubahanaset'] = 'akuntansi/perubahanaset';
 $route['perubahanarus'] = 'akuntansi/perubahanarus';
 $route['rapb'] = 'akuntansi/rapb';
+$route['catatan'] = 'akuntansi/catatan';
 // --------------- Transaksi -----------------------------
 // $route['kasmasuk1'] = 'akuntansi/transaksi/kasmasuk';
 $route['kasmasuk'] = 'akuntansi/kasmasuk';
