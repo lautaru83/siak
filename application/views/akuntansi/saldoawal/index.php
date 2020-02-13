@@ -68,7 +68,6 @@
                                                 <td><?= $dataTahunbuku['keterangan']; ?></td>
                                                 <td><?= txt_status($dataTahunbuku['is_active']); ?></td>
                                                 <td class="text-center">
-                                                    <a href="<?= site_url('akuntansi/saldoawal/saldo2/'); ?><?= $idtahun; ?>" class="btn-pilih-tahunbuku" data-id="<?= $dataTahunbuku['id']; ?>" data-toggle="tooltip" data-placement="bottom" title="Daftar Saldo2"><i class="far fa-list-alt" style="color: teal"></i></a> -
                                                     <a href="<?= site_url('akuntansi/saldoawal/saldo/'); ?><?= $idtahun; ?>" class="btn-pilih-tahunbuku" data-id="<?= $dataTahunbuku['id']; ?>" data-toggle="tooltip" data-placement="bottom" title="Daftar Saldo"><i class="far fa-list-alt" style="color: teal"></i></a>
                                                 </td>
                                             </tr>
