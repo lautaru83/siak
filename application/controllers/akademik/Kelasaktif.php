@@ -8,17 +8,18 @@ class Kelasaktif extends CI_Controller
         parent::__construct();
         is_logged_in();
         $this->db3 = $this->load->database('akademik', TRUE);
-        $this->load->model(array('akademik/Tahunakademik_model' => 'Tahunakademik_model', 'akademik/Periodeakademik_model' => 'Periodeakademik_model', 'akademik/Kelas_model' => 'Kelas_model'));
+        $this->load->model(array('akademik/Tahunakademik_model' => 'Tahunakademik_model', 'akademik/Periodeakademik_model' => 'Periodeakademik_model', 'akademik/Kelas_model' => 'Kelas_model', 'akademik/Kelasaktif_model' => 'Kelasaktif_model', 'akademik/Mahasiswa_model' => 'Mahasiswa_model'));
     }
     public function index()
     {
         //echo "Angkatan";
+        $idPerak = $this->session->userdata('idPerak');
         $data['kontenmenu'] = "Pengaturan";
         $data['kontensubmenu'] = "Kelas Aktif";
         $data['kelasaktif'] = "";
-        // $data['tahunakademik'] = $this->Tahunakademik_model->data_fk();
-        $data['kelas'] = $this->Semester_model->data_fk();
-        $data['periodeakademik'] = $this->Periodeakademik_model->data_fk();
+        $data['periode'] = $this->Periodeakademik_model->ambil_data_id($idPerak);
+        $data['kelas'] = $this->Kelas_model->data_fk();
+        $data['kelasaktif'] = $this->Kelasaktif_model->ambil_data();
         $this->template->display('akademik/kelasaktif/index', $data);
     }
     public function simpan()
@@ -27,83 +28,73 @@ class Kelasaktif extends CI_Controller
         if ($this->form_validation->run() == false) {
             $data = array(
                 'status' => 'gagal',
-                'kode_error' => form_error('id'),
-                'awal_periode_error' => form_error('awal_periode'),
-                'akhir_periode_error' => form_error('akhir_periode'),
-                'semester_error' => form_error('semester_id'),
-                'tahunakademik_error' => form_error('tahunakademik_id'),
-                'keterangan_error' => form_error('keterangan')
+                'periode_error' => form_error('perak_id'),
+                'kelas_error' => form_error('kelas_id')
             );
         } else {
-            $this->Periodeakademik_model->simpan();
+            $this->Kelasaktif_model->simpan();
             $data = array(
                 'status' => 'sukses'
             );
         }
         echo json_encode($data);
+    }
+    public function mahasiswa($id)
+    {
+        $data['kontenmenu'] = "Pengaturan";
+        $data['kontensubmenu'] = "Mahasiswa Aktif";
+        $data['dekelas_id'] = $id;
+        $data['detailkelas'] = $this->Kelasaktif_model->detail_data_id($id);
+        $data['mahasiswaaktif'] = $this->Kelasaktif_model->mahasiswa_active_id($id); //id detail kelas
+        $this->template->display('akademik/kelasaktif/mahasiswa', $data);
     }
     public function hapus()
     {
         $id = $this->input->post('id');
         $info = $this->input->post('info');
-        $hasil = $this->Periodeakademik_model->cek_hapus($id);
+        $hasil = $this->Kelasaktif_model->cek_hapus($id);
         if ($hasil > 0) {
             $data = array(
                 'status' => 'gagal'
             );
         } else {
-            $this->Periodeakademik_model->hapus($id, $info);
+            $this->Kelasaktif_model->hapus($id, $info);
             $data = array(
                 'status' => 'sukses'
             );
         }
         echo json_encode($data);
     }
-    public function ajax_edit($id)
+    public function hapusdetail()
     {
-        $hasil = $this->Periodeakademik_model->ambil_data_id($id);
+        $id = $this->input->post('id'); //id mahasiswaactives
+        $info = $this->input->post('info');
+        $this->Kelasaktif_model->hapusdetail($id, $info);
+        $data = array(
+            'status' => 'sukses'
+        );
+        echo json_encode($data);
+    }
+    public function ubahmhs()
+    {
+        $dekelas_id = $this->input->post('dekelas_id');
+        $mhs_id = $this->input->post('mhs_id');
+        $data = [
+            "detailkelas_id" => $dekelas_id,
+            "mahasiswa_id" => $mhs_id
+        ];
+        $hasil = $this->Kelasaktif_model->cek_active($data);
         if ($hasil) {
-            $data = array(
-                'status' => 'sukses',
-                'id' => $hasil['id'],
-                'tahunakademik_id' => $hasil['tahunakademik_id'],
-                'semester_id' => $hasil['semester_id'],
-                'keterangan' => $hasil['keterangan'],
-                'awal_periode' => tanggal_indo($hasil['awal_semester']),
-                'akhir_periode' => tanggal_indo($hasil['akhir_semester'])
-            );
+            $this->Kelasaktif_model->hapusmhs($data);
         } else {
-            $data = array(
-                'status' => 'gagal'
-            );
+            $this->Kelasaktif_model->simpanmhs($data);
         }
-        echo json_encode($data);
-    }
-    public function ubah()
-    {
-        $id = $this->input->post('idubah');
-        $this->_validate();
-        if ($this->form_validation->run() == false) {
-            $data = array(
-                'status' => 'gagal',
-                'awal_periode_error' => form_error('awal_periode'),
-                'akhir_periode_error' => form_error('akhir_periode'),
-                'semester_error' => form_error('semester_id'),
-                'tahunakademik_error' => form_error('tahunakademik_id'),
-                'keterangan_error' => form_error('keterangan')
-            );
-        } else {
-            $this->Periodeakademik_model->ubah($id);
-            $data = array(
-                'status' => 'sukses'
-            );
-        }
-        echo json_encode($data);
     }
     public function cek_unik()
     {
-        $id = $this->input->post('id');
-        $hasil = $this->Periodeakademik_model->cek_id($id);
+        $kelas_id = $this->input->post('kelas_id');
+        $perak_id = $this->input->post('perak_id');
+        $hasil = $this->Kelasaktif_model->cek_id($perak_id, $kelas_id);
         if ($hasil > 0) {
             return false;
         } else {
@@ -112,15 +103,14 @@ class Kelasaktif extends CI_Controller
     }
     private function _validate()
     {
-        if (!$this->input->post('idubah')) {
-            $this->form_validation->set_rules('id', 'Kode', 'required|trim|exact_length[6]|callback_cek_unik', [
-                'cek_unik' => 'Kode telah digunakan oleh data lain !'
-            ]);
-        }
-        $this->form_validation->set_rules('tahunakademik_id', 'Tahun Akademik', 'required|trim');
-        $this->form_validation->set_rules('semester_id', 'Semester', 'required|trim');
-        $this->form_validation->set_rules('keterangan', 'Keterangan', 'required|trim');
-        $this->form_validation->set_rules('awal_periode', 'Awal Periode', 'required|trim');
-        $this->form_validation->set_rules('akhir_periode', 'Akhir Periode', 'required|trim');
+        // if (!$this->input->post('idubah')) {
+        //     $this->form_validation->set_rules('id', 'Kode', 'required|trim|exact_length[6]|callback_cek_unik', [
+        //         'cek_unik' => 'Kode telah digunakan oleh data lain !'
+        //     ]);
+        // }
+        $this->form_validation->set_rules('perak_id', 'Periode Akademik', 'required|trim');
+        $this->form_validation->set_rules('kelas_id', 'Kelas', 'required|trim|callback_cek_unik', [
+            'cek_unik' => 'Kelas sudah ada!'
+        ]);
     }
 }

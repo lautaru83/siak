@@ -888,7 +888,195 @@ $(document).ready(function () {
     // end ajax tombol modal ubah periodeakademik
 
     // -------------------------------------/PERIODE AKADEMIK-------------------------
+    // -------------------------------------/KELAS AKTIF-------------------------
+    //set focus input kelasaktif saat modal muncul
+    $('#modal-kelasaktif').on('shown.bs.modal', function () {
+        $('#kelas_id').trigger('focus');
+    })
+    //set focus input kelasaktif saat modal muncul
+    // tombol tambah kelasaktif table
+    $('#btn-tambah-kelasaktif').on('click', function (e) {
+        e.preventDefault();
+        const judul = document.getElementById('judul-modal');
+        judul.innerHTML = 'Tambah Data Kelas Aktif';
+        $('#btn-ubah-kelasaktif').hide();
+        $('#modal-kelasaktif').modal('show');
+    });
+    // end tombol tambah kelasaktif table
+    // ajax tombol Simpan modal kelasaktif
+    $('#btn-simpan-kelasaktif').on('click', function (e) {
+        e.preventDefault();
+        // const id = $('[name="id"]').val();
+        // const tahunakademik_id = $('[name="tahunakademik_id"]').val();
+        const perak_id = $('[name="perak_id"]').val();
+        const kelas_id = $('[name="kelas_id"]').val();
+        $.ajax({
+            method: "POST",
+            url: base_url + "akademik/kelasaktif/simpan",
+            data: {
+                perak_id: perak_id,
+                kelas_id: kelas_id
+            },
+            dataType: "JSON",
+            beforeSend: function () {
+                $('#btn-simpan-kelasaktif').attr('disabled', 'disabled');
+            },
+            success: function (data) {
+                if (data.status == 'gagal') {
+                    Toast.fire({
+                        type: 'error',
+                        title: ' Input data tidak valid!!!.'
+                    });
+                    if (data.periode_error != '') {
+                        $('#periode_error').html(data.periode_error);
+                    } else {
+                        $('#periode_error').html('');
+                    }
+                    if (data.kelas_error != '') {
+                        $('#kelas_error').html(data.kelas_error);
+                    } else {
+                        $('#kelas_error').html('');
+                    }
+                    $('#kelas_id').trigger('focus');
+                } else {
+                    Toast.fire({
+                        type: 'success',
+                        title: ' Data berhasil disimpan.'
+                    });
+                    $('#modal-kelasaktif').modal('hide');
+                }
+                $('#btn-simpan-kelasaktif').attr('disabled', false);
+            }
+        });
+        return false;
+    });
+    //end  ajax tombol Simpan modal kelasaktif
+    // ajax icon hapus table kelasaktif klik
+    $('.btn-hapus-kelasaktif').on('click', function (e) {
+        e.preventDefault();
+        var id = $(this).data('id');
+        var info = $(this).data('info');
+        Swal.fire({
+            title: 'Konfirmasi!',
+            text: 'Apakah anda yakin akan menghapus kelas -' + id + info + '- !?!',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'Batal',
+            confirmButtonText: 'Hapus'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    method: "POST",
+                    url: base_url + "akademik/kelasaktif/hapus",
+                    data: {
+                        id: id,
+                        info: info
+                    },
+                    dataType: 'JSON',
+                    success: function (data) {
+                        if (data.status == 'sukses') {
+                            Toast.fire({
+                                type: 'success',
+                                title: ' Data berhasil dihapus!!!.'
+                            });
+                            document.location.reload();
+                        } else {
+                            Toast.fire({
+                                type: 'warning',
+                                title: ' Penghapusan dibatalkan, data sedang digunakan oleh system!!!.'
+                            });
+                        }
+                    }
+                });
+            }
+        })
+    });
+    // end ajax icon hapus table kelasaktif klik
+    //set focus input mahasiswaaktif saat modal muncul
+    $('#modal-mahasiswaaktif').on('shown.bs.modal', function () {
+        //$('#kelas_id').trigger('focus');
+    })
+    //set focus input mahasiswaaktif saat modal muncul
+    // tombol tambah mahasiswaaktif table
+    $('#btn-tambah-mahasiswaaktif').on('click', function (e) {
+        e.preventDefault();
+        const judul = document.getElementById('judul-modal');
+        judul.innerHTML = 'Tambah Data Mahasiswa Aktif';
+        $('#btn-ubah-mahasiswaaktif').hide();
+        $('#modal-mahasiswaaktif').modal('show');
+    });
+    // end tombol tambah mahasiswaaktif table
+    // ajax icon hapus table mahasiswaaktif klik
+    $('.btn-hapus-mahasiswaaktif').on('click', function (e) {
+        e.preventDefault();
+        var id = $(this).data('id');
+        var info = $(this).data('info');
+        Swal.fire({
+            title: 'Konfirmasi!',
+            text: 'Apakah anda yakin akan menghapus mahasiswa -' + info + '- !?!',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'Batal',
+            confirmButtonText: 'Hapus'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    method: "POST",
+                    url: base_url + "akademik/kelasaktif/hapusdetail",
+                    data: {
+                        id: id,
+                        info: info
+                    },
+                    dataType: 'JSON',
+                    success: function (data) {
+                        if (data.status == 'sukses') {
+                            Toast.fire({
+                                type: 'success',
+                                title: ' Data berhasil dihapus!!!.'
+                            });
+                            document.location.reload();
+                        } else {
+                            Toast.fire({
+                                type: 'warning',
+                                title: ' Penghapusan dibatalkan, data sedang digunakan oleh system!!!.'
+                            });
+                        }
+                    }
+                });
+            }
+        })
+    });
+    // end ajax icon hapus table mahasiswaaktif klik
 
+    // -------------------------------------/KELAS AKTIF-------------------------
+    //---------------------------------------MAHASISWA AKTIF CEKBOX----------------------------
+    //ajax cekbox mahasiswa aktif
+    $('.frm-cek-mhsactive').on('click', function (e) {
+        const dekelas_id = $(this).data('iddekelas');
+        const mhs_id = $(this).data('mhsid');
+        $.ajax({
+            url: base_url + "akademik/kelasaktif/ubahmhs",
+            method: 'POST',
+            data: {
+                dekelas_id: dekelas_id,
+                mhs_id: mhs_id
+            },
+            success: function () {
+                Toast.fire({
+                    type: 'success',
+                    title: 'Data kelas berhasil diperbaharui!'
+                });
+            }
+        });
+    });
+    //end ajax cekbox mahasiswa aktif
+
+
+    //--------------------------------------/MAHASISWA AKTIF CEKBOX----------------------------
 
 
 

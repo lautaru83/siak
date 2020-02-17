@@ -28,7 +28,7 @@
                         <div class="card-header bg-gradient-light">
                             <div>
                                 <h4 class="card-title">
-                                    <a href="#" class="text-reset" id="btn-tambah-periodeakademik" data-aksi="tambah"><i class="fas fa-file-alt" style="color: teal"></i> Tambah data </a>
+                                    <a href="#" class="text-reset" id="btn-tambah-kelasaktif" data-aksi="tambah"><i class="fas fa-file-alt" style="color: teal"></i> Tambah data </a>
                                 </h4>
                             </div>
                             <div class="float-right">
@@ -40,18 +40,19 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body" id="tabel-data">
-                            <table id="tabel1" class="table table-bordered table-striped">
+                            <?php
+                            // var_dump($periode);
+                            // echo "<br>";
+                            // echo $periode['id'];
+                            ?>
+                            <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <td width="5%" class="text-center">No</td>
-                                        <td width="8%" class="text-center">Kode</td>
-                                        <td width="12%">Tahun Akademik</td>
-                                        <td width="8%">Semester</td>
-                                        <td width="12%">Awal Semester</td>
-                                        <td width="12%">Akhir Semester</td>
-                                        <td>Keterangan</td>
-                                        <td width="10%">Status</td>
-                                        <td width="8%" class="text-center" style="color: grey"><i class="fas fa-cog"></i></td>
+                                        <td width="30%">Periode Akademik</td>
+                                        <td width="">Kelas</td>
+                                        <td width="10%" class="text-center">Mahasiswa</td>
+                                        <td width="12%" class="text-center" style="color: grey"><i class="fas fa-cog"></i></td>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -61,21 +62,23 @@
                                         foreach ($kelasaktif as $dataKelasaktif) :
                                             $idKelasaktif = $dataKelasaktif['id'];
                                     ?>
-
                                             <tr>
                                                 <td class="text-center"><?= $no; ?></td>
-                                                <td class="text-center"><?= $idKelasaktif; ?></td>
-                                                <td><?= $dataKelasaktif['tahunakademik']; ?></td>
-                                                <td><?= $dataKelasaktif['semester']; ?></td>
-                                                <td><?= tanggal_indo($dataKelasaktif['awal_semester']); ?></td>
-                                                <td><?= tanggal_indo($dataKelasaktif['akhir_semester']); ?></td>
-                                                <td><?= $dataKelasaktif['keterangan']; ?></td>
-                                                <td><?= txt_status($dataKelasaktif['is_active']); ?></td>
-                                                <td class="text-center"><a href="" class="btn-edit-periodeakademik" data-id="<?= $idKelasaktif; ?>" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fas fa-edit" style="color: olive"></i></a> - <a href="" class="btn-hapus-periodeakademik" data-id="<?= $idKelasaktif; ?>" data-info="<?= $dataKelasaktif['tahunakademik']; ?>" data-toggle="tooltip" data-placement="bottom" title="Hapus"> <i class="far fa-trash-alt" style="color: maroon"></i></a></td>
+                                                <td><?= $dataKelasaktif['periodeakademik']; ?></td>
+                                                <td><?= $dataKelasaktif['kelas']; ?></td>
+                                                <td class="text-center"></td>
+                                                <td class="text-center"><a href="<?= base_url('akademik/kelasaktif/mahasiswa/' . $idKelasaktif); ?>" class="btn-mahasiswa-aktif" data-id="<?= $idKelasaktif; ?>" data-toggle="tooltip" data-placement="bottom" title="Mahasiswa Aktif"><i class="fas fa-list-alt" style="color: olive"></i></a> - <a href="" class="btn-hapus-kelasaktif" data-id="<?= $idKelasaktif; ?>" data-info="<?= $dataKelasaktif['kelas']; ?>" data-toggle="tooltip" data-placement="bottom" title="Hapus"> <i class="far fa-trash-alt" style="color: maroon"></i></a></td>
                                             </tr>
-                                    <?php
+                                        <?php
                                             $no++;
                                         endforeach;
+                                    } else {
+                                        ?>
+
+                                        <tr>
+                                            <td colspan="4" class="text-center">Data tidak ditemukan</td>
+                                        </tr>
+                                    <?php
                                     }
                                     ?>
 

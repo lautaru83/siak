@@ -33,6 +33,17 @@ function cek_access($role_id, $submenu_id)
         return "checked='checked'";
     }
 }
+function cek_mahasiswaaktif($dekelas_id, $mhs_id)
+{
+    $ci = get_instance();
+    $ci->db3 = $ci->load->database('akademik', TRUE);
+    $ci->db3->where('detailkelas_id', $dekelas_id);
+    $ci->db3->where('mahasiswa_id', $mhs_id);
+    $result = $ci->db3->get('mahasiswaactives');
+    if ($result->num_rows() > 0) {
+        return "checked='checked'";
+    }
+}
 function cek_akun($tran_id, $akun_id)
 {
     $ci = get_instance();
