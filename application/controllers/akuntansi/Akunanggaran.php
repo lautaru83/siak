@@ -80,23 +80,6 @@ class Akunanggaran extends CI_Controller
         }
         echo json_encode($data);
     }
-    // public function ajax_editunit($id)
-    // {
-    //     $hasil = $this->Akunanggaran_model->ambil_data_unit($id);
-    //     if ($hasil) {
-    //         $data = array(
-    //             'status' => 'sukses',
-    //             'id' => $hasil['id'],
-    //             'kelompokanggaran_id' => $hasil['kelompokanggaran_id'],
-    //             'unit_anggaran' => $hasil['unit_anggaran']
-    //         );
-    //     } else {
-    //         $data = array(
-    //             'status' => 'gagal'
-    //         );
-    //     }
-    //     echo json_encode($data);
-    // }
     public function ajax_editanggaran($id)
     {
         $hasil = $this->Akunanggaran_model->ambil_data_anggaran($id);
@@ -116,23 +99,6 @@ class Akunanggaran extends CI_Controller
         }
         echo json_encode($data);
     }
-    // public function ubahunit($id)
-    // {
-    //     $this->_unitvalidate();
-    //     if ($this->form_validation->run() == false) {
-    //         $data = array(
-    //             'status' => 'gagal',
-    //             'kodeunit_error' => form_error('kodeunit'),
-    //             'unit_error' => form_error('unit_anggaran')
-    //         );
-    //     } else {
-    //         $this->Akunanggaran_model->ubahunit($id);
-    //         $data = array(
-    //             'status' => 'sukses'
-    //         );
-    //     }
-    //     echo json_encode($data);
-    // }
     public function ubahanggaran()
     {
         $id = $this->input->post('idubah');
@@ -169,16 +135,6 @@ class Akunanggaran extends CI_Controller
             'cek_unikakun' => 'Kode perkiraan telah digunakan!'
         ]);
     }
-    // public function cek_unikanggaran()
-    // {
-    //     $id = $this->input->post('id');
-    //     $hasil = $this->Akunanggaran_model->cek_idanggaran($id);
-    //     if ($hasil > 0) {
-    //         return false;
-    //     } else {
-    //         return true;
-    //     }
-    // }
     private function _anggaranvalidate()
     {
         // if (!$this->input->post('idubah')) {

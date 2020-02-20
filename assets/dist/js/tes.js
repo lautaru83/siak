@@ -886,7 +886,6 @@ $(document).ready(function () {
         return false;
     });
     // end ajax tombol modal ubah periodeakademik
-
     // -------------------------------------/PERIODE AKADEMIK-------------------------
     // -------------------------------------/KELAS AKTIF-------------------------
     //set focus input kelasaktif saat modal muncul
@@ -1051,7 +1050,6 @@ $(document).ready(function () {
         })
     });
     // end ajax icon hapus table mahasiswaaktif klik
-
     // -------------------------------------/KELAS AKTIF-------------------------
     //---------------------------------------MAHASISWA AKTIF CEKBOX----------------------------
     //ajax cekbox mahasiswa aktif
@@ -1074,9 +1072,659 @@ $(document).ready(function () {
         });
     });
     //end ajax cekbox mahasiswa aktif
-
-
     //--------------------------------------/MAHASISWA AKTIF CEKBOX----------------------------
+    //--------------------------------------/KOMPONEN BOP----------------------------
+    //set focus input komponenbop saat modal muncul
+    $('#modal-komponenbop').on('shown.bs.modal', function () {
+        $('#kode').trigger('focus');
+    })
+    //set focus input komponenbop saat modal muncul
+    // tombol tambah komponenbop table
+    $('#btn-tambah-komponenbop').on('click', function (e) {
+        e.preventDefault();
+        const judul = document.getElementById('judul-modal');
+        judul.innerHTML = 'Tambah Data Komponen BOP';
+        $('#btn-ubah-komponenbop').hide();
+        $('#modal-komponenbop').modal('show');
+    });
+    // end tombol tambah komponenbop table
+    // ajax tombol Simpan modal komponenbop
+    $('#btn-simpan-komponenbop').on('click', function (e) {
+        e.preventDefault();
+        const kode = $('[name="kode"]').val();
+        const kewajiban = $('[name="kewajiban"]').val();
+        const jenis = $('[name="jenis"]').val();
+        $.ajax({
+            method: "POST",
+            url: base_url + "akademik/komponenbop/simpan",
+            data: {
+                kode: kode,
+                kewajiban: kewajiban,
+                jenis: jenis
+            },
+            dataType: "JSON",
+            beforeSend: function () {
+                $('#btn-simpan-komponenbop').attr('disabled', 'disabled');
+            },
+            success: function (data) {
+                if (data.status == 'gagal') {
+                    Toast.fire({
+                        type: 'error',
+                        title: ' Input data tidak valid!!!.'
+                    });
+                    if (data.kode_error != '') {
+                        $('#kode_error').html(data.kode_error);
+                    } else {
+                        $('#kode_error').html('');
+                    }
+                    if (data.komponen_error != '') {
+                        $('#komponen_error').html(data.komponen_error);
+                    } else {
+                        $('#komponen_error').html('');
+                    }
+                    if (data.jenis_error != '') {
+                        $('#jenis_error').html(data.jenis_error);
+                    } else {
+                        $('#jenis_error').html('');
+                    }
+                    $('#kode').trigger('focus');
+                } else {
+                    Toast.fire({
+                        type: 'success',
+                        title: ' Data berhasil disimpan.'
+                    });
+                    $('#modal-komponenbop').modal('hide');
+                }
+                $('#btn-simpan-komponenbop').attr('disabled', false);
+            }
+        });
+        return false;
+    });
+    //end  ajax tombol Simpan modal komponenbop
+    // ajax tombol edit data table komponenbop klik
+    $('.btn-edit-komponenbop').on('click', function (e) {
+        e.preventDefault();
+        const judul = document.getElementById('judul-modal');
+        judul.innerHTML = 'Ubah Data Komponen BOP';
+        var id = $(this).data('id');
+        $('#btn-simpan-komponenbop').hide();
+        $.ajax({
+            url: base_url + 'akademik/komponenbop/ajax_edit/' + id,
+            type: "GET",
+            dataType: "JSON",
+            success: function (data) {
+                $('[name="idubah"]').val(data.id);
+                $('[name="kode"]').val(data.kode);
+                $('[name="kewajiban"]').val(data.kewajiban);
+                $('[name="jenis"]').val(data.jenis);
+                $('#modal-komponenbop').modal('show');
+                $('#kewajiban').trigger('focus');
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('Error get data from ajax');
+            }
+        });
+    });
+    //end ajax tombol edit data table komponenbop klik
+    // ajax tombol modal ubah komponenbop
+    $('#btn-ubah-komponenbop').on('click', function (e) {
+        e.preventDefault();
+        const idubah = $('[name="idubah"]').val();
+        const kode = $('[name="kode"]').val();
+        const kewajiban = $('[name="kewajiban"]').val();
+        const jenis = $('[name="jenis"]').val();
+        $.ajax({
+            type: "POST",
+            url: base_url + "akademik/komponenbop/ubah",
+            data: {
+                idubah: idubah,
+                kode: kode,
+                kewajiban: kewajiban,
+                jenis: jenis
+            },
+            dataType: 'JSON',
+            beforeSend: function () {
+                $('#btn-ubah-komponenbop').attr('disabled', 'disabled');
+            },
+            success: function (data) {
+                if (data.status == 'gagal') {
+                    Toast.fire({
+                        type: 'error',
+                        title: ' Input data tidak valid!!!.'
+                    });
+                    if (data.kode_error != '') {
+                        $('#kode_error').html(data.kode_error);
+                    } else {
+                        $('#kode_error').html('');
+                    }
+                    if (data.komponen_error != '') {
+                        $('#komponen_error').html(data.komponen_error);
+                    } else {
+                        $('#komponen_error').html('');
+                    }
+                    if (data.jenis_error != '') {
+                        $('#jenis_error').html(data.jenis_error);
+
+                    } else {
+                        $('#jenis_error').html('');
+                    }
+                    $('#kode').trigger('focus');
+                } else {
+                    Toast.fire({
+                        type: 'success',
+                        title: ' Data berhasil diubah!'
+                    });
+                    $('#modal-komponenbop').modal('hide');
+                    //dataTable.ajax.reload();
+                }
+                $('#btn-ubah-komponenbop').attr('disabled', false);
+            }
+        });
+        return false;
+    });
+    // end ajax tombol modal ubah komponenbop
+    // ajax icon hapus table komponenbop klik
+    $('.btn-hapus-komponenbop').on('click', function (e) {
+        e.preventDefault();
+        var id = $(this).data('id');
+        var info = $(this).data('info');
+        Swal.fire({
+            title: 'Konfirmasi!',
+            text: 'Apakah anda yakin akan menghapus Komponen BOP -' + info + '- !?!',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'Batal',
+            confirmButtonText: 'Hapus'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    type: "POST",
+                    url: base_url + "akademik/komponenbop/hapus/",
+                    data: {
+                        id: id,
+                        info: info
+                    },
+                    dataType: 'JSON',
+                    success: function (data) {
+                        if (data.status == 'sukses') {
+                            Toast.fire({
+                                type: 'success',
+                                title: ' Data berhasil dihapus!!!.'
+                            });
+                            document.location.reload();
+                        } else {
+                            Toast.fire({
+                                type: 'warning',
+                                title: ' Penghapusan dibatalkan, data sedang digunakan oleh system!!!.'
+                            });
+                        }
+                    }
+                });
+            }
+        })
+    });
+    // end ajax icon hapus table komponenbop klik
+    // tombol tambah akunbop table
+    $('.btn-tambah-akunbop').on('click', function (e) {
+        e.preventDefault();
+        var idKewajiban = $(this).data('idkewajiban');
+        var info = $(this).data('info');
+        const judul = document.getElementById('judul-modalakunbop');
+        judul.innerHTML = 'Tambah Akun' + ' ' + info;
+        $('[name="namakewajiban"]').val(info);
+        $('[name="kewajiban_id"]').val(idKewajiban);
+        // $('#btn-ubah-akunbop').hide();
+        $('#modal-akunbop').modal('show');
+    });
+    // end tombol tambah akunbop table
+    // ajax tombol Simpan modal akunbop
+    $('#btn-simpan-akunbop').on('click', function (e) {
+        e.preventDefault();
+        const kewajiban_id = $('[name="kewajiban_id"]').val();
+        const a6level_id = $('[name="a6level_id"]').val();
+        $.ajax({
+            method: "POST",
+            url: base_url + "akademik/komponenbop/simpanakun",
+            data: {
+                kewajiban_id: kewajiban_id,
+                a6level_id: a6level_id
+            },
+            dataType: "JSON",
+            beforeSend: function () {
+                $('#btn-simpan-akunbop').attr('disabled', 'disabled');
+            },
+            success: function (data) {
+                if (data.status == 'gagal') {
+                    Toast.fire({
+                        type: 'error',
+                        title: ' Input data tidak valid!!!.'
+                    });
+                    if (data.akun_error != '') {
+                        $('#akun_error').html(data.akun_error);
+                    } else {
+                        $('#akun_error').html('');
+                    }
+                    $('#a6level_id').trigger('focus');
+                } else {
+                    Toast.fire({
+                        type: 'success',
+                        title: ' Data berhasil disimpan.'
+                    });
+                    $('#modal-akunbop').modal('hide');
+                }
+                $('#btn-simpan-akunbop').attr('disabled', false);
+            }
+        });
+        return false;
+    });
+    //end  ajax tombol Simpan modal akunbop
+    // ajax icon hapus table akunbop klik
+    $('.btn-hapus-akunbop').on('click', function (e) {
+        e.preventDefault();
+        var id = $(this).data('id');
+        var info = $(this).data('info');
+        Swal.fire({
+            title: 'Konfirmasi!',
+            text: 'Apakah anda yakin akan menghapus akun -' + info + '- !?!',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'Batal',
+            confirmButtonText: 'Hapus'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    method: "POST",
+                    url: base_url + "akademik/komponenbop/hapusakun",
+                    data: {
+                        id: id,
+                        info: info
+                    },
+                    dataType: 'JSON',
+                    success: function (data) {
+                        if (data.status == 'sukses') {
+                            Toast.fire({
+                                type: 'success',
+                                title: ' Data berhasil dihapus!!!.'
+                            });
+                            document.location.reload();
+                        } else {
+                            Toast.fire({
+                                type: 'warning',
+                                title: ' Penghapusan dibatalkan, data sedang digunakan oleh system!!!.'
+                            });
+                        }
+                    }
+                });
+            }
+        })
+    });
+    // end ajax icon hapus table akunbop klik
+    //--------------------------------------/KOMPONEN BOP----------------------------
+    //---------------------------------------BOP----------------------------
+    //set focus input bop saat modal muncul
+    $('#modal-bop').on('shown.bs.modal', function () {
+        $('#kode').trigger('focus');
+    })
+    //set focus input bop saat modal muncul
+    // tombol tambah bop table
+    $('#btn-tambah-bop').on('click', function (e) {
+        e.preventDefault();
+        const judul = document.getElementById('judul-modal');
+        judul.innerHTML = 'Tambah Data BOP';
+        $('#btn-ubah-bop').hide();
+        $('#modal-bop').modal('show');
+    });
+    // end tombol tambah bop table
+    // ajax tombol Simpan modal bop
+    $('#btn-simpan-bop').on('click', function (e) {
+        e.preventDefault();
+        const kode = $('[name="kode"]').val();
+        const keterangan = $('[name="keterangan"]').val();
+        $.ajax({
+            method: "POST",
+            url: base_url + "akademik/bop/simpan",
+            data: {
+                kode: kode,
+                keterangan: keterangan
+            },
+            dataType: "JSON",
+            beforeSend: function () {
+                $('#btn-simpan-bop').attr('disabled', 'disabled');
+            },
+            success: function (data) {
+                if (data.status == 'gagal') {
+                    Toast.fire({
+                        type: 'error',
+                        title: ' Input data tidak valid!!!.'
+                    });
+                    if (data.kode_error != '') {
+                        $('#kode_error').html(data.kode_error);
+                    } else {
+                        $('#kode_error').html('');
+                    }
+                    if (data.keterangan_error != '') {
+                        $('#keterangan_error').html(data.keterangan_error);
+                    } else {
+                        $('#keterangan_error').html('');
+                    }
+                    $('#kode').trigger('focus');
+                } else {
+                    Toast.fire({
+                        type: 'success',
+                        title: ' Data berhasil disimpan.'
+                    });
+                    $('#modal-bop').modal('hide');
+                }
+                $('#btn-simpan-bop').attr('disabled', false);
+            }
+        });
+        return false;
+    });
+    //end  ajax tombol Simpan modal bop
+    // ajax icon hapus table bop klik
+    $('.btn-hapus-bop').on('click', function (e) {
+        e.preventDefault();
+        var id = $(this).data('id');
+        var info = $(this).data('info');
+        Swal.fire({
+            title: 'Konfirmasi!',
+            text: 'Apakah anda yakin akan menghapus BOP -' + info + '- !?!',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'Batal',
+            confirmButtonText: 'Hapus'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    type: "POST",
+                    url: base_url + "akademik/bop/hapus",
+                    data: {
+                        id: id,
+                        info: info
+                    },
+                    dataType: 'JSON',
+                    success: function (data) {
+                        if (data.status == 'sukses') {
+                            Toast.fire({
+                                type: 'success',
+                                title: ' Data berhasil dihapus!!!.'
+                            });
+                            document.location.reload();
+                        } else {
+                            Toast.fire({
+                                type: 'warning',
+                                title: ' Penghapusan dibatalkan, data sedang digunakan oleh system!!!.'
+                            });
+                        }
+                    }
+                });
+            }
+        })
+    });
+    // end ajax icon hapus table bop klik
+    // ajax tombol edit data table bop klik
+    $('.btn-edit-bop').on('click', function (e) {
+        e.preventDefault();
+        const judul = document.getElementById('judul-modal');
+        judul.innerHTML = 'Ubah Data BOP';
+        var id = $(this).data('id');
+        $('#btn-simpan-bop').hide();
+        $.ajax({
+            url: base_url + 'akademik/bop/ajax_edit/' + id,
+            type: "GET",
+            dataType: "JSON",
+            success: function (data) {
+                $('[name="idubah"]').val(data.id);
+                $('[name="kode"]').val(data.kode);
+                $('[name="keterangan"]').val(data.keterangan);
+                $('#modal-bop').modal('show');
+                $('#kode').trigger('focus');
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('Error get data from ajax');
+            }
+        });
+    });
+    //end ajax tombol edit data table bop klik
+    // ajax tombol modal ubah bop
+    $('#btn-ubah-bop').on('click', function (e) {
+        e.preventDefault();
+        const idubah = $('[name="idubah"]').val();
+        const kode = $('[name="kode"]').val();
+        const keterangan = $('[name="keterangan"]').val();
+        $.ajax({
+            type: "POST",
+            url: base_url + "akademik/bop/ubah",
+            data: {
+                idubah: idubah,
+                kode: kode,
+                keterangan: keterangan
+            },
+            dataType: 'JSON',
+            beforeSend: function () {
+                $('#btn-ubah-bop').attr('disabled', 'disabled');
+            },
+            success: function (data) {
+                if (data.status == 'gagal') {
+                    Toast.fire({
+                        type: 'error',
+                        title: ' Input data tidak valid!!!.'
+                    });
+                    if (data.kode_error != '') {
+                        $('#kode_error').html(data.kode_error);
+
+                    } else {
+                        $('#kode_error').html('');
+                    }
+                    if (data.keterangan_error != '') {
+                        $('#keterangan_error').html(data.keterangan_error);
+
+                    } else {
+                        $('#keterangan_error').html('');
+                    }
+                    $('#kode').trigger('focus');
+                } else {
+                    Toast.fire({
+                        type: 'success',
+                        title: ' Data berhasil diubah!'
+                    });
+                    $('#modal-bop').modal('hide');
+                    //dataTable.ajax.reload();
+                }
+                $('#btn-ubah-bop').attr('disabled', false);
+            }
+        });
+        return false;
+    });
+    // end ajax tombol modal ubah bop
+    //set focus input detailbop saat modal muncul
+    $('#modal-detailbop').on('shown.bs.modal', function () {
+        $('#kewajiban_id').trigger('focus');
+    })
+    //set focus input detailbop saat modal muncul
+    // tombol tambah detailbop table
+    $('#btn-tambah-detailbop').on('click', function (e) {
+        e.preventDefault();
+        const judul = document.getElementById('judul-modal');
+        judul.innerHTML = 'Tambah Data Detail BOP';
+        $('#btn-ubah-detailbop').hide();
+        $('#modal-detailbop').modal('show');
+    });
+    // end tombol tambah detailbop table
+    // ajax tombol Simpan modal detailbop
+    $('#btn-simpan-detailbop').on('click', function (e) {
+        e.preventDefault();
+        const bop_id = $('[name="bop_id"]').val();
+        const kewajiban_id = $('[name="kewajiban_id"]').val();
+        const jumlah = $('[name="jumlah"]').val();
+        $.ajax({
+            cache: false,
+            method: "POST",
+            url: base_url + "akademik/bop/simpandetail",
+            data: {
+                bop_id: bop_id,
+                kewajiban_id: kewajiban_id,
+                jumlah: jumlah
+            },
+            dataType: "JSON",
+            beforeSend: function () {
+                $('#btn-simpan-detailbop').attr('disabled', 'disabled');
+            },
+            success: function (data) {
+                if (data.status == 'gagal') {
+                    Toast.fire({
+                        type: 'error',
+                        title: ' Input data tidak valid!!!.'
+                    });
+                    if (data.komponen_error != '') {
+                        $('#komponen_error').html(data.komponen_error);
+                    } else {
+                        $('#komponen_error').html('');
+                    }
+                    if (data.jumlah_error != '') {
+                        $('#jumlah_error').html(data.jumlah_error);
+                    } else {
+                        $('#jumlah_error').html('');
+                    }
+                    $('#kewajiban_id').trigger('focus');
+                } else {
+                    Toast.fire({
+                        type: 'success',
+                        title: ' Data berhasil disimpan.'
+                    });
+                    $('#modal-detailbop').modal('hide');
+                }
+                $('#btn-simpan-detailbop').attr('disabled', false);
+            }
+        });
+        return false;
+    });
+    //end  ajax tombol Simpan modal detailbop
+    // ajax tombol edit data table detailbop klik
+    $('.btn-edit-detailbop').on('click', function (e) {
+        e.preventDefault();
+        const judul = document.getElementById('judul-modal');
+        judul.innerHTML = 'Ubah Data Detail BOP';
+        var id = $(this).data('id');
+        $('#btn-simpan-detailbop').hide();
+        $.ajax({
+            url: base_url + 'akademik/bop/edit_detail/' + id,
+            type: "GET",
+            dataType: "JSON",
+            success: function (data) {
+                $('[name="idubah"]').val(data.id);
+                $('[name="kewajiban_id"]').val(data.kewajiban_id);
+                $('[name="jumlah"]').val(data.jumlah);
+                $('#modal-detailbop').modal('show');
+                $('#kewajiban_id').trigger('focus');
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('Sesi user habis, refresh halaman dan login kembali');
+            }
+        });
+    });
+    //end ajax tombol edit data table detailbop klik
+    // ajax tombol modal ubah detailbop
+    $('#btn-ubah-detailbop').on('click', function (e) {
+        e.preventDefault();
+        const idubah = $('[name="idubah"]').val();
+        const kewajiban_id = $('[name="kewajiban_id"]').val();
+        const jumlah = $('[name="jumlah"]').val();
+        $.ajax({
+            type: "POST",
+            url: base_url + "akademik/bop/ubahdetail",
+            data: {
+                idubah: idubah,
+                kewajiban_id: kewajiban_id,
+                jumlah: jumlah
+            },
+            dataType: 'JSON',
+            beforeSend: function () {
+                $('#btn-ubah-detailbop').attr('disabled', 'disabled');
+            },
+            success: function (data) {
+                if (data.status == 'gagal') {
+                    Toast.fire({
+                        type: 'error',
+                        title: ' Input data tidak valid!!!.'
+                    });
+                    if (data.komponen_error != '') {
+                        $('#komponen_error').html(data.komponen_error);
+
+                    } else {
+                        $('#komponen_error').html('');
+                    }
+                    if (data.jumlah_error != '') {
+                        $('#jumlah_error').html(data.jumlah_error);
+
+                    } else {
+                        $('#jumlah_error').html('');
+                    }
+                    $('#kewajiban_id').trigger('focus');
+                } else {
+                    Toast.fire({
+                        type: 'success',
+                        title: ' Data berhasil diubah!'
+                    });
+                    $('#modal-detailbop').modal('hide');
+                    //dataTable.ajax.reload();
+                }
+                $('#btn-ubah-detailbop').attr('disabled', false);
+            }
+        });
+        return false;
+    });
+    // end ajax tombol modal ubah detailbop
+    // ajax icon hapus table detailbop klik
+    $('.btn-hapus-detailbop').on('click', function (e) {
+        e.preventDefault();
+        var id = $(this).data('id');
+        var info = $(this).data('info');
+        Swal.fire({
+            title: 'Konfirmasi!',
+            text: 'Apakah anda yakin akan menghapus detail BOP -' + info + '- !?!',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'Batal',
+            confirmButtonText: 'Hapus'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    type: "POST",
+                    url: base_url + "akademik/bop/hapusdetail",
+                    data: {
+                        id: id,
+                        info: info
+                    },
+                    dataType: 'JSON',
+                    success: function (data) {
+                        if (data.status == 'sukses') {
+                            Toast.fire({
+                                type: 'success',
+                                title: ' Data berhasil dihapus!!!.'
+                            });
+                            document.location.reload();
+                        } else {
+                            Toast.fire({
+                                type: 'warning',
+                                title: ' Penghapusan dibatalkan, data sedang digunakan oleh system!!!.'
+                            });
+                        }
+                    }
+                });
+            }
+        })
+    });
+    // end ajax icon hapus table detailbop klik
+    //--------------------------------------/BOP----------------------------
 
 
 

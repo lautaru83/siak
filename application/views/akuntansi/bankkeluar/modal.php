@@ -43,7 +43,7 @@
                         </div>
                         <div class="form-group">
                             <label for="jumlah" class="control-label">
-                                Jumlah Transaksi (Rp.)
+                                Jumlah Transaksi (Rp)
                             </label>
                             <div>
                                 <input type="text" name="jumlah" class="form-control" id="jumlah" data-inputmask="'alias': 'decimal', 'groupSeparator': '.', 'autoGroup': true, 'digits': 2, 'digitsOptional': false,'allowMinus':false, 'placeholder': '0', 'radixPoint': ',', 'rightAlign': false">

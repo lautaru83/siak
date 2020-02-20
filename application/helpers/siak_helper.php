@@ -60,6 +60,16 @@ function txt_status($txt)
         return "Aktif";
     }
 }
+function txt_komponen($txt)
+{
+    if ($txt == "B") {
+        return "Kas/Bank";
+    } elseif ($txt == "M") {
+        return "Pendapatan";
+    } else {
+        return "Beban";
+    }
+}
 function txt_gender($gender)
 {
     if ($gender == "L") {

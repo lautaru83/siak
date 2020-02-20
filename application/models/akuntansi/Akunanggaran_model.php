@@ -103,7 +103,7 @@ class Akunanggaran_model extends CI_Model
     {
         $this->db2->delete('akun_anggarans', ['id' => $id]);
         $log_type = "hapus";
-        $log_desc = "hapus kodeperkiraan anggaran - $info";
+        $log_desc = "hapus akun anggaran - $info";
         userLog($log_type, $log_desc);
     }
     public function hapusanggaran($id, $info)
