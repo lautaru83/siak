@@ -906,13 +906,14 @@ $(document).ready(function () {
     $('#btn-simpan-kelasaktif').on('click', function (e) {
         e.preventDefault();
         // const id = $('[name="id"]').val();
-        // const tahunakademik_id = $('[name="tahunakademik_id"]').val();
+        const bop_id = $('[name="bop_id"]').val();
         const perak_id = $('[name="perak_id"]').val();
         const kelas_id = $('[name="kelas_id"]').val();
         $.ajax({
             method: "POST",
             url: base_url + "akademik/kelasaktif/simpan",
             data: {
+                bop_id: bop_id,
                 perak_id: perak_id,
                 kelas_id: kelas_id
             },
@@ -935,6 +936,11 @@ $(document).ready(function () {
                         $('#kelas_error').html(data.kelas_error);
                     } else {
                         $('#kelas_error').html('');
+                    }
+                    if (data.bop_error != '') {
+                        $('#bop_error').html(data.bop_error);
+                    } else {
+                        $('#bop_error').html('');
                     }
                     $('#kelas_id').trigger('focus');
                 } else {
@@ -993,6 +999,84 @@ $(document).ready(function () {
         })
     });
     // end ajax icon hapus table kelasaktif klik
+    // ajax tombol edit data table kelasaktif klik
+    $('.btn-edit-kelasaktif').on('click', function (e) {
+        e.preventDefault();
+        const judul = document.getElementById('judul-modal');
+        judul.innerHTML = 'Ubah Data Kelas Aktif';
+        var id = $(this).data('id');
+        $('#btn-simpan-kelasaktif').hide();
+        $.ajax({
+            url: base_url + 'akademik/kelasaktif/ajax_edit/' + id,
+            type: "GET",
+            dataType: "JSON",
+            success: function (data) {
+                $('[name="idubah"]').val(data.id);
+                $('[name="kelas_id"]').val(data.kelas_id);
+                $('[name="bop_id"]').val(data.bop_id);
+                $('#kelas_id').attr('disabled', 'disabled');
+                $('#modal-kelasaktif').modal('show');
+                $('#kelas_id').trigger('focus');
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('Sesi login telah habis!refresh halaman dan login kembali');
+            }
+        });
+    });
+    //end ajax tombol edit data table kelasaktif klik
+    // ajax tombol modal ubah kelasaktif
+    $('#btn-ubah-kelasaktif').on('click', function (e) {
+        e.preventDefault();
+        const idubah = $('[name="idubah"]').val();
+        const kelas_id = $('[name="kelas_id"]').val();
+        const perak_id = $('[name="perak_id"]').val();
+        const bop_id = $('[name="bop_id"]').val();
+        $.ajax({
+            type: "POST",
+            url: base_url + "akademik/kelasaktif/ubah",
+            data: {
+                idubah: idubah,
+                kelas_id: kelas_id,
+                perak_id: perak_id,
+                bop_id: bop_id
+            },
+            dataType: 'JSON',
+            beforeSend: function () {
+                $('#btn-ubah-kelasaktif').attr('disabled', 'disabled');
+            },
+            success: function (data) {
+                if (data.status == 'gagal') {
+                    Toast.fire({
+                        type: 'error',
+                        title: ' Input data tidak valid!!!.'
+                    });
+                    if (data.kelas_error != '') {
+                        $('#kelas_error').html(data.kelas_error);
+
+                    } else {
+                        $('#kelas_error').html('');
+                    }
+                    if (data.bop_error != '') {
+                        $('#bop_error').html(data.bop_error);
+
+                    } else {
+                        $('#bop_error').html('');
+                    }
+                    $('#kelas_id').trigger('focus');
+                } else {
+                    Toast.fire({
+                        type: 'success',
+                        title: ' Data berhasil diubah!'
+                    });
+                    $('#modal-kelasaktif').modal('hide');
+                    //dataTable.ajax.reload();
+                }
+                $('#btn-ubah-kelasaktif').attr('disabled', false);
+            }
+        });
+        return false;
+    });
+    // end ajax tombol modal ubah kelasaktif
     //set focus input mahasiswaaktif saat modal muncul
     $('#modal-mahasiswaaktif').on('shown.bs.modal', function () {
         //$('#kelas_id').trigger('focus');

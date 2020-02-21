@@ -49,8 +49,9 @@
                                 <thead>
                                     <tr>
                                         <td width="5%" class="text-center">No</td>
-                                        <td width="30%">Periode Akademik</td>
+                                        <td width="15%">Periode Akademik</td>
                                         <td width="">Kelas</td>
+                                        <td width="15%">Kode BOP</td>
                                         <td width="10%" class="text-center">Mahasiswa</td>
                                         <td width="12%" class="text-center" style="color: grey"><i class="fas fa-cog"></i></td>
                                     </tr>
@@ -64,10 +65,11 @@
                                     ?>
                                             <tr>
                                                 <td class="text-center"><?= $no; ?></td>
-                                                <td><?= $dataKelasaktif['periodeakademik']; ?></td>
+                                                <td><?= $dataKelasaktif['perak_id']; ?></td>
                                                 <td><?= $dataKelasaktif['kelas']; ?></td>
-                                                <td class="text-center"></td>
-                                                <td class="text-center"><a href="<?= base_url('akademik/kelasaktif/mahasiswa/' . $idKelasaktif); ?>" class="btn-mahasiswa-aktif" data-id="<?= $idKelasaktif; ?>" data-toggle="tooltip" data-placement="bottom" title="Mahasiswa Aktif"><i class="fas fa-list-alt" style="color: olive"></i></a> - <a href="" class="btn-hapus-kelasaktif" data-id="<?= $idKelasaktif; ?>" data-info="<?= $dataKelasaktif['kelas']; ?>" data-toggle="tooltip" data-placement="bottom" title="Hapus"> <i class="far fa-trash-alt" style="color: maroon"></i></a></td>
+                                                <td><?= $dataKelasaktif['kode_bop']; ?></td>
+                                                <td class="text-center"><?= $dataKelasaktif['jml_mhs']; ?></td>
+                                                <td class="text-center"><a href="<?= base_url('akademik/kelasaktif/mahasiswa/' . $idKelasaktif); ?>" class="btn-mahasiswa-aktif" data-id="<?= $idKelasaktif; ?>" data-toggle="tooltip" data-placement="bottom" title="Mahasiswa Aktif"><i class="fas fa-list-alt" style="color: olive"></i></a> - <a href="" class="btn-edit-kelasaktif" data-id="<?= $idKelasaktif; ?>" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fas fa-edit" style="color: olive"></i></a> - <a href="" class="btn-hapus-kelasaktif" data-id="<?= $idKelasaktif; ?>" data-info="<?= $dataKelasaktif['kelas']; ?>" data-toggle="tooltip" data-placement="bottom" title="Hapus"> <i class="far fa-trash-alt" style="color: maroon"></i></a></td>
                                             </tr>
                                         <?php
                                             $no++;
@@ -76,7 +78,7 @@
                                         ?>
 
                                         <tr>
-                                            <td colspan="4" class="text-center">Data tidak ditemukan</td>
+                                            <td colspan="6" class="text-center">Data tidak ditemukan</td>
                                         </tr>
                                     <?php
                                     }

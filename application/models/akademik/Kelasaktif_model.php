@@ -9,7 +9,8 @@ class Kelasaktif_model extends CI_Model
     }
     public function ambil_data()
     {
-        return $this->db3->query("SELECT b.id AS id, b.perak_id AS perak_id, b.kelas_id AS kelas_id, a.keterangan AS periodeakademik, c.keterangan AS kelas FROM periodeakademiks AS a INNER JOIN detailkelases AS b ON a.id = b.perak_id INNER JOIN kelases AS c ON c.id = b.kelas_id order by a.id DESC")->result_array();
+        $perak_id = $this->session->userdata('idPerak');
+        return $this->db3->query("SELECT b.id AS id, b.bop_id AS bop_id,e.kode as kode_bop, b.perak_id AS perak_id, b.kelas_id AS kelas_id, a.keterangan AS periodeakademik, c.keterangan AS kelas, ( SELECT count(mahasiswa_id) FROM mahasiswaactives d WHERE b.id = d.detailkelas_id ) AS jml_mhs, e.kode AS kode_bop FROM periodeakademiks AS a INNER JOIN detailkelases AS b ON a.id = b.perak_id INNER JOIN kelases AS c ON c.id = b.kelas_id INNER JOIN bops AS e ON e.id = b.bop_id WHERE b.perak_id = '$perak_id' ORDER BY a.id DESC")->result_array();
     }
     public function detail_data_id($id)
     {
@@ -58,19 +59,32 @@ class Kelasaktif_model extends CI_Model
     {
         $perak_id = $this->input->post('perak_id');
         $kelas_id = $this->input->post('kelas_id');
+        $bop_id = $this->input->post('bop_id');
         $data = array(
             'perak_id' => $perak_id,
+            'bop_id' => $bop_id,
             'kelas_id' => $kelas_id
         );
         $this->db3->insert('detailkelases', $data);
         $log_type = "tambah";
-        $log_desc = "tambah detail kelas - $perak_id - $kelas_id";
+        $log_desc = "tambah detail kelas - $perak_id - $bop_id - $kelas_id";
+        userLog($log_type, $log_desc);
+    }
+    public function ubah($id)
+    {
+        $kelas_id = $this->input->post('kelas_id');
+        $bop_id = $this->input->post('bop_id');
+        $data = array(
+            'bop_id' => $bop_id
+        );
+        $this->db3->where('id', $id);
+        $this->db3->update('detailkelases', $data);
+        $log_type = "ubah";
+        $log_desc = "ubah detail kelas - $id - $bop_id - $kelas_id -";
         userLog($log_type, $log_desc);
     }
     public function simpanmhs($data = array())
     {
-        // $tran_id = $this->input->post('jenis_transaksi_id');
-        // $level6_id = $this->input->post('a6level_id');
         $this->db3->insert('mahasiswaactives', $data);
         $log_type = "simpan";
         $log_desc = "simpan mahasiswa active -" . $data . "-";
@@ -78,8 +92,6 @@ class Kelasaktif_model extends CI_Model
     }
     public function hapusmhs($data = array())
     {
-        // $tran_id = $this->input->post('jenis_transaksi_id');
-        // $level6_id = $this->input->post('a6level_id');
         $this->db3->delete('mahasiswaactives', $data);
         $log_type = "hapus";
         $log_desc = "hapus mahasiswa active -" . $data . "-";
@@ -89,24 +101,4 @@ class Kelasaktif_model extends CI_Model
     {
         return $this->db3->get_where('mahasiswaactives', $data)->row_array();
     }
-    // public function ubah($id)
-    // {
-    //     $tahunakademik_id = $this->input->post('tahunakademik_id');
-    //     $semester_id = $this->input->post('semester_id');
-    //     $awal_periode = tanggal_input($this->input->post('awal_periode'));
-    //     $akhir_periode = tanggal_input($this->input->post('akhir_periode'));
-    //     $keterangan = htmlspecialchars($this->input->post('keterangan'));
-    //     $data = array(
-    //         'tahunakademik_id' => $tahunakademik_id,
-    //         'semester_id' => $semester_id,
-    //         'keterangan' => $keterangan,
-    //         'awal_semester' => $awal_periode,
-    //         'akhir_semester' => $akhir_periode
-    //     );
-    //     $this->db3->where('id', $id);
-    //     $this->db3->update('detailkelases', $data);
-    //     $log_type = "ubah";
-    //     $log_desc = "ubah Periode akademik -  $id - $tahunakademik_id - $semester_id - $keterangan - $awal_periode - $akhir_periode";
-    //     userLog($log_type, $log_desc);
-    // }
 }

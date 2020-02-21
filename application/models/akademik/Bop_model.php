@@ -13,6 +13,11 @@ class Bop_model extends CI_Model
         //$this->db3->order_by('id', 'DESC');
         return $this->db3->get_where('bops', ['institusi_id' => $institusi_id])->result_array();
     }
+    public function data_fk()
+    {
+        $institusi_id = $this->session->userdata('idInstitusi');
+        return $this->db3->query("select * from bops where institusi_id='$institusi_id' order by id DESC")->result_array();
+    }
     public function ambil_detail_data($id)
     {
         return $this->db3->query("SELECT a.id AS id, b.kode AS kode, b.kewajiban AS kewajiban, a.jumlah AS jumlah, a.bop_id AS bop_id FROM detailbops AS a INNER JOIN kewajibans AS b ON b.id = a.kewajiban_id where a.bop_id=$id order by b.id ASC")->result_array();
