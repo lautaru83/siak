@@ -1809,11 +1809,18 @@ $(document).ready(function () {
     });
     // end ajax icon hapus table detailbop klik
     //--------------------------------------/BOP----------------------------
-
-
-
-
-
+    //--------------------------------------/OPM----------------------------
+    $('#nim_opm').keypress(function (e) {
+        if (e.which == 13) { // e.which == 13 merupakan kode yang mendeteksi ketika anda   // menekan tombol enter di keyboard
+            //letakan fungsi anda disini
+            const nim = $('[name="nim_opm"]').val();
+            Toast.fire({
+                type: 'success',
+                title: 'Cari Data Nim!!!.' + nim
+            });
+        }
+    });
+    //--------------------------------------/OPM----------------------------
 
 
     // ---------------------/TES---------------------------
