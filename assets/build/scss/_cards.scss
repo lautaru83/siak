@@ -2,6 +2,15 @@
 // Component: Cards
 //
 
+// Color variants
+@each $name, $color in $theme-colors {
+  @include cards-variant($name, $color);
+}
+
+@each $name, $color in $colors {
+  @include cards-variant($name, $color);
+}
+
 .card {
   @include box-shadow($card-shadow);
   margin-bottom: map-get($spacers, 3);
@@ -78,7 +87,7 @@
 
   &.card-tabs {
     &:not(.card-outline) {
-      & .card-header {
+      & > .card-header {
         border-bottom: 0;
 
         .nav-item {
@@ -96,6 +105,34 @@
         &:first-child .nav-link {
           border-left: 0;
           margin-left: 0;
+        }
+      }
+    }
+
+    .card-tools {
+      margin: .3rem .5rem;
+    }
+
+    &:not(.expanding-card).collapsed-card {
+      .card-header {
+        border-bottom: 0;
+
+        .nav-tabs {
+          border-bottom: 0;
+
+          .nav-item {
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+
+    &.expanding-card {
+      .card-header {
+        .nav-tabs {
+          .nav-item {
+            margin-bottom: -1px;
+          }
         }
       }
     }
@@ -122,6 +159,32 @@
         &.active {
           &:hover {
             margin-top: 0;
+          }
+        }
+      }
+    }
+
+    .card-tools {
+      margin: .5rem .5rem .3rem;
+    }
+
+    &:not(.expanding-card).collapsed-card .card-header {
+      border-bottom: 0;
+
+      .nav-tabs {
+        border-bottom: 0;
+
+        .nav-item {
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    &.expanding-card {
+      .card-header {
+        .nav-tabs {
+          .nav-item {
+            margin-bottom: -1px;
           }
         }
       }
@@ -211,7 +274,7 @@ html.maximized-card {
   }
 
   .nav-link {
-    padding: $card-nav-link-padding-sm-y $card-nav-link-padding-sm-x; 
+    padding: $card-nav-link-padding-sm-y $card-nav-link-padding-sm-x;
   }
 }
 
@@ -400,16 +463,6 @@ html.maximized-card {
 .card-input {
   max-width: 200px;
 }
-
-// Color variants
-@each $name, $color in $theme-colors {
-  @include cards-variant($name, $color);
-}
-
-@each $name, $color in $colors {
-  @include cards-variant($name, $color);
-}
-
 
 // Nav Tabs override
 .card-default {

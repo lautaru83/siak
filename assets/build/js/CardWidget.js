@@ -27,6 +27,8 @@ const CardWidget = (($) => {
   const ClassName = {
     CARD: 'card',
     COLLAPSED: 'collapsed-card',
+    COLLAPSING: 'collapsing-card',
+    EXPANDING: 'expanding-card',
     WAS_COLLAPSED: 'was-collapsed',
     MAXIMIZED: 'maximized-card',
   }
@@ -66,11 +68,12 @@ const CardWidget = (($) => {
     }
 
     collapse() {
-      this._parent.children(`${Selector.CARD_BODY}, ${Selector.CARD_FOOTER}`)
+      this._parent.addClass(ClassName.COLLAPSING).children(`${Selector.CARD_BODY}, ${Selector.CARD_FOOTER}`)
         .slideUp(this._settings.animationSpeed, () => {
-          this._parent.addClass(ClassName.COLLAPSED)
+          this._parent.addClass(ClassName.COLLAPSED).removeClass(ClassName.COLLAPSING)
         })
-      this._parent.find(this._settings.collapseTrigger + ' .' + this._settings.collapseIcon)
+
+      this._parent.find('> ' + Selector.CARD_HEADER + ' ' + this._settings.collapseTrigger + ' .' + this._settings.collapseIcon)
         .addClass(this._settings.expandIcon)
         .removeClass(this._settings.collapseIcon)
 
@@ -80,12 +83,12 @@ const CardWidget = (($) => {
     }
 
     expand() {
-      this._parent.children(`${Selector.CARD_BODY}, ${Selector.CARD_FOOTER}`)
+      this._parent.addClass(ClassName.EXPANDING).children(`${Selector.CARD_BODY}, ${Selector.CARD_FOOTER}`)
         .slideDown(this._settings.animationSpeed, () => {
-          this._parent.removeClass(ClassName.COLLAPSED)
+          this._parent.removeClass(ClassName.COLLAPSED).removeClass(ClassName.EXPANDING)
         })
 
-      this._parent.find(this._settings.collapseTrigger + ' .' + this._settings.expandIcon)
+      this._parent.find('> ' + Selector.CARD_HEADER + ' ' + this._settings.collapseTrigger + ' .' + this._settings.expandIcon)
         .addClass(this._settings.collapseIcon)
         .removeClass(this._settings.expandIcon)
 

@@ -19,6 +19,12 @@ $(document).ready(function () {
             format: 'DD-MM-YYYY'
         }
     });
+    $('#rtanggal').daterangepicker({
+        singleDatePicker: true,
+        locale: {
+            format: 'DD-MM-YYYY'
+        }
+    });
     const Toast = Swal.mixin({
         toast: true,
         position: 'center',
