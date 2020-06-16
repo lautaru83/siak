@@ -45,7 +45,7 @@
                                     <tr>
                                         <td width="5%" class="text-center" style="color: grey"><i class="fas fa-cog"></i></td>
                                         <td colspan="2">Komponen BOP</td>
-                                        <td width="20%">Jenis</td>
+                                        <td width="20%">Jenis/Posisi</td>
                                         <td width="10%" class="text-center" style="color: grey"><i class="fas fa-cog"></i></td>
                                     </tr>
                                 </thead>
@@ -78,11 +78,12 @@
                                                     <tr>
                                                         <td></td>
                                                         <td></td>
-                                                        <td colspan="2">
+                                                        <td>
                                                             <div class="pl-3">
                                                                 <?= $dataAkunbop['a6level_id']; ?> - <?= $dataAkunbop['level6']; ?>
                                                             </div>
                                                         </td>
+                                                        <td><?= posisi_bop($dataAkunbop['posisi']); ?></td>
                                                         <td class="text-center">
                                                             <a href="" class="btn-hapus-akunbop" data-id="<?= $idAkunbop; ?>" data-info="<?= $dataAkunbop['level6']; ?>" data-toggle="tooltip" data-placement="bottom" title="Hapus Akun"> <i class="far fa-trash-alt" style="color: maroon"></i></a>
                                                         </td>

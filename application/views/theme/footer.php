@@ -5,7 +5,7 @@
       Siak Versi 2.0
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2019 <a href="">YAYASAN SERULINGMAS</a></strong> Maos-Cilacap. All rights reserved.
+    <strong>Copyright &copy; 2020 <a href="">YAYASAN PAGUWARMAS</a></strong> Maos-Cilacap. All rights reserved.
   </footer>
   </div>
   <!-- ./wrapper -->
@@ -14,7 +14,8 @@
 
   <!-- jQuery -->
   <!-- jQuery -->
-  <script src="<?= base_url('assets/') ?>dist/js/jquery-3.4.1.min.js"></script>
+  <script src="<?= base_url('assets/') ?>plugins/jquery/jquery.min.js"></script>
+  <!-- <script src="dist/js/jquery-3.4.1.min.js"></script> -->
   <!-- jQuery UI 1.11.4 -->
   <script src="<?= base_url('assets/') ?>plugins/jquery-ui/jquery-ui.min.js"></script>
   <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->

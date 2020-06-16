@@ -33,7 +33,7 @@ class Komponenbop_model extends CI_Model
     }
     public function daftarAkun($kewajiban_id)
     {
-        return $this->db3->query("SELECT a.id AS id, a.kewajiban_id AS kewajiban_id, a.a6level_id AS a6level_id, b.level6 AS level6 FROM siak_akademik.akunkewajibans AS a INNER JOIN siak_akuntansi.a6levels AS b ON b.id = a.a6level_id where a.kewajiban_id=$kewajiban_id ORDER BY b.id ASC")->result_array();
+        return $this->db3->query("SELECT a.id AS id, a.kewajiban_id AS kewajiban_id, a.a6level_id AS a6level_id,a.posisi AS posisi, b.level6 AS level6 FROM siak_akademik.akunkewajibans AS a INNER JOIN siak_akuntansi.a6levels AS b ON b.id = a.a6level_id where a.kewajiban_id=$kewajiban_id ORDER BY b.id ASC")->result_array();
     }
     public function hapus($id, $info)
     {
@@ -79,13 +79,15 @@ class Komponenbop_model extends CI_Model
     {
         $kewajiban_id = $this->input->post('kewajiban_id');
         $a6level_id = $this->input->post('a6level_id');
+        $posisi = $this->input->post('posisi');
         $data = array(
             'kewajiban_id' => $kewajiban_id,
-            'a6level_id' => $a6level_id
+            'a6level_id' => $a6level_id,
+            'posisi' => $posisi
         );
         $this->db3->insert('akunkewajibans', $data);
         $log_type = "simpan";
-        $log_desc = "tambah akunbop -" . $kewajiban_id . "-" . $a6level_id . "-";
+        $log_desc = "tambah akunbop -" . $kewajiban_id . "-" . $a6level_id . "-" . $posisi . "-";
         userLog($log_type, $log_desc);
     }
     public function hapusakun($id, $info)

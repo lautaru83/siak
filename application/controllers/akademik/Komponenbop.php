@@ -97,7 +97,8 @@ class Komponenbop extends CI_Controller
         if ($this->form_validation->run() == false) {
             $data = array(
                 'status' => 'gagal',
-                'akun_error' => form_error('a6level_id')
+                'akun_error' => form_error('a6level_id'),
+                'posisi_error' => form_error('posisi')
             );
         } else {
             $this->Komponenbop_model->simpanakun();
@@ -134,6 +135,7 @@ class Komponenbop extends CI_Controller
     }
     private function _akunvalidate()
     {
+        $this->form_validation->set_rules('posisi', 'Posisi', 'required|trim');
         $this->form_validation->set_rules('a6level_id', 'Akun', 'required|trim|callback_cek_unikakun', [
             'cek_unikakun' => 'Kode perkiraan telah digunakan!'
         ]);

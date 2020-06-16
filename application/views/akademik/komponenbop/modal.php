@@ -35,9 +35,9 @@
                             <div>
                                 <select id="jenis" name="jenis" class="form-control">
                                     <option value="">- Pilih -</option>
-                                    <option value="B">- Kas/Bank -</option>
-                                    <option value="M">- Pendapatan -</option>
-                                    <option value="K">- Beban -</option>
+                                    <option value="K">- Kas/Bank -</option>
+                                    <option value="P">- Pendapatan -</option>
+                                    <option value="L">- Pendapatan Lain -</option>
                                 </select>
                                 <span id="jenis_error" class="text-danger"></span>
                             </div>
@@ -99,6 +99,19 @@
                                 </select>
                             </div>
                             <span id="akun_error" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="posisi" class="control-label">Posisi</label>
+                            <div>
+                                <select id="posisi" name="posisi" class="form-control">
+                                    <option value="">- Pilih -</option>
+                                    <option value="D">- Debet -</option>
+                                    <option value="K">- Kredit -</option>
+                                    <option value="SD">- Saldo Debet -</option>
+                                    <option value="SK">- Saldo Kredit -</option>
+                                </select>
+                            </div>
+                            <span id="posisi_error" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="modal-footer card-footer">

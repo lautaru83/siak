@@ -60,14 +60,38 @@ function txt_status($txt)
         return "Aktif";
     }
 }
+function opjenis_status($txt)
+{
+    if ($txt > 0) {
+        return "disabled";
+    }
+}
+// function cek_combo($opt1, $opt2)
+// {
+//     if ($opt1 == $opt2) {
+//         echo "selected";
+//     }
+// }
 function txt_komponen($txt)
 {
-    if ($txt == "B") {
+    if ($txt == "K") {
         return "Kas/Bank";
-    } elseif ($txt == "M") {
+    } elseif ($txt == "P") {
         return "Pendapatan";
     } else {
-        return "Beban";
+        return "Pendapatan Lain";
+    }
+}
+function posisi_bop($txt)
+{
+    if ($txt == "D") {
+        return "Debet";
+    } elseif ($txt == "K") {
+        return "Kredit";
+    } elseif ($txt == "SD") {
+        return "Saldo Debet";
+    } else {
+        return "Saldo Kredit";
     }
 }
 function txt_gender($gender)
@@ -212,6 +236,17 @@ function saldoAwalAbttInstitusi($a2level_id)
         return $saldoAwal;
     }
 }
+function ambil_namaunit($unit_id)
+{
+    $ci = get_instance();
+    //$ci->db = $ci->load->database('akademik', TRUE);
+    $hasil = $ci->db->query("SELECT unit FROM units where id='$unit_id'")->row_array();
+    $unit = "";
+    if ($hasil) {
+        $unit = $hasil['unit'];
+    }
+    return $unit;
+}
 function saldoAwalAbttKonsolidasi($a2level_id)
 {
     $ci = get_instance();
@@ -306,10 +341,10 @@ function saldoAkun6Laporan($tanggal, $idakun3)
     $tahun_buku = $ci->session->userdata('tahun_buku');
     $akhir_periode = tanggal_input($tanggal);
     $hasil = $ci->db2->query("select  a6level_id,posisi,sum(debet) as debet,sum(kredit) as kredit from view_detailtransaksis WHERE a6level_id='$akun_id' AND tanggal_transaksi BETWEEN '$awal_periode' AND '$akhir_periode' AND tahun_buku='$tahun_buku' GROUP BY a6level_id")->result_array();
+    $saldo = 0;
     if ($hasil) {
         $debet = 0;
         $kredit = 0;
-        $saldo = 0;
         foreach ($hasil as $hasilData) :
             $posisi = $hasilData['posisi'];
             $debet = $hasilData['debet'];
@@ -391,7 +426,7 @@ function notransaksi()
     $th = $ci->session->userdata('tahun_buku');
     $ints = $ci->session->userdata('idInstitusi');
     $char = substr($th, 2, 2) . $ints;
-    $hasil = $ci->db->query("select max(a.notran) as maxnotran from siak_akuntansi.transaksis a join siak_setting.units b on b.id=a.unit_id join siak_setting.institusis c on c.id=b.institusi_id where a.tahun_buku='2019' and c.id=$ints")->row_array();
+    $hasil = $ci->db->query("select max(a.notran) as maxnotran from siak_akuntansi.transaksis a join siak_setting.units b on b.id=a.unit_id join siak_setting.institusis c on c.id=b.institusi_id where a.tahun_buku='$th' and c.id=$ints")->row_array();
     if ($hasil) {
         $nomor = $hasil['maxnotran'];
         $noUrut = (int) substr($nomor, 4, 6);
@@ -408,7 +443,7 @@ function no_tran($jurnal)
     $th = $ci->session->userdata('tahun_buku');
     $ints = $ci->session->userdata('idInstitusi');
     $char = $jurnal . substr($th, 2, 2) . $ints;
-    $hasil = $ci->db->query("select max(a.notran) as maxnotran from siak_akuntansi.transaksis a join siak_setting.units b on b.id=a.unit_id join siak_setting.institusis c on c.id=b.institusi_id where a.tahun_buku='2019' and a.jurnal='$jurnal' and c.id='$ints'")->row_array();
+    $hasil = $ci->db->query("select max(a.notran) as maxnotran from siak_akuntansi.transaksis a join siak_setting.units b on b.id=a.unit_id join siak_setting.institusis c on c.id=b.institusi_id where a.tahun_buku='$th' and a.jurnal='$jurnal' and c.id='$ints'")->row_array();
     if ($hasil) {
         $nomor = $hasil['maxnotran'];
         $noUrut = (int) substr($nomor, 6, 4);

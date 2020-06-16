@@ -52,7 +52,7 @@ $(document).ready(function () {
     //     const tahunbuku = $('[name="tahun_pembukuan_id"]').val();
     //     const saldo = $('[name="saldoawal"]').val();
     //     Toast.fire({
-    //         type: 'success',
+    //         icon: 'success',
     //         title: ' Datanya ' + a6level_id + "-" + tahunbuku + "-" + saldo + "-"
     //     });
     // });
@@ -100,12 +100,12 @@ $(document).ready(function () {
             success: function (response) {
                 if (response.status == 'gagal') {
                     Toast.fire({
-                        type: 'warning',
+                        icon: 'warning',
                         title: 'Tanggal diluar periode pembukuan!!!'
                     });
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Tampilkan laporan!!!.' + jenis
                     });
                     $.ajax({
@@ -170,12 +170,12 @@ $(document).ready(function () {
             success: function (response) {
                 if (response.status == 'gagal') {
                     Toast.fire({
-                        type: 'warning',
+                        icon: 'warning',
                         title: 'Tanggal diluar periode pembukuan!!!'
                     });
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Menampilkan laporan!!!.' + jenis
                     });
                     $.ajax({
@@ -240,7 +240,7 @@ $(document).ready(function () {
             success: function (response) {
                 if (response.status == 'gagal') {
                     Toast.fire({
-                        type: 'warning',
+                        icon: 'warning',
                         title: 'Tanggal diluar periode pembukuan!!!'
                     });
                 } else {
@@ -257,7 +257,7 @@ $(document).ready(function () {
                         }
                     });
                     // Toast.fire({
-                    //     type: 'success',
+                    //     icon: 'success',
                     //     title: ' Tampilkan laporan!!!. aaaaa' + jenis
                     // });
                 }
@@ -310,7 +310,7 @@ $(document).ready(function () {
             success: function (response) {
                 if (response.status == 'gagal') {
                     Toast.fire({
-                        type: 'warning',
+                        icon: 'warning',
                         title: 'Tanggal diluar periode pembukuan!!!'
                     });
                 } else {
@@ -327,7 +327,7 @@ $(document).ready(function () {
                         }
                     });
                     // Toast.fire({
-                    //     type: 'success',
+                    //     icon: 'success',
                     //     title: ' Tampilkan laporan!!!. aaaaa' + jenis
                     // });
                 }
@@ -369,7 +369,7 @@ $(document).ready(function () {
             success: function (response) {
                 if (response.status == 'gagal') {
                     Toast.fire({
-                        type: 'warning',
+                        icon: 'warning',
                         title: 'Tanggal diluar periode pembukuan!!!'
                     });
                 } else {
@@ -386,7 +386,7 @@ $(document).ready(function () {
                         }
                     });
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Tampilkan laporan!!!. aaaaa' + jenis
                     });
                 }
@@ -489,7 +489,7 @@ $(document).ready(function () {
                     $('#rencana').trigger('focus');
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil disimpan.'
                     });
                     $('#modal-rapb').modal('hide');
@@ -508,7 +508,7 @@ $(document).ready(function () {
         Swal.fire({
             title: 'Konfirmasi!',
             text: 'Apakah anda yakin akan menghapus RAPB -' + info + '- !?!',
-            type: 'warning',
+            icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
@@ -527,13 +527,13 @@ $(document).ready(function () {
                     success: function (data) {
                         if (data.status == 'sukses') {
                             Toast.fire({
-                                type: 'success',
+                                icon: 'success',
                                 title: ' Data berhasil dihapus!!!.'
                             });
                             document.location.reload();
                         } else {
                             Toast.fire({
-                                type: 'warning',
+                                icon: 'warning',
                                 title: ' Penghapusan dibatalkan, data sedang digunakan oleh system!!!.'
                             });
                         }
@@ -646,7 +646,7 @@ $(document).ready(function () {
                     $('#rencana').trigger('focus');
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil diubah!'
                     });
                     $('#modal-rapb').modal('hide');
@@ -736,7 +736,7 @@ $(document).ready(function () {
                     $('#id').trigger('focus');
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil disimpan.'
                     });
                     $('#modal-periodeakademik').modal('hide');
@@ -755,7 +755,7 @@ $(document).ready(function () {
         Swal.fire({
             title: 'Konfirmasi!',
             text: 'Apakah anda yakin akan menghapus Periode Akademik -' + info + '- !?!',
-            type: 'warning',
+            icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
@@ -774,13 +774,13 @@ $(document).ready(function () {
                     success: function (data) {
                         if (data.status == 'sukses') {
                             Toast.fire({
-                                type: 'success',
+                                icon: 'success',
                                 title: ' Data berhasil dihapus!!!.'
                             });
                             document.location.reload();
                         } else {
                             Toast.fire({
-                                type: 'warning',
+                                icon: 'warning',
                                 title: ' Penghapusan dibatalkan, data sedang digunakan oleh system!!!.'
                             });
                         }
@@ -880,7 +880,7 @@ $(document).ready(function () {
                     $('#tahunakademik_id').trigger('focus');
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil diubah!'
                     });
                     $('#modal-periodeakademik').modal('hide');
@@ -951,7 +951,7 @@ $(document).ready(function () {
                     $('#kelas_id').trigger('focus');
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil disimpan.'
                     });
                     $('#modal-kelasaktif').modal('hide');
@@ -970,7 +970,7 @@ $(document).ready(function () {
         Swal.fire({
             title: 'Konfirmasi!',
             text: 'Apakah anda yakin akan menghapus kelas -' + id + info + '- !?!',
-            type: 'warning',
+            icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
@@ -989,13 +989,13 @@ $(document).ready(function () {
                     success: function (data) {
                         if (data.status == 'sukses') {
                             Toast.fire({
-                                type: 'success',
+                                icon: 'success',
                                 title: ' Data berhasil dihapus!!!.'
                             });
                             document.location.reload();
                         } else {
                             Toast.fire({
-                                type: 'warning',
+                                icon: 'warning',
                                 title: ' Penghapusan dibatalkan, data sedang digunakan oleh system!!!.'
                             });
                         }
@@ -1071,7 +1071,7 @@ $(document).ready(function () {
                     $('#kelas_id').trigger('focus');
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil diubah!'
                     });
                     $('#modal-kelasaktif').modal('hide');
@@ -1105,7 +1105,7 @@ $(document).ready(function () {
         Swal.fire({
             title: 'Konfirmasi!',
             text: 'Apakah anda yakin akan menghapus mahasiswa -' + info + '- !?!',
-            type: 'warning',
+            icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
@@ -1124,13 +1124,13 @@ $(document).ready(function () {
                     success: function (data) {
                         if (data.status == 'sukses') {
                             Toast.fire({
-                                type: 'success',
+                                icon: 'success',
                                 title: ' Data berhasil dihapus!!!.'
                             });
                             document.location.reload();
                         } else {
                             Toast.fire({
-                                type: 'warning',
+                                icon: 'warning',
                                 title: ' Penghapusan dibatalkan, data sedang digunakan oleh system!!!.'
                             });
                         }
@@ -1155,7 +1155,7 @@ $(document).ready(function () {
             },
             success: function () {
                 Toast.fire({
-                    type: 'success',
+                    icon: 'success',
                     title: 'Data kelas berhasil diperbaharui!'
                 });
             }
@@ -1220,7 +1220,7 @@ $(document).ready(function () {
                     $('#kode').trigger('focus');
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil disimpan.'
                     });
                     $('#modal-komponenbop').modal('hide');
@@ -1301,7 +1301,7 @@ $(document).ready(function () {
                     $('#kode').trigger('focus');
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil diubah!'
                     });
                     $('#modal-komponenbop').modal('hide');
@@ -1321,7 +1321,7 @@ $(document).ready(function () {
         Swal.fire({
             title: 'Konfirmasi!',
             text: 'Apakah anda yakin akan menghapus Komponen BOP -' + info + '- !?!',
-            type: 'warning',
+            icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
@@ -1340,13 +1340,13 @@ $(document).ready(function () {
                     success: function (data) {
                         if (data.status == 'sukses') {
                             Toast.fire({
-                                type: 'success',
+                                icon: 'success',
                                 title: ' Data berhasil dihapus!!!.'
                             });
                             document.location.reload();
                         } else {
                             Toast.fire({
-                                type: 'warning',
+                                icon: 'warning',
                                 title: ' Penghapusan dibatalkan, data sedang digunakan oleh system!!!.'
                             });
                         }
@@ -1374,12 +1374,14 @@ $(document).ready(function () {
         e.preventDefault();
         const kewajiban_id = $('[name="kewajiban_id"]').val();
         const a6level_id = $('[name="a6level_id"]').val();
+        const posisi = $('[name="posisi"]').val();
         $.ajax({
             method: "POST",
             url: base_url + "akademik/komponenbop/simpanakun",
             data: {
                 kewajiban_id: kewajiban_id,
-                a6level_id: a6level_id
+                a6level_id: a6level_id,
+                posisi: posisi
             },
             dataType: "JSON",
             beforeSend: function () {
@@ -1396,10 +1398,15 @@ $(document).ready(function () {
                     } else {
                         $('#akun_error').html('');
                     }
+                    if (data.posisi_error != '') {
+                        $('#posisi_error').html(data.posisi_error);
+                    } else {
+                        $('#posisi_error').html('');
+                    }
                     $('#a6level_id').trigger('focus');
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil disimpan.'
                     });
                     $('#modal-akunbop').modal('hide');
@@ -1418,7 +1425,7 @@ $(document).ready(function () {
         Swal.fire({
             title: 'Konfirmasi!',
             text: 'Apakah anda yakin akan menghapus akun -' + info + '- !?!',
-            type: 'warning',
+            icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
@@ -1437,13 +1444,13 @@ $(document).ready(function () {
                     success: function (data) {
                         if (data.status == 'sukses') {
                             Toast.fire({
-                                type: 'success',
+                                icon: 'success',
                                 title: ' Data berhasil dihapus!!!.'
                             });
                             document.location.reload();
                         } else {
                             Toast.fire({
-                                type: 'warning',
+                                icon: 'warning',
                                 title: ' Penghapusan dibatalkan, data sedang digunakan oleh system!!!.'
                             });
                         }
@@ -1504,7 +1511,7 @@ $(document).ready(function () {
                     $('#kode').trigger('focus');
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil disimpan.'
                     });
                     $('#modal-bop').modal('hide');
@@ -1523,7 +1530,7 @@ $(document).ready(function () {
         Swal.fire({
             title: 'Konfirmasi!',
             text: 'Apakah anda yakin akan menghapus BOP -' + info + '- !?!',
-            type: 'warning',
+            icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
@@ -1542,13 +1549,13 @@ $(document).ready(function () {
                     success: function (data) {
                         if (data.status == 'sukses') {
                             Toast.fire({
-                                type: 'success',
+                                icon: 'success',
                                 title: ' Data berhasil dihapus!!!.'
                             });
                             document.location.reload();
                         } else {
                             Toast.fire({
-                                type: 'warning',
+                                icon: 'warning',
                                 title: ' Penghapusan dibatalkan, data sedang digunakan oleh system!!!.'
                             });
                         }
@@ -1621,7 +1628,7 @@ $(document).ready(function () {
                     $('#kode').trigger('focus');
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil diubah!'
                     });
                     $('#modal-bop').modal('hide');
@@ -1685,7 +1692,7 @@ $(document).ready(function () {
                     $('#kewajiban_id').trigger('focus');
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil disimpan.'
                     });
                     $('#modal-detailbop').modal('hide');
@@ -1706,6 +1713,7 @@ $(document).ready(function () {
         $.ajax({
             url: base_url + 'akademik/bop/edit_detail/' + id,
             type: "GET",
+            cache: false,
             dataType: "JSON",
             success: function (data) {
                 $('[name="idubah"]').val(data.id);
@@ -1759,7 +1767,7 @@ $(document).ready(function () {
                     $('#kewajiban_id').trigger('focus');
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil diubah!'
                     });
                     $('#modal-detailbop').modal('hide');
@@ -1779,7 +1787,7 @@ $(document).ready(function () {
         Swal.fire({
             title: 'Konfirmasi!',
             text: 'Apakah anda yakin akan menghapus detail BOP -' + info + '- !?!',
-            type: 'warning',
+            icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
@@ -1798,13 +1806,13 @@ $(document).ready(function () {
                     success: function (data) {
                         if (data.status == 'sukses') {
                             Toast.fire({
-                                type: 'success',
+                                icon: 'success',
                                 title: ' Data berhasil dihapus!!!.'
                             });
                             document.location.reload();
                         } else {
                             Toast.fire({
-                                type: 'warning',
+                                icon: 'warning',
                                 title: ' Penghapusan dibatalkan, data sedang digunakan oleh system!!!.'
                             });
                         }
@@ -1821,11 +1829,597 @@ $(document).ready(function () {
             //letakan fungsi anda disini
             const nim = $('[name="nim_opm"]').val();
             Toast.fire({
-                type: 'success',
+                icon: 'success',
                 title: 'Cari Data Nim!!!.' + nim
             });
         }
     });
+    $('#btn-cari-opm').on('click', function (e) {
+        e.preventDefault();
+        const nim = $('[name="nim_opm"]').val();
+        const ling = base_url + 'akademik/opm/data/' + nim;
+        $.ajax({
+            url: base_url + 'akademik/opm/cek_mahasiswa',
+            type: "POST",
+            cache: false,
+            dataType: "JSON",
+            data: {
+                nim: nim
+            },
+            success: function (data) {
+                if (data.status == 'gagal') {
+                    Toast.fire({
+                        icon: 'warning',
+                        title: ' Mahasiswa dengan nim ' + nim + ' tidak ada!!!.'
+                    });
+                } else {
+                    window.location.href = ling;
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('Sesi user habis, refresh halaman dan login kembali');
+            }
+        });
+
+    });
+    $('#btn-edit-nimopm').on('click', function (e) {
+        e.preventDefault();
+        //const tran_id = $('[name="tran_id"]').val();
+        const status = $('[name="status"]').val();
+        if (status == 1) {
+            Toast.fire({
+                icon: 'warning',
+                title: ' Harap selesaikan/hapus transaksi terlebih dahulu!!!.'
+            });
+        } else {
+            const judul = document.getElementById('judul-modalubah');
+            judul.innerHTML = 'Ubah Nim Transaksi';
+            $('#modal-opm-ubahnim').modal('show');
+        }
+    });
+    $('#btn-ubah-nimopm').on('click', function (e) {
+        e.preventDefault();
+        const nim = $('[name="nim_opm"]').val();
+        const ling = base_url + 'akademik/opm/data/' + nim;
+        if (nim != '') {
+            $.ajax({
+                url: base_url + 'akademik/opm/cek_mahasiswa',
+                type: "POST",
+                cache: false,
+                dataType: "JSON",
+                data: {
+                    nim: nim
+                },
+                success: function (data) {
+                    if (data.status == 'gagal') {
+                        Toast.fire({
+                            icon: 'warning',
+                            title: ' Mahasiswa dengan nim ' + nim + ' tidak ada!!!.'
+                        });
+                    } else {
+                        window.location.href = ling;
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert('Sesi user habis, refresh halaman dan login kembali');
+                }
+            });
+        } else {
+            Toast.fire({
+                icon: 'warning',
+                title: ' Harap isi Nim!!!.'
+            });
+            $('#nim_opm').trigger('focus');
+        }
+    });
+    $('#btn-batal-opmtransaksi').on('click', function (e) {
+        e.preventDefault();
+        var idOperasional = $(this).data('id');
+        var notran = $(this).data('notran');
+        var info = $(this).data('info');
+        // const notran = $('[name="notran"]').val();
+        // const idTransaksi = $('[name="idUbah"]').val();
+        Swal.fire({
+            title: 'Konfirmasi!',
+            text: 'Apakah anda yakin akan menghapus transaksi pembayaran mahasiswa -' + info + '- !?!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'Batal',
+            confirmButtonText: 'Hapus'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    type: "POST",
+                    cache: false,
+                    url: base_url + "akademik/opm/bataltransaksi",
+                    data: {
+                        operasional_id: idOperasional,
+                        notran: notran
+                    },
+                    dataType: 'JSON',
+                    success: function (data) {
+                        if (data.status == 'sukses') {
+                            Toast.fire({
+                                icon: 'success',
+                                title: ' Data berhasil dihapus!!!.'
+                            });
+                            document.location.reload();
+                        }
+                        // else {
+                        //     Toast.fire({
+                        //         icon: 'warning',
+                        //         title: ' Penghapusan dibatalkan!!!.'
+                        //     });
+                        // }
+                    }
+                });
+            }
+            //  else {
+            //     Toast.fire({
+            //         icon: 'success',
+            //         title: ' dibatalkan!!!.'
+            //     });
+            // }
+        });
+    });
+    $('#btn-simpan-opm').on('click', function (e) {
+        e.preventDefault();
+        const nim = $('[name="nim"]').val();
+        const jurnal = $('[name="jurnal"]').val();
+        const notran = $('[name="notran"]').val();
+        const nobukti = $('[name="nobukti"]').val();
+        const noref = $('[name="noref"]').val();
+        const tanggal = $('[name="tanggal_transaksi"]').val();
+        const jenis = $('[name="jenis"]').val();
+        const keterangan = $('[name="keterangan"]').val();
+        const unit_id = $('[name="unit_id"]').val();
+        const status = $('[name="status"]').val();
+        const mahasiswa_id = $('[name="mahasiswa_id"]').val();
+        if (status == 0) {
+            $.ajax({
+                url: base_url + 'akademik/opm/simpan',
+                type: "POST",
+                cache: false,
+                dataType: "JSON",
+                data: {
+                    nim: nim,
+                    jurnal: jurnal,
+                    notran: notran,
+                    nobukti: nobukti,
+                    noref: noref,
+                    tanggal_transaksi: tanggal,
+                    keterangan: keterangan,
+                    unit_id: unit_id,
+                    jenis: jenis,
+                    mahasiswa_id: mahasiswa_id
+                },
+                success: function (data) {
+                    $('#nobukti_error').html('');
+                    $('#tanggal_error').html('');
+                    if (data.status == 'sukses') {
+                        Toast.fire({
+                            icon: 'success',
+                            title: 'Transaksi berhasil disimpan!!!.'
+                        });
+                        location.reload();
+                    } else {
+                        Toast.fire({
+                            icon: 'error',
+                            title: ' Input data tidak valid!!!.'
+                        });
+                        if (data.nobukti_error != '') {
+                            $('#nobukti_error').html(data.nobukti_error);
+                        } else {
+                            $('#nobukti_error').html('');
+                        }
+                        if (data.tanggal_error != '') {
+                            $('#tanggal_error').html(data.tanggal_error);
+                        } else {
+                            $('#tanggal_error').html('');
+                        }
+                        if (data.keterangan_error != '') {
+                            $('#keterangan_error').html(data.keterangan_error);
+                        } else {
+                            $('#keterangan_error').html('');
+                        }
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert('Sesi user habis, refresh halaman dan login kembali');
+                }
+            });
+        } else {
+            const idTransaksi = $('[name="idUbah"]').val();
+            const notr = $('[name="notran"]').val();
+            $.ajax({
+                url: base_url + 'akademik/opm/ubah/' + idTransaksi,
+                type: "POST",
+                cache: false,
+                dataType: "JSON",
+                data: {
+                    // nim: nim,
+                    // jurnal: jurnal,
+                    notran: notr,
+                    nobukti: nobukti,
+                    noref: noref,
+                    tanggal_transaksi: tanggal,
+                    keterangan: keterangan,
+                    // unit_id: unit_id,
+                    jenis: jenis
+                    // mahasiswa_id: mahasiswa_id
+                },
+                success: function (data) {
+                    $('#nobukti_error').html('');
+                    $('#tanggal_error').html('');
+                    if (data.status == 'sukses') {
+                        Toast.fire({
+                            icon: 'success',
+                            title: 'Transaksi berhasil diubah!!!.'
+                        });
+                        location.reload();
+                    } else {
+                        Toast.fire({
+                            icon: 'error',
+                            title: ' Input data tidak valid!!!.'
+                        });
+                        if (data.nobukti_error != '') {
+                            $('#nobukti_error').html(data.nobukti_error);
+                        } else {
+                            $('#nobukti_error').html('');
+                        }
+                        if (data.tanggal_error != '') {
+                            $('#tanggal_error').html(data.tanggal_error);
+                        } else {
+                            $('#tanggal_error').html('');
+                        }
+                        if (data.keterangan_error != '') {
+                            $('#keterangan_error').html(data.keterangan_error);
+                        } else {
+                            $('#keterangan_error').html('');
+                        }
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert('Sesi user habis, refresh halaman dan login kembali');
+                }
+            });
+        }
+    });
+    // tombol tambah rincian OPM table
+    $('#btn-tambah-rincianopm').on('click', function (e) {
+        e.preventDefault();
+        //const tran_id = $('[name="tran_id"]').val();
+        const status = $('[name="status"]').val();
+        if (status == 0) {
+            Toast.fire({
+                icon: 'warning',
+                title: ' Harap isi dan simpan form transaksi terlebih dahulu!!!.'
+            });
+        } else {
+            const judul = document.getElementById('judul-modal');
+            judul.innerHTML = 'Operasional Mahasiswa Reguler';
+            $('#btn-ubah-detailopm').hide();
+            $('#modal-opm').modal('show');
+        }
+    });
+    // end tombol tambah rincianOPM table
+    // tombol simpan rinciantransaksi modal
+    $('#btn-simpan-detailopm').on('click', function (e) {
+        e.preventDefault();
+        const operasional_id = $('[name="operasional_id"]').val();
+        const notran = $('[name="notran"]').val();
+        const akun_id = $('[name="akun_id"]').val();
+        const mahasiswa_id = $('[name="mahasiswa_id"]').val();
+        const iddopm = $('[name="iddopm"]').val();
+        const akun_lama = $('[name="akun_lama"]').val();
+        const dbopid_lama = $('[name="dbopid_lama"]').val();
+        const jumlah = $('[name="jumlah"]').val();
+        const posisi_akun = $('[name="posisi_akun"]').val();
+        const jenis_opm = $('[name="jenis_opm"]').val();
+        var anggaran = 0;
+        if ($('#is_anggaran').is(":checked")) {
+            anggaran = 1;
+        }
+        const is_anggaran = anggaran;
+        const tanggal = $('[name="tanggal_transaksi"]').val();
+        $.ajax({
+            type: "POST",
+            cache: false,
+            url: base_url + 'akademik/opm/simpandetail',
+            dataType: "JSON",
+            data: {
+                idubah: iddopm,
+                akun_lama: akun_lama,
+                operasional_id: operasional_id,
+                mahasiswa_id: mahasiswa_id,
+                akun_id: akun_id,
+                posisi_akun: posisi_akun,
+                jumlah: jumlah,
+                is_anggaran: is_anggaran,
+                jenis: jenis_opm,
+                tanggal_transaksi: tanggal,
+                notran: notran
+            },
+            success: function (data) {
+                if (data.status == 'sukses') {
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Transaksi berhasil disimpan!!!.'
+                    });
+                    location.reload();
+                } else {
+                    Toast.fire({
+                        icon: 'error',
+                        title: ' Input data tidak valid!!!.'
+                    });
+                    if (data.akun_error != '') {
+                        $('#akun_error').html(data.akun_error);
+                    } else {
+                        $('#akun_error').html('');
+                    }
+                    if (data.posisi_error != '') {
+                        $('#posisi_error').html(data.posisi_error);
+                    } else {
+                        $('#posisi_error').html('');
+                    }
+                    if (data.jumlah_error != '') {
+                        $('#jumlah_error').html(data.jumlah_error);
+                    } else {
+                        $('#jumlah_error').html('');
+                    }
+                }
+            },
+            error: function (e) {
+                // error: function (jqXHR, textStatus, errorThrown) {
+                //alert(jqXHR + textStatus + errorThrown);
+                console.log('Error' + e);
+            },
+        });
+
+    });
+    // end tombol simpan rinciantransaksi modal
+    // tombol edit rinciantransaksi tabel
+    $('.btn-edit-rincianopm').on('click', function (e) {
+        e.preventDefault();
+        const judul = document.getElementById('judul-modal');
+        judul.innerHTML = 'Ubah Rincian Transaksi';
+        var id = $(this).data('id');
+        $('#btn-simpan-detailopm').hide();
+        //$('#modal-opm').modal('show');
+        $.ajax({
+            url: base_url + 'akademik/opm/edit_detail/' + id,
+            type: "GET",
+            cache: false,
+            dataType: "JSON",
+            success: function (data) {
+                const dbop_id = data.detailbop_id;
+                const ak_id = data.a6level_id;
+                const idak = dbop_id + "/" + ak_id;
+                //const anggaran=data.anggaran;
+                if (data.anggaran == 1) {
+                    $('[name="is_anggaran"]').prop("checked", true);
+                }
+                $('[name="iddopm"]').val(data.id);
+                $('[name="akun_lama"]').val(data.a6level_id);
+                $('[name="dbopid_lama"]').val(data.detailbop_id);
+                $('[name="akun_id"]').val(idak);
+                $('[name="posisi_akun"]').val(data.posisi_akun);
+                $('[name="jumlah"]').val(data.jumlah);
+                $('#modal-opm').modal('show');
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('Sesi user habis, refresh halaman dan login kembali');
+            }
+        });
+
+    });
+    // end tombol edit rinciantransaksi table
+    // tombol ubah rinciantransaksi modal
+    $('#btn-ubah-detailopm').on('click', function (e) {
+        e.preventDefault();
+        //var id = $(this).data('id');
+        const operasional_id = $('[name="operasional_id"]').val();
+        const iddopm = $('[name="iddopm"]').val();
+        const notran = $('[name="notran"]').val();
+        const mahasiswa_id = $('[name="mahasiswa_id"]').val();
+        const akun_id = $('[name="akun_id"]').val();
+        const akun_lama = $('[name="akun_lama"]').val();
+        const dbopid_lama = $('[name="dbopid_lama"]').val();
+        const jumlah = $('[name="jumlah"]').val();
+        const posisi_akun = $('[name="posisi_akun"]').val();
+        const jenis_opm = $('[name="jenis_opm"]').val();
+        var anggaran = 0;
+        if ($('#is_anggaran').is(":checked")) {
+            anggaran = 1;
+        };
+        const is_anggaran = anggaran;
+        const tanggal = $('[name="tanggal_transaksi"]').val();
+        $.ajax({
+            type: "POST",
+            cache: false,
+            url: base_url + 'akademik/opm/ubahdetail',
+            dataType: "JSON",
+            data: {
+                idubah: iddopm,
+                operasional_id: operasional_id,
+                akun_id: akun_id,
+                mahasiswa_id: mahasiswa_id,
+                akun_lama: akun_lama,
+                dbopid_lama: dbopid_lama,
+                posisi_akun: posisi_akun,
+                jumlah: jumlah,
+                is_anggaran: is_anggaran,
+                jenis: jenis_opm,
+                tanggal_transaksi: tanggal,
+                notran: notran
+                // keterangan: keterangan,
+                // unit_id: unit_id,
+                // mahasiswa_id: mahasiswa_id
+            },
+            success: function (data) {
+                // $('#nobukti_error').html('');
+                // $('#tanggal_error').html('');
+                if (data.status == 'sukses') {
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Transaksi berhasil disimpan!!!.'
+                    });
+                    location.reload();
+                } else {
+                    Toast.fire({
+                        icon: 'error',
+                        title: ' Input data tidak valid!!!.' + jumlah
+                    });
+                    if (data.akun_error != '') {
+                        $('#akun_error').html(data.akun_error);
+                    } else {
+                        $('#akun_error').html('');
+                    }
+                    if (data.posisi_error != '') {
+                        $('#posisi_error').html(data.posisi_error);
+                    } else {
+                        $('#posisi_error').html('');
+                    }
+                    if (data.jumlah_error != '') {
+                        $('#jumlah_error').html(data.jumlah_error);
+                    } else {
+                        $('#jumlah_error').html('');
+                    }
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('Sesi user habis, refresh halaman dan login kembali');
+            }
+        });
+
+    });
+    // end tombol ubah rinciantransaksi modal
+    // tombol hapus rinciantransaksi table
+    $('.btn-hapus-rincianopm').on('click', function (e) {
+        e.preventDefault();
+        const notran = $('[name="notran"]').val();
+        const id = $(this).data('id');
+        const a6level_id = $(this).data('id6');
+        const info = $(this).data('info');
+        Swal.fire({
+            title: 'Konfirmasi!',
+            text: 'Apakah anda yakin akan menghapus -' + info + '- !?!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'Batal',
+            confirmButtonText: 'Hapus'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    type: "POST",
+                    cache: false,
+                    url: base_url + "akademik/opm/hapusdetail",
+                    data: {
+                        id: id,
+                        notran: notran,
+                        a6level_id: a6level_id
+                    },
+                    dataType: 'JSON',
+                    success: function (data) {
+                        if (data.status == 'sukses') {
+                            Toast.fire({
+                                icon: 'success',
+                                title: ' Data berhasil dihapus!!!.'
+                            });
+                            document.location.reload();
+                        } else {
+                            Toast.fire({
+                                icon: 'warning',
+                                title: ' Penghapusan gagal!!!.'
+                            });
+                        }
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert('Sesi user habis, refresh halaman dan login kembali');
+                    }
+                });
+            }
+        });
+    });
+    // end tombol hapus rinciantransaksi table
+    // ajax icon selesai opmtransaksi
+    $('#btn-selesai-opmtransaksi').on('click', function (e) {
+        e.preventDefault();
+        var operasional_id = $(this).data('id');
+        var total_transaksi = $(this).data('total');
+        var notran = $(this).data('notran');
+        //var info = $(this).data('info');
+        Swal.fire({
+            title: 'Konfirmasi!',
+            text: 'Apakah anda yakin data telah benar!?!',
+            type: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'Batal',
+            confirmButtonText: 'Confirm'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    type: "POST",
+                    cache: false,
+                    url: base_url + "akademik/opm/selesaitransaksi",
+                    data: {
+                        operasional_id: operasional_id,
+                        notran: notran,
+                        total_transaksi: total_transaksi
+                    },
+                    dataType: 'JSON',
+                    success: function (data) {
+                        if (data.status == 'sukses') {
+                            Toast.fire({
+                                icon: 'success',
+                                title: ' Data berhasil disimpan!!!.'
+                            });
+                            document.location.reload();
+                        } else {
+                            Toast.fire({
+                                icon: 'warning',
+                                title: ' Kesalahan dalam menyelesaikan transaksi!!!.'
+                            });
+                        }
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert('Sesi user habis, refresh halaman dan login kembali');
+                    }
+                });
+            }
+        })
+    });
+    // end ajax icon selesai Opm Transaksi
+    $('#btn-tes-detailopm').on('click', function (e) {
+        e.preventDefault();
+        const operasional_id = $('[name="operasional_id"]').val();
+        const notran = $('[name="notran"]').val();
+        const akun_id = $('[name="akun_id"]').val();
+        const mahasiswa_id = $('[name="mahasiswa_id"]').val();
+        const iddopm = $('[name="iddopm"]').val();
+        const akun_lama = $('[name="akun_lama"]').val();
+        const dbopid_lama = $('[name="dbopid_lama"]').val();
+        const jumlah = $('[name="jumlah"]').val();
+        const posisi_akun = $('[name="posisi_akun"]').val();
+        const jenis_opm = $('[name="jenis_opm"]').val();
+        var anggaran = 0;
+        if ($('#is_anggaran').is(":checked")) {
+            anggaran = 1;
+        }
+        const is_anggaran = anggaran;
+        const tanggal = $('[name="tanggal_transaksi"]').val();
+        Toast.fire({
+            icon: 'success',
+            title: ' operasional_id>' + operasional_id + ' tanggal_transaksi >' + tanggal + ' notran>' + notran + ' akun_id>' + akun_id + ' mahasiswa_id>' + mahasiswa_id + ' iddopm >' + iddopm + ' akun_lama >' + akun_lama + ' dbopid_lama >' + dbopid_lama + ' jumlah >' + jumlah + ' posisi_akun >' + posisi_akun + ' jenis_opm >' + jenis_opm
+        });
+    });
+
     //--------------------------------------/OPM----------------------------
 
 
@@ -1865,7 +2459,7 @@ $(document).ready(function () {
         //     title: ' Input data tidak valid!!!.' + nobukti + '-' + tanggal_transaksi + '-' + notran + '-' + tahun_pembukuan_id + '-' + jurnal + '-' + unit_id + '-' + keterangan
         // });
 // Toast.fire({
-//     type: 'success',
+//     icon: 'success',
 //     title: ' simpan!!!.'
 // });
 // js mengambil nilai atribut sebuah tag
@@ -1882,7 +2476,7 @@ $(document).ready(function () {
     //     const institusi_id = $('[name="institusi_id"]').val();
     //     const id = a5level_id + '.' + kode6;
     //     Toast.fire({
-    //         type: 'success',
+    //         icon: 'success',
     //         title: ' Datanya ' + id + "-" + a5level_id + "-" + kode6 + "-" + idubah6 + "-" + level6 + "-" + posisi + "-" + institusi_id + "-"
     //     });
     // });
@@ -1952,7 +2546,7 @@ $(document).ready(function () {
     //                 $('#kode5').trigger('focus');
     //             } else {
     //                 Toast.fire({
-    //                     type: 'success',
+    //                     icon: 'success',
     //                     title: ' Data berhasil disimpan.'
     //                 });
     //                 $('#modal-level5').modal('hide');
@@ -1973,7 +2567,7 @@ $(document).ready(function () {
 //     Swal.fire({
 //         title: 'Konfirmasi!',
 //         text: 'Apakah anda yakin akan menghapus Akun -' + info + '- !?!',
-//         type: 'warning',
+//         icon: 'warning',
 //         showCancelButton: true,
 //         confirmButtonColor: '#3085d6',
 //         cancelButtonColor: '#d33',
@@ -1992,13 +2586,13 @@ $(document).ready(function () {
 //                 success: function (data) {
 //                     if (data.status == 'sukses') {
 //                         Toast.fire({
-//                             type: 'success',
+//                             icon: 'success',
 //                             title: ' Data berhasil dihapus!!!.'
 //                         });
 //                         document.location.reload();
 //                     } else {
 //                         Toast.fire({
-//                             type: 'warning',
+//                             icon: 'warning',
 //                             title: ' Penghapusan dibatalkan, data sedang digunakan oleh system!!!.'
 //                         });
 //                     }
@@ -2042,7 +2636,7 @@ $(document).ready(function () {
     //         Swal.fire({
     //             title: 'Konfirmasi!',
     //             text: 'Apakah anda yakin akan mengaktifkan Tahun Anggaran -' + info + '- !?!',
-    //             type: 'warning',
+    //             icon: 'warning',
     //             showCancelButton: true,
     //             confirmButtonColor: '#3085d6',
     //             cancelButtonColor: '#d33',
@@ -2060,7 +2654,7 @@ $(document).ready(function () {
     //                     //dataType: 'JSON',
     //                     success: function () {
     //                         Toast.fire({
-    //                             type: 'success',
+    //                             icon: 'success',
     //                             title: ' Tahun' + info + ' berhasil diaktifkan!'
     //                         });
     //                         document.location.reload();
@@ -2102,7 +2696,7 @@ $(document).ready(function () {
     //                 $('#jenis_transaksi').trigger('focus');
     //             } else {
     //                 Toast.fire({
-    //                     type: 'success',
+    //                     icon: 'success',
     //                     title: ' Data berhasil diubah!'
     //                 });
     //                 $('#modal-jenistransaksi').modal('hide');
@@ -2170,6 +2764,6 @@ $(document).ready(function () {
 
 
     // Toast.fire({
-    //     type: 'warning',
+    //     icon: 'warning',
     //     title: 'Sesi login habis!!refresh halaman dan login kembali!!!.'
     // });

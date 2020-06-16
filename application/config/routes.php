@@ -96,6 +96,9 @@ $route['tahunajaran'] = 'akademik/tahunajaran';
 $route['komponenbop'] = 'akademik/komponenbop';
 $route['bop'] = 'akademik/bop';
 $route['opm'] = 'akademik/opm';
+$route['operasional'] = 'akademik/operasional';
+$route['opm/data/(:any)'] = 'akademik/opm/data/$1';
+// $route['opm/ceksaldo/(:any)'] = 'akademik/opm/data/$1';
 // --------------- operasional -----------------------------
 $route['kewajiban'] = 'operasional/kewajiban';
 $route['aturbayar'] = 'operasional/aturbayar';

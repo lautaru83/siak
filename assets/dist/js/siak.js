@@ -64,7 +64,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.status == 'gagal') {
                     Toast.fire({
-                        type: 'error',
+                        icon: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
                     if (data.institusi_error != '') {
@@ -80,7 +80,7 @@ $(document).ready(function () {
                     $('#institusi').trigger('focus');
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil disimpan.'
                     });
                     $('#modal-institusi').modal('hide');
@@ -99,7 +99,7 @@ $(document).ready(function () {
         Swal.fire({
             title: 'Konfirmasi!',
             text: 'apakah anda yakin akan menghapus Institusi -' + info + ' !?!',
-            type: 'warning',
+            icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
@@ -113,13 +113,13 @@ $(document).ready(function () {
                     success: function (data) {
                         if (data.status == 'sukses') {
                             Toast.fire({
-                                type: 'success',
+                                icon: 'success',
                                 title: ' Data berhasil dihapus!!!.'
                             });
                             document.location.reload();
                         } else {
                             Toast.fire({
-                                type: 'warning',
+                                icon: 'warning',
                                 title: ' Penghapusan dibatalkan, data sedang digunakan oleh system!!!.'
                             });
                         }
@@ -169,7 +169,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.status == 'gagal') {
                     Toast.fire({
-                        type: 'error',
+                        icon: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
                     if (data.institusi_error != '') {
@@ -186,7 +186,7 @@ $(document).ready(function () {
                     $('#institusi').trigger('focus');
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil diubah!'
                     });
                     $('#modal-institusi').modal('hide');
@@ -228,7 +228,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.status == 'gagal') {
                     Toast.fire({
-                        type: 'error',
+                        icon: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
                     if (data.role_error != '') {
@@ -244,7 +244,7 @@ $(document).ready(function () {
                     $('#role').trigger('focus');
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil disimpan.'
                     });
                     $('#modal-role').modal('hide');
@@ -263,7 +263,7 @@ $(document).ready(function () {
         Swal.fire({
             title: 'Konfirmasi!',
             text: 'apakah anda yakin akan menghapus Role -' + info + ' !?!',
-            type: 'warning',
+            icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
@@ -277,13 +277,13 @@ $(document).ready(function () {
                     success: function (data) {
                         if (data.status == 'sukses') {
                             Toast.fire({
-                                type: 'success',
+                                icon: 'success',
                                 title: ' Data berhasil dihapus!!!.'
                             });
                             document.location.reload();
                         } else {
                             Toast.fire({
-                                type: 'warning',
+                                icon: 'warning',
                                 title: ' Penghapusan dibatalkan, data sedang digunakan oleh system!!!.'
                             });
                         }
@@ -333,7 +333,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.status == 'gagal') {
                     Toast.fire({
-                        type: 'error',
+                        icon: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
                     if (data.role_error != '') {
@@ -350,7 +350,7 @@ $(document).ready(function () {
                     $('#role').trigger('focus');
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil diubah!'
                     });
                     $('#modal-role').modal('hide');
@@ -392,7 +392,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.status == 'gagal') {
                     Toast.fire({
-                        type: 'error',
+                        icon: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
                     if (data.menu_error != '') {
@@ -413,7 +413,7 @@ $(document).ready(function () {
                     $('#menu').trigger('focus');
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil disimpan.'
                     });
                     $('#modal-menu').modal('hide');
@@ -432,7 +432,7 @@ $(document).ready(function () {
         Swal.fire({
             title: 'Konfirmasi!',
             text: 'apakah anda yakin akan menghapus Menu -' + info + ' !?!',
-            type: 'warning',
+            icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
@@ -446,13 +446,13 @@ $(document).ready(function () {
                     success: function (data) {
                         if (data.status == 'sukses') {
                             Toast.fire({
-                                type: 'success',
+                                icon: 'success',
                                 title: ' Data berhasil dihapus!!!.'
                             });
                             document.location.reload();
                         } else {
                             Toast.fire({
-                                type: 'warning',
+                                icon: 'warning',
                                 title: ' Penghapusan dibatalkan, data sedang digunakan oleh system!!!.'
                             });
                         }
@@ -503,7 +503,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.status == 'gagal') {
                     Toast.fire({
-                        type: 'error',
+                        icon: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
                     if (data.menu_error != '') {
@@ -525,7 +525,7 @@ $(document).ready(function () {
                     $('#menu').trigger('focus');
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil diubah!'
                     });
                     $('#modal-menu').modal('hide');
@@ -568,7 +568,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.status == 'gagal') {
                     Toast.fire({
-                        type: 'error',
+                        icon: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
                     if (data.nama_error != '') {
@@ -604,7 +604,7 @@ $(document).ready(function () {
                     $('#nama').trigger('focus');
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil disimpan.'
                     });
                     $('#modal-user').modal('hide');
@@ -623,7 +623,7 @@ $(document).ready(function () {
         Swal.fire({
             title: 'Konfirmasi!',
             text: 'apakah anda yakin akan menghapus User -' + info + ' !?!',
-            type: 'warning',
+            icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
@@ -637,13 +637,13 @@ $(document).ready(function () {
                     success: function (data) {
                         if (data.status == 'sukses') {
                             Toast.fire({
-                                type: 'success',
+                                icon: 'success',
                                 title: ' Data berhasil dihapus!!!.'
                             });
                             document.location.reload();
                         } else {
                             Toast.fire({
-                                type: 'warning',
+                                icon: 'warning',
                                 title: ' Penghapusan dibatalkan, data sedang digunakan oleh system!!!.'
                             });
                         }
@@ -697,7 +697,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.status == 'gagal') {
                     Toast.fire({
-                        type: 'error',
+                        icon: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
                     if (data.nama_error != '') {
@@ -733,7 +733,7 @@ $(document).ready(function () {
                     $('#nama').trigger('focus');
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil diubah!'
                     });
                     $('#modal-user').modal('hide');
@@ -776,7 +776,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.status == 'gagal') {
                     Toast.fire({
-                        type: 'error',
+                        icon: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
                     if (data.kode_error != '') {
@@ -797,7 +797,7 @@ $(document).ready(function () {
                     $('#id').trigger('focus');
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil disimpan.'
                     });
                     $('#modal-unit').modal('hide');
@@ -816,7 +816,7 @@ $(document).ready(function () {
         Swal.fire({
             title: 'Konfirmasi!',
             text: 'apakah anda yakin akan menghapus Unit -' + info + ' !?!',
-            type: 'warning',
+            icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
@@ -830,13 +830,13 @@ $(document).ready(function () {
                     success: function (data) {
                         if (data.status == 'sukses') {
                             Toast.fire({
-                                type: 'success',
+                                icon: 'success',
                                 title: ' Data berhasil dihapus!!!.'
                             });
                             document.location.reload();
                         } else {
                             Toast.fire({
-                                type: 'warning',
+                                icon: 'warning',
                                 title: ' Penghapusan dibatalkan, data sedang digunakan oleh system!!!.'
                             });
                         }
@@ -888,7 +888,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.status == 'gagal') {
                     Toast.fire({
-                        type: 'error',
+                        icon: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
                     if (data.kode_error != '') {
@@ -909,7 +909,7 @@ $(document).ready(function () {
                     $('#unit').trigger('focus');
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil diubah!'
                     });
                     $('#modal-unit').modal('hide');
@@ -952,7 +952,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.status == 'gagal') {
                     Toast.fire({
-                        type: 'error',
+                        icon: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
                     if (data.submenu_error != '') {
@@ -983,7 +983,7 @@ $(document).ready(function () {
                     $('#submenu').trigger('focus');
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil disimpan.'
                     });
                     $('#modal-submenu').modal('hide');
@@ -1002,7 +1002,7 @@ $(document).ready(function () {
         Swal.fire({
             title: 'Konfirmasi!',
             text: 'apakah anda yakin akan menghapus Submenu -' + info + ' !?!',
-            type: 'warning',
+            icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
@@ -1016,13 +1016,13 @@ $(document).ready(function () {
                     success: function (data) {
                         if (data.status == 'sukses') {
                             Toast.fire({
-                                type: 'success',
+                                icon: 'success',
                                 title: ' Data berhasil dihapus!!!.'
                             });
                             document.location.reload();
                         } else {
                             Toast.fire({
-                                type: 'warning',
+                                icon: 'warning',
                                 title: ' Penghapusan dibatalkan, data sedang digunakan oleh system!!!.'
                             });
                         }
@@ -1075,7 +1075,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.status == 'gagal') {
                     Toast.fire({
-                        type: 'error',
+                        icon: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
                     if (data.submenu_error != '') {
@@ -1106,7 +1106,7 @@ $(document).ready(function () {
                     $('#submenu').trigger('focus');
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil diubah!'
                     });
                     $('#modal-submenu').modal('hide');
@@ -1137,7 +1137,7 @@ $(document).ready(function () {
             },
             success: function () {
                 Toast.fire({
-                    type: 'success',
+                    icon: 'success',
                     title: 'Hak akses berhasil diubah!'
                 });
                 //$(this).attr('disabled', false);
@@ -1187,7 +1187,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.status == 'gagal') {
                     Toast.fire({
-                        type: 'error',
+                        icon: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
                     if (data.kode_error != '') {
@@ -1218,7 +1218,7 @@ $(document).ready(function () {
                     $('#id').trigger('focus');
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil disimpan.'
                     });
                     $('#modal-tahunbuku').modal('hide');
@@ -1237,7 +1237,7 @@ $(document).ready(function () {
         Swal.fire({
             title: 'Konfirmasi!',
             text: 'apakah anda yakin akan menghapus Tahun Pembukuan -' + info + ' !?!',
-            type: 'warning',
+            icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
@@ -1252,13 +1252,13 @@ $(document).ready(function () {
                     success: function (data) {
                         if (data.status == 'sukses') {
                             Toast.fire({
-                                type: 'success',
+                                icon: 'success',
                                 title: ' Data berhasil dihapus!!!.'
                             });
                             document.location.reload();
                         } else {
                             Toast.fire({
-                                type: 'warning',
+                                icon: 'warning',
                                 title: ' Penghapusan dibatalkan, data sedang digunakan oleh system!!!.'
                             });
                         }
@@ -1320,7 +1320,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.status == 'gagal') {
                     Toast.fire({
-                        type: 'error',
+                        icon: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
                     if (data.awal_periode_error != '') {
@@ -1342,7 +1342,7 @@ $(document).ready(function () {
                     //$('#institusi').trigger('focus');
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil diubah!'
                     });
                     $('#modal-tahunbuku').modal('hide');
@@ -1363,7 +1363,7 @@ $(document).ready(function () {
             Swal.fire({
                 title: 'Konfirmasi!',
                 text: 'Apakah anda yakin akan mengaktifkan Tahun Pembukuan -' + id + '- !?!',
-                type: 'warning',
+                icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
@@ -1377,7 +1377,7 @@ $(document).ready(function () {
                         // dataType: 'JSON',
                         success: function () {
                             Toast.fire({
-                                type: 'success',
+                                icon: 'success',
                                 title: ' Tahun' + id + ' berhasil diaktifkan!'
                             });
                             document.location.reload();
@@ -1429,7 +1429,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.status == 'gagal') {
                     Toast.fire({
-                        type: 'error',
+                        icon: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
                     if (data.tahunanggaran_error != '') {
@@ -1460,7 +1460,7 @@ $(document).ready(function () {
                     $('#tahunanggaran').trigger('focus');
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil disimpan.'
                     });
                     $('#modal-tahunanggaran').modal('hide');
@@ -1479,7 +1479,7 @@ $(document).ready(function () {
         Swal.fire({
             title: 'Konfirmasi!',
             text: 'Apakah anda yakin akan menghapus Tahun Anggaran -' + info + '- !?!',
-            type: 'warning',
+            icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
@@ -1498,13 +1498,13 @@ $(document).ready(function () {
                     success: function (data) {
                         if (data.status == 'sukses') {
                             Toast.fire({
-                                type: 'success',
+                                icon: 'success',
                                 title: ' Data berhasil dihapus!!!.'
                             });
                             document.location.reload();
                         } else {
                             Toast.fire({
-                                type: 'warning',
+                                icon: 'warning',
                                 title: ' Penghapusan dibatalkan, data sedang digunakan oleh system!!!.'
                             });
                         }
@@ -1568,7 +1568,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.status == 'gagal') {
                     Toast.fire({
-                        type: 'error',
+                        icon: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
                     if (data.tahunanggaran_error != '') {
@@ -1596,7 +1596,7 @@ $(document).ready(function () {
                     //$('#institusi').trigger('focus');
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil diubah!'
                     });
                     $('#modal-tahunanggaran').modal('hide');
@@ -1618,7 +1618,7 @@ $(document).ready(function () {
             Swal.fire({
                 title: 'Konfirmasi!',
                 text: 'Apakah anda yakin akan mengaktifkan Tahun Anggaran -' + info + '- !?!',
-                type: 'warning',
+                icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
@@ -1636,7 +1636,7 @@ $(document).ready(function () {
                         //dataType: 'JSON',
                         success: function () {
                             Toast.fire({
-                                type: 'success',
+                                icon: 'success',
                                 title: ' Tahun' + info + ' berhasil diaktifkan!'
                             });
                             document.location.reload();
@@ -1683,7 +1683,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.status == 'gagal') {
                     Toast.fire({
-                        type: 'error',
+                        icon: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
                     if (data.kode_error != '') {
@@ -1699,7 +1699,7 @@ $(document).ready(function () {
                     $('#id').trigger('focus');
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil disimpan.'
                     });
                     $('#modal-jenistransaksi').modal('hide');
@@ -1718,7 +1718,7 @@ $(document).ready(function () {
         Swal.fire({
             title: 'Konfirmasi!',
             text: 'Apakah anda yakin akan menghapus Jenis Transaksi -' + info + '- !?!',
-            type: 'warning',
+            icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
@@ -1727,7 +1727,7 @@ $(document).ready(function () {
         }).then((result) => {
             if (result.value) {
                 // Toast.fire({
-                //     type: 'success',
+                //     icon: 'success',
                 //     title: id + "-" + info
                 // });
                 $.ajax({
@@ -1741,13 +1741,13 @@ $(document).ready(function () {
                     success: function (data) {
                         if (data.status == 'sukses') {
                             Toast.fire({
-                                type: 'success',
+                                icon: 'success',
                                 title: ' Data berhasil dihapus!!!.'
                             });
                             document.location.reload();
                         } else {
                             Toast.fire({
-                                type: 'warning',
+                                icon: 'warning',
                                 title: ' Penghapusan dibatalkan, data sedang digunakan oleh system!!!.'
                             });
                         }
@@ -1800,7 +1800,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.status == 'gagal') {
                     Toast.fire({
-                        type: 'error',
+                        icon: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
                     if (data.jenis_transaksi_error != '') {
@@ -1812,7 +1812,7 @@ $(document).ready(function () {
                     $('#jenis_transaksi').trigger('focus');
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil diubah!'
                     });
                     $('#modal-jenistransaksi').modal('hide');
@@ -1871,7 +1871,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.status == 'gagal') {
                     Toast.fire({
-                        type: 'error',
+                        icon: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
                     if (data.kode5_error != '') {
@@ -1887,7 +1887,7 @@ $(document).ready(function () {
                     $('#kode5').trigger('focus');
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil disimpan.'
                     });
                     $('#modal-level5').modal('hide');
@@ -1946,7 +1946,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.status == 'gagal') {
                     Toast.fire({
-                        type: 'error',
+                        icon: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
                     if (data.kode6_error != '') {
@@ -1972,7 +1972,7 @@ $(document).ready(function () {
                     $('#kode6').trigger('focus');
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil disimpan.'
                     });
                     $('#modal-level6').modal('hide');
@@ -1991,7 +1991,7 @@ $(document).ready(function () {
         Swal.fire({
             title: 'Konfirmasi!',
             text: 'Apakah anda yakin akan menghapus Akun -' + info + '- !?!',
-            type: 'warning',
+            icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
@@ -2010,13 +2010,13 @@ $(document).ready(function () {
                     success: function (data) {
                         if (data.status == 'sukses') {
                             Toast.fire({
-                                type: 'success',
+                                icon: 'success',
                                 title: ' Data berhasil dihapus!!!.'
                             });
                             document.location.reload();
                         } else {
                             Toast.fire({
-                                type: 'warning',
+                                icon: 'warning',
                                 title: ' Penghapusan dibatalkan, data sedang digunakan oleh system!!!.'
                             });
                         }
@@ -2034,7 +2034,7 @@ $(document).ready(function () {
         Swal.fire({
             title: 'Konfirmasi!',
             text: 'Apakah anda yakin akan menghapus Akun -' + info + '- !?!',
-            type: 'warning',
+            icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
@@ -2053,13 +2053,13 @@ $(document).ready(function () {
                     success: function (data) {
                         if (data.status == 'sukses') {
                             Toast.fire({
-                                type: 'success',
+                                icon: 'success',
                                 title: ' Data berhasil dihapus!!!.'
                             });
                             document.location.reload();
                         } else {
                             Toast.fire({
-                                type: 'warning',
+                                icon: 'warning',
                                 title: ' Penghapusan dibatalkan, data sedang digunakan oleh system!!!.'
                             });
                         }
@@ -2146,7 +2146,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.status == 'gagal') {
                     Toast.fire({
-                        type: 'error',
+                        icon: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
                     if (data.level5_error != '') {
@@ -2158,7 +2158,7 @@ $(document).ready(function () {
                     $('#level5').trigger('focus');
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil diubah!'
                     });
                     $('#modal-level5').modal('hide');
@@ -2193,7 +2193,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.status == 'gagal') {
                     Toast.fire({
-                        type: 'error',
+                        icon: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
                     if (data.kode6_error != '') {
@@ -2221,7 +2221,7 @@ $(document).ready(function () {
                     $('#level6').trigger('focus');
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil diubah!'
                     });
                     $('#modal-level6').modal('hide');
@@ -2247,7 +2247,7 @@ $(document).ready(function () {
             },
             success: function () {
                 Toast.fire({
-                    type: 'success',
+                    icon: 'success',
                     title: 'akun transaksi berhasil diperbaharui!'
                 });
             }
@@ -2313,7 +2313,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.status == 'gagal') {
                     Toast.fire({
-                        type: 'error',
+                        icon: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
 
@@ -2325,7 +2325,7 @@ $(document).ready(function () {
                     $('#a6level_id').trigger('focus');
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil disimpan.'
                     });
                     $('#modal-akunanggaran').modal('hide');
@@ -2344,7 +2344,7 @@ $(document).ready(function () {
         Swal.fire({
             title: 'Konfirmasi!',
             text: 'Apakah anda yakin akan menghapus Akun -' + info + '- !?!',
-            type: 'warning',
+            icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
@@ -2363,13 +2363,13 @@ $(document).ready(function () {
                     success: function (data) {
                         if (data.status == 'sukses') {
                             Toast.fire({
-                                type: 'success',
+                                icon: 'success',
                                 title: ' Data berhasil dihapus!!!.'
                             });
                             document.location.reload();
                         } else {
                             Toast.fire({
-                                type: 'warning',
+                                icon: 'warning',
                                 title: ' Penghapusan dibatalkan, data sedang digunakan oleh system!!!.'
                             });
                         }
@@ -2407,7 +2407,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.status == 'gagal') {
                     Toast.fire({
-                        type: 'error',
+                        icon: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
 
@@ -2424,7 +2424,7 @@ $(document).ready(function () {
                     $('#anggaran').trigger('focus');
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil disimpan.'
                     });
                     $('#modal-anggaran').modal('hide');
@@ -2444,7 +2444,7 @@ $(document).ready(function () {
         Swal.fire({
             title: 'Konfirmasi!',
             text: 'Apakah anda yakin akan menghapus Akun -' + info + '- !?!',
-            type: 'warning',
+            icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
@@ -2463,13 +2463,13 @@ $(document).ready(function () {
                     success: function (data) {
                         if (data.status == 'sukses') {
                             Toast.fire({
-                                type: 'success',
+                                icon: 'success',
                                 title: ' Data berhasil dihapus!!!.'
                             });
                             document.location.reload();
                         } else {
                             Toast.fire({
-                                type: 'warning',
+                                icon: 'warning',
                                 title: ' Penghapusan dibatalkan, data sedang digunakan oleh system!!!.'
                             });
                         }
@@ -2525,7 +2525,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.status == 'gagal') {
                     Toast.fire({
-                        type: 'error',
+                        icon: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
                     if (data.anggaran_error != '') {
@@ -2541,7 +2541,7 @@ $(document).ready(function () {
                     $('#anggaran').trigger('focus');
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil diubah!'
                     });
                     $('#modal-anggaran').modal('hide');
@@ -2583,7 +2583,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.status == 'gagal') {
                     Toast.fire({
-                        type: 'error',
+                        icon: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
                     if (data.saldoawal_error != '') {
@@ -2599,7 +2599,7 @@ $(document).ready(function () {
                     $('#saldoawal').trigger('focus');
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Pengaturan saldo berhasil.'
                     });
                     $('#modal-saldoawal').modal('hide');
@@ -2667,7 +2667,7 @@ $(document).ready(function () {
         Swal.fire({
             title: 'Konfirmasi!',
             text: 'Anda yakin akan menghapus Saldo Akun -' + info + '- !?!',
-            type: 'warning',
+            icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
@@ -2687,14 +2687,14 @@ $(document).ready(function () {
                     success: function (data) {
                         if (data.status == 'sukses') {
                             Toast.fire({
-                                type: 'success',
+                                icon: 'success',
                                 title: ' Saldo berhasil dihapus!!!.'
                             });
 
                             document.location.reload();
                         } else {
                             Toast.fire({
-                                type: 'warning',
+                                icon: 'warning',
                                 title: 'Akun tidak meiliki saldo!!!.'
                             });
                         }
@@ -2729,7 +2729,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.status == 'gagal') {
                     Toast.fire({
-                        type: 'error',
+                        icon: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
                     if (data.posisi_error != '') {
@@ -2747,7 +2747,7 @@ $(document).ready(function () {
                     $('#saldoawal').trigger('focus');
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil diubah!'
                     });
                     $('#modal-saldoawal').modal('hide');
@@ -2797,7 +2797,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.status == 'gagal') {
                     Toast.fire({
-                        type: 'error',
+                        icon: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
                     if (data.kode_error != '') {
@@ -2813,7 +2813,7 @@ $(document).ready(function () {
                     $('#id').trigger('focus');
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil disimpan.'
                     });
                     $('#modal-angkatan').modal('hide');
@@ -2832,7 +2832,7 @@ $(document).ready(function () {
         Swal.fire({
             title: 'Konfirmasi!',
             text: 'Apakah anda yakin akan menghapus Angkatan -' + info + '- !?!',
-            type: 'warning',
+            icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
@@ -2841,7 +2841,7 @@ $(document).ready(function () {
         }).then((result) => {
             if (result.value) {
                 // Toast.fire({
-                //     type: 'success',
+                //     icon: 'success',
                 //     title: id + "-" + info
                 // });
                 $.ajax({
@@ -2855,13 +2855,13 @@ $(document).ready(function () {
                     success: function (data) {
                         if (data.status == 'sukses') {
                             Toast.fire({
-                                type: 'success',
+                                icon: 'success',
                                 title: ' Data berhasil dihapus!!!.'
                             });
                             document.location.reload();
                         } else {
                             Toast.fire({
-                                type: 'warning',
+                                icon: 'warning',
                                 title: ' Penghapusan dibatalkan, data sedang digunakan oleh system!!!.'
                             });
                         }
@@ -2914,7 +2914,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.status == 'gagal') {
                     Toast.fire({
-                        type: 'error',
+                        icon: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
                     if (data.angkatan_error != '') {
@@ -2926,7 +2926,7 @@ $(document).ready(function () {
                     $('#angkatan').trigger('focus');
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil diubah!'
                     });
                     $('#modal-angkatan').modal('hide');
@@ -2976,7 +2976,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.status == 'gagal') {
                     Toast.fire({
-                        type: 'error',
+                        icon: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
                     if (data.kode_error != '') {
@@ -2992,7 +2992,7 @@ $(document).ready(function () {
                     $('#id').trigger('focus');
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil disimpan.'
                     });
                     $('#modal-jenjang').modal('hide');
@@ -3011,7 +3011,7 @@ $(document).ready(function () {
         Swal.fire({
             title: 'Konfirmasi!',
             text: 'Apakah anda yakin akan menghapus Jenjang -' + info + '- !?!',
-            type: 'warning',
+            icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
@@ -3020,7 +3020,7 @@ $(document).ready(function () {
         }).then((result) => {
             if (result.value) {
                 // Toast.fire({
-                //     type: 'success',
+                //     icon: 'success',
                 //     title: id + "-" + info
                 // });
                 $.ajax({
@@ -3034,13 +3034,13 @@ $(document).ready(function () {
                     success: function (data) {
                         if (data.status == 'sukses') {
                             Toast.fire({
-                                type: 'success',
+                                icon: 'success',
                                 title: ' Data berhasil dihapus!!!.'
                             });
                             document.location.reload();
                         } else {
                             Toast.fire({
-                                type: 'warning',
+                                icon: 'warning',
                                 title: ' Penghapusan dibatalkan, data sedang digunakan oleh system!!!.'
                             });
                         }
@@ -3093,7 +3093,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.status == 'gagal') {
                     Toast.fire({
-                        type: 'error',
+                        icon: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
                     if (data.jenjang_error != '') {
@@ -3105,7 +3105,7 @@ $(document).ready(function () {
                     $('#jenjang').trigger('focus');
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil diubah!'
                     });
                     $('#modal-jenjang').modal('hide');
@@ -3155,7 +3155,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.status == 'gagal') {
                     Toast.fire({
-                        type: 'error',
+                        icon: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
                     if (data.jalur_error != '') {
@@ -3166,7 +3166,7 @@ $(document).ready(function () {
                     $('#id').trigger('focus');
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil disimpan.'
                     });
                     $('#modal-jalur').modal('hide');
@@ -3185,7 +3185,7 @@ $(document).ready(function () {
         Swal.fire({
             title: 'Konfirmasi!',
             text: 'Apakah anda yakin akan menghapus Jalur Pendidikan -' + info + '- !?!',
-            type: 'warning',
+            icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
@@ -3194,7 +3194,7 @@ $(document).ready(function () {
         }).then((result) => {
             if (result.value) {
                 // Toast.fire({
-                //     type: 'success',
+                //     icon: 'success',
                 //     title: id + "-" + info
                 // });
                 $.ajax({
@@ -3208,13 +3208,13 @@ $(document).ready(function () {
                     success: function (data) {
                         if (data.status == 'sukses') {
                             Toast.fire({
-                                type: 'success',
+                                icon: 'success',
                                 title: ' Data berhasil dihapus!!!.'
                             });
                             document.location.reload();
                         } else {
                             Toast.fire({
-                                type: 'warning',
+                                icon: 'warning',
                                 title: ' Penghapusan dibatalkan, data sedang digunakan oleh system!!!.'
                             });
                         }
@@ -3267,7 +3267,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.status == 'gagal') {
                     Toast.fire({
-                        type: 'error',
+                        icon: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
                     if (data.jalur_error != '') {
@@ -3279,7 +3279,7 @@ $(document).ready(function () {
                     $('#jalur').trigger('focus');
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil diubah!'
                     });
                     $('#modal-jalur').modal('hide');
@@ -3330,7 +3330,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.status == 'gagal') {
                     Toast.fire({
-                        type: 'error',
+                        icon: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
                     if (data.kode_error != '') {
@@ -3346,7 +3346,7 @@ $(document).ready(function () {
                     $('#id').trigger('focus');
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil disimpan.'
                     });
                     $('#modal-tingkat').modal('hide');
@@ -3365,7 +3365,7 @@ $(document).ready(function () {
         Swal.fire({
             title: 'Konfirmasi!',
             text: 'Apakah anda yakin akan menghapus Tingkat Pendidikan -' + info + '- !?!',
-            type: 'warning',
+            icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
@@ -3374,7 +3374,7 @@ $(document).ready(function () {
         }).then((result) => {
             if (result.value) {
                 // Toast.fire({
-                //     type: 'success',
+                //     icon: 'success',
                 //     title: id + "-" + info
                 // });
                 $.ajax({
@@ -3388,13 +3388,13 @@ $(document).ready(function () {
                     success: function (data) {
                         if (data.status == 'sukses') {
                             Toast.fire({
-                                type: 'success',
+                                icon: 'success',
                                 title: ' Data berhasil dihapus!!!.'
                             });
                             document.location.reload();
                         } else {
                             Toast.fire({
-                                type: 'warning',
+                                icon: 'warning',
                                 title: ' Penghapusan dibatalkan, data sedang digunakan oleh system!!!.'
                             });
                         }
@@ -3447,7 +3447,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.status == 'gagal') {
                     Toast.fire({
-                        type: 'error',
+                        icon: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
                     if (data.tingkat_error != '') {
@@ -3459,7 +3459,7 @@ $(document).ready(function () {
                     $('#tingkat').trigger('focus');
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil diubah!'
                     });
                     $('#modal-tingkat').modal('hide');
@@ -3510,7 +3510,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.status == 'gagal') {
                     Toast.fire({
-                        type: 'error',
+                        icon: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
                     // if (data.kode_error != '') {
@@ -3526,7 +3526,7 @@ $(document).ready(function () {
                     $('#id').trigger('focus');
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil disimpan.'
                     });
                     $('#modal-semester').modal('hide');
@@ -3545,7 +3545,7 @@ $(document).ready(function () {
         Swal.fire({
             title: 'Konfirmasi!',
             text: 'Apakah anda yakin akan menghapus Semester Pendidikan -' + info + '- !?!',
-            type: 'warning',
+            icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
@@ -3554,7 +3554,7 @@ $(document).ready(function () {
         }).then((result) => {
             if (result.value) {
                 // Toast.fire({
-                //     type: 'success',
+                //     icon: 'success',
                 //     title: id + "-" + info
                 // });
                 $.ajax({
@@ -3568,13 +3568,13 @@ $(document).ready(function () {
                     success: function (data) {
                         if (data.status == 'sukses') {
                             Toast.fire({
-                                type: 'success',
+                                icon: 'success',
                                 title: ' Data berhasil dihapus!!!.'
                             });
                             document.location.reload();
                         } else {
                             Toast.fire({
-                                type: 'warning',
+                                icon: 'warning',
                                 title: ' Penghapusan dibatalkan, data sedang digunakan oleh system!!!.'
                             });
                         }
@@ -3627,7 +3627,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.status == 'gagal') {
                     Toast.fire({
-                        type: 'error',
+                        icon: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
                     if (data.semester_error != '') {
@@ -3639,7 +3639,7 @@ $(document).ready(function () {
                     $('#semester').trigger('focus');
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil diubah!'
                     });
                     $('#modal-semester').modal('hide');
@@ -3692,7 +3692,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.status == 'gagal') {
                     Toast.fire({
-                        type: 'error',
+                        icon: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
                     if (data.kode_error != '') {
@@ -3718,7 +3718,7 @@ $(document).ready(function () {
                     $('#id').trigger('focus');
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil disimpan.'
                     });
                     $('#modal-tahunakademik').modal('hide');
@@ -3737,7 +3737,7 @@ $(document).ready(function () {
         Swal.fire({
             title: 'Konfirmasi!',
             text: 'Apakah anda yakin akan menghapus Tahun Akademik -' + info + '- !?!',
-            type: 'warning',
+            icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
@@ -3756,13 +3756,13 @@ $(document).ready(function () {
                     success: function (data) {
                         if (data.status == 'sukses') {
                             Toast.fire({
-                                type: 'success',
+                                icon: 'success',
                                 title: ' Data berhasil dihapus!!!.'
                             });
                             document.location.reload();
                         } else {
                             Toast.fire({
-                                type: 'warning',
+                                icon: 'warning',
                                 title: ' Penghapusan dibatalkan, data sedang digunakan oleh system!!!.'
                             });
                         }
@@ -3822,7 +3822,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.status == 'gagal') {
                     Toast.fire({
-                        type: 'error',
+                        icon: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
                     if (data.tahunakademik_error != '') {
@@ -3844,7 +3844,7 @@ $(document).ready(function () {
                     $('#tahunakademik').trigger('focus');
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil diubah!'
                     });
                     $('#modal-tahunakademik').modal('hide');
@@ -3896,7 +3896,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.status == 'gagal') {
                     Toast.fire({
-                        type: 'error',
+                        icon: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
                     if (data.kode_error != '') {
@@ -3917,7 +3917,7 @@ $(document).ready(function () {
                     $('#id').trigger('focus');
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil disimpan.'
                     });
                     $('#modal-jurusan').modal('hide');
@@ -3936,7 +3936,7 @@ $(document).ready(function () {
         Swal.fire({
             title: 'Konfirmasi!',
             text: 'Apakah anda yakin akan menghapus Jurusan -' + info + '- !?!',
-            type: 'warning',
+            icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
@@ -3945,7 +3945,7 @@ $(document).ready(function () {
         }).then((result) => {
             if (result.value) {
                 // Toast.fire({
-                //     type: 'success',
+                //     icon: 'success',
                 //     title: id + "-" + info
                 // });
                 $.ajax({
@@ -3959,13 +3959,13 @@ $(document).ready(function () {
                     success: function (data) {
                         if (data.status == 'sukses') {
                             Toast.fire({
-                                type: 'success',
+                                icon: 'success',
                                 title: ' Data berhasil dihapus!!!.'
                             });
                             document.location.reload();
                         } else {
                             Toast.fire({
-                                type: 'warning',
+                                icon: 'warning',
                                 title: ' Penghapusan dibatalkan, data sedang digunakan oleh system!!!.'
                             });
                         }
@@ -4021,7 +4021,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.status == 'gagal') {
                     Toast.fire({
-                        type: 'error',
+                        icon: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
                     if (data.jurusan_error != '') {
@@ -4033,7 +4033,7 @@ $(document).ready(function () {
                     $('#jurusan').trigger('focus');
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil diubah!'
                     });
                     $('#modal-jurusan').modal('hide');
@@ -4090,7 +4090,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.status == 'gagal') {
                     Toast.fire({
-                        type: 'error',
+                        icon: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
                     if (data.kode_error != '') {
@@ -4121,7 +4121,7 @@ $(document).ready(function () {
                     $('#id').trigger('focus');
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil disimpan.'
                     });
                     $('#modal-prodi').modal('hide');
@@ -4140,7 +4140,7 @@ $(document).ready(function () {
         Swal.fire({
             title: 'Konfirmasi!',
             text: 'Apakah anda yakin akan menghapus Prodi -' + info + '- !?!',
-            type: 'warning',
+            icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
@@ -4149,7 +4149,7 @@ $(document).ready(function () {
         }).then((result) => {
             if (result.value) {
                 // Toast.fire({
-                //     type: 'success',
+                //     icon: 'success',
                 //     title: id + "-" + info
                 // });
                 $.ajax({
@@ -4163,13 +4163,13 @@ $(document).ready(function () {
                     success: function (data) {
                         if (data.status == 'sukses') {
                             Toast.fire({
-                                type: 'success',
+                                icon: 'success',
                                 title: ' Data berhasil dihapus!!!.'
                             });
                             document.location.reload();
                         } else {
                             Toast.fire({
-                                type: 'warning',
+                                icon: 'warning',
                                 title: ' Penghapusan dibatalkan, data sedang digunakan oleh system!!!.'
                             });
                         }
@@ -4231,7 +4231,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.status == 'gagal') {
                     Toast.fire({
-                        type: 'error',
+                        icon: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
                     if (data.prodi_error != '') {
@@ -4258,7 +4258,7 @@ $(document).ready(function () {
                     $('#prodi').trigger('focus');
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil diubah!'
                     });
                     $('#modal-prodi').modal('hide');
@@ -4314,7 +4314,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.status == 'gagal') {
                     Toast.fire({
-                        type: 'error',
+                        icon: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
                     if (data.tahun_ajaran_error != '') {
@@ -4345,12 +4345,12 @@ $(document).ready(function () {
                     $('#tahun_ajaran_id').trigger('focus');
                 } else if (data.status == 'batal') {
                     Toast.fire({
-                        type: 'warning',
+                        icon: 'warning',
                         title: ' Penyimpanan dibatalkan, kombinasi Tahun ajaran dan Semester telah ada!!!.'
                     });
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil disimpan.'
                     });
                     $('#modal-detailtahunajaran').modal('hide');
@@ -4369,7 +4369,7 @@ $(document).ready(function () {
         Swal.fire({
             title: 'Konfirmasi!',
             text: 'Apakah anda yakin akan menghapus Tahun Ajaran -' + info + '- !?!',
-            type: 'warning',
+            icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
@@ -4378,7 +4378,7 @@ $(document).ready(function () {
         }).then((result) => {
             if (result.value) {
                 // Toast.fire({
-                //     type: 'success',
+                //     icon: 'success',
                 //     title: id + "-" + info
                 // });
                 $.ajax({
@@ -4392,13 +4392,13 @@ $(document).ready(function () {
                     success: function (data) {
                         if (data.status == 'sukses') {
                             Toast.fire({
-                                type: 'success',
+                                icon: 'success',
                                 title: ' Data berhasil dihapus!!!.'
                             });
                             document.location.reload();
                         } else {
                             Toast.fire({
-                                type: 'warning',
+                                icon: 'warning',
                                 title: ' Penghapusan dibatalkan, data sedang digunakan oleh system!!!.'
                             });
                         }
@@ -4461,7 +4461,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.status == 'gagal') {
                     Toast.fire({
-                        type: 'error',
+                        icon: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
                     if (data.tahun_ajaran_error != '') {
@@ -4492,13 +4492,13 @@ $(document).ready(function () {
                     $('#tahun_ajaran_id').trigger('focus');
                 } else if (data.status == 'batal') {
                     Toast.fire({
-                        type: 'warning',
+                        icon: 'warning',
                         title: ' Perubahan dibatalkan, kombinasi Tahun ajaran dan Semester telah ada!!!.'
                     });
                     $('#tahun_ajaran_id').trigger('focus');
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil diubah!'
                     });
                     $('#modal-detailtahunajaran').modal('hide');
@@ -4552,7 +4552,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.status == 'gagal') {
                     Toast.fire({
-                        type: 'error',
+                        icon: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
                     if (data.kode_error != '') {
@@ -4578,7 +4578,7 @@ $(document).ready(function () {
                     $('#id').trigger('focus');
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil disimpan.'
                     });
                     $('#modal-kelas').modal('hide');
@@ -4597,7 +4597,7 @@ $(document).ready(function () {
         Swal.fire({
             title: 'Konfirmasi!',
             text: 'Apakah anda yakin akan menghapus Kelas -' + info + '- !?!',
-            type: 'warning',
+            icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
@@ -4616,13 +4616,13 @@ $(document).ready(function () {
                     success: function (data) {
                         if (data.status == 'sukses') {
                             Toast.fire({
-                                type: 'success',
+                                icon: 'success',
                                 title: ' Data berhasil dihapus!!!.'
                             });
                             document.location.reload();
                         } else {
                             Toast.fire({
-                                type: 'warning',
+                                icon: 'warning',
                                 title: ' Penghapusan dibatalkan, data sedang digunakan oleh system!!!.'
                             });
                         }
@@ -4654,7 +4654,7 @@ $(document).ready(function () {
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 Toast.fire({
-                    type: 'warning',
+                    icon: 'warning',
                     title: 'Sesi login habis!!refresh halaman dan login kembali!!!.'
                 });
             }
@@ -4685,7 +4685,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.status == 'gagal') {
                     Toast.fire({
-                        type: 'error',
+                        icon: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
                     if (data.angkatan_error != '') {
@@ -4706,7 +4706,7 @@ $(document).ready(function () {
                     $('#prodi').trigger('focus');
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil diubah!'
                     });
                     $('#modal-kelas').modal('hide');
@@ -4759,7 +4759,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.status == 'gagal') {
                     Toast.fire({
-                        type: 'error',
+                        icon: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
                     if (data.nim_error != '') {
@@ -4780,7 +4780,7 @@ $(document).ready(function () {
                     $('#nim').trigger('focus');
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil disimpan.'
                     });
                     $('#modal-mahasiswa').modal('hide');
@@ -4799,7 +4799,7 @@ $(document).ready(function () {
         Swal.fire({
             title: 'Konfirmasi!',
             text: 'Apakah anda yakin akan menghapus Mahasiswa -' + info + '- !?!',
-            type: 'warning',
+            icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
@@ -4808,7 +4808,7 @@ $(document).ready(function () {
         }).then((result) => {
             if (result.value) {
                 // Toast.fire({
-                //     type: 'success',
+                //     icon: 'success',
                 //     title: id + "-" + info
                 // });
                 $.ajax({
@@ -4822,13 +4822,13 @@ $(document).ready(function () {
                     success: function (data) {
                         if (data.status == 'sukses') {
                             Toast.fire({
-                                type: 'success',
+                                icon: 'success',
                                 title: ' Data berhasil dihapus!!!.'
                             });
                             document.location.reload();
                         } else {
                             Toast.fire({
-                                type: 'warning',
+                                icon: 'warning',
                                 title: ' Penghapusan dibatalkan, data sedang digunakan oleh system!!!.'
                             });
                         }
@@ -4886,7 +4886,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.status == 'gagal') {
                     Toast.fire({
-                        type: 'error',
+                        icon: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
                     if (data.nim_error != '') {
@@ -4907,7 +4907,7 @@ $(document).ready(function () {
                     $('#nim').trigger('focus');
                 } else {
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil diubah!'
                     });
                     $('#modal-mahasiswa').modal('hide');
@@ -4928,7 +4928,7 @@ $(document).ready(function () {
         const tran_id = $('[name="tran_id"]').val();
         if (tran_id == '') {
             Toast.fire({
-                type: 'warning',
+                icon: 'warning',
                 title: ' Harap isi dan simpan form transaksi terlebih dahulu!!!.'
             });
         } else {
@@ -4971,7 +4971,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.status == 'gagal') {
                     Toast.fire({
-                        type: 'error',
+                        icon: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
                     if (data.akun_error != '') {
@@ -4994,7 +4994,7 @@ $(document).ready(function () {
                 } else {
                     //$('#btn-simpan-transaksi').attr('disabled', false);
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil disimpan!'
                     });
                     document.location.reload();
@@ -5004,8 +5004,6 @@ $(document).ready(function () {
             }
         });
         return false;
-
-
     });
     // end tombol simpan detailkasmasuk table
     // tombol ubah detailtransaksi table
@@ -5038,7 +5036,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.status == 'gagal') {
                     Toast.fire({
-                        type: 'error',
+                        icon: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
                     if (data.akun_error != '') {
@@ -5061,7 +5059,7 @@ $(document).ready(function () {
                 } else {
                     //$('#btn-simpan-transaksi').attr('disabled', false);
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil disimpan!'
                     });
                     //document.location.reload();
@@ -5108,7 +5106,7 @@ $(document).ready(function () {
         Swal.fire({
             title: 'Konfirmasi!',
             text: 'Apakah anda yakin akan menghapus Rincian -' + info + '- !?!',
-            type: 'warning',
+            icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
@@ -5127,13 +5125,13 @@ $(document).ready(function () {
                     success: function (data) {
                         if (data.status == 'sukses') {
                             Toast.fire({
-                                type: 'success',
+                                icon: 'success',
                                 title: ' Data berhasil dihapus!!!.'
                             });
                             document.location.reload();
                         } else {
                             Toast.fire({
-                                type: 'warning',
+                                icon: 'warning',
                                 title: ' Penghapusan gagal!!!.'
                             });
                         }
@@ -5176,7 +5174,7 @@ $(document).ready(function () {
                 success: function (data) {
                     if (data.status == 'gagal') {
                         Toast.fire({
-                            type: 'error',
+                            icon: 'error',
                             title: ' Input data tidak valid!!!.'
                         });
                         if (data.nobukti_error != '') {
@@ -5204,7 +5202,7 @@ $(document).ready(function () {
                     } else {
                         //$('#btn-simpan-transaksi').attr('disabled', false);
                         Toast.fire({
-                            type: 'success',
+                            icon: 'success',
                             title: ' Data berhasil disimpan!'
                         });
                         document.location.reload();
@@ -5238,7 +5236,7 @@ $(document).ready(function () {
                 success: function (data) {
                     if (data.status == 'gagal') {
                         Toast.fire({
-                            type: 'error',
+                            icon: 'error',
                             title: ' Input data tidak valid!!!.'
                         });
                         if (data.nobukti_error != '') {
@@ -5266,7 +5264,7 @@ $(document).ready(function () {
                     } else {
                         //$('#btn-simpan-transaksi').attr('disabled', false);
                         Toast.fire({
-                            type: 'success',
+                            icon: 'success',
                             title: ' Data berhasil diubah!'
                         });
                         document.location.reload();
@@ -5288,7 +5286,7 @@ $(document).ready(function () {
         Swal.fire({
             title: 'Konfirmasi!',
             text: 'Apakah anda yakin data telah benar!?!',
-            type: 'question',
+            icon: 'question',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
@@ -5307,13 +5305,13 @@ $(document).ready(function () {
                     success: function (data) {
                         if (data.status == 'sukses') {
                             Toast.fire({
-                                type: 'success',
+                                icon: 'success',
                                 title: ' Data berhasil disimpan!!!.'
                             });
                             document.location.reload();
                         } else {
                             Toast.fire({
-                                type: 'warning',
+                                icon: 'warning',
                                 title: ' Kesalahan dalam menyelesaikan transaksi!!!.'
                             });
                         }
@@ -5332,7 +5330,7 @@ $(document).ready(function () {
         const tran_id = $('[name="tran_id"]').val();
         if (tran_id == '') {
             Toast.fire({
-                type: 'warning',
+                icon: 'warning',
                 title: ' Harap isi dan simpan form transaksi terlebih dahulu!!!.'
             });
         } else {
@@ -5375,7 +5373,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.status == 'gagal') {
                     Toast.fire({
-                        type: 'error',
+                        icon: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
                     if (data.akun_error != '') {
@@ -5398,7 +5396,7 @@ $(document).ready(function () {
                 } else {
                     //$('#btn-simpan-transaksi').attr('disabled', false);
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil disimpan!'
                     });
                     document.location.reload();
@@ -5442,7 +5440,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.status == 'gagal') {
                     Toast.fire({
-                        type: 'error',
+                        icon: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
                     if (data.akun_error != '') {
@@ -5465,7 +5463,7 @@ $(document).ready(function () {
                 } else {
                     //$('#btn-simpan-transaksi').attr('disabled', false);
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil disimpan!'
                     });
                     //document.location.reload();
@@ -5512,7 +5510,7 @@ $(document).ready(function () {
         Swal.fire({
             title: 'Konfirmasi!',
             text: 'Apakah anda yakin akan menghapus Rincian -' + info + '- !?!',
-            type: 'warning',
+            icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
@@ -5531,13 +5529,13 @@ $(document).ready(function () {
                     success: function (data) {
                         if (data.status == 'sukses') {
                             Toast.fire({
-                                type: 'success',
+                                icon: 'success',
                                 title: ' Data berhasil dihapus!!!.'
                             });
                             document.location.reload();
                         } else {
                             Toast.fire({
-                                type: 'warning',
+                                icon: 'warning',
                                 title: ' Penghapusan gagal!!!.'
                             });
                         }
@@ -5580,7 +5578,7 @@ $(document).ready(function () {
                 success: function (data) {
                     if (data.status == 'gagal') {
                         Toast.fire({
-                            type: 'error',
+                            icon: 'error',
                             title: ' Input data tidak valid!!!.'
                         });
                         if (data.nobukti_error != '') {
@@ -5608,7 +5606,7 @@ $(document).ready(function () {
                     } else {
                         //$('#btn-simpan-transaksi').attr('disabled', false);
                         Toast.fire({
-                            type: 'success',
+                            icon: 'success',
                             title: ' Data berhasil disimpan!'
                         });
                         document.location.reload();
@@ -5642,7 +5640,7 @@ $(document).ready(function () {
                 success: function (data) {
                     if (data.status == 'gagal') {
                         Toast.fire({
-                            type: 'error',
+                            icon: 'error',
                             title: ' Input data tidak valid!!!.'
                         });
                         if (data.nobukti_error != '') {
@@ -5670,7 +5668,7 @@ $(document).ready(function () {
                     } else {
                         //$('#btn-simpan-transaksi').attr('disabled', false);
                         Toast.fire({
-                            type: 'success',
+                            icon: 'success',
                             title: ' Data berhasil diubah!'
                         });
                         document.location.reload();
@@ -5692,7 +5690,7 @@ $(document).ready(function () {
         Swal.fire({
             title: 'Konfirmasi!',
             text: 'Apakah anda yakin data telah benar!?!',
-            type: 'question',
+            icon: 'question',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
@@ -5711,13 +5709,13 @@ $(document).ready(function () {
                     success: function (data) {
                         if (data.status == 'sukses') {
                             Toast.fire({
-                                type: 'success',
+                                icon: 'success',
                                 title: ' Data berhasil disimpan!!!.'
                             });
                             document.location.reload();
                         } else {
                             Toast.fire({
-                                type: 'warning',
+                                icon: 'warning',
                                 title: ' Kesalahan dalam menyelesaikan transaksi!!!.'
                             });
                         }
@@ -5737,7 +5735,7 @@ $(document).ready(function () {
         const tran_id = $('[name="tran_id"]').val();
         if (tran_id == '') {
             Toast.fire({
-                type: 'warning',
+                icon: 'warning',
                 title: ' Harap isi dan simpan form transaksi terlebih dahulu!!!.'
             });
         } else {
@@ -5780,7 +5778,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.status == 'gagal') {
                     Toast.fire({
-                        type: 'error',
+                        icon: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
                     if (data.akun_error != '') {
@@ -5803,7 +5801,7 @@ $(document).ready(function () {
                 } else {
                     //$('#btn-simpan-transaksi').attr('disabled', false);
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil disimpan!'
                     });
                     document.location.reload();
@@ -5847,7 +5845,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.status == 'gagal') {
                     Toast.fire({
-                        type: 'error',
+                        icon: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
                     if (data.akun_error != '') {
@@ -5870,7 +5868,7 @@ $(document).ready(function () {
                 } else {
                     //$('#btn-simpan-transaksi').attr('disabled', false);
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil disimpan!'
                     });
                     //document.location.reload();
@@ -5917,7 +5915,7 @@ $(document).ready(function () {
         Swal.fire({
             title: 'Konfirmasi!',
             text: 'Apakah anda yakin akan menghapus Rincian -' + info + '- !?!',
-            type: 'warning',
+            icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
@@ -5936,13 +5934,13 @@ $(document).ready(function () {
                     success: function (data) {
                         if (data.status == 'sukses') {
                             Toast.fire({
-                                type: 'success',
+                                icon: 'success',
                                 title: ' Data berhasil dihapus!!!.'
                             });
                             document.location.reload();
                         } else {
                             Toast.fire({
-                                type: 'warning',
+                                icon: 'warning',
                                 title: ' Penghapusan gagal!!!.'
                             });
                         }
@@ -5985,7 +5983,7 @@ $(document).ready(function () {
                 success: function (data) {
                     if (data.status == 'gagal') {
                         Toast.fire({
-                            type: 'error',
+                            icon: 'error',
                             title: ' Input data tidak valid!!!.'
                         });
                         if (data.nobukti_error != '') {
@@ -6013,7 +6011,7 @@ $(document).ready(function () {
                     } else {
                         //$('#btn-simpan-transaksi').attr('disabled', false);
                         Toast.fire({
-                            type: 'success',
+                            icon: 'success',
                             title: ' Data berhasil disimpan!'
                         });
                         document.location.reload();
@@ -6047,7 +6045,7 @@ $(document).ready(function () {
                 success: function (data) {
                     if (data.status == 'gagal') {
                         Toast.fire({
-                            type: 'error',
+                            icon: 'error',
                             title: ' Input data tidak valid!!!.'
                         });
                         if (data.nobukti_error != '') {
@@ -6075,7 +6073,7 @@ $(document).ready(function () {
                     } else {
                         //$('#btn-simpan-transaksi').attr('disabled', false);
                         Toast.fire({
-                            type: 'success',
+                            icon: 'success',
                             title: ' Data berhasil diubah!'
                         });
                         document.location.reload();
@@ -6097,7 +6095,7 @@ $(document).ready(function () {
         Swal.fire({
             title: 'Konfirmasi!',
             text: 'Apakah anda yakin data telah benar!?!',
-            type: 'question',
+            icon: 'question',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
@@ -6116,13 +6114,13 @@ $(document).ready(function () {
                     success: function (data) {
                         if (data.status == 'sukses') {
                             Toast.fire({
-                                type: 'success',
+                                icon: 'success',
                                 title: ' Data berhasil disimpan!!!.'
                             });
                             document.location.reload();
                         } else {
                             Toast.fire({
-                                type: 'warning',
+                                icon: 'warning',
                                 title: ' Kesalahan dalam menyelesaikan transaksi!!!.'
                             });
                         }
@@ -6142,7 +6140,7 @@ $(document).ready(function () {
         const tran_id = $('[name="tran_id"]').val();
         if (tran_id == '') {
             Toast.fire({
-                type: 'warning',
+                icon: 'warning',
                 title: ' Harap isi dan simpan form transaksi terlebih dahulu!!!.'
             });
         } else {
@@ -6184,7 +6182,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.status == 'gagal') {
                     Toast.fire({
-                        type: 'error',
+                        icon: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
                     if (data.akun_error != '') {
@@ -6207,7 +6205,7 @@ $(document).ready(function () {
                 } else {
                     //$('#btn-simpan-transaksi').attr('disabled', false);
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil disimpan!'
                     });
                     document.location.reload();
@@ -6249,7 +6247,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.status == 'gagal') {
                     Toast.fire({
-                        type: 'error',
+                        icon: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
                     if (data.akun_error != '') {
@@ -6272,7 +6270,7 @@ $(document).ready(function () {
                 } else {
                     //$('#btn-simpan-transaksi').attr('disabled', false);
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil disimpan!'
                     });
                     //document.location.reload();
@@ -6319,7 +6317,7 @@ $(document).ready(function () {
         Swal.fire({
             title: 'Konfirmasi!',
             text: 'Apakah anda yakin akan menghapus Rincian -' + info + '- !?!',
-            type: 'warning',
+            icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
@@ -6338,13 +6336,13 @@ $(document).ready(function () {
                     success: function (data) {
                         if (data.status == 'sukses') {
                             Toast.fire({
-                                type: 'success',
+                                icon: 'success',
                                 title: ' Data berhasil dihapus!!!.'
                             });
                             document.location.reload();
                         } else {
                             Toast.fire({
-                                type: 'warning',
+                                icon: 'warning',
                                 title: ' Penghapusan gagal!!!.'
                             });
                         }
@@ -6387,7 +6385,7 @@ $(document).ready(function () {
                 success: function (data) {
                     if (data.status == 'gagal') {
                         Toast.fire({
-                            type: 'error',
+                            icon: 'error',
                             title: ' Input data tidak valid!!!.'
                         });
                         if (data.nobukti_error != '') {
@@ -6415,7 +6413,7 @@ $(document).ready(function () {
                     } else {
                         //$('#btn-simpan-transaksi').attr('disabled', false);
                         Toast.fire({
-                            type: 'success',
+                            icon: 'success',
                             title: ' Data berhasil disimpan!'
                         });
                         document.location.reload();
@@ -6449,7 +6447,7 @@ $(document).ready(function () {
                 success: function (data) {
                     if (data.status == 'gagal') {
                         Toast.fire({
-                            type: 'error',
+                            icon: 'error',
                             title: ' Input data tidak valid!!!.'
                         });
                         if (data.nobukti_error != '') {
@@ -6477,7 +6475,7 @@ $(document).ready(function () {
                     } else {
                         //$('#btn-simpan-transaksi').attr('disabled', false);
                         Toast.fire({
-                            type: 'success',
+                            icon: 'success',
                             title: ' Data berhasil diubah!'
                         });
                         document.location.reload();
@@ -6499,7 +6497,7 @@ $(document).ready(function () {
         Swal.fire({
             title: 'Konfirmasi!',
             text: 'Apakah anda yakin data telah benar!?!',
-            type: 'question',
+            icon: 'question',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
@@ -6518,13 +6516,13 @@ $(document).ready(function () {
                     success: function (data) {
                         if (data.status == 'sukses') {
                             Toast.fire({
-                                type: 'success',
+                                icon: 'success',
                                 title: ' Data berhasil disimpan!!!.'
                             });
                             document.location.reload();
                         } else {
                             Toast.fire({
-                                type: 'warning',
+                                icon: 'warning',
                                 title: ' Kesalahan dalam menyelesaikan transaksi!!!.'
                             });
                         }
@@ -6544,7 +6542,7 @@ $(document).ready(function () {
         const tran_id = $('[name="tran_id"]').val();
         if (tran_id == '') {
             Toast.fire({
-                type: 'warning',
+                icon: 'warning',
                 title: ' Harap isi dan simpan form transaksi terlebih dahulu!!!.'
             });
         } else {
@@ -6587,7 +6585,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.status == 'gagal') {
                     Toast.fire({
-                        type: 'error',
+                        icon: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
                     if (data.akun_error != '') {
@@ -6610,7 +6608,7 @@ $(document).ready(function () {
                 } else {
                     //$('#btn-simpan-transaksi').attr('disabled', false);
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil disimpan!'
                     });
                     document.location.reload();
@@ -6652,7 +6650,7 @@ $(document).ready(function () {
             success: function (data) {
                 if (data.status == 'gagal') {
                     Toast.fire({
-                        type: 'error',
+                        icon: 'error',
                         title: ' Input data tidak valid!!!.'
                     });
                     if (data.akun_error != '') {
@@ -6675,7 +6673,7 @@ $(document).ready(function () {
                 } else {
                     //$('#btn-simpan-transaksi').attr('disabled', false);
                     Toast.fire({
-                        type: 'success',
+                        icon: 'success',
                         title: ' Data berhasil disimpan!'
                     });
                     //document.location.reload();
@@ -6722,7 +6720,7 @@ $(document).ready(function () {
         Swal.fire({
             title: 'Konfirmasi!',
             text: 'Apakah anda yakin akan menghapus Rincian -' + info + '- !?!',
-            type: 'warning',
+            icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
@@ -6741,13 +6739,13 @@ $(document).ready(function () {
                     success: function (data) {
                         if (data.status == 'sukses') {
                             Toast.fire({
-                                type: 'success',
+                                icon: 'success',
                                 title: ' Data berhasil dihapus!!!.'
                             });
                             document.location.reload();
                         } else {
                             Toast.fire({
-                                type: 'warning',
+                                icon: 'warning',
                                 title: ' Penghapusan gagal!!!.'
                             });
                         }
@@ -6790,7 +6788,7 @@ $(document).ready(function () {
                 success: function (data) {
                     if (data.status == 'gagal') {
                         Toast.fire({
-                            type: 'error',
+                            icon: 'error',
                             title: ' Input data tidak valid!!!.'
                         });
                         if (data.nobukti_error != '') {
@@ -6818,7 +6816,7 @@ $(document).ready(function () {
                     } else {
                         //$('#btn-simpan-transaksi').attr('disabled', false);
                         Toast.fire({
-                            type: 'success',
+                            icon: 'success',
                             title: ' Data berhasil disimpan!'
                         });
                         document.location.reload();
@@ -6852,7 +6850,7 @@ $(document).ready(function () {
                 success: function (data) {
                     if (data.status == 'gagal') {
                         Toast.fire({
-                            type: 'error',
+                            icon: 'error',
                             title: ' Input data tidak valid!!!.'
                         });
                         if (data.nobukti_error != '') {
@@ -6880,7 +6878,7 @@ $(document).ready(function () {
                     } else {
                         //$('#btn-simpan-transaksi').attr('disabled', false);
                         Toast.fire({
-                            type: 'success',
+                            icon: 'success',
                             title: ' Data berhasil diubah!'
                         });
                         document.location.reload();
@@ -6902,7 +6900,7 @@ $(document).ready(function () {
         Swal.fire({
             title: 'Konfirmasi!',
             text: 'Apakah anda yakin data telah benar!?!',
-            type: 'question',
+            icon: 'question',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
@@ -6921,13 +6919,13 @@ $(document).ready(function () {
                     success: function (data) {
                         if (data.status == 'sukses') {
                             Toast.fire({
-                                type: 'success',
+                                icon: 'success',
                                 title: ' Data berhasil disimpan!!!.'
                             });
                             document.location.reload();
                         } else {
                             Toast.fire({
-                                type: 'warning',
+                                icon: 'warning',
                                 title: ' Kesalahan dalam menyelesaikan transaksi!!!.'
                             });
                         }

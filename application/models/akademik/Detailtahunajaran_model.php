@@ -10,7 +10,7 @@ class Detailtahunajaran_model extends CI_Model
     public function ambil_data()
     {
         //return $this->db3->get('akademiks')->result_array();
-        $sql = "select a.id as id,a.awal_periode as awal_periode, a.akhir_periode as akhir_periode,a.keterangan as keterangan,a.is_active as is_active,b.id as tahun_ajaran_id,b.tahun_ajaran as tahun_ajaran,c.id as semester_id,c.semester as semester from akademiks a join tahun_ajarans b on b.id=a.tahun_ajaran_id join semesters c on c.id=a.semester_id order by b.tahun_ajaran ASC";
+        $sql = "select a.id as id,a.awal_semester as awal_semester, a.akhir_semester as akhir_semester,a.keterangan as keterangan,a.is_active as is_active,b.id as tahunakademik_id,b.tahunakademik as tahunakademik,c.id as semester_id,c.semester as semester from periodeakademiks a join tahunakademiks b on b.id=a.tahunakademik_id join semesters c on c.id=a.semester_id order by b.tahunakademik ASC";
         $data = $this->db3->query($sql);
         return $data->result_array();
     }
