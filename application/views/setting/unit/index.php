@@ -39,13 +39,13 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body" id="tabel-data">
-                            <table id="tabel1" class="table table-bordered table-striped">
+                            <table id="tabel1" class="table table-bordered table-striped table-sm">
                                 <thead>
                                     <tr>
-                                        <td class="w-1">Kode</td>
-                                        <td class="w-35">Unit Usaha</td>
-                                        <td class="w-40">Institusi</td>
-                                        <td class="w-24 text-center" style="color: grey"><i class="fas fa-cog"></i></td>
+                                        <td class="text-center" width="5%">Kode</td>
+                                        <td class="text-center">Unit Usaha</td>
+                                        <td class="text-center">Institusi</td>
+                                        <td class="text-center" width="12%" style="color: grey"><i class="fas fa-cog"></i></td>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -53,10 +53,10 @@
                                     //$no = 1;
                                     if ($unit) {
                                         foreach ($unit as $dataUnit) :
-                                            ?>
+                                    ?>
 
                                             <tr>
-                                                <td><?= $dataUnit['id']; ?></td>
+                                                <td class="text-center"><?= $dataUnit['id']; ?></td>
                                                 <td><?= $dataUnit['unit']; ?></td>
                                                 <td><?= $dataUnit['institusi']; ?></td>
                                                 <td class="text-center"><a href="" class="btn-edit-unit" data-id="<?= $dataUnit['id']; ?>" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fas fa-edit" style="color: olive"></i></a> - <a href="" class="btn-hapus-unit" data-id="<?= $dataUnit['id']; ?>" data-info="<?= $dataUnit['unit']; ?>" data-toggle="tooltip" data-placement="bottom" title="Hapus"> <i class="far fa-trash-alt" style="color: maroon"></i></a></td>

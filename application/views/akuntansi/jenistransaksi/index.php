@@ -40,12 +40,12 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body" id="tabel-data">
-                            <table id="tabel1" class="table table-bordered table-striped">
+                            <table id="tabel1" class="table table-bordered table-striped table-sm">
                                 <thead>
                                     <tr>
-                                        <td class="w-1">Kode</td>
-                                        <td class="w-75">Jenis Transaksi</td>
-                                        <td class="w-24 text-center" style="color: grey"><i class="fas fa-cog"></i></td>
+                                        <td class="text-center" width="8%">Kode</td>
+                                        <td class="text-center">Jenis Transaksi</td>
+                                        <td class="text-center" width="12%" style="color: grey"><i class="fas fa-cog"></i></td>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -54,10 +54,10 @@
                                     if ($jenistransaksi) {
                                         foreach ($jenistransaksi as $dataJenistransaksi) :
                                             $idjenis = $dataJenistransaksi['id'];
-                                            ?>
+                                    ?>
 
                                             <tr>
-                                                <td><?= $idjenis; ?></td>
+                                                <td class="text-center"><?= $idjenis; ?></td>
                                                 <td><?= $dataJenistransaksi['jenis_transaksi']; ?></td>
                                                 <td class="text-center"><a href="<?= site_url('akuntansi/jenistransaksi/akun/' . $idjenis); ?>" data-toggle="tooltip" data-placement="bottom" title="Akun jenis transaksi"><i class="far fa-list-alt" style="color: teal"></i></a> - <a href="" class="btn-edit-jenistransaksi" data-id="<?= $idjenis; ?>" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fas fa-edit" style="color: olive"></i></a> - <a href="" class="btn-hapus-jenistransaksi" data-id="<?= $idjenis; ?>" data-info="<?= $dataJenistransaksi['jenis_transaksi']; ?>" data-toggle="tooltip" data-placement="bottom" title="Hapus"> <i class="far fa-trash-alt" style="color: maroon"></i></a></td>
                                             </tr>

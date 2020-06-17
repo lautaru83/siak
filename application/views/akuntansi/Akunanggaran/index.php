@@ -39,7 +39,7 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body" id="tabel-data">
-                            <table class="table table-bordered table-hover">
+                            <table class="table table-bordered table-hover table-sm">
                                 <thead>
                                     <tr class="">
                                         <td class="text-center" style="color: grey" width="5%"><i class="fas fa-cog"></i></td>

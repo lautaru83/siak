@@ -40,11 +40,11 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body" id="tabel-data">
-                            <table id="tabel1" class="table table-bordered table-striped">
+                            <table id="tabel1" class="table table-bordered table-striped table-sm">
                                 <thead>
                                     <tr>
                                         <td width="8%" class="text-center">No</td>
-                                        <td>Semester Pendidikan</td>
+                                        <td class="text-center">Semester Pendidikan</td>
                                         <td width="10%" class="text-center" style="color: grey"><i class="fas fa-cog"></i></td>
                                     </tr>
                                 </thead>

@@ -40,13 +40,13 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body" id="tabel-data">
-              <table id="tabel1" class="table table-bordered table-striped">
+              <table id="tabel1" class="table table-bordered table-striped table-sm">
                 <thead>
                   <tr>
-                    <td class="w-1">No</td>
-                    <td class="w-25">Institusi</td>
-                    <td class="w-50">Keterangan</td>
-                    <td class="w-24 text-center" style="color: grey"><i class="fas fa-cog"></i></td>
+                    <td class="text-center" width="5%">No</td>
+                    <td class="text-center" width="20%">Institusi</td>
+                    <td class="text-center">Keterangan</td>
+                    <td class="text-center" width="12%" style="color: grey"><i class="fas fa-cog"></i></td>
                   </tr>
                 </thead>
                 <tbody>
@@ -54,10 +54,10 @@
                   $no = 1;
                   if ($institusi) {
                     foreach ($institusi as $dataInstitusi) :
-                      ?>
+                  ?>
 
                       <tr>
-                        <td><?= $no; ?></td>
+                        <td class="text-center"><?= $no; ?></td>
                         <td><?= $dataInstitusi['institusi']; ?></td>
                         <td><?= $dataInstitusi['keterangan']; ?></td>
                         <td class="text-center"><a href="" class="btn-edit-institusi" data-id="<?= $dataInstitusi['id']; ?>" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fas fa-edit" style="color: olive"></i></a> - <a href="" class="btn-hapus-institusi" data-id="<?= $dataInstitusi['id']; ?>" data-info="<?= $dataInstitusi['institusi']; ?>" data-toggle="tooltip" data-placement="bottom" title="Hapus"> <i class="far fa-trash-alt" style="color: maroon"></i></a></td>

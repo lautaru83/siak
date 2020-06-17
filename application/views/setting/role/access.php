@@ -40,12 +40,12 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body" id="tabel-data">
-                            <table class="table table-bordered table-hover">
+                            <table class="table table-bordered table-hover table-sm">
                                 <thead>
                                     <tr>
-                                        <td class="w-1 text-center">Icon</td>
-                                        <td colspan="2" class="w-75">Menu / Submenu</td>
-                                        <td class="w-24 text-center" style="color: grey"><i class="fas fa-cog"></i></td>
+                                        <td class="text-center" width="10%">Icon</td>
+                                        <td colspan="2" class="text-center">Menu / Submenu</td>
+                                        <td class="text-center" width="12%" style="color: grey"><i class="fas fa-cog"></i></td>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -54,7 +54,7 @@
                                     if ($menu) {
                                         foreach ($menu as $dataMenu) :
                                             $idMenu = $dataMenu['id'];
-                                            ?>
+                                    ?>
 
                                             <tr class="bg-light">
                                                 <td class="text-center">
@@ -63,12 +63,12 @@
                                                 <td colspan="3"><?= $dataMenu['menu']; ?></td>
                                             </tr>
                                             <?php
-                                                    $sqlSubmenu = "select * from submenus where menu_id=$idMenu ";
-                                                    $subMenu = $this->db->query($sqlSubmenu)->result_array();
-                                                    if ($subMenu) {
-                                                        foreach ($subMenu as $dataSubmenu) :
-                                                            $idSubmenu = $dataSubmenu['id'];
-                                                            ?>
+                                            $sqlSubmenu = "select * from submenus where menu_id=$idMenu ";
+                                            $subMenu = $this->db->query($sqlSubmenu)->result_array();
+                                            if ($subMenu) {
+                                                foreach ($subMenu as $dataSubmenu) :
+                                                    $idSubmenu = $dataSubmenu['id'];
+                                            ?>
                                                     <tr>
                                                         <td class="text-center">
                                                             <i class="nav-icon <?= $dataSubmenu['icon']; ?>"></i>
@@ -81,9 +81,9 @@
                                                         </td>
                                                     </tr>
                                             <?php
-                                                        endforeach;
-                                                    }
-                                                    ?>
+                                                endforeach;
+                                            }
+                                            ?>
                                     <?php
                                         //$no++;
                                         endforeach;

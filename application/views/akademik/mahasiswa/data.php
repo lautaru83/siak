@@ -45,7 +45,7 @@
                                         <td width="10%"><?= $detailkelas['id']; ?></td>
                                         <td width="4%">Prodi</td>
                                         <td width="1%">:</td>
-                                        <td width="15%"><?= $detailkelas['prodi']; ?></td>
+                                        <td width="25%"><?= $detailkelas['prodi']; ?></td>
                                         <td width="4%">Angkatan</td>
                                         <td width="1%">:</td>
                                         <td width="10%"><?= $detailkelas['angkatan']; ?></td>
@@ -77,14 +77,14 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body" id="tabel-data">
-                            <table class="table table-bordered table-striped">
+                            <table class="table table-bordered table-striped table-sm">
                                 <thead>
                                     <tr>
-                                        <td width="8%" class="text-center">No</td>
+                                        <td width="5%" class="text-center">No</td>
                                         <td width="12%">NIM</td>
                                         <td>Nama</td>
                                         <td width="10%">Status</td>
-                                        <td width="10%" class="text-center" style="color: grey"><i class="fas fa-cog"></i></td>
+                                        <td width="12%" class="text-center" style="color: grey"><i class="fas fa-cog"></i></td>
                                     </tr>
                                 </thead>
                                 <tbody>

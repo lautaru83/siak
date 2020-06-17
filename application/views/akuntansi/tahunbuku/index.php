@@ -40,15 +40,15 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body" id="tabel-data">
-                            <table id="tabel1" class="table table-bordered table-striped">
+                            <table id="tabel1" class="table table-bordered table-striped table-sm">
                                 <thead>
                                     <tr>
-                                        <td class="w-1">Kode</td>
-                                        <td class="w-10">Awal Periode</td>
-                                        <td class="w-10">Akhir Periode</td>
-                                        <td class="w-45">Keterangan</td>
-                                        <td class="w-10">Status</td>
-                                        <td class="w-24 text-center" style="color: grey"><i class="fas fa-cog"></i></td>
+                                        <td class="text-center">Kode</td>
+                                        <td class="text-center">Awal Periode</td>
+                                        <td class="text-center">Akhir Periode</td>
+                                        <td class="text-center">Keterangan</td>
+                                        <td class="text-center">Status</td>
+                                        <td class="text-center" style="color: grey"><i class="fas fa-cog"></i></td>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -56,10 +56,10 @@
                                     //$no = 1;
                                     if ($tahunbuku) {
                                         foreach ($tahunbuku as $dataTahunbuku) :
-                                            ?>
+                                    ?>
 
                                             <tr>
-                                                <td><?= $dataTahunbuku['id']; ?></td>
+                                                <td class="text-center"><?= $dataTahunbuku['id']; ?></td>
                                                 <td><?= tanggal_indo($dataTahunbuku['awal_periode']); ?></td>
                                                 <td><?= tanggal_indo($dataTahunbuku['akhir_periode']); ?></td>
                                                 <td><?= $dataTahunbuku['keterangan']; ?></td>

@@ -152,7 +152,7 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table class="table table-bordered table-hover table-striped">
+                            <table class="table table-bordered table-hover table-striped table-sm">
                                 <thead>
                                     <tr>
                                         <td width="5%" class="text-center">No</td>
@@ -226,7 +226,7 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table class="table table-bordered table-hover table-striped">
+                            <table class="table table-bordered table-hover table-striped table-sm">
                                 <thead>
                                     <tr>
                                         <td width="5%" class="text-center">No</td>

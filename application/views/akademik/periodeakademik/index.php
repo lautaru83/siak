@@ -40,17 +40,17 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body" id="tabel-data">
-                            <table id="tabel1" class="table table-bordered table-striped">
+                            <table id="tabel1" class="table table-bordered table-striped table-sm">
                                 <thead>
                                     <tr>
                                         <td width="5%" class="text-center">No</td>
                                         <td width="8%" class="text-center">Kode</td>
-                                        <td width="12%">Tahun Akademik</td>
-                                        <td width="8%">Semester</td>
-                                        <td width="12%">Awal Semester</td>
-                                        <td width="12%">Akhir Semester</td>
-                                        <td>Keterangan</td>
-                                        <td width="10%">Status</td>
+                                        <td width="12%" class="text-center">Tahun Akademik</td>
+                                        <td width="8%" class="text-center">Semester</td>
+                                        <td width="12%" class="text-center">Awal Semester</td>
+                                        <td width="12%" class="text-center">Akhir Semester</td>
+                                        <td class="text-center">Keterangan</td>
+                                        <td width="10%" class="text-center">Status</td>
                                         <td width="8%" class="text-center" style="color: grey"><i class="fas fa-cog"></i></td>
                                     </tr>
                                 </thead>
@@ -70,7 +70,7 @@
                                                 <td><?= tanggal_indo($dataPeriodeakademik['awal_semester']); ?></td>
                                                 <td><?= tanggal_indo($dataPeriodeakademik['akhir_semester']); ?></td>
                                                 <td><?= $dataPeriodeakademik['keterangan']; ?></td>
-                                                <td><?= txt_status($dataPeriodeakademik['is_active']); ?></td>
+                                                <td class="text-center"><?= txt_status($dataPeriodeakademik['is_active']); ?></td>
                                                 <td class="text-center"><a href="" class="btn-edit-periodeakademik" data-id="<?= $idPeriode; ?>" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fas fa-edit" style="color: olive"></i></a> - <a href="" class="btn-hapus-periodeakademik" data-id="<?= $idPeriode; ?>" data-info="<?= $dataPeriodeakademik['tahunakademik']; ?>" data-toggle="tooltip" data-placement="bottom" title="Hapus"> <i class="far fa-trash-alt" style="color: maroon"></i></a></td>
                                             </tr>
                                     <?php

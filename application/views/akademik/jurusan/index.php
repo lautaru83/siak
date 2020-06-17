@@ -40,12 +40,12 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body" id="tabel-data">
-                            <table id="tabel1" class="table table-bordered table-striped">
+                            <table id="tabel1" class="table table-bordered table-striped table-sm">
                                 <thead>
                                     <tr>
                                         <td width="8%" class="text-center">Kode</td>
-                                        <td>Jurusan Pendidikan</td>
-                                        <td>Unit Usaha</td>
+                                        <td class="text-center">Jurusan Pendidikan</td>
+                                        <td class="text-center">Unit Usaha</td>
                                         <td width="10%" class="text-center" style="color: grey"><i class="fas fa-cog"></i></td>
                                     </tr>
                                 </thead>

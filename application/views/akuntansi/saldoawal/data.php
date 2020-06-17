@@ -45,8 +45,8 @@
                                 <thead>
                                     <tr class="">
                                         <!-- <td width="3%" class="text-center"></td> -->
-                                        <td colspan="6" class="text-center"><span>KODE PERKIRAAN</span></td>
-                                        <td width="15%" class="text-center"><span>SALDO AWAL (Rp)</span></td>
+                                        <td colspan="6" class="text-center"><span>Kode Perkiraan</span></td>
+                                        <td width="15%" class="text-center"><span>Saldo Awal (Rp)</span></td>
                                         <!-- <td width="3%" class="text-center"></td> -->
                                     </tr>
                                 </thead>

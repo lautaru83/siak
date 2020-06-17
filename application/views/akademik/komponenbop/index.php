@@ -40,13 +40,13 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body" id="tabel-data">
-                            <table class="table table-bordered table-hover">
+                            <table class="table table-bordered table-hover table-sm">
                                 <thead>
                                     <tr>
                                         <td width="5%" class="text-center" style="color: grey"><i class="fas fa-cog"></i></td>
-                                        <td colspan="2">Komponen BOP</td>
-                                        <td width="20%">Jenis/Posisi</td>
-                                        <td width="10%" class="text-center" style="color: grey"><i class="fas fa-cog"></i></td>
+                                        <td colspan="2" class="text-center">Komponen BOP</td>
+                                        <td width="20%" class="text-center">Jenis/Posisi</td>
+                                        <td width="12%" class="text-center" style="color: grey"><i class="fas fa-cog"></i></td>
                                     </tr>
                                 </thead>
                                 <tbody>

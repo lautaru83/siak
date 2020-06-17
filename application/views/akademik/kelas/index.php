@@ -43,14 +43,14 @@
                             <?php
                             //var_dump($kelas);
                             ?>
-                            <table class="table table-bordered table-striped">
+                            <table class="table table-bordered table-striped table-sm">
                                 <thead>
                                     <tr>
                                         <td width="5%" class="text-center">No</td>
-                                        <td width="8%">Kode</td>
-                                        <td width="20%">Prodi</td>
-                                        <td width="8%">Angkatan</td>
-                                        <td>Keterangan</td>
+                                        <td width="8%" class="text-center">Kode</td>
+                                        <td width="20%" class="text-center">Prodi</td>
+                                        <td width="8%" class="text-center">Angkatan</td>
+                                        <td class="text-center">Keterangan</td>
                                         <td width="10%" class="text-center" style="color: grey"><i class="fas fa-cog"></i></td>
                                     </tr>
                                 </thead>
@@ -64,9 +64,9 @@
 
                                             <tr>
                                                 <td class="text-center"><?= $no; ?></td>
-                                                <td><?= $dataKelas['id']; ?></td>
+                                                <td class="text-center"><?= $dataKelas['id']; ?></td>
                                                 <td><?= $dataKelas['prodi']; ?></td>
-                                                <td><?= $dataKelas['angkatan']; ?></td>
+                                                <td class="text-center"><?= $dataKelas['angkatan']; ?></td>
                                                 <td><?= $dataKelas['keterangan']; ?></td>
                                                 <td class="text-center"><a href="" class="btn-edit-kelas" data-id="<?= $idKelas; ?>" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fas fa-edit" style="color: olive"></i></a> - <a href="" class="btn-hapus-kelas" data-id="<?= $idKelas; ?>" data-info="<?= $dataKelas['keterangan']; ?>" data-toggle="tooltip" data-placement="bottom" title="Hapus"> <i class="far fa-trash-alt" style="color: maroon"></i></a></td>
                                             </tr>

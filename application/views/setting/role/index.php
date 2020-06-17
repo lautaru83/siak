@@ -39,13 +39,13 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body" id="tabel-data">
-                            <table id="tabel1" class="table table-bordered table-striped">
+                            <table id="tabel1" class="table table-bordered table-striped table-sm">
                                 <thead>
                                     <tr>
-                                        <td class="w-1">No</td>
-                                        <td class="w-25">Role</td>
-                                        <td class="w-50">Keterangan</td>
-                                        <td class="w-24 text-center" style="color: grey"><i class="fas fa-cog"></i></td>
+                                        <td class="text-center" width="5%">No</td>
+                                        <td class="text-center" width="25%">Role</td>
+                                        <td class="text-center">Keterangan</td>
+                                        <td class="text-center" width="12%" style="color: grey"><i class="fas fa-cog"></i></td>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -54,10 +54,10 @@
                                     if ($role) {
                                         foreach ($role as $dataRole) :
                                             $idrole = $dataRole['id'];
-                                            ?>
+                                    ?>
 
                                             <tr>
-                                                <td><?= $no; ?></td>
+                                                <td class="text-center"><?= $no; ?></td>
                                                 <td><?= $dataRole['role']; ?></td>
                                                 <td><?= $dataRole['keterangan']; ?></td>
                                                 <td class="text-center">

@@ -41,14 +41,14 @@
                         <!-- /.card-header -->
                         <!-- <div class="card-body" id="tabel-data"> -->
                         <div class="card-body" id="tabel-data">
-                            <table class="table table-bordered table-striped">
+                            <table class="table table-bordered table-striped table-sm">
                                 <thead>
                                     <tr>
                                         <td width="5%" class="text-center">No</td>
-                                        <td class="w-10">Tahun Anggaran</td>
-                                        <td class="w-35">Keterangan</td>
-                                        <td class="w-10">Status</td>
-                                        <td class="text-center" style="color: grey"><i class="fas fa-cog"></i></td>
+                                        <td class="text-center">Tahun Anggaran</td>
+                                        <td class="text-center">Keterangan</td>
+                                        <td class="text-center">Status</td>
+                                        <td class="text-center" width="12%" style="color: grey"><i class="fas fa-cog"></i></td>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -63,7 +63,7 @@
                                                 <td class="text-center"><?= $no; ?></td>
                                                 <td><?= $dataTahunanggaran['tahunanggaran']; ?></td>
                                                 <td><?= $dataTahunanggaran['keterangan']; ?></td>
-                                                <td><?= txt_status($dataTahunanggaran['is_active']); ?>
+                                                <td class="text-center"><?= txt_status($dataTahunanggaran['is_active']); ?>
                                                 </td>
                                                 <td class="text-center">
                                                     <a href="

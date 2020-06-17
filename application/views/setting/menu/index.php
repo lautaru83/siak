@@ -39,14 +39,14 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body" id="tabel-data">
-                            <table id="tabel1" class="table table-bordered table-striped">
+                            <table id="tabel1" class="table table-bordered table-striped table-sm">
                                 <thead>
                                     <tr>
-                                        <td class="w-1">No</td>
-                                        <td class="w-25">Menu</td>
-                                        <td class="w-15">Icon</td>
-                                        <td class="w-30">Keterangan</td>
-                                        <td class="w-24 text-center" style="color: grey"><i class="fas fa-cog"></i></td>
+                                        <td class="text-center" width="5%">No</td>
+                                        <td class="text-center" width="20%">Menu</td>
+                                        <td class="text-center" width="20%">Icon</td>
+                                        <td class="text-center">Keterangan</td>
+                                        <td class="text-center" width="12%" style="color: grey"><i class="fas fa-cog"></i></td>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -54,10 +54,10 @@
                                     $no = 1;
                                     if ($menu) {
                                         foreach ($menu as $dataMenu) :
-                                            ?>
+                                    ?>
 
                                             <tr>
-                                                <td><?= $no; ?></td>
+                                                <td class="text-center"><?= $no; ?></td>
                                                 <td><?= $dataMenu['menu']; ?></td>
                                                 <td><?= $dataMenu['icon']; ?></td>
                                                 <td><?= $dataMenu['keterangan']; ?></td>

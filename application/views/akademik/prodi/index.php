@@ -40,15 +40,15 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body" id="tabel-data">
-                            <table id="tabel1" class="table table-bordered table-striped">
+                            <table id="tabel1" class="table table-bordered table-striped table-sm">
                                 <thead>
                                     <tr>
                                         <td width="8%" class="text-center">No</td>
-                                        <td>Program Pendidikan</td>
-                                        <td>Jenjang</td>
-                                        <td>Jurusan</td>
-                                        <td>Jalur</td>
-                                        <td width="10%" class="text-center" style="color: grey"><i class="fas fa-cog"></i></td>
+                                        <td class="text-center">Program Pendidikan</td>
+                                        <td class="text-center">Jenjang</td>
+                                        <td class="text-center">Jurusan</td>
+                                        <td class="text-center">Jalur</td>
+                                        <td width="12%" class="text-center" style="color: grey"><i class="fas fa-cog"></i></td>
                                     </tr>
                                 </thead>
                                 <tbody>

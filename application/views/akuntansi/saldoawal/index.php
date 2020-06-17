@@ -42,14 +42,14 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body" id="tabel-data">
-                            <table id="tabel1" class="table table-bordered table-striped">
+                            <table id="tabel1" class="table table-bordered table-striped table-sm">
                                 <thead>
                                     <tr>
-                                        <td width="8%">Kode</td>
-                                        <td width="15%">Awal Periode</td>
-                                        <td width="15%">Akhir Periode</td>
-                                        <td width="42%">Keterangan</td>
-                                        <td width="10%">Status</td>
+                                        <td width="8%" class="text-center">Kode</td>
+                                        <td width="15%" class="text-center">Awal Periode</td>
+                                        <td width="15%" class="text-center">Akhir Periode</td>
+                                        <td width="42%" class="text-center">Keterangan</td>
+                                        <td width="10%" class="text-center">Status</td>
                                         <td width="10%" class="text-center" style="color: grey"><i class="fas fa-cog"></i></td>
                                     </tr>
                                 </thead>
@@ -62,11 +62,11 @@
                                     ?>
 
                                             <tr>
-                                                <td><?= $dataTahunbuku['id']; ?></td>
+                                                <td class="text-center"><?= $dataTahunbuku['id']; ?></td>
                                                 <td><?= tanggal_indo($dataTahunbuku['awal_periode']); ?></td>
                                                 <td><?= tanggal_indo($dataTahunbuku['akhir_periode']); ?></td>
                                                 <td><?= $dataTahunbuku['keterangan']; ?></td>
-                                                <td><?= txt_status($dataTahunbuku['is_active']); ?></td>
+                                                <td class="text-center"><?= txt_status($dataTahunbuku['is_active']); ?></td>
                                                 <td class="text-center">
                                                     <a href="<?= site_url('akuntansi/saldoawal/saldo/'); ?><?= $idtahun; ?>" class="btn-pilih-tahunbuku" data-id="<?= $dataTahunbuku['id']; ?>" data-toggle="tooltip" data-placement="bottom" title="Daftar Saldo"><i class="far fa-list-alt" style="color: teal"></i></a>
                                                 </td>
