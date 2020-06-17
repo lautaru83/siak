@@ -1,5 +1,5 @@
 <!-- Modal BOP -->
-<div class="modal fade" id="modal-bop" tabindex="-1">
+<div class="modal fade" id="modal-aturbop" tabindex="-1">
     <div class="vertical-alignment-helper">
         <div class="modal-dialog modal-dialog-default">
             <div class="modal-content card">
@@ -9,7 +9,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form id="form-bop" class="form-horizontal">
+                <form id="form-aturbop" class="form-horizontal">
                     <div class="modal-body card-body">
                         <div class="form-group">
                             <label for="kode" class="control-label">
@@ -48,10 +48,10 @@
                     </div>
                     <div class="modal-footer card-footer">
                         <div>
-                            <button id="btn-ubah-bop" type="submit" class="btn btn-primary"><i class="far fa-edit"></i> Ubah</button>
+                            <button id="btn-ubah-aturbop" type="submit" class="btn btn-primary"><i class="far fa-edit"></i> Ubah</button>
                         </div>
                         <div>
-                            <button id="btn-simpan-bop" type="submit" class="btn btn-success"><i class="far fa-check-square"></i> Simpan</button>
+                            <button id="btn-simpan-aturbop" type="submit" class="btn btn-success"><i class="far fa-check-square"></i> Simpan</button>
                         </div>
                     </div>
                 </form>

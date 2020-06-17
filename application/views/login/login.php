@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-	<title>Login V1</title>
+	<title>SIAK V 2.0 Paguwarmas</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!--===============================================================================================-->
@@ -40,7 +40,7 @@
 					<div class="row">
 						<div class="col">
 							<span class="login100-form-title2">
-								APP SIAK SERULINGMAS LOGIN
+								APP SIAK PAGUWARMAS LOGIN
 							</span>
 						</div>
 					</div>

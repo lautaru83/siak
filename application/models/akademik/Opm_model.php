@@ -21,12 +21,13 @@ class Opm_model extends CI_Model
     }
     public function daftarakunopm($kelas_id, $perak_id, $jenis)
     {
+        $institusi_id = $this->session->userdata['idInstitusi'];
         if ($jenis == "R") {
-            return $this->db2->query("SELECT a.idpembayaran AS idpembayaran,a.a6level_id AS a6level_id, b.level6 AS level6 FROM siak_akademik.view_bops a JOIN siak_akuntansi.view_kodeperkiraans b ON b.a6level_id = a.a6level_id WHERE a.kelas_id = '$kelas_id' AND a.perak_id='$perak_id' AND b.a3level_id IN('111','211','212') ORDER BY a.idpembayaran, a.a6level_id ASC")->result_array();
+            return $this->db2->query("SELECT a.idpembayaran AS idpembayaran,a.a6level_id AS a6level_id, b.level6 AS level6 FROM siak_akademik.view_bops a JOIN siak_akuntansi.view_kodeperkiraans b ON b.a6level_id = a.a6level_id WHERE a.kelas_id = '$kelas_id' AND a.institusi_id=$institusi_id AND a.perak_id='$perak_id' AND b.a3level_id IN('111','211','212') ORDER BY a.idpembayaran, a.a6level_id ASC")->result_array();
         } elseif ($jenis == "P") {
-            return $this->db2->query("SELECT a.idpembayaran AS idpembayaran,a.a6level_id AS a6level_id, b.level6 AS level6 FROM siak_akademik.view_bops a JOIN siak_akuntansi.view_kodeperkiraans b ON b.a6level_id = a.a6level_id WHERE a.kelas_id = '$kelas_id' AND a.perak_id='$perak_id' AND b.a2level_id IN('110','210') ORDER BY a.idpembayaran, a.a6level_id ASC")->result_array();
+            return $this->db2->query("SELECT a.idpembayaran AS idpembayaran,a.a6level_id AS a6level_id, b.level6 AS level6 FROM siak_akademik.view_bops a JOIN siak_akuntansi.view_kodeperkiraans b ON b.a6level_id = a.a6level_id WHERE a.kelas_id = '$kelas_id' AND a.institusi_id=$institusi_id AND a.perak_id='$perak_id' AND b.a2level_id IN('110','210') ORDER BY a.idpembayaran, a.a6level_id ASC")->result_array();
         } elseif ($jenis == "D") {
-            return $this->db2->query("SELECT a.idpembayaran AS idpembayaran,a.a6level_id AS a6level_id, b.level6 AS level6 FROM siak_akademik.view_bops a JOIN siak_akuntansi.view_kodeperkiraans b ON b.a6level_id = a.a6level_id WHERE a.kelas_id = '$kelas_id' AND a.perak_id='$perak_id' AND b.a3level_id IN('111','211','411') ORDER BY a.idpembayaran, a.a6level_id ASC")->result_array();
+            return $this->db2->query("SELECT a.idpembayaran AS idpembayaran,a.a6level_id AS a6level_id, b.level6 AS level6 FROM siak_akademik.view_bops a JOIN siak_akuntansi.view_kodeperkiraans b ON b.a6level_id = a.a6level_id WHERE a.kelas_id = '$kelas_id' AND a.institusi_id=$institusi_id AND a.perak_id='$perak_id' AND b.a3level_id IN('111','211','411') ORDER BY a.idpembayaran, a.a6level_id ASC")->result_array();
         } else {
             return null;
         }
@@ -115,7 +116,7 @@ class Opm_model extends CI_Model
     public function riwayatpembayaran($mahasiswa_id)
     {
         $perak_id = $this->session->userdata['idPerak'];
-        return $this->db3->query("SELECT id,tanggal_transaksi,nobukti,notran,keterangan,total_transaksi from operasionals where perak_id='$perak_id' and mahasiswa_id='$mahasiswa_id'")->result_array();
+        return $this->db3->query("SELECT id,tanggal_transaksi,nobukti,notran,keterangan,total_transaksi from operasionals where perak_id='$perak_id' and mahasiswa_id='$mahasiswa_id' and is_valid IN('1','2','3')")->result_array();
     }
 
     public function cek_akunkewajiban($a6level_id)

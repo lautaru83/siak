@@ -45,8 +45,8 @@
                             <table class="table table-bordered table-hover table-sm">
                                 <thead>
                                     <tr class="">
-                                        <!-- <td width="3%" class="text-center"></td> -->
-                                        <td colspan="6" class="text-center">KODE PERKIRAAN</td>
+                                        <td class="text-center"></td>
+                                        <td colspan="5" class="text-center">KODE PERKIRAAN</td>
                                         <td width="15%" class="text-center">POSISI</td>
                                         <!-- <td width="3%" class="text-center"></td> -->
                                     </tr>
@@ -59,7 +59,7 @@
                                     ?>
                                         <tr>
                                             <!-- <td width="3%" class="text-center"></td> -->
-                                            <td width="8%" class="font-weight-bolder "><?= $dataLevel1['id']; ?>-00-00-00</td>
+                                            <td width="10%" class="font-weight-bolder "><?= $dataLevel1['id']; ?>-00-00-00</td>
                                             <td colspan="6" class="font-weight-bolder text-uppercase text-md"><?= $dataLevel1['level1']; ?></td>
                                             <!-- <td width="10%" class="text-center">Posisi</td> -->
                                             <!-- <td width="3%" class="text-center"></td> -->
@@ -71,7 +71,7 @@
                                         ?>
                                             <tr>
                                                 <!-- <td width="3%" class="text-center"></td> -->
-                                                <td width="8%" class="font-weight-normal "><?= $dataLevel2['id']; ?>-00-00-00</td>
+                                                <td width="10%" class="font-weight-normal "><?= $dataLevel2['id']; ?>-00-00-00</td>
                                                 <td colspan="6" class="font-weight-normal text-uppercase text-md"><?= $dataLevel2['level2']; ?></td>
                                                 <!-- <td width="10%" class="text-center">Posisi</td> -->
                                                 <!-- <td width="3%" class="text-center"></td> -->
@@ -83,7 +83,7 @@
                                             ?>
                                                 <tr>
                                                     <!-- <td width="3%" class="text-center"></td> -->
-                                                    <td width="8%" class="font-weight-normal "><?= $dataLevel3['id']; ?>-00-00-00</td>
+                                                    <td width="10%" class="font-weight-normal "><?= $dataLevel3['id']; ?>-00-00-00</td>
                                                     <td colspan="6" class="font-weight-normal text-md"><?= $dataLevel3['level3']; ?></td>
                                                     <!-- <td width="10%" class="text-center">Posisi</td> -->
                                                     <!-- <td width="3%" class="text-center"></td> -->
@@ -96,7 +96,7 @@
                                                     <tr>
                                                         <!-- <td width="3%" class="text-center"></td> -->
                                                         <td></td>
-                                                        <td width="8%"><?= $dataLevel4['id']; ?>-00-00</td>
+                                                        <td width="10%"><?= $dataLevel4['id']; ?>-00-00</td>
                                                         <td colspan="5" class="text-md"><?= $dataLevel4['level4']; ?></td>
                                                         <!-- <td width="10%" class="text-center">Posisi</td> -->
                                                         <!-- <td width="3%" class="text-center"></td> -->
@@ -110,7 +110,7 @@
                                                             <!-- <td width="3%" class="text-center"></td> -->
                                                             <td></td>
                                                             <td></td>
-                                                            <td width="8%"><?= $dataLevel5['id']; ?>-00</td>
+                                                            <td width="10%"><?= $dataLevel5['id']; ?>-00</td>
                                                             <td colspan="4" class="text-md"><?= $dataLevel5['level5']; ?></td>
                                                             <!-- <td width="10%" class="text-center">Posisi</td> -->
                                                             <!-- <td width="3%" class="text-center"></td> -->
@@ -125,7 +125,7 @@
                                                                 <td></td>
                                                                 <td></td>
                                                                 <td></td>
-                                                                <td width="8%"><?= $dataLevel6['id']; ?></td>
+                                                                <td width="10%"><?= $dataLevel6['id']; ?></td>
                                                                 <td colspan="2" class="text-md"><?= $dataLevel6['level6']; ?></td>
                                                                 <td class="text-center"><?= posisi_akun($dataLevel6['posisi']); ?></td>
                                                                 <!-- <td width="3%" class="text-center"></td> -->

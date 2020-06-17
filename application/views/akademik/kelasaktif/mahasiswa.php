@@ -95,7 +95,7 @@
                         </div>
                         <!-- /.card header-->
                         <div class="card-body" id="tabel-data">
-                            <table class="table table-bordered table-striped">
+                            <table class="table table-bordered table-striped table-sm">
                                 <thead>
                                     <tr>
                                         <td width="5%" class="text-center">No</td>

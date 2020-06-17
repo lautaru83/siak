@@ -1,34 +1,33 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Bop extends CI_Controller
+class Aturbop extends CI_Controller
 {
     public function __construct()
     {
         parent::__construct();
         is_logged_in();
         $this->db3 = $this->load->database('akademik', TRUE);
-        $this->load->model(array('akademik/Komponenbop_model' => 'Komponenbop_model', 'akademik/Bop_model' => 'Bop_model', 'akademik/Kelasaktif_model' => 'Kelasaktif_model'));
+        $this->load->model(array('akademik/Komponenbop_model' => 'Komponenbop_model', 'akademik/Bop_model' => 'Bop_model', 'akademik/Aturbop_model' => 'Aturbop_model', 'akademik/Kelasaktif_model' => 'Kelasaktif_model'));
     }
     public function index()
     {
         $data['kontenmenu'] = "Pengaturan";
         $data['kontensubmenu'] = "BOP";
-        $data['bop'] = $this->Bop_model->ambil_data();
-        $data['bop2'] = $this->Bop_model->ambil_datafull();
+        $data['bop'] = $this->Aturbop_model->ambil_data();
         $data['kelasaktif'] = $this->Kelasaktif_model->detailkelas_data_fk();
         //$data['akun'] = $this->Kodeperkiraan_model->akun6Institusi();
-        $this->template->display('akademik/bop/index', $data);
+        $this->template->display('akademik/aturbop/index', $data);
     }
     public function data($id)
     {
         $data['kontenmenu'] = "Pengaturan";
         $data['kontensubmenu'] = "Detail BOP";
         $data['bop'] = $this->Bop_model->ambil_data_id($id);
-        $data['bop2'] = $this->Bop_model->ambil_datafull_id($id);
         $data['detail'] = $this->Bop_model->ambil_detail_data($id);
         $data['komponen'] = $this->Komponenbop_model->data_fk();
-        $this->template->display('akademik/bop/data', $data);
+
+        $this->template->display('akademik/aturbop/data', $data);
     }
     public function simpan()
     {
@@ -37,7 +36,7 @@ class Bop extends CI_Controller
             $data = array(
                 'status' => 'gagal',
                 'kode_error' => form_error('kode'),
-                'kelas_error' => form_error('detailkelas_id')
+                'keterangan_error' => form_error('keterangan')
             );
         } else {
             $this->Bop_model->simpan();
@@ -72,7 +71,7 @@ class Bop extends CI_Controller
                 'status' => 'sukses',
                 'id' => $hasil['id'],
                 'kode' => $hasil['kode'],
-                'detailkelas_id' => $hasil['detailkelas_id']
+                'keterangan' => $hasil['keterangan']
             );
         } else {
             $data = array(
@@ -89,7 +88,7 @@ class Bop extends CI_Controller
             $data = array(
                 'status' => 'gagal',
                 'kode_error' => form_error('kode'),
-                'kelas_error' => form_error('detailkelas_id')
+                'keterangan_error' => form_error('keterangan')
             );
         } else {
             $this->Bop_model->ubah($id);
@@ -183,8 +182,7 @@ class Bop extends CI_Controller
     private function _validate()
     {
         $this->form_validation->set_rules('kode', 'Kode', 'required|trim');
-        //$this->form_validation->set_rules('keterangan', 'Jenis', 'required|trim');
-        $this->form_validation->set_rules('detailkelas_id', 'Kelas', 'required|trim');
+        $this->form_validation->set_rules('keterangan', 'Jenis', 'required|trim');
     }
     private function _detailvalidate()
     {

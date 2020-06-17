@@ -10,11 +10,16 @@ class Kelasaktif_model extends CI_Model
     public function ambil_data()
     {
         $perak_id = $this->session->userdata('idPerak');
-        return $this->db3->query("SELECT b.id AS id, b.bop_id AS bop_id,e.kode as kode_bop, b.perak_id AS perak_id, b.kelas_id AS kelas_id, a.keterangan AS periodeakademik, c.keterangan AS kelas, ( SELECT count(mahasiswa_id) FROM mahasiswaactives d WHERE b.id = d.detailkelas_id ) AS jml_mhs, e.kode AS kode_bop FROM periodeakademiks AS a INNER JOIN detailkelases AS b ON a.id = b.perak_id INNER JOIN kelases AS c ON c.id = b.kelas_id INNER JOIN bops AS e ON e.id = b.bop_id WHERE b.perak_id = '$perak_id' ORDER BY a.id DESC")->result_array();
+        return $this->db3->query("SELECT b.id AS id, b.perak_id AS perak_id, b.kelas_id AS kelas_id, a.keterangan AS periodeakademik, c.keterangan AS kelas, ( SELECT count(mahasiswa_id) FROM mahasiswaactives d WHERE b.id = d.detailkelas_id ) AS jml_mhs FROM periodeakademiks AS a INNER JOIN detailkelases AS b ON a.id = b.perak_id INNER JOIN kelases AS c ON c.id = b.kelas_id WHERE b.perak_id = '$perak_id' ORDER BY a.id DESC")->result_array();
     }
     public function detail_data_id($id)
     {
         return $this->db3->query("SELECT b.id AS id, b.perak_id AS perak_id, b.kelas_id AS kelas_id, a.keterangan AS periodeakademik, c.keterangan AS kelas FROM periodeakademiks AS a INNER JOIN detailkelases AS b ON a.id = b.perak_id INNER JOIN kelases AS c ON c.id = b.kelas_id where b.id=$id")->row_array();
+    }
+    public function detailkelas_data_fk()
+    {
+        $perak_id = $this->session->userdata('idPerak');
+        return $this->db3->query("SELECT a.id AS kelas_id, b.id AS detailkelas_id, a.keterangan AS keterangan, b.perak_id AS perak_id FROM kelases AS a INNER JOIN detailkelases AS b ON a.id = b.kelas_id where perak_id='$perak_id'")->result_array();
     }
     public function mahasiswa_active_id($id)
     {
@@ -59,15 +64,13 @@ class Kelasaktif_model extends CI_Model
     {
         $perak_id = $this->input->post('perak_id');
         $kelas_id = $this->input->post('kelas_id');
-        $bop_id = $this->input->post('bop_id');
         $data = array(
             'perak_id' => $perak_id,
-            'bop_id' => $bop_id,
             'kelas_id' => $kelas_id
         );
         $this->db3->insert('detailkelases', $data);
         $log_type = "tambah";
-        $log_desc = "tambah detail kelas - $perak_id - $bop_id - $kelas_id";
+        $log_desc = "tambah detail kelas - $perak_id - $kelas_id";
         userLog($log_type, $log_desc);
     }
     public function ubah($id)

@@ -57,10 +57,10 @@
                         <div class="card-body">
 
                             <?php
-                            if ($idTransaksi) {
-                                var_dump($total);
-                                echo input_uang($total['debet']);
-                            }
+                            // if ($idTransaksi) {
+                            //     var_dump($total);
+                            //     echo input_uang($total['debet']);
+                            // }
                             ?>
                             <div class="row">
                                 <?php

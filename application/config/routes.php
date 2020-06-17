@@ -95,6 +95,7 @@ $route['detailkelas'] = 'akademik/kelas/detail';
 $route['tahunajaran'] = 'akademik/tahunajaran';
 $route['komponenbop'] = 'akademik/komponenbop';
 $route['bop'] = 'akademik/bop';
+// $route['aturbop'] = 'akademik/aturbop';
 $route['opm'] = 'akademik/opm';
 $route['operasional'] = 'akademik/operasional';
 $route['opm/data/(:any)'] = 'akademik/opm/data/$1';

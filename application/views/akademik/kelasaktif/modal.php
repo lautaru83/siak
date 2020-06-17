@@ -10,16 +10,6 @@
                 </div>
                 <form id="form-kelasaktif" class="form-horizontal">
                     <div class="modal-body card-body">
-                        <!-- <div class="form-group">
-                            <label for="id" class="control-label">
-                                Kode Kelas
-                            </label>
-                            <div>
-                                <input type="hidden" id="idubah" name="idubah">
-                                <input type="text" name="id" class="form-control" id="id" autocomplete="off" placeholder="Kode kelas">
-                                <span id="kode_error" class="text-danger"></span>
-                            </div>
-                        </div> -->
                         <div class="form-group">
                             <label for="prodi_id" class="control-label">Tahun Akademik</label>
                             <div>
@@ -51,24 +41,15 @@
                                 <span id="kelas_error" class="text-danger"></span>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label for="bop_id" class="control-label">Kode BOP</label>
                             <div>
                                 <select id="bop_id" name="bop_id" class="form-control">
                                     <option value="">- Pilih -</option>
-                                    <?php
-                                    if ($bop) {
-                                        foreach ($bop as $dataBop) :
-                                    ?>
-                                            <option value="<?= $dataBop['id']; ?>"><?= $dataBop['kode']; ?> <?= $dataBop['keterangan']; ?></option>
-                                    <?php
-                                        endforeach;
-                                    }
-                                    ?>
                                 </select>
                                 <span id="bop_error" class="text-danger"></span>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
 
                     <div class="modal-footer card-footer">

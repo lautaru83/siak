@@ -40,12 +40,12 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body" id="tabel-data">
-                            <table class="table table-bordered table-hover">
+                            <table class="table table-bordered table-hover table-sm">
                                 <thead>
                                     <tr>
                                         <td width="5%" class="text-center">No</td>
                                         <td width="20%">Kode Pembayaran</td>
-                                        <td>Keterangan</td>
+                                        <td>Kelas Aktif</td>
                                         <td width="10%" class="text-center" style="color: grey"><i class="fas fa-cog"></i></td>
                                     </tr>
                                 </thead>
@@ -54,8 +54,8 @@
                                     $no = 1;
                                     //$bop = "";
                                     //var_dump($kewajiban);
-                                    if ($bop) {
-                                        foreach ($bop as $dataBop) :
+                                    if ($bop2) {
+                                        foreach ($bop2 as $dataBop) :
                                             $idBop = $dataBop['id'];
                                     ?>
                                             <tr class="bg-light">

@@ -45,10 +45,10 @@
                             $idDetail = "";
                             $kode = "";
                             $keterangan = "";
-                            if ($bop2) {
-                                $idDetail = $bop2['id'];
-                                $kode = $bop2['kode'];
-                                $keterangan = $bop2['keterangan'];
+                            if ($bop) {
+                                $idDetail = $bop['id'];
+                                $kode = $bop['kode'];
+                                $keterangan = $bop['keterangan'];
                             }
                             $data['bop_id'] = $idDetail;
                             ?>
@@ -63,7 +63,7 @@
                             </div>
                             <div class="row">
                                 <div class="col col-md-2">
-                                    <span class="float-left">Kelas</span>
+                                    <span class="float-left">Keterangan</span>
                                     <span class="float-right">:</span>
                                 </div>
                                 <div class="col col-md-10">
@@ -100,7 +100,7 @@
                             <?php
                             //var_dump($komponen);
                             ?>
-                            <table class="table table-bordered table-hover table-sm">
+                            <table class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
                                         <td width="5%" class="text-center">No</td>

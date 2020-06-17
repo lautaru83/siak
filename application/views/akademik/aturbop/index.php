@@ -28,7 +28,7 @@
                         <div class="card-header bg-gradient-light">
                             <div>
                                 <h4 class="card-title">
-                                    <a href="#" class="text-reset" id="btn-tambah-kelasaktif" data-aksi="tambah"><i class="fas fa-file-alt" style="color: teal"></i> Tambah data </a>
+                                    <a href="#" class="text-reset" id="btn-tambah-aturbop" data-aksi="tambah" data-toggle="tooltip" title="Tambah BOP"><i class="fas fa-file-alt" style="color: teal"></i> Tambah data </a>
                                 </h4>
                             </div>
                             <div class="float-right">
@@ -40,44 +40,44 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body" id="tabel-data">
-                            <?php
-                            // var_dump($periode);
-                            // echo "<br>";
-                            // echo $periode['id'];
-                            ?>
-                            <table class="table table-bordered table-striped table-sm">
+                            <table class="table table-bordered table-hover table-sm">
                                 <thead>
                                     <tr>
                                         <td width="5%" class="text-center">No</td>
-                                        <td width="15%">Periode Akademik</td>
-                                        <td width="">Kelas</td>
-                                        <td width="10%" class="text-center">Mahasiswa</td>
-                                        <td width="12%" class="text-center" style="color: grey"><i class="fas fa-cog"></i></td>
+                                        <td width="20%">Kode Pembayaran</td>
+                                        <td>Kelas</td>
+                                        <td width="10%" class="text-center" style="color: grey"><i class="fas fa-cog"></i></td>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
                                     $no = 1;
-                                    if ($kelasaktif) {
-                                        foreach ($kelasaktif as $dataKelasaktif) :
-                                            $idKelasaktif = $dataKelasaktif['id'];
+                                    //$bop = "";
+                                    //var_dump($kewajiban);
+                                    if ($bop) {
+                                        foreach ($bop as $dataBop) :
+                                            $idBop = $dataBop['id'];
                                     ?>
-                                            <tr>
-                                                <td class="text-center"><?= $no; ?></td>
-                                                <td><?= $dataKelasaktif['perak_id']; ?></td>
-                                                <td><?= $dataKelasaktif['kelas']; ?></td>
-                                                <td class="text-center"><?= $dataKelasaktif['jml_mhs']; ?></td>
-                                                <td class="text-center"><a href="<?= base_url('akademik/kelasaktif/mahasiswa/' . $idKelasaktif); ?>" class="btn-mahasiswa-aktif" data-id="<?= $idKelasaktif; ?>" data-toggle="tooltip" data-placement="bottom" title="Mahasiswa Aktif"><i class="fas fa-list-alt" style="color: olive"></i></a> - <a href="" class="btn-hapus-kelasaktif" data-id="<?= $idKelasaktif; ?>" data-info="<?= $dataKelasaktif['kelas']; ?>" data-toggle="tooltip" data-placement="bottom" title="Hapus"> <i class="far fa-trash-alt" style="color: maroon"></i></a></td>
+                                            <tr class="bg-light">
+                                                <td class="text-center">
+                                                    <?= $no; ?>
+                                                </td>
+                                                <td><?= $dataBop['kode']; ?></td>
+                                                <td><?= $dataBop['keterangan']; ?></td>
+                                                <td class="text-center">
+                                                    <a href="<?= site_url('akademik/bop/data/' . $idBop); ?>" class="btn-detail-aturbop" data-toggle="tooltip" data-placement="bottom" title="Detail BOP <?= $dataBop['kode']; ?>"><i class="far fa-list-alt" style="color: teal"></i></a> - <a href="" class="btn-edit-aturbop" data-id="<?= $idBop; ?>" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fas fa-edit" style="color: olive"></i></a> - <a href="" class="btn-hapus-aturbop" data-id="<?= $idBop; ?>" data-info="<?= $dataBop['kode']; ?>" data-toggle="tooltip" data-placement="bottom" title="Hapus"> <i class="far fa-trash-alt" style="color: maroon"></i></a></td>
                                             </tr>
                                         <?php
                                             $no++;
                                         endforeach;
                                     } else {
                                         ?>
-
                                         <tr>
-                                            <td colspan="5" class="text-center">Data tidak ditemukan</td>
+                                            <td colspan="4" class="text-center">
+                                                Data tidak ditemukan
+                                            </td>
                                         </tr>
+
                                     <?php
                                     }
                                     ?>
@@ -89,14 +89,13 @@
                         <!-- /.card-body -->
                     </div>
                     <!-- /.card -->
-
                 </div>
                 <!-- /.col -->
             </div>
             <!-- /.row -->
         </div>
         <!-- /.container-fluid -->
-        <?php $this->load->view('akademik/kelasaktif/modal');
+        <?php $this->load->view('akademik/aturbop/modal');
         ?>
     </section>
     <!-- /.content -->

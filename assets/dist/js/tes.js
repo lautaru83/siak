@@ -912,14 +912,14 @@ $(document).ready(function () {
     $('#btn-simpan-kelasaktif').on('click', function (e) {
         e.preventDefault();
         // const id = $('[name="id"]').val();
-        const bop_id = $('[name="bop_id"]').val();
+        // const bop_id = $('[name="bop_id"]').val();
         const perak_id = $('[name="perak_id"]').val();
         const kelas_id = $('[name="kelas_id"]').val();
         $.ajax({
             method: "POST",
             url: base_url + "akademik/kelasaktif/simpan",
             data: {
-                bop_id: bop_id,
+                // bop_id: bop_id,
                 perak_id: perak_id,
                 kelas_id: kelas_id
             },
@@ -943,11 +943,11 @@ $(document).ready(function () {
                     } else {
                         $('#kelas_error').html('');
                     }
-                    if (data.bop_error != '') {
-                        $('#bop_error').html(data.bop_error);
-                    } else {
-                        $('#bop_error').html('');
-                    }
+                    // if (data.bop_error != '') {
+                    //     $('#bop_error').html(data.bop_error);
+                    // } else {
+                    //     $('#bop_error').html('');
+                    // }
                     $('#kelas_id').trigger('focus');
                 } else {
                     Toast.fire({
@@ -1019,7 +1019,7 @@ $(document).ready(function () {
             success: function (data) {
                 $('[name="idubah"]').val(data.id);
                 $('[name="kelas_id"]').val(data.kelas_id);
-                $('[name="bop_id"]').val(data.bop_id);
+                // $('[name="bop_id"]').val(data.bop_id);
                 $('#kelas_id').attr('disabled', 'disabled');
                 $('#modal-kelasaktif').modal('show');
                 $('#kelas_id').trigger('focus');
@@ -1036,7 +1036,7 @@ $(document).ready(function () {
         const idubah = $('[name="idubah"]').val();
         const kelas_id = $('[name="kelas_id"]').val();
         const perak_id = $('[name="perak_id"]').val();
-        const bop_id = $('[name="bop_id"]').val();
+        // const bop_id = $('[name="bop_id"]').val();
         $.ajax({
             type: "POST",
             url: base_url + "akademik/kelasaktif/ubah",
@@ -1062,12 +1062,12 @@ $(document).ready(function () {
                     } else {
                         $('#kelas_error').html('');
                     }
-                    if (data.bop_error != '') {
-                        $('#bop_error').html(data.bop_error);
+                    // if (data.bop_error != '') {
+                    //     $('#bop_error').html(data.bop_error);
 
-                    } else {
-                        $('#bop_error').html('');
-                    }
+                    // } else {
+                    //     $('#bop_error').html('');
+                    // }
                     $('#kelas_id').trigger('focus');
                 } else {
                     Toast.fire({
@@ -1480,13 +1480,13 @@ $(document).ready(function () {
     $('#btn-simpan-bop').on('click', function (e) {
         e.preventDefault();
         const kode = $('[name="kode"]').val();
-        const keterangan = $('[name="keterangan"]').val();
+        const detailkelas_id = $('[name="detailkelas_id"]').val();
         $.ajax({
             method: "POST",
             url: base_url + "akademik/bop/simpan",
             data: {
                 kode: kode,
-                keterangan: keterangan
+                detailkelas_id: detailkelas_id
             },
             dataType: "JSON",
             beforeSend: function () {
@@ -1503,10 +1503,10 @@ $(document).ready(function () {
                     } else {
                         $('#kode_error').html('');
                     }
-                    if (data.keterangan_error != '') {
-                        $('#keterangan_error').html(data.keterangan_error);
+                    if (data.kelas_error != '') {
+                        $('#kelas_error').html(data.kelas_error);
                     } else {
-                        $('#keterangan_error').html('');
+                        $('#kelas_error').html('');
                     }
                     $('#kode').trigger('focus');
                 } else {
@@ -1579,7 +1579,7 @@ $(document).ready(function () {
             success: function (data) {
                 $('[name="idubah"]').val(data.id);
                 $('[name="kode"]').val(data.kode);
-                $('[name="keterangan"]').val(data.keterangan);
+                $('[name="detailkelas_id"]').val(data.detailkelas_id);
                 $('#modal-bop').modal('show');
                 $('#kode').trigger('focus');
             },
@@ -1594,14 +1594,14 @@ $(document).ready(function () {
         e.preventDefault();
         const idubah = $('[name="idubah"]').val();
         const kode = $('[name="kode"]').val();
-        const keterangan = $('[name="keterangan"]').val();
+        const detailkelas_id = $('[name="detailkelas_id"]').val();
         $.ajax({
             type: "POST",
             url: base_url + "akademik/bop/ubah",
             data: {
                 idubah: idubah,
                 kode: kode,
-                keterangan: keterangan
+                detailkelas_id: detailkelas_id
             },
             dataType: 'JSON',
             beforeSend: function () {
@@ -1619,11 +1619,11 @@ $(document).ready(function () {
                     } else {
                         $('#kode_error').html('');
                     }
-                    if (data.keterangan_error != '') {
-                        $('#keterangan_error').html(data.keterangan_error);
+                    if (data.kelas_error != '') {
+                        $('#kelas_error').html(data.kelas_error);
 
                     } else {
-                        $('#keterangan_error').html('');
+                        $('#kelas_error').html('');
                     }
                     $('#kode').trigger('focus');
                 } else {
@@ -1823,7 +1823,23 @@ $(document).ready(function () {
     });
     // end ajax icon hapus table detailbop klik
     //--------------------------------------/BOP----------------------------
-    //--------------------------------------/OPM----------------------------
+    //---------------------------------------ATUR BOP----------------------------
+    //set focus input bop saat modal muncul
+    $('#modal-aturbop').on('shown.bs.modal', function () {
+        $('#kode').trigger('focus');
+    })
+    //set focus input bop saat modal muncul
+    // tombol tambah bop table
+    $('#btn-tambah-aturbop').on('click', function (e) {
+        e.preventDefault();
+        const judul = document.getElementById('judul-modal');
+        judul.innerHTML = 'Tambah Data BOP';
+        $('#btn-ubah-aturbop').hide();
+        $('#modal-aturbop').modal('show');
+    });
+    // end tombol tambah bop table
+    //---------------------------------------/ATUR BOP----------------------------
+    //--------------------------------------OPM----------------------------
     $('#nim_opm').keypress(function (e) {
         if (e.which == 13) { // e.which == 13 merupakan kode yang mendeteksi ketika anda   // menekan tombol enter di keyboard
             //letakan fungsi anda disini

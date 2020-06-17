@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-class Bop_model extends CI_Model
+class Aturbop_model extends CI_Model
 {
     public function __construct()
     {
@@ -13,19 +13,10 @@ class Bop_model extends CI_Model
         //$this->db3->order_by('id', 'DESC');
         return $this->db3->get_where('bops', ['institusi_id' => $institusi_id])->result_array();
     }
-    public function ambil_datafull()
+    public function ambil_data2()
     {
         $institusi_id = $this->session->userdata('idInstitusi');
-        $perak_id = $this->session->userdata('idPerak');
-        //$this->db3->order_by('id', 'DESC');
-        return $this->db3->query("SELECT a.id AS id, a.kode AS kode, a.detailkelas_id AS detailkelas_id, c.id AS kelas_id, c.keterangan AS keterangan, b.perak_id FROM bops AS a INNER JOIN detailkelases AS b ON b.id = a.detailkelas_id INNER JOIN kelases AS c ON c.id = b.kelas_id where a.institusi_id='$institusi_id' AND b.perak_id='$perak_id'")->result_array();
-    }
-    public function ambil_datafull_id($id)
-    {
-        $institusi_id = $this->session->userdata('idInstitusi');
-        $perak_id = $this->session->userdata('idPerak');
-        //$this->db3->order_by('id', 'DESC');
-        return $this->db3->query("SELECT a.id AS id, a.kode AS kode, a.detailkelas_id AS detailkelas_id, c.id AS kelas_id, c.keterangan AS keterangan, b.perak_id FROM bops AS a INNER JOIN detailkelases AS b ON b.id = a.detailkelas_id INNER JOIN kelases AS c ON c.id = b.kelas_id where a.institusi_id='$institusi_id' AND b.perak_id='$perak_id' and a.id='$id'")->row_array();
+        return $this->db3->query("select * from bops where institusi_id='$institusi_id' order by id DESC")->result_array();
     }
     public function data_fk()
     {
@@ -69,29 +60,29 @@ class Bop_model extends CI_Model
     {
         $institusi_id = $this->session->userdata('idInstitusi');
         $kode = $this->input->post('kode');
-        $detailkelas_id = htmlspecialchars($this->input->post('detailkelas_id'));
+        $keterangan = htmlspecialchars($this->input->post('keterangan'));
         $data = array(
             'kode' => $kode,
-            'detailkelas_id' => $detailkelas_id,
+            'keterangan' => $keterangan,
             'institusi_id' => $institusi_id
         );
         $this->db3->insert('bops', $data);
         $log_type = "tambah";
-        $log_desc = "tambah Bop - $kode - $detailkelas_id - $institusi_id -";
+        $log_desc = "tambah Bop - $kode - $keterangan - $institusi_id -";
         userLog($log_type, $log_desc);
     }
     public function ubah($id)
     {
         $kode = $this->input->post('kode');
-        $detailkelas_id = $this->input->post('detailkelas_id');
+        $keterangan = htmlspecialchars($this->input->post('keterangan'));
         $data = array(
             'kode' => $kode,
-            'detailkelas_id' => $detailkelas_id
+            'keterangan' => $keterangan
         );
         $this->db3->where('id', $id);
         $this->db3->update('bops', $data);
         $log_type = "ubah";
-        $log_desc = "ubah Bop - $id - $kode - $detailkelas_id -";
+        $log_desc = "ubah Bop - $id - $kode - $keterangan -";
         userLog($log_type, $log_desc);
     }
     public function simpandetail()
