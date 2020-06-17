@@ -2437,6 +2437,85 @@ $(document).ready(function () {
     });
 
     //--------------------------------------/OPM----------------------------
+    //---------------------------------------PEMBUKUAN AKTIF----------------------------
+    $('#btn-simpan-pembukuanaktif').on('click', function (e) {
+        e.preventDefault();
+        //const pembukuan_id = $('#pa_pembukuan_id').val('selectedvalue');
+        const pembukuan_id = $('[name="pa_pembukuan_id"]').val();
+        const anggaran_id = $('[name="pa_anggaran_id"]').val();
+        const tahunakademik_id = $('[name="idakademik"]').val();
+        const perak_id = $('[name="pa_perak_id"]').val();
+
+        Toast.fire({
+            icon: 'success',
+            title: ' simpan!!!. 1> ' + pembukuan_id + ' 2> ' + anggaran_id + ' 3> ' + tahunakademik_id + ' 4> ' + perak_id
+        });
+
+    });
+    $("#pa_pembukuan_id").change(function () {
+        var pembukuan_id = $("#pa_pembukuan_id option:selected").val();
+        $.ajax({
+            url: base_url + 'akuntansi/pembukuanaktif/ajaxcombobuku/' + pembukuan_id,
+            type: "GET",
+            cache: false,
+            dataType: "JSON",
+            success: function (data) {
+                // $('[name="idbuku"]').val(data.id);
+                $('[name="awalbuku"]').val(data.awal_periode);
+                $('[name="akhirbuku"]').val(data.akhir_periode);
+                //$('#modal-detailbop').modal('show');
+                //$('#kewajiban_id').trigger('focus');
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('Sesi user habis, refresh halaman dan login kembali');
+            }
+        });
+        // var pembukuan_id = this.value;
+        // var firstDropVal = $('#pick').val();
+        // Toast.fire({
+        //     icon: 'success',
+        //     title: ' isinya !!!. >' + pembukuan_id
+        // });
+    });
+    $("#pa_anggaran_id").change(function () {
+        var anggaran_id = $("#pa_anggaran_id option:selected").val();
+        $.ajax({
+            url: base_url + 'akuntansi/pembukuanaktif/ajaxcomboanggaran/' + anggaran_id,
+            type: "GET",
+            cache: false,
+            dataType: "JSON",
+            success: function (data) {
+                // $('[name="idbuku"]').val(data.id);
+                $('[name="awalanggaran"]').val(data.awal_periode);
+                $('[name="akhiranggaran"]').val(data.akhir_periode);
+                //$('#modal-detailbop').modal('show');
+                //$('#kewajiban_id').trigger('focus');
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('Sesi user habis, refresh halaman dan login kembali');
+            }
+        });
+    });
+    $("#pa_perak_id").change(function () {
+        var perak_id = $("#pa_perak_id option:selected").val();
+        $.ajax({
+            url: base_url + 'akuntansi/pembukuanaktif/ajaxcomboperak/' + perak_id,
+            type: "GET",
+            cache: false,
+            dataType: "JSON",
+            success: function (data) {
+                $('[name="idakademik"]').val(data.tahunakademik_id);
+                $('[name="awalsemester"]').val(data.awal_periode);
+                $('[name="akhirsemester"]').val(data.akhir_periode);
+                //$('#modal-detailbop').modal('show');
+                //$('#kewajiban_id').trigger('focus');
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('Sesi user habis, refresh halaman dan login kembali');
+            }
+        });
+    });
+    //--------------------------------------/PEMBUKUAN AKTIF----------------------------
 
 
     // ---------------------/TES---------------------------

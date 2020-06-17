@@ -55,6 +55,7 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 $route['tahunbuku'] = 'akuntansi/tahunbuku';
 $route['tahunanggaran'] = 'akuntansi/tahunanggaran';
+$route['pembukuanaktif'] = 'akuntansi/pembukuanaktif';
 $route['kodeperkiraan'] = 'akuntansi/kodeperkiraan';
 $route['akunanggaran'] = 'akuntansi/akunanggaran';
 $route['jenistransaksi'] = 'akuntansi/jenistransaksi';
@@ -102,5 +103,5 @@ $route['opm/data/(:any)'] = 'akademik/opm/data/$1';
 // $route['opm/ceksaldo/(:any)'] = 'akademik/opm/data/$1';
 // --------------- operasional -----------------------------
 $route['kewajiban'] = 'operasional/kewajiban';
-$route['aturbayar'] = 'operasional/aturbayar';
+// $route['aturbayar'] = 'operasional/aturbayar';
 //$route['kewajiban/akun'] = 'operasional/kewajiban/akun';

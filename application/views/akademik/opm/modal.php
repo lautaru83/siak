@@ -77,9 +77,9 @@
                         </div>
                     </div>
                     <div class="modal-footer card-footer">
-                        <div>
+                        <!-- <div>
                             <button id="btn-tes-detailopm" type="submit" class="btn btn-primary"><i class="far fa-edit"></i> Tes</button>
-                        </div>
+                        </div> -->
                         <div>
                             <button id="btn-ubah-detailopm" type="submit" class="btn btn-primary"><i class="far fa-edit"></i> Ubah</button>
                         </div>
