@@ -66,21 +66,16 @@ class Pembukuanaktif extends CI_Controller
     //     }
     //     echo json_encode($data);
     // }
-    // public function hapus($id, $info)
-    // {
-    //     $hasil = $this->Tahunbuku_model->cek_hapus($id);
-    //     if ($hasil > 0) {
-    //         $data = array(
-    //             'status' => 'gagal'
-    //         );
-    //     } else {
-    //         $this->Tahunbuku_model->hapus($id, $info);
-    //         $data = array(
-    //             'status' => 'sukses'
-    //         );
-    //     }
-    //     echo json_encode($data);
-    // }
+    public function ubahpembukuan()
+    {
+        $this->Pembukuanaktif_model->ubahpembukuan();
+        //if ($hasil) {
+        $data = array(
+            'status' => 'sukses'
+        );
+        //}
+        echo json_encode($data);
+    }
     public function ajaxcombobuku($id)
     {
         $hasil = $this->Tahunbuku_model->ambil_data_id($id);

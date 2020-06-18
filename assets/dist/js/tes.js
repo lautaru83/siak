@@ -2442,14 +2442,68 @@ $(document).ready(function () {
         e.preventDefault();
         //const pembukuan_id = $('#pa_pembukuan_id').val('selectedvalue');
         const pembukuan_id = $('[name="pa_pembukuan_id"]').val();
+        const buku_awal = $('[name="awalbuku"]').val();
+        const buku_akhir = $('[name="akhirbuku"]').val();
         const anggaran_id = $('[name="pa_anggaran_id"]').val();
+        const anggaran_awal = $('[name="awalanggaran"]').val();
+        const anggaran_akhir = $('[name="akhiranggaran"]').val();
         const tahunakademik_id = $('[name="idakademik"]').val();
         const perak_id = $('[name="pa_perak_id"]').val();
+        const semester_awal = $('[name="awalsemester"]').val();
+        const semester_akhir = $('[name="akhirsemester"]').val();
+        Swal.fire({
+            title: 'Konfirmasi!',
+            text: 'Apakah anda yakin merubah periode pembukuaan!?!',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'Batal',
+            confirmButtonText: 'Confirm'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    type: "POST",
+                    cache: false,
+                    url: base_url + "akuntansi/pembukuanaktif/ubahpembukuan",
+                    data: {
+                        pembukuan_id: pembukuan_id,
+                        buku_awal: buku_awal,
+                        buku_akhir: buku_akhir,
+                        anggaran_id: anggaran_id,
+                        anggaran_awal: anggaran_awal,
+                        anggaran_akhir: anggaran_akhir,
+                        tahunakademik_id: tahunakademik_id,
+                        perak_id: perak_id,
+                        semester_awal: semester_awal,
+                        semester_akhir: semester_akhir
+                    },
+                    dataType: 'JSON',
+                    success: function (data) {
+                        if (data.status == 'sukses') {
+                            Toast.fire({
+                                icon: 'success',
+                                title: ' Data berhasil disimpan!!!.'
+                            });
+                            document.location.reload();
+                        } else {
+                            Toast.fire({
+                                icon: 'warning',
+                                title: ' Kesalahan dalam menyelesaikan transaksi!!!.'
+                            });
+                        }
+                    },
+                    error: function (e) {
+                        console.log('Error' + e);
+                    }
+                });
+            }
+        })
+        // Toast.fire({
+        //     icon: 'success',
+        //     title: ' simpan!!!. 1> ' + pembukuan_id + ' 2> ' + anggaran_id + ' 3> ' + tahunakademik_id + ' 4> ' + perak_id
+        // });
 
-        Toast.fire({
-            icon: 'success',
-            title: ' simpan!!!. 1> ' + pembukuan_id + ' 2> ' + anggaran_id + ' 3> ' + tahunakademik_id + ' 4> ' + perak_id
-        });
 
     });
     $("#pa_pembukuan_id").change(function () {
