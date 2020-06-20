@@ -51,7 +51,7 @@ class Auth extends CI_Controller
         $anggaran = $this->Tahunanggaran_model->ambil_anggaran_aktif();
         if ($anggaran) {
             $idTahunAnggaran = $anggaran['id'];
-            $Tahun_Anggaran = $anggaran['keterangan'];
+            $Tahun_Anggaran = $anggaran['tahunanggaran'];
             $anggaran_awal = $anggaran['awal_periode'];
             $anggaran_akhir = $anggaran['akhir_periode'];
         }

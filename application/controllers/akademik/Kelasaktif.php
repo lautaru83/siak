@@ -145,7 +145,7 @@ class Kelasaktif extends CI_Controller
         //     ]);
         // }
         $this->form_validation->set_rules('perak_id', 'Periode Akademik', 'required|trim');
-        $this->form_validation->set_rules('bop_id', 'BOP', 'required|trim');
+        // $this->form_validation->set_rules('bop_id', 'BOP', 'required|trim');
         if (!$this->input->post('idubah')) {
             $this->form_validation->set_rules('kelas_id', 'Kelas', 'required|trim|callback_cek_unik', [
                 'cek_unik' => 'Kelas sudah ada!'

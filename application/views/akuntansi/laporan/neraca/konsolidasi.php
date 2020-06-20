@@ -10,8 +10,8 @@
                 <div class="float-right">
                 </div>
             </div>
-            <div class="card-body bg-gradient-light">
-                <div class="row bg-gradient-light">
+            <div class="card-body">
+                <div class="row">
                     <div style="height: 25px;">
                     </div>
                 </div>
@@ -361,7 +361,7 @@
                         </tbody>
                     </table>
                 <?php } ?>
-                <div class="row bg-gradient-light">
+                <div class="row">
                     <div style="height: 25px;">
                     </div>
                 </div>

@@ -32,6 +32,15 @@ class Neraca extends CI_Controller
         $data['institusi'] = $this->Institusi_model->ambil_data_id($institusi_id);
         // $data['institusi'] = $this->Institusi_model->ambil_data();
         if ($jenis == "4") {
+            $data['asetLancar'] = $this->Laporan_model->asetLancarKomKonsolidasi();
+            $data['asetTidakLancar'] = $this->Laporan_model->asetTidakLancarKomKonsolidasi();
+            $data['kewajiban'] = $this->Laporan_model->kewajibanKomKonsolidasi();
+            $data['bersihTidakTerikat'] = $this->Laporan_model->bersihTidakTerikatKomKonsolidasi();
+            $data['bersihTerikat'] = $this->Laporan_model->bersihTerikatKomKonsolidasi();
+            // $data['asetTidakLancar'] = $this->Laporan_model->asetTidakLancarKonsolidasi();
+            // $data['kewajiban'] = $this->Laporan_model->kewajibanKonsolidasi();
+            // $data['bersihTidakTerikat'] = $this->Laporan_model->bersihTidakTerikatKonsolidasi();
+            // $data['bersihTerikat'] = $this->Laporan_model->bersihTerikatKonsolidasi();
             $this->load->view('akuntansi/laporan/neraca/lengkap', $data);
         } elseif ($jenis == "3") {
             $data['asetLancar'] = $this->Laporan_model->asetLancarKonsolidasi();
@@ -41,7 +50,13 @@ class Neraca extends CI_Controller
             $data['bersihTerikat'] = $this->Laporan_model->bersihTerikatKonsolidasi();
             $this->load->view('akuntansi/laporan/neraca/konsolidasi', $data);
         } elseif ($jenis == "2") {
+            $data['asetLancar'] = $this->Laporan_model->asetLancarKomInstitusi();
+            $data['asetTidakLancar'] = $this->Laporan_model->asetTidakLancarKomInstitusi();
+            $data['kewajiban'] = $this->Laporan_model->kewajibanKomInstitusi();
+            $data['bersihTidakTerikat'] = $this->Laporan_model->bersihTidakTerikatKomInstitusi();
+            $data['bersihTerikat'] = $this->Laporan_model->bersihTerikatKomInstitusi();
             $this->load->view('akuntansi/laporan/neraca/komparatif', $data);
+            //$this->load->view('akuntansi/laporan/neraca/institusi', $data);
         } else {
             $data['asetLancar'] = $this->Laporan_model->asetLancarInstitusi();
             $data['asetTidakLancar'] = $this->Laporan_model->asetTidakLancarInstitusi();

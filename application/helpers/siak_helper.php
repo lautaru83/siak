@@ -385,6 +385,31 @@ function asetbersihTb($tanggal)
         return $jumlah;
     }
 }
+function asetbersihTbKom($awalperiode, $akhirperiode, $tahunbuku)
+{
+    //Mengambil aset bersih tidak terikat tahun berjalan per institusi
+    $ci = get_instance();
+    $ci->db2 = $ci->load->database('akuntansi', TRUE);
+    $institusi_id = $ci->session->userdata('idInstitusi');
+    $buku_awal = tanggal_input($awalperiode);
+    $akhir_periode = tanggal_input($akhirperiode);
+    $tahun_buku = $tahunbuku;
+    // $ci->db->where('submenu_id', $submenu_id);
+    $hasil = $ci->db2->query("SELECT a.posisi as posisi, SUM(b.debet) as debet, SUM(b.kredit) as kredit,b.tanggal_transaksi as tanggal_transaksi FROM view_kodeperkiraans AS a INNER JOIN view_transaksis AS b ON a.a6level_id = b.a6level_id WHERE a.a1level_id BETWEEN '400' AND '700' AND b.tahun_buku='$tahun_buku' AND a.institusi_id='$institusi_id' AND b.tanggal_transaksi BETWEEN '$buku_awal' AND '$akhir_periode' AND is_valid IN('1','2','3') GROUP BY b.tahun_buku")->result_array();
+    $debet = 0;
+    $kredit = 0;
+    $jumlah = 0;
+    if ($hasil) {
+        foreach ($hasil as $dataHasil) :
+            $debet = $dataHasil['debet'];
+            $kredit = $dataHasil['kredit'];
+            $jumlah = $kredit - $debet;
+        endforeach;
+        return $jumlah;
+    } else {
+        return $jumlah;
+    }
+}
 function asetbersihTbKonsolidasi($tanggal)
 {
     //Mengambil aset bersih tidak terikat tahun berjalan per institusi
@@ -393,6 +418,30 @@ function asetbersihTbKonsolidasi($tanggal)
     $buku_awal = $ci->session->userdata('buku_awal');
     $tahun_buku = $ci->session->userdata('tahun_buku');
     $akhir_periode = tanggal_input($tanggal);
+    // $ci->db->where('submenu_id', $submenu_id);
+    $hasil = $ci->db2->query("SELECT a.posisi as posisi, SUM(b.debet) as debet, SUM(b.kredit) as kredit,b.tanggal_transaksi as tanggal_transaksi FROM view_kodeperkiraans AS a INNER JOIN view_transaksis AS b ON a.a6level_id = b.a6level_id WHERE a.a1level_id BETWEEN '400' AND '700' AND b.tahun_buku='$tahun_buku' AND b.tanggal_transaksi BETWEEN '$buku_awal' AND '$akhir_periode' AND is_valid BETWEEN 1 AND 2 GROUP BY b.tahun_buku")->result_array();
+    $debet = 0;
+    $kredit = 0;
+    $jumlah = 0;
+    if ($hasil) {
+        foreach ($hasil as $dataHasil) :
+            $debet = $dataHasil['debet'];
+            $kredit = $dataHasil['kredit'];
+            $jumlah = $kredit - $debet;
+        endforeach;
+        return $jumlah;
+    } else {
+        return $jumlah;
+    }
+}
+function asetbersihTbKomKonsolidasi($awalperiode, $akhirperiode, $tahunbuku)
+{
+    //Mengambil aset bersih tidak terikat tahun berjalan per institusi
+    $ci = get_instance();
+    $ci->db2 = $ci->load->database('akuntansi', TRUE);
+    $buku_awal = $awalperiode;
+    $tahun_buku = $tahunbuku;
+    $akhir_periode = $akhirperiode;
     // $ci->db->where('submenu_id', $submenu_id);
     $hasil = $ci->db2->query("SELECT a.posisi as posisi, SUM(b.debet) as debet, SUM(b.kredit) as kredit,b.tanggal_transaksi as tanggal_transaksi FROM view_kodeperkiraans AS a INNER JOIN view_transaksis AS b ON a.a6level_id = b.a6level_id WHERE a.a1level_id BETWEEN '400' AND '700' AND b.tahun_buku='$tahun_buku' AND b.tanggal_transaksi BETWEEN '$buku_awal' AND '$akhir_periode' AND is_valid BETWEEN 1 AND 2 GROUP BY b.tahun_buku")->result_array();
     $debet = 0;
@@ -486,4 +535,14 @@ function sembunyikan_input($institusi)
     } else {
         echo "class='form-check form-check-inline mx-sm-2 mb-2 invisible'";
     }
+}
+function manipulasiTanggal($tgl, $jumlah, $format)
+{
+    $currentDate = $tgl;
+    return date('Y-m-d', strtotime($jumlah . ' ' . $format, strtotime($currentDate)));
+}
+function manipulasiTahun($tgl, $jumlah, $format)
+{
+    $currentDate = $tgl;
+    return date('Y', strtotime($jumlah . ' ' . $format, strtotime($currentDate)));
 }

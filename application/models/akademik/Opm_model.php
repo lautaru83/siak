@@ -116,7 +116,7 @@ class Opm_model extends CI_Model
     public function riwayatpembayaran($mahasiswa_id)
     {
         $perak_id = $this->session->userdata['idPerak'];
-        return $this->db3->query("SELECT id,tanggal_transaksi,nobukti,notran,keterangan,total_transaksi from operasionals where perak_id='$perak_id' and mahasiswa_id='$mahasiswa_id' and is_valid IN('1','2','3')")->result_array();
+        return $this->db3->query("SELECT id,tanggal_transaksi,nobukti,notran,keterangan,total_transaksi from operasionals where perak_id='$perak_id' and mahasiswa_id='$mahasiswa_id' and is_valid IN('1','2')")->result_array();
     }
 
     public function cek_akunkewajiban($a6level_id)
@@ -175,7 +175,6 @@ class Opm_model extends CI_Model
         $tgl2 = "2020-01-10";
         return $this->db3->query("SELECT a.kodekewajiban as kode,b.jumlah as jumlahkewajiban,a.posakun as posakun,sum(a.debet)as debet,sum(a.kredit) as kredit from view_detailoperasionals a join detailbops b ON b.id=a.detailbop_id where a.a6level_id='$a6level_id' AND a.jenistransaksi='P' AND a.mahasiswa_id='$mahasiswa_id' AND a.perak_id='$perak_id' AND a.is_valid IN('1','2','3') AND a.tanggal_transaksi BETWEEN '$tgl1' AND '$tgl2' GROUP BY a.a6level_id")->row_array();
     }
-
     public function cek_akun6_dopm($op_id, $a6_id)
     {
         //cek kodeperkiraan  untuk validasi
@@ -190,11 +189,11 @@ class Opm_model extends CI_Model
     {
         return $this->db3->get_where('detail_operasionals', ['id' => $id])->row_array();
     }
-    // public function riwayat_transaksi($jurnal)
-    // {
-    //     $user_id = $this->session->userdata('xyz');
-    //     return $this->db2->query("SELECT * FROM transaksis where jurnal='$jurnal' and is_valid=1 and user_id=$user_id order by id desc LIMIT 0, 5 ")->result_array();
-    // }
+    public function riwayat_transaksi($jurnal)
+    {
+        $user_id = $this->session->userdata('xyz');
+        return $this->db2->query("SELECT * FROM transaksis where jurnal='$jurnal' and is_valid=1 and user_id=$user_id order by id desc LIMIT 0, 5 ")->result_array();
+    }
     // public function ceksaldotransaksi($akun_id)
     // {
     //     $tahun_buku = $this->session->userdata('tahun_buku');

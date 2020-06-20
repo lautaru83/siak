@@ -26,6 +26,14 @@ class Saldoawal extends CI_Controller
         //$data['tahunbuku'] = $this->Tahunbuku_model->ambil_data();
         $this->template->display('akuntansi/saldoawal/data', $data);
     }
+    public function tessaldo($idtahun)
+    {
+        $institusi_id = $this->session->userdata('idInstitusi');
+        $hasil = $this->Transaksi_model->cektransaldo($idtahun, $institusi_id);
+        echo $institusi_id;
+        echo "</br>";
+        var_dump($hasil);
+    }
     public function konfirmasi($idtahun)
     {
         $institusi_id = $this->session->userdata('idInstitusi');

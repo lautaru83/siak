@@ -448,7 +448,7 @@
                                                                 <thead>
                                                                     <tr>
                                                                         <td width="4%" class="text-center">No</td>
-                                                                        <td width="15%" class="text-center">Tanggal Transaksi</td>
+                                                                        <td width="15%" class="text-center">Tanggal</td>
                                                                         <td width="10%" class="text-center">No Bukti</td>
                                                                         <td width="10%" class="text-center">No Transaksi</td>
                                                                         <td width="40%" class="text-center">Keterangan</td>
@@ -510,13 +510,13 @@
                                                                         <tr>
                                                                             <td colspan="7" class="text-center">Data tidak ditemukan</td>
                                                                         </tr>
-                                                                        <tr>
+                                                                        <!-- <tr>
                                                                             <td></td>
                                                                             <td class="text-left"></td>
                                                                             <td class="text-right"></td>
                                                                             <td class="text-right"></td>
                                                                             <td colspan="4" class="text-center"></td>
-                                                                        </tr>
+                                                                        </tr> -->
                                                                     <?php
                                                                     }
                                                                     ?>
@@ -536,6 +536,64 @@
                         <!-- /.card-body -->
                     </div>
                     <!-- /.card-->
+                </div>
+                <!-- /.col col-lg-12-->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col col-lg-12">
+                    <div class="card">
+                        <div class="card-header bg-gradient-light">
+                            <div>
+                                <h4 class="card-title">
+                                    Riwayat Transaksi
+                                </h4>
+                            </div>
+                            <div class="float-right">
+                            </div>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table class="table table-bordered table-hover table-striped table-sm">
+                                <thead>
+                                    <tr>
+                                        <td width="5%" class="text-center">No</td>
+                                        <td width="10%" class="text-center">Tanggal</td>
+                                        <td width="10%" class="text-center">No. Bukti</td>
+                                        <td class="text-center">Uraian</td>
+                                        <td width="15%" class="text-center">Jumlah Transaksi (Rp.)</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $nor = 1;
+                                    if ($riwayat) {
+                                        foreach ($riwayat as $dataRiwayat) :
+                                    ?>
+                                            <tr>
+                                                <td class="text-center"><?= $nor; ?></td>
+                                                <td class="text-center"><?= tanggal_indo($dataRiwayat['tanggal_transaksi']); ?></td>
+                                                <td class="text-center"><?= $dataRiwayat['nobukti']; ?></td>
+                                                <td><?= $dataRiwayat['keterangan']; ?></td>
+                                                <td width="15%" class="text-right"><?= rupiah($dataRiwayat['total_transaksi']); ?></td>
+                                            </tr>
+                                        <?php
+                                            $nor++;
+                                        endforeach;
+                                    } else {
+                                        ?>
+
+                                        <tr>
+                                            <td colspan="5" class="text-center">Data Tidak Ditemukan</td>
+                                        </tr>
+                                    <?php
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
                 </div>
                 <!-- /.col col-lg-12-->
             </div>

@@ -8,7 +8,7 @@ class Opm extends CI_Controller
         parent::__construct();
         is_logged_in();
         $this->db3 = $this->load->database('akademik', TRUE);
-        $this->load->model(array('akademik/Mahasiswa_model' => 'Mahasiswa_model', 'akademik/Opm_model' => 'Opm_model', 'akuntansi/Kodeperkiraan_model' => 'Kodeperkiraan_model', 'Unit_model' => 'Unit_model', 'Akademik/Bop_model' => 'Bop_model'));
+        $this->load->model(array('akademik/Mahasiswa_model' => 'Mahasiswa_model', 'akademik/Opm_model' => 'Opm_model', 'akuntansi/Kodeperkiraan_model' => 'Kodeperkiraan_model', 'Unit_model' => 'Unit_model', 'Akademik/Bop_model' => 'Bop_model', 'Akuntansi/Transaksi_model' => 'Transaksi_model'));
     }
     public function index()
     {
@@ -18,6 +18,7 @@ class Opm extends CI_Controller
         $data['kontensubmenu'] = "Operasional Mahasiswa";
         $jrnl = "PM";
         $hasil = $this->Opm_model->cektranuser($jrnl);
+        $data['riwayat'] = $this->Transaksi_model->riwayat_transaksi($jrnl);
         if ($hasil) {
             $idMahasiswa = $hasil['mahasiswa_id'];
             $mahasiswa = $this->Mahasiswa_model->ambil_data_id($idMahasiswa);
@@ -80,6 +81,7 @@ class Opm extends CI_Controller
             //$data['totaltransaksi'] = $this->Transaksi_model->cektotaltransaksi($idtransaksi);
             $data['detail'] = $this->Opm_model->detailtransaksi($idtransaksi);
         }
+        $data['riwayat'] = $this->Transaksi_model->riwayat_transaksi($jrnl);
         $this->template->display('akademik/opm/transaksi', $data);
     }
     public function cek_mahasiswa()

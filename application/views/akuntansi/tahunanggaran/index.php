@@ -67,7 +67,9 @@
                                                 <td><?= tanggal_indo($dataTahunanggaran['akhir_periode']); ?></td>
                                                 <td><?= $dataTahunanggaran['keterangan']; ?></td>
                                                 <td class="text-center"><?= txt_status($dataTahunanggaran['is_active']); ?></td>
-                                                <td class="text-center"><a href="" class="btn-aktif-tahunanggaran" data-id="<?= $dataTahunanggaran['id']; ?>" data-aktif="<?= $dataTahunanggaran['is_active']; ?>" data-info="<?= $dataTahunanggaran['tahunanggaran']; ?>" data-toggle="tooltip" data-placement="bottom" title="Set Aktif"><i class="far fa-calendar-check" <?= icon_aktif($dataTahunanggaran['is_active']); ?>></i></a> - <a href="" class="btn-edit-tahunanggaran" data-id="<?= $dataTahunanggaran['id']; ?>" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fas fa-edit" style="color: olive"></i></a> - <a href="" class="btn-hapus-tahunanggaran" data-id="<?= $dataTahunanggaran['id']; ?>" data-info="<?= $dataTahunanggaran['tahunanggaran']; ?>" data-toggle="tooltip" data-placement="bottom" title="Hapus"> <i class="far fa-trash-alt" style="color: maroon"></i></a></td>
+                                                <td class="text-center">
+                                                    <a href="" class="btn-edit-tahunanggaran" data-id="<?= $dataTahunanggaran['id']; ?>" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fas fa-edit" style="color: olive"></i></a> - <a href="" class="btn-hapus-tahunanggaran" data-id="<?= $dataTahunanggaran['id']; ?>" data-info="<?= $dataTahunanggaran['tahunanggaran']; ?>" data-toggle="tooltip" data-placement="bottom" title="Hapus"> <i class="far fa-trash-alt" style="color: maroon"></i></a>
+                                                </td>
                                             </tr>
                                     <?php
                                             $no++;

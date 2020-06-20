@@ -64,7 +64,9 @@
                                                 <td><?= tanggal_indo($dataTahunbuku['akhir_periode']); ?></td>
                                                 <td><?= $dataTahunbuku['keterangan']; ?></td>
                                                 <td><?= txt_status($dataTahunbuku['is_active']); ?></td>
-                                                <td class="text-center"><a href="" class="btn-aktif-tahunbuku" data-id="<?= $dataTahunbuku['id']; ?>" data-info="<?= $dataTahunbuku['is_active']; ?>" data-toggle="tooltip" data-placement="bottom" title="Set Aktif"><i class="far fa-calendar-check" <?= icon_aktif($dataTahunbuku['is_active']); ?>></i></a> - <a href="" class="btn-edit-tahunbuku" data-id="<?= $dataTahunbuku['id']; ?>" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fas fa-edit" style="color: olive"></i></a> - <a href="" class="btn-hapus-tahunbuku" data-id="<?= $dataTahunbuku['id']; ?>" data-info="<?= $dataTahunbuku['id']; ?>" data-toggle="tooltip" data-placement="bottom" title="Hapus"> <i class="far fa-trash-alt" style="color: maroon"></i></a></td>
+                                                <td class="text-center">
+                                                    <a href="" class="btn-edit-tahunbuku" data-id="<?= $dataTahunbuku['id']; ?>" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fas fa-edit" style="color: olive"></i></a> - <a href="" class="btn-hapus-tahunbuku" data-id="<?= $dataTahunbuku['id']; ?>" data-info="<?= $dataTahunbuku['id']; ?>" data-toggle="tooltip" data-placement="bottom" title="Hapus"> <i class="far fa-trash-alt" style="color: maroon"></i></a>
+                                                </td>
                                             </tr>
                                     <?php
                                         //$no++;
