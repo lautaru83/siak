@@ -32,7 +32,12 @@ class Activitas extends CI_Controller
         $data['institusi'] = $this->Institusi_model->ambil_data_id($institusi_id);
         // $data['institusi'] = $this->Institusi_model->ambil_data();
         if ($jenis == "4") {
-            $this->load->view('akuntansi/laporan/activitas/institusi', $data);
+            $data['pttb'] = $this->Laporan_model->pttbKomKonsolidasi();
+            $data['badu'] = $this->Laporan_model->baduKomKonsolidasi();
+            $data['bpdp'] = $this->Laporan_model->bpdpKomKonsolidasi();
+            $data['bpda'] = $this->Laporan_model->bpdaKomKonsolidasi();
+            $data['pbll'] = $this->Laporan_model->pbllKomKonsolidasi();
+            $this->load->view('akuntansi/laporan/activitas/lengkap', $data);
         } elseif ($jenis == "3") {
             $data['pttb'] = $this->Laporan_model->pttbKonsolidasi();
             $data['badu'] = $this->Laporan_model->baduKonsolidasi();
@@ -41,7 +46,12 @@ class Activitas extends CI_Controller
             $data['pbll'] = $this->Laporan_model->pbllKonsolidasi();
             $this->load->view('akuntansi/laporan/activitas/konsolidasi', $data);
         } elseif ($jenis == "2") {
-            $this->load->view('akuntansi/laporan/activitas/institusi', $data);
+            $data['pttb'] = $this->Laporan_model->pttbKomInstitusi();
+            $data['badu'] = $this->Laporan_model->baduKomInstitusi();
+            $data['bpdp'] = $this->Laporan_model->bpdpKomInstitusi();
+            $data['bpda'] = $this->Laporan_model->bpdaKomInstitusi();
+            $data['pbll'] = $this->Laporan_model->pbllKomInstitusi();
+            $this->load->view('akuntansi/laporan/activitas/komparatif', $data);
         } else {
             $data['pttb'] = $this->Laporan_model->pttbInstitusi();
             $data['badu'] = $this->Laporan_model->baduInstitusi();

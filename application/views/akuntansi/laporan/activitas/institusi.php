@@ -4,14 +4,14 @@
             <div class="card-header bg-gradient-light">
                 <div>
                     <h4 class="card-title">
-                        Activitas Institusi
+                        Aktivitas Institusi
                     </h4>
                 </div>
                 <div class="float-right">
                 </div>
             </div>
-            <div class="card-body bg-gradient-light">
-                <div class="row bg-gradient-light">
+            <div class="card-body">
+                <div class="row">
                     <div style="height: 25px;">
                     </div>
                 </div>
@@ -28,7 +28,7 @@
                                                                             } ?></span>
                         </div>
                         <div class="col-md-12 text-center">
-                            <span class="font-weight-bolder">LAPORAN ACTIVITAS</span>
+                            <span class="font-weight-bolder">LAPORAN AKTIVITAS</span>
                         </div>
                     </div>
                     <table id="tabel3" class="table table-sm table-borderless table-hover">
@@ -395,7 +395,7 @@
                         </tbody>
                     </table>
                 <?php } ?>
-                <div class="row bg-gradient-light">
+                <div class="row">
                     <div style="height: 25px;">
                     </div>
                 </div>

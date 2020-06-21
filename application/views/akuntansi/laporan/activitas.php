@@ -45,8 +45,8 @@
                                     <input type="text" name="akhir_periode" id="akhir_periode" class="form-control" autocomplete="off">
                                 </div>
                                 <div class="form-check form-check-inline my-2 mx-sm-3">
-                                    <input class="form-check-input font-weight-normal" type="checkbox" id="ckkomparatif" disabled>
-                                    <label class="form-check-label" for="ckkomparatif" disabled>Komparatif</label>
+                                    <input class="form-check-input font-weight-normal" type="checkbox" id="ckkomparatif">
+                                    <label class="form-check-label" for="ckkomparatif">Komparatif</label>
                                 </div>
                                 <?php
                                 if ($institusi_id == "01") {
