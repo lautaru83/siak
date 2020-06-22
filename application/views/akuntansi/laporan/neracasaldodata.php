@@ -82,7 +82,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <table id="tabel3" class="table table-bordered table-striped table-hover">
+                                        <table id="tabel3" class="table table-bordered table-striped table-hover table-sm">
                                             <thead>
                                                 <tr>
                                                     <td width="5%" class="text-center">No</td>
