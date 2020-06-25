@@ -57,13 +57,181 @@ $(document).ready(function () {
     //     });
     // });
     // cek data
+    // --------------------------------------BUKUBESAR----------------------------
+    $("#jt_pembukuan_id").change(function () {
+        var pembukuan_id = $("#jt_pembukuan_id option:selected").val();
+        $.ajax({
+            url: base_url + 'akuntansi/laporan/ajaxcombobuku/' + pembukuan_id,
+            type: "GET",
+            cache: false,
+            dataType: "JSON",
+            success: function (data) {
+                $('[name="awal_periode"]').val(data.awal_periode);
+                $('[name="akhir_periode"]').val(data.akhir_periode);
+                $('[name="awalbuku"]').val(data.awal_periode);
+                $('[name="akhirbuku"]').val(data.akhir_periode);
+            },
+            error: function (e) {
+                console.log('Error' + e);
+            }
+        });
+    });
+
+    // --------------------------------------/BUKUBESAR----------------------------
+    // --------------------------------------JURNAL----------------------------
+    $("#bb_pembukuan_id").change(function () {
+        var pembukuan_id = $("#bb_pembukuan_id option:selected").val();
+        $.ajax({
+            url: base_url + 'akuntansi/laporan/ajaxcombobuku/' + pembukuan_id,
+            type: "GET",
+            cache: false,
+            dataType: "JSON",
+            success: function (data) {
+                //$('[name="awal_periode"]').val(data.awal_periode);
+                //$('[name="awal_periode"]')
+                $("#awal_periode").data('daterangepicker').setStartDate(data.awal_periode);
+                $("#akhir_periode").data('daterangepicker').setStartDate(data.akhir_periode);
+                //$('[name="akhir_periode"]').val(data.akhir_periode);
+                $('[name="awalbuku"]').val(data.awal_periode);
+                $('[name="akhirbuku"]').val(data.akhir_periode);
+
+            },
+            error: function (e) {
+                console.log('Error' + e);
+            }
+        });
+    });
+    $('#btn-tampil-bukubesar').on('click', function (e) {
+        e.preventDefault();
+        //var laporan = $(this).data('laporan');
+        //var jenis = "";
+        // var idInstitusi = $(this).data('id');
+        //const awalbuku2 = $('[name="awalbuku"]').text;
+        const awalbuku = $('[name="awalbuku"]').val();
+        const akhirbuku = $('[name="akhirbuku"]').val();
+        const tahunbuku = $('[name="bb_pembukuan_id"]').val();
+        const akhir_periode = $('[name="akhir_periode"]').val();
+        const awal_periode = $('[name="awal_periode"]').val();
+        const a6level_id = $('[name="a6level_id"]').val();
+        // Toast.fire({
+        //     icon: 'success',
+        //     title: ' awalbuku. >' + awalbuku + 'awal_periode >' + awal_periode + 'akhirbuku >' + akhirbuku + 'akhir_periode   >' + akhir_periode
+        // });
+        $.ajax({
+            cache: false,
+            type: "POST",
+            url: base_url + "akuntansi/bukubesar/cekinput",
+            data: {
+                awalbuku: awalbuku,
+                akhirbuku: akhirbuku,
+                akhir_periode: akhir_periode,
+                awal_periode: awal_periode,
+                a6level_id: a6level_id
+            },
+            dataType: "JSON",
+            beforeSend: function () {
+                $('#btn-tampil-bukubesar').attr('disabled', 'disabled');
+            },
+            success: function (response) {
+                if (response.status == 'gagal') {
+                    Toast.fire({
+                        icon: 'warning',
+                        title: 'Data tidak valid!!!'
+                    });
+                    if (response.awal_error != '') {
+                        $('#awal_error').html(response.awal_error);
+                    } else {
+                        $('#awal_error').html('');
+                    }
+                    if (response.akhir_error != '') {
+                        $('#akhir_error').html(response.akhir_error);
+                    } else {
+                        $('#akhir_error').html('');
+                    }
+                    if (response.akun_error != '') {
+                        $('#akun_error').html(response.akun_error);
+                    } else {
+                        $('#akun_error').html('');
+                    }
+
+                } else {
+                    $('#awal_error').html('');
+                    $('#akhir_error').html('');
+                    $('#akun_error').html('');
+                    Toast.fire({
+                        icon: 'success',
+                        title: ' Menampilkan Laporan..'
+                    });
+                    $.ajax({
+                        type: "POST",
+                        cache: false,
+                        url: base_url + "akuntansi/bukubesar/viewdata",
+                        data: {
+                            tahunbuku: tahunbuku,
+                            awalbuku: awalbuku,
+                            akhirbuku: akhirbuku,
+                            awal_periode: awal_periode,
+                            akhir_periode: akhir_periode,
+                            a6level_id: a6level_id
+                        },
+                        success: function (data) {
+                            $("#data").html(data);
+                        }
+                    });
+                }
+                $('#btn-tampil-bukubesar').attr('disabled', false);
+            },
+            error: function (e) {
+                console.log('Error' + e);
+            }
+        });
+        //return false;
+    });
+    // --------------------------------------/JURNAL----------------------------
+    // --------------------------------------NERACA SALDO----------------------------
+    $("#ns_pembukuan_id").change(function () {
+        var pembukuan_id = $("#ns_pembukuan_id option:selected").val();
+        $.ajax({
+            url: base_url + 'akuntansi/laporan/ajaxcombobuku/' + pembukuan_id,
+            type: "GET",
+            cache: false,
+            dataType: "JSON",
+            success: function (data) {
+                $('[name="awalperiode"]').val(data.awal_periode);
+                $('[name="akhir_periode"]').val(data.akhir_periode);
+            },
+            error: function (e) {
+                console.log('Error' + e);
+            }
+        });
+    });
+    // --------------------------------------/NERACA SALDO----------------------------
     // --------------------------------------NERACA----------------------------
+    $("#nr_pembukuan_id").change(function () {
+        var pembukuan_id = $("#nr_pembukuan_id option:selected").val();
+        $.ajax({
+            url: base_url + 'akuntansi/laporan/ajaxcombobuku/' + pembukuan_id,
+            type: "GET",
+            cache: false,
+            dataType: "JSON",
+            success: function (data) {
+                $('[name="awalbuku"]').val(data.awal_periode);
+                $('[name="akhirbuku"]').val(data.akhir_periode);
+                $('[name="akhir_periode"]').val(data.akhir_periode);
+            },
+            error: function (e) {
+                console.log('Error' + e);
+            }
+        });
+    });
     $('#btn-tampil-neraca').on('click', function (e) {
         e.preventDefault();
         var laporan = $(this).data('laporan');
         var jenis = "";
         var idInstitusi = $(this).data('id');
-        //const akhir_periode = $('[name="akhir_periode"]').val();
+        const awalbuku = $('[name="awalbuku"]').val();
+        const akhirbuku = $('[name="akhirbuku"]').val();
+        const tahunbuku = $('[name="nr_pembukuan_id"]').val();
         const tanggal = $('[name="akhir_periode"]').val();
         // const buku_awal = $(this).data('tgl1');
         // const buku_akhir = $(this).data('tgl2');
@@ -91,6 +259,8 @@ $(document).ready(function () {
             type: "POST",
             url: base_url + "akuntansi/neraca/cekinput",
             data: {
+                awalbuku: awalbuku,
+                akhirbuku: akhirbuku,
                 akhir_periode: tanggal
             },
             dataType: "JSON",
@@ -106,13 +276,16 @@ $(document).ready(function () {
                 } else {
                     Toast.fire({
                         icon: 'success',
-                        title: ' Tampilkan laporan!!!.' + jenis
+                        title: ' Menampilkan Laporan..'
                     });
                     $.ajax({
                         type: "POST",
                         cache: false,
                         url: base_url + "akuntansi/neraca/viewdata",
                         data: {
+                            tahunbuku: tahunbuku,
+                            awalbuku: awalbuku,
+                            akhirbuku: akhirbuku,
                             akhir_periode: tanggal,
                             jenis: jenis
                         },
@@ -198,6 +371,23 @@ $(document).ready(function () {
     });
     // -------------------------------------/CALK----------------------------
     // --------------------------------------AKTIVITAS-------------------------
+    $("#ak_pembukuan_id").change(function () {
+        var pembukuan_id = $("#ak_pembukuan_id option:selected").val();
+        $.ajax({
+            url: base_url + 'akuntansi/laporan/ajaxcombobuku/' + pembukuan_id,
+            type: "GET",
+            cache: false,
+            dataType: "JSON",
+            success: function (data) {
+                $('[name="awalbuku"]').val(data.awal_periode);
+                $('[name="akhirbuku"]').val(data.akhir_periode);
+                $('[name="akhir_periode"]').val(data.akhir_periode);
+            },
+            error: function (e) {
+                console.log('Error' + e);
+            }
+        });
+    });
     $('#btn-tampil-activitas').on('click', function (e) {
         e.preventDefault();
         var laporan = $(this).data('laporan');
@@ -205,8 +395,9 @@ $(document).ready(function () {
         var idInstitusi = $(this).data('id');
         //const akhir_periode = $('[name="akhir_periode"]').val();
         const tanggal = $('[name="akhir_periode"]').val();
-        // const buku_awal = $(this).data('tgl1');
-        // const buku_akhir = $(this).data('tgl2');
+        const awalbuku = $('[name="awalbuku"]').val();
+        const akhirbuku = $('[name="akhirbuku"]').val();
+        const tahunbuku = $('[name="ak_pembukuan_id"]').val();
         const ckKonsolidasi = document.getElementById("ckkonsolidasi");
         const ckKomparatif = document.getElementById("ckkomparatif");
         if (idInstitusi == '01') {
@@ -231,6 +422,8 @@ $(document).ready(function () {
             type: "POST",
             url: base_url + "akuntansi/activitas/cekinput",
             data: {
+                awalbuku: awalbuku,
+                akhirbuku: akhirbuku,
                 akhir_periode: tanggal
             },
             dataType: "JSON",
@@ -244,11 +437,18 @@ $(document).ready(function () {
                         title: 'Tanggal diluar periode pembukuan!!!'
                     });
                 } else {
+                    Toast.fire({
+                        icon: 'success',
+                        title: ' Menampilkan Laporan..'
+                    });
                     $.ajax({
                         type: "POST",
                         cache: false,
                         url: base_url + "akuntansi/activitas/viewdata",
                         data: {
+                            tahunbuku: tahunbuku,
+                            awalbuku: awalbuku,
+                            akhirbuku: akhirbuku,
                             akhir_periode: tanggal,
                             jenis: jenis
                         },
@@ -268,6 +468,23 @@ $(document).ready(function () {
     });
     // -------------------------------------/AKTIVITAS-------------------------
     // --------------------------------------PERUBAHAN ASET-------------------------
+    $("#pas_pembukuan_id").change(function () {
+        var pembukuan_id = $("#pas_pembukuan_id option:selected").val();
+        $.ajax({
+            url: base_url + 'akuntansi/laporan/ajaxcombobuku/' + pembukuan_id,
+            type: "GET",
+            cache: false,
+            dataType: "JSON",
+            success: function (data) {
+                $('[name="awalbuku"]').val(data.awal_periode);
+                $('[name="akhirbuku"]').val(data.akhir_periode);
+                $('[name="akhir_periode"]').val(data.akhir_periode);
+            },
+            error: function (e) {
+                console.log('Error' + e);
+            }
+        });
+    });
     $('#btn-tampil-perubahanaset').on('click', function (e) {
         e.preventDefault();
         var laporan = $(this).data('laporan');
@@ -275,8 +492,9 @@ $(document).ready(function () {
         var idInstitusi = $(this).data('id');
         //const akhir_periode = $('[name="akhir_periode"]').val();
         const tanggal = $('[name="akhir_periode"]').val();
-        // const buku_awal = $(this).data('tgl1');
-        // const buku_akhir = $(this).data('tgl2');
+        const awalbuku = $('[name="awalbuku"]').val();
+        const akhirbuku = $('[name="akhirbuku"]').val();
+        const tahunbuku = $('[name="pas_pembukuan_id"]').val();
         const ckKonsolidasi = document.getElementById("ckkonsolidasi");
         const ckKomparatif = document.getElementById("ckkomparatif");
         if (idInstitusi == '01') {
@@ -301,6 +519,8 @@ $(document).ready(function () {
             type: "POST",
             url: base_url + "akuntansi/perubahanaset/cekinput",
             data: {
+                awalbuku: awalbuku,
+                akhirbuku: akhirbuku,
                 akhir_periode: tanggal
             },
             dataType: "JSON",
@@ -314,11 +534,18 @@ $(document).ready(function () {
                         title: 'Tanggal diluar periode pembukuan!!!'
                     });
                 } else {
+                    Toast.fire({
+                        icon: 'success',
+                        title: ' Menampilkan laporan...'
+                    });
                     $.ajax({
                         type: "POST",
                         cache: false,
                         url: base_url + "akuntansi/perubahanaset/viewdata",
                         data: {
+                            tahunbuku: tahunbuku,
+                            awalbuku: awalbuku,
+                            akhirbuku: akhirbuku,
                             akhir_periode: tanggal,
                             jenis: jenis
                         },
@@ -326,10 +553,7 @@ $(document).ready(function () {
                             $("#data").html(data);
                         }
                     });
-                    // Toast.fire({
-                    //     icon: 'success',
-                    //     title: ' Tampilkan laporan!!!. aaaaa' + jenis
-                    // });
+
                 }
                 $('#btn-tampil-perubahanaset').attr('disabled', false);
             }

@@ -26,7 +26,7 @@
                         <div class="card-header bg-gradient-light">
                             <div>
                                 <h4 class="card-title">
-                                    Parameter Laporan
+                                    Tahun Pembukuan <?= $this->session->userdata('tahun_buku'); ?>
                                 </h4>
                             </div>
                             <div class="float-right">
@@ -39,15 +39,28 @@
                         <!-- /.card-header -->
                         <div class="card-body">
                             <!--------------- isi content ---------------------------- -->
-                            <form method="POST" action="<?= base_url('akuntansi/bukubesar/data'); ?>">
+                            <form>
                                 <div class="row">
+                                    <div class="col-md-1">
+                                        <label class="font-weight-normal">Pembukuan</label>
+                                        <select id="bb_pembukuan_id" name="bb_pembukuan_id" class="form-control">
+                                            <?php
+                                            foreach ($pembukuan as $dataPembukuan) :
+                                                $idBuku = $dataPembukuan['id'];
+                                            ?>
+                                                <option value="<?= $dataPembukuan['id']; ?>" <?php cek_combo($pembukuan_id, $idBuku); ?>><?= $idBuku; ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
                                     <div class="col-md-2">
                                         <label class="font-weight-normal">Awal Periode </label>
-                                        <input type="text" name="awal_periode" id="awal_periode" class="form-control" autocomplete="off">
+                                        <input type="text" name="awal_periode" id="awal_periode" class="form-control" autocomplete="off" value="<?= $awal_periode; ?>">
+                                        <span id="awal_error" class="text-danger"></span>
                                     </div>
                                     <div class="col-md-2">
                                         <label class="font-weight-normal">Akhir Periode </label>
                                         <input type="text" name="akhir_periode" id="akhir_periode" class="form-control" autocomplete="off">
+                                        <span id="akhir_error" class="text-danger"></span>
                                     </div>
                                     <div class="col-md-5">
                                         <label class="font-weight-normal">Kode Perkiraan </label>
@@ -63,18 +76,19 @@
                                             }
                                             ?>
                                         </select>
-
                                         <span id="akun_error" class="text-danger"></span>
                                     </div>
-                                    <div class="col-md-2 mt-auto">
-                                        <button type="submit" class="btn btn-primary">Tampilkan</button>
+                                    <div class="col-md-2">
+                                        <label class="font-weight-normal">&nbsp;</label><br>
+                                        <input type="hidden" id="awalbuku" name="awalbuku" value="<?= $awalbuku; ?>">
+                                        <input type="hidden" id="akhirbuku" name="akhirbuku" value="<?= $akhirbuku; ?>">
+                                        <button type="submit" id="btn-tampil-bukubesar" class="btn btn-primary">Tampilkan</button>
                                     </div>
-
-
                                 </div>
                             </form>
                             <!-- /.form inline -->
                             <!--------------- isi content ---------------------------- -->
+
                         </div>
                         <!-- /.card-body -->
                     </div>
@@ -83,6 +97,14 @@
                 <!-- /.col-md-12 -->
             </div>
             <!-- /.row -->
+            <!-- <div class="row">
+                <div class="col-md-12"> -->
+            <!-- data laporanya -->
+            <div id="data">
+            </div>
+            <!-- end data laporanya-->
+            <!-- </div>
+            </div> -->
 
         </div>
         <!-- /.container-fluid -->

@@ -4,7 +4,7 @@
             <div class="card-header bg-gradient-light">
                 <div>
                     <h4 class="card-title">
-                        Laporan Perubahan Aset Bersih Komparatif
+                        Perubahan Aset Bersih Komparatif
                     </h4>
                 </div>
                 <div class="float-right">
@@ -19,10 +19,10 @@
                 //var_dump($pbll);
                 ?>
                 <?php
-                $pembukuan = $this->session->userdata['tahun_buku'];
+                $pembukuan = $tahunbuku;
                 $format = "years";
                 $jml = -1;
-                $buku_awalA = $this->session->userdata['buku_awal'];
+                $buku_awalA = $awalbuku;
                 $buku_awalB = manipulasiTanggal($buku_awalA, $jml, $format);
                 $tanggallalu = manipulasiTanggal($tanggal, $jml, $format);
                 $tahunlalu = manipulasiTahun($tanggal, $jml, $format);
@@ -43,7 +43,7 @@
                             <tr>
                                 <td class="text-center"></td>
                                 <td class="text-center" colspan="4">
-                                    Untuk Tahun Yang Berakhir <?= format_indo($this->session->userdata('buku_akhir')); ?> dan <?= $tahunlalu ?><br>
+                                    Untuk Tahun Yang Berakhir <?= format_indo($akhirbuku); ?> dan <?= $tahunlalu ?><br>
                                     (Dinyatakan dalam Rupiah, kecuali dinyatakan lain)
 
                                 </td>
@@ -71,12 +71,12 @@
                                     <span class="font-weight-normal my-auto">Catatan</span>
                                     <div class="border-top my-1"></div>
                                 </td>
-                                <td width="12%" class="text-center">
+                                <td width="15%" class="text-center">
                                     <span class="font-weight-normal my-auto"><?= format_indo($tanggal); ?><div class="border-top my-1"></div>
                                         <div class="my-1">(Rp)</div>
                                     </span>
                                 </td>
-                                <td width="12%" class="text-center">
+                                <td width="15%" class="text-center">
                                     <span class="font-weight-normal my-auto"><?= format_indo($tanggallalu); ?><div class="border-top my-1"></div>
                                         <div class="my-1">(Rp)</div>
                                     </span>

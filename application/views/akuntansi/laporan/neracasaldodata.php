@@ -26,7 +26,7 @@
                         <div class="card-header bg-gradient-light">
                             <div>
                                 <h4 class="card-title">
-                                    Parameter Laporan
+                                    Tahun Pembukuan <?= $this->session->userdata('tahun_buku'); ?>
                                 </h4>
                             </div>
                             <div class="float-right">
@@ -39,17 +39,32 @@
                         <!-- /.card-header -->
                         <div class="card-body">
                             <!--------------- isi content ---------------------------- -->
-                            <form class="form-inline" method="POST" action="<?= base_url('akuntansi/neracasaldo/data'); ?>">
-                                <div class="form-group my-2 mr-sm-3">
-                                    <label class="font-weight-normal my-2 mr-3">Akhir Periode :</label>
-                                    <input type="text" name="akhir_periode" id="akhir_periode" class="form-control" autocomplete="off" value="<?= $akhir_periode; ?>">
-                                    <span id="akhir_error" class="text-danger"></span>
+                            <form method="POST" action="<?= base_url('akuntansi/neracasaldo/data'); ?>">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <label class="font-weight-normal">Pembukuan</label>
+                                        <select id="ns_pembukuan_id" name="ns_pembukuan_id" class="form-control">
+                                            <?php
+                                            foreach ($pembukuan as $dataPembukuan) :
+                                                $idBuku = $dataPembukuan['id'];
+                                            ?>
+                                                <option value="<?= $dataPembukuan['id']; ?>" <?php cek_combo($pembukuan_id, $idBuku); ?>><?= $idBuku; ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="font-weight-normal">Akhir Periode </label>
+                                        <input type="hidden" id="awalperiode" name="awalperiode" value="<?= $awal_periode; ?>">
+                                        <input type="text" name="akhir_periode" id="akhir_periode" class="form-control" autocomplete="off" value="<?= $akhir_periode; ?>">
+                                    </div>
+                                    <!-- <button type="submit" id="btn_tampl_neracasaldo" class="btn btn-primary mb-2">Terapkan</button> -->
+                                    <div class="col-md-2 mt-auto">
+                                        <button type="submit" class="btn btn-primary">Tampilkan</button>
+                                    </div>
+
                                 </div>
-
-                                <button type="submit" class="btn btn-primary my-1">Tampilkan</button>
+                                <!-- /.row -->
                             </form>
-                            <!-- /.form inline -->
-
                         </div>
                         <!-- /.card-body -->
                     </div>
@@ -59,6 +74,7 @@
             </div>
             <!-- /.row -->
             <?php
+            //var_dump($neracasaldo);
             if ($neracasaldo) {
             ?>
                 <!-- isi laporan -->

@@ -40,7 +40,7 @@
                             <tr>
                                 <td class="text-center"></td>
                                 <td class="text-center" colspan="4">
-                                    Untuk Tahun Yang Berakhir <?= format_indo($this->session->userdata('buku_akhir')); ?> dan <?= $tahunlalu; ?><br>
+                                    Untuk Tahun Yang Berakhir <?= format_indo($akhirbuku); ?> dan <?= $tahunlalu; ?><br>
                                     (Dinyatakan dalam Rupiah, kecuali dinyatakan lain)
 
                                 </td>

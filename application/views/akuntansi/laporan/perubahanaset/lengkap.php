@@ -19,10 +19,10 @@
                 //var_dump($pbll);
                 ?>
                 <?php
-                $pembukuan = $this->session->userdata['tahun_buku'];
+                $pembukuan = $tahunbuku;
                 $format = "years";
                 $jml = -1;
-                $buku_awalA = $this->session->userdata['buku_awal'];
+                $buku_awalA = $awalbuku;
                 $buku_awalB = manipulasiTanggal($buku_awalA, $jml, $format);
                 $tanggallalu = manipulasiTanggal($tanggal, $jml, $format);
                 $tahunlalu = manipulasiTahun($tanggal, $jml, $format);

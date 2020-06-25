@@ -134,6 +134,10 @@ class Kodeperkiraan_model extends CI_Model
     {
         return $this->db2->get_where('a6levels', ['id' => $id])->num_rows();
     }
+    public function ambil_akun6($id)
+    {
+        return $this->db2->get_where('a6levels', ['id' => $id])->row_array();
+    }
     public function hapusakun5($id, $info)
     {
         $this->db2->delete('a5levels', ['id' => $id]);

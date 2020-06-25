@@ -26,7 +26,7 @@
                         <div class="card-header bg-gradient-light">
                             <div>
                                 <h4 class="card-title">
-                                    Parameter Laporan
+                                    Tahun Pembukuan <?= $this->session->userdata('tahun_buku'); ?>
                                 </h4>
                             </div>
                             <div class="float-right">
@@ -39,34 +39,46 @@
                         <!-- /.card-header -->
                         <div class="card-body">
                             <!--------------- isi content ---------------------------- -->
-                            <form class="form-inline" method="POST" action="<?= base_url('akuntansi/jurnal/data'); ?>">
-
-                                <div class="form-group my-2 mr-sm-3">
-                                    <label class="font-weight-normal my-2 mr-3">Awal Periode :</label>
-                                    <input type="text" name="awal_periode" id="awal_periode" class="form-control" autocomplete="off" value="<?= $awal_periode; ?>">
-                                    <span id="awal_error" class="text-danger"></span>
+                            <form method="POST" action="<?= base_url('akuntansi/jurnal/data'); ?>">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <label class="font-weight-normal">Pembukuan</label>
+                                        <select id="jt_pembukuan_id" name="jt_pembukuan_id" class="form-control">
+                                            <?php
+                                            foreach ($pembukuan as $dataPembukuan) :
+                                                $idBuku = $dataPembukuan['id'];
+                                            ?>
+                                                <option value="<?= $dataPembukuan['id']; ?>" <?php cek_combo($pembukuan_id, $idBuku); ?>><?= $idBuku; ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label class="font-weight-normal">Awal Periode </label>
+                                        <input type="text" name="awal_periode" id="awal_periode" class="form-control" autocomplete="off" value="<?= $awal_periode; ?>">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label class="font-weight-normal">Akhir Periode </label>
+                                        <input type="text" name="akhir_periode" id="akhir_periode" class="form-control" autocomplete="off" value="<?= $akhir_periode; ?>">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <!-- <div class="form-group"> -->
+                                        <label class="font-weight-normal">Jurnal</label>
+                                        <select id="jurnal" name="jurnal" class="form-control" tabindex="4">
+                                            <option value="">- Semua -</option>
+                                            <?php
+                                            foreach ($cmbjurnal as $dataCmbjurnal) :
+                                                $idJurnal = $dataCmbjurnal['id'];
+                                            ?>
+                                                <option value="<?= $dataCmbjurnal['id']; ?>" <?php cek_combo($jurnal_id, $idJurnal); ?>><?= $idJurnal; ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                        <!-- </div> -->
+                                    </div>
+                                    <div class="col-md-2 mt-auto">
+                                        <button type="submit" class="btn btn-primary">Tampilkan</button>
+                                    </div>
                                 </div>
-                                <div class="form-group my-2 mr-sm-3">
-                                    <label class="font-weight-normal my-2 mr-3">Akhir Periode :</label>
-                                    <input type="text" name="akhir_periode" id="akhir_periode" class="form-control" autocomplete="off" value="<?= $akhir_periode; ?>">
-                                    <span id="akhir_error" class="text-danger"></span>
-                                </div>
-                                <div class="form-group my-2 mr-sm-3">
-                                    <select id="jurnal" name="jurnal" class="form-control" tabindex="4">
-                                        <option value="">- Semua Jurnal -</option>
-                                        <option value="KM">- Jurnal Kas Masuk -</option>
-                                        <option value="KK">- Jurnal Kas Keluar -</option>
-                                        <option value="BM">- Jurnal Bank Masuk -</option>
-                                        <option value="BK">- Jurnal Bank Masuk -</option>
-                                        <option value="NN">- Jurnal Non Kas -</option>
-                                    </select>
-                                    <span id="unit_error" class="text-danger"></span>
-                                </div>
-
-                                <button type="submit" class="btn btn-primary my-1">Tampilkan</button>
                             </form>
-                            <!-- /.form inline -->
-
                         </div>
                         <!-- /.card-body -->
                     </div>
@@ -99,7 +111,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <table id="tabel3" class="table table-bordered table-hover">
+                                        <table id="tabel3" class="table table-bordered table-hover table-sm">
                                             <thead>
                                                 <tr>
                                                     <td width="5%" class="text-center">No</td>
@@ -118,8 +130,8 @@
                                                 ?>
                                                     <tr class="font-weight-normal bg-light">
                                                         <td class="text-center"><?= $no; ?></td>
-                                                        <td><?= tanggal_indo($dataJurnal['tanggal']); ?></td>
-                                                        <td><?= $dataJurnal['nobukti']; ?></td>
+                                                        <td class="text-center"><?= tanggal_indo($dataJurnal['tanggal']); ?></td>
+                                                        <td class="text-center"><?= $dataJurnal['nobukti']; ?></td>
                                                         <td colspan="3">
                                                             <?= $dataJurnal['keterangan']; ?>
                                                         </td>

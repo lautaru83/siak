@@ -9,7 +9,7 @@ class Laporan extends CI_Controller
         is_logged_in();
         $this->db2 = $this->load->database('akuntansi', TRUE);
         //$this->load->model('akuntansi/Tahunbuku_model', 'Tahunbuku_model');
-        $this->load->model(array('Institusi_model' => 'Institusi_model', 'akuntansi/Kodeperkiraan_model' => 'Kodeperkiraan_model', 'akuntansi/Saldoawal_model' => 'Saldoawal_model', 'akuntansi/Transaksi_model' => 'Transaksi_model', 'akuntansi/Kodeperkiraan_model' => 'Kodeperkiraan_model', 'Unit_model' => 'Unit_model', 'akuntansi/Laporan_model' => 'Laporan_model'));
+        $this->load->model(array('Institusi_model' => 'Institusi_model', 'akuntansi/Kodeperkiraan_model' => 'Kodeperkiraan_model', 'akuntansi/Tahunbuku_model' => 'Tahunbuku_model', 'akuntansi/Saldoawal_model' => 'Saldoawal_model', 'akuntansi/Transaksi_model' => 'Transaksi_model', 'akuntansi/Kodeperkiraan_model' => 'Kodeperkiraan_model', 'Unit_model' => 'Unit_model', 'akuntansi/Laporan_model' => 'Laporan_model'));
     }
     public function index()
     {
@@ -26,12 +26,30 @@ class Laporan extends CI_Controller
         $this->template->display('akuntansi/laporan/jurnal', $data);
         //$this->template->display('akuntansi/transaksi/kasmasuk');
     }
+    public function ajaxcombobuku($id)
+    {
+        $hasil = $this->Tahunbuku_model->ambil_data_id($id);
+        if ($hasil) {
+            $data = array(
+                'status' => 'sukses',
+                'id' => $hasil['id'],
+                'awal_periode' => tanggal_indo($hasil['awal_periode']),
+                'akhir_periode' => tanggal_indo($hasil['akhir_periode']),
+                'keterangan' => $hasil['keterangan']
+            );
+        } else {
+            $data = array(
+                'status' => 'gagal'
+            );
+        }
+        echo json_encode($data);
+    }
     public function jurnal()
     {
         $data['kontenmenu'] = "Laporan";
         $data['kontensubmenu'] = "Jurnal Transaksi";
         $data['jurnal'] = "";
-        $data['awal_periode'] = $this->input->post('awal_periode');
+        $data['awal_periode'] = $this->input->post('awalperiode');
         $data['akhir_periode'] = $this->input->post('akhir_periode');
         $this->_validatejurnal();
         if ($this->form_validation->run() == false) {
@@ -45,9 +63,6 @@ class Laporan extends CI_Controller
         }
         $this->template->display('akuntansi/laporan/datajurnal', $data);
     }
-
-
-
     private function _validatejurnal()
     {
         $this->form_validation->set_rules('awal_periode', 'Tanggal', 'required|trim');

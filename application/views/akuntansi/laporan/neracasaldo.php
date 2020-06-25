@@ -29,7 +29,7 @@
                         <div class="card-header bg-gradient-light">
                             <div>
                                 <h4 class="card-title">
-                                    <a class="text-reset" id="kas-keluar">Parameter Laporan </a>
+                                    <a class="text-reset" id="kas-keluar">Tahun Pembukuan <?= $this->session->userdata('tahun_buku'); ?></a>
                                 </h4>
                             </div>
                             <div class="float-right">
@@ -37,28 +37,32 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <div class="col">
-                                <form class="form-inline" method="POST" action="<?= base_url('akuntansi/neracasaldo/data'); ?>">
-                                    <div class="form-group mb-2">
-                                        <label class="font-weight-normal">Akhir Periode : </label>
+                            <form method="POST" action="<?= base_url('akuntansi/neracasaldo/data'); ?>">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <label class="font-weight-normal">Pembukuan</label>
+                                        <select id="ns_pembukuan_id" name="ns_pembukuan_id" class="form-control">
+                                            <?php
+                                            foreach ($pembukuan as $dataPembukuan) :
+                                                $idBuku = $dataPembukuan['id'];
+                                            ?>
+                                                <option value="<?= $dataPembukuan['id']; ?>" <?php cek_combo($pembukuan_id, $idBuku); ?>><?= $idBuku; ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
                                     </div>
-                                    <!-- <div class="form-group mx-sm-2 mb-2">
-                                        <input type="text" name="awal_periode" id="awal_periode" class="form-control" autocomplete="off" value="<?php //$awal_periode; 
-                                                                                                                                                ?>">
-                                        <span id="tanggal_error" class="text-danger"></span>
-                                    </div>
-                                    <div class="form-group mb-2">
-                                        <label class="font-weight-normal">Akhir Periode : </label>
-                                    </div> -->
-                                    <div class="form-group mx-sm-2 mb-2">
+                                    <div class="col-md-3">
+                                        <label class="font-weight-normal">Akhir Periode </label>
+                                        <input type="hidden" id="awalperiode" name="awalperiode" value="<?= $awal_periode; ?>">
                                         <input type="text" name="akhir_periode" id="akhir_periode" class="form-control" autocomplete="off" value="<?= $akhir_periode; ?>">
-                                        <span id="tanggal_error" class="text-danger"></span>
                                     </div>
-                                    <button type="submit" id="btn_tampl_neracasaldo" class="btn btn-primary mb-2">Terapkan</button>
-                                </form>
-                                <!-- /.row -->
+                                    <!-- <button type="submit" id="btn_tampl_neracasaldo" class="btn btn-primary mb-2">Terapkan</button> -->
+                                    <div class="col-md-2 mt-auto">
+                                        <button type="submit" class="btn btn-primary">Tampilkan</button>
+                                    </div>
 
-                            </div>
+                                </div>
+                                <!-- /.row -->
+                            </form>
                             <!-- /.container-fluid -->
                             <?php //$this->load->view('akuntansi/nonkasbank/modal');
                             ?>

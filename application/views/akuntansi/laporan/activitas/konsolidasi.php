@@ -10,8 +10,8 @@
                 <div class="float-right">
                 </div>
             </div>
-            <div class="card-body bg-gradient-light">
-                <div class="row bg-gradient-light">
+            <div class="card-body">
+                <div class="row">
                     <div style="height: 25px;">
                     </div>
                 </div>
@@ -36,7 +36,7 @@
                             <tr>
                                 <td class="text-center"></td>
                                 <td class="text-center" colspan="4">
-                                    Untuk Tahun Yang Berakhir <?= format_indo($this->session->userdata('buku_akhir')); ?><br>
+                                    Untuk Tahun Yang Berakhir <?= format_indo($akhirbuku); ?><br>
                                     (Dinyatakan dalam Rupiah, kecuali dinyatakan lain)
 
                                 </td>
@@ -395,7 +395,7 @@
                         </tbody>
                     </table>
                 <?php } ?>
-                <div class="row bg-gradient-light">
+                <div class="row">
                     <div style="height: 25px;">
                     </div>
                 </div>

@@ -191,6 +191,66 @@ function ambilsaldo($thbukuid, $akunid, $posisi)
         echo "0,00";
     }
 }
+function saldoawal($tahunbuku, $akun_id)
+{
+    $ci = get_instance();
+    $ci->db2 = $ci->load->database('akuntansi', TRUE);
+    $saldoawal = 0.00;
+    $result = $ci->db2->query("SELECT b.tahun_buku AS tahunbuku, a.posisi AS posisi, b.debet AS debet, b.kredit AS kredit, b.jurnal AS jurnal FROM view_kodeperkiraans AS a INNER JOIN view_transaksis AS b ON a.a6level_id = b.a6level_id WHERE b.a6level_id = '$akun_id' AND b.tahun_buku = '$tahunbuku' AND b.jurnal = 'SA'")->row_array();
+    if ($result) {
+        $posisi = $result['posisi'];
+        $debet = $result['debet'];
+        $kredit = $result['kredit'];
+        if ($posisi == "D") {
+            $saldoawal = $debet - $kredit;
+        } else {
+            $saldoawal = $kredit - $debet;
+        }
+        return $saldoawal;
+    } else {
+        return $saldoawal;
+    }
+}
+function saldoawalberjalan($tahunbuku, $akun_id, $awalbuku, $awalperiode)
+{
+    $ci = get_instance();
+    $ci->db2 = $ci->load->database('akuntansi', TRUE);
+    $saldoawal = 0.00;
+    $result = $ci->db2->query("SELECT b.tahun_buku AS tahunbuku, a.posisi AS posisi, sum(b.debet) AS debet, sum(b.kredit) AS kredit FROM view_kodeperkiraans AS a INNER JOIN view_transaksis AS b ON a.a6level_id = b.a6level_id WHERE b.a6level_id = '$akun_id' AND b.tahun_buku = '$tahunbuku' AND b.is_valid IN ('1', '2', '3') AND b.tanggal_transaksi BETWEEN '$awalbuku' AND '$awalperiode' GROUP BY b.a6level_id")->row_array();
+    if ($result) {
+        $posisi = $result['posisi'];
+        $debet = $result['debet'];
+        $kredit = $result['kredit'];
+        if ($posisi == "D") {
+            $saldoawal = $debet - $kredit;
+        } else {
+            $saldoawal = $kredit - $debet;
+        }
+        return $saldoawal;
+    } else {
+        return $saldoawal;
+    }
+}
+function saldoakhir($tahunbuku, $akun_id, $awalbuku, $akhirperiode)
+{
+    $ci = get_instance();
+    $ci->db2 = $ci->load->database('akuntansi', TRUE);
+    $saldoawal = 0.00;
+    $result = $ci->db2->query("SELECT b.tahun_buku AS tahunbuku, a.posisi AS posisi, sum(b.debet) AS debet, sum(b.kredit) AS kredit FROM view_kodeperkiraans AS a INNER JOIN view_transaksis AS b ON a.a6level_id = b.a6level_id WHERE b.a6level_id = '$akun_id' AND b.tahun_buku = '$tahunbuku' AND b.is_valid IN ('1', '2', '3') AND b.tanggal_transaksi BETWEEN '$awalbuku' AND '$akhirperiode' GROUP BY b.a6level_id")->row_array();
+    if ($result) {
+        $posisi = $result['posisi'];
+        $debet = $result['debet'];
+        $kredit = $result['kredit'];
+        if ($posisi == "D") {
+            $saldoawal = $debet - $kredit;
+        } else {
+            $saldoawal = $kredit - $debet;
+        }
+        return $saldoawal;
+    } else {
+        return $saldoawal;
+    }
+}
 function ambilsaldoawal($thbukuid, $akunid, $posisi)
 {
     $ci = get_instance();

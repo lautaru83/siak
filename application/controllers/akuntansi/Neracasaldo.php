@@ -9,7 +9,7 @@ class Neracasaldo extends CI_Controller
         is_logged_in();
         $this->db2 = $this->load->database('akuntansi', TRUE);
         //$this->load->model('akuntansi/Tahunbuku_model', 'Tahunbuku_model');
-        $this->load->model(array('Institusi_model' => 'Institusi_model', 'akuntansi/Kodeperkiraan_model' => 'Kodeperkiraan_model', 'akuntansi/Saldoawal_model' => 'Saldoawal_model', 'akuntansi/Transaksi_model' => 'Transaksi_model', 'akuntansi/Kodeperkiraan_model' => 'Kodeperkiraan_model', 'Unit_model' => 'Unit_model', 'akuntansi/Laporan_model' => 'Laporan_model'));
+        $this->load->model(array('Institusi_model' => 'Institusi_model', 'akuntansi/Kodeperkiraan_model' => 'Kodeperkiraan_model', 'akuntansi/Saldoawal_model' => 'Saldoawal_model', 'akuntansi/Tahunbuku_model' => 'Tahunbuku_model', 'akuntansi/Transaksi_model' => 'Transaksi_model', 'akuntansi/Kodeperkiraan_model' => 'Kodeperkiraan_model', 'Unit_model' => 'Unit_model', 'akuntansi/Laporan_model' => 'Laporan_model'));
     }
     public function index()
     {
@@ -17,9 +17,10 @@ class Neracasaldo extends CI_Controller
         $data['kontensubmenu'] = "Neraca Saldo";
         $institusi_id = $this->session->userdata('idInstitusi');
         $pembukuan_id = $this->session->userdata('tahun_buku');
-        $data['pembukuan_id'] = $this->session->userdata('tahun_buku');
-        $data['neracasaldo'] = "";
-        $data['awal_periode'] = tanggal_indo($this->session->userdata('buku_awal'));
+        $data['pembukuan_id'] = $pembukuan_id;
+        $data['pembukuan'] = $this->Tahunbuku_model->ambil_data();
+        //$data['neracasaldo'] = "";
+        $data['awal_periode'] = tanggal_input($this->session->userdata('buku_awal'));
         $data['akhir_periode'] = tanggal_indo($this->session->userdata('buku_akhir'));
         $data['jurnal'] = "";
         //$data['unit'] = $this->Unit_model->ambil_data_institusi_id($institusi_id);
@@ -31,8 +32,10 @@ class Neracasaldo extends CI_Controller
         $data['kontenmenu'] = "Laporan";
         $data['kontensubmenu'] = "Neraca Saldo";
         $data['neracasaldo'] = "";
-        //$data['neracasaldo'] = "";
-        $data['awal_periode'] = $this->input->post('awal_periode');
+        $pembukuan_id = $this->input->post('ns_pembukuan_id');
+        $data['pembukuan_id'] = $pembukuan_id;
+        $data['pembukuan'] = $this->Tahunbuku_model->ambil_data();
+        $data['awal_periode'] = $this->input->post('awalperiode');
         $data['akhir_periode'] = $this->input->post('akhir_periode');
         $this->_validatejurnal();
         if ($this->form_validation->run() == false) {

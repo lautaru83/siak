@@ -26,7 +26,7 @@
                         <div class="card-header bg-gradient-light">
                             <div>
                                 <h4 class="card-title">
-                                    Parameter Laporan
+                                    Tahun Pembukuan <?= $this->session->userdata('tahun_buku'); ?>
                                 </h4>
                             </div>
                             <div class="float-right">
@@ -41,6 +41,17 @@
                             <!--------------- isi content ---------------------------- -->
                             <form method="POST" action="<?= base_url('akuntansi/bukubesar/data'); ?>">
                                 <div class="row">
+                                    <div class="col-md-1">
+                                        <label class="font-weight-normal">Pembukuan</label>
+                                        <select id="bb_pembukuan_id" name="bb_pembukuan_id" class="form-control">
+                                            <?php
+                                            foreach ($pembukuan as $dataPembukuan) :
+                                                $idBuku = $dataPembukuan['id'];
+                                            ?>
+                                                <option value="<?= $dataPembukuan['id']; ?>" <?php cek_combo($pembukuan_id, $idBuku); ?>><?= $idBuku; ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
                                     <div class="col-md-2">
                                         <label class="font-weight-normal">Awal Periode </label>
                                         <input type="text" name="awal_periode" id="awal_periode" class="form-control" autocomplete="off" value="<?= $awal_periode; ?>">
@@ -58,7 +69,7 @@
                                                 foreach ($akunbuku as $dataAkunbuku) :
                                                     $akun_id = $dataAkunbuku['id'];
                                             ?>
-                                                    <option value="<?= $dataAkunbuku['id']; ?>" <?= cek_combo($akun_id,$a6level_id); ?>><?= $dataAkunbuku['id']; ?> - <?= $dataAkunbuku['level6']; ?></option>
+                                                    <option value="<?= $dataAkunbuku['id']; ?>" <?= cek_combo($akun_id, $a6level_id); ?>><?= $dataAkunbuku['id']; ?> - <?= $dataAkunbuku['level6']; ?></option>
                                             <?php
                                                 endforeach;
                                             }
@@ -68,6 +79,8 @@
                                         <span id="akun_error" class="text-danger"></span>
                                     </div>
                                     <div class="col-md-2 mt-auto">
+                                        <input type="hidden" id="awalbuku" name="awalbuku" value="<?= $awal_periode; ?>">
+                                        <input type="hidden" id="akhirbuku" name="akhirbuku" value="<?= $akhir_periode; ?>">
                                         <button type="submit" class="btn btn-primary">Tampilkan</button>
                                     </div>
 
@@ -95,7 +108,7 @@
                             <div class="card-header bg-gradient-light">
                                 <div>
                                     <h4 class="card-title">
-                                        Data Transaksi
+                                        Buku Besar
                                     </h4>
                                 </div>
                                 <div class="float-right">
@@ -109,7 +122,58 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <table id="tabel3" class="table table-bordered table-hover table-striped">
+                                        <table id="tabel3" class="table table-borderless table-sm">
+                                            <?php
+                                            $akun = $this->Kodeperkiraan_model->ambil_akun6($a6level_id);
+                                            $id6 = $akun['id'];
+                                            if ($awalbuku == $tanggalawal) {
+                                                $tes = "cek saldo awal 1";
+                                            } else {
+                                                $tes = "cek saldo awal tanggal - 1";
+                                            }
+                                            ?>
+                                            <tr>
+                                                <td width="10%">Kode</td>
+                                                <td width="3%">:</td>
+                                                <td><?= $akun['id']; ?></td>
+                                                <td width="10%">Pembukuan</td>
+                                                <td width="1%">:</td>
+                                                <td width="15%" class="text-right"><?= $pembukuan_id; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Nama Akun</td>
+                                                <td>:</td>
+                                                <td><?= $akun['level6']; ?></td>
+                                                <td>Tanggal</td>
+                                                <td>:</td>
+                                                <td class="text-right"><?= tanggal_indo($akhir_periode); ?></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Saldo Awal</td>
+                                                <td>:</td>
+                                                <td><?= $tes; ?></td>
+                                                <td>Saldo Akhir</td>
+                                                <td>:</td>
+                                                <td class="text-right"><?= $akhir_periode; ?></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <!-- <div class="col-md-6">
+                                        <div class="">
+                                            <span>Kode :</span><br>
+                                            <span>Nama Akun :</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="float-right">
+                                            <span>c</span><br>
+                                            <span>d</span>
+                                        </div>
+                                    </div> -->
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <table id="tabel3" class="table table-bordered table-hover table-striped table-sm">
                                             <thead>
                                                 <tr>
                                                     <td width="5%" class="text-center">No</td>

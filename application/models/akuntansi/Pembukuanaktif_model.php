@@ -43,9 +43,6 @@ class Pembukuanaktif_model extends CI_Model
         $semester_awal = $this->input->post('semester_awal');
         $semester_akhir = $this->input->post('semester_akhir');
         $akademik_id = $this->input->post('tahunakademik_id');
-
-
-
         $nonactive = 0;
         $active = 0;
         $data = array(

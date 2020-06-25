@@ -26,7 +26,7 @@
                         <div class="card-header bg-gradient-light">
                             <div>
                                 <h4 class="card-title">
-                                    Parameter Laporan
+                                    Tahun Pembukuan <?= $this->session->userdata('tahun_buku'); ?>
                                 </h4>
                             </div>
                             <div class="float-right">
