@@ -17,7 +17,6 @@
         <!-- </div> -->
         <!-- /.container-fluid -->
     </section>
-
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
@@ -37,7 +36,7 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <form method="POST" action="<?= base_url('akuntansi/neracasaldo/data'); ?>">
+                            <form>
                                 <div class="row">
                                     <div class="col-md-2">
                                         <label class="font-weight-normal">Pembukuan</label>
@@ -52,20 +51,34 @@
                                     </div>
                                     <div class="col-md-3">
                                         <label class="font-weight-normal">Akhir Periode </label>
-                                        <input type="hidden" id="awalperiode" name="awalperiode" value="<?= $awal_periode; ?>">
-                                        <input type="text" name="akhir_periode" id="akhir_periode" class="form-control" autocomplete="off" value="<?= $akhir_periode; ?>">
+                                        <input type="text" name="akhir_periode" id="akhir_periode" class="form-control" autocomplete="off">
+                                        <span id="akhir_error" class="text-danger"></span>
                                     </div>
                                     <!-- <button type="submit" id="btn_tampl_neracasaldo" class="btn btn-primary mb-2">Terapkan</button> -->
-                                    <div class="col-md-2 mt-auto">
-                                        <button type="submit" class="btn btn-primary">Tampilkan</button>
+                                    <div class="col-md-2">
+                                        <label class="font-weight-normal">&nbsp;</label><br>
+                                        <input type="hidden" id="awalbuku" name="awalbuku" value="<?= $awalbuku; ?>">
+                                        <input type="hidden" id="akhirbuku" name="akhirbuku" value="<?= $akhirbuku; ?>">
+                                        <button type="submit" id="btn-tampil-neracasaldo" class="btn btn-primary">Tampilkan</button>
                                     </div>
-
                                 </div>
                                 <!-- /.row -->
                             </form>
-                            <!-- /.container-fluid -->
-                            <?php //$this->load->view('akuntansi/nonkasbank/modal');
-                            ?>
+                            <!--------------- isi content ---------------------------- -->
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.col-md-12 -->
+            </div>
+            <!-- /.row -->
+            <!-- data laporanya -->
+            <div id="data">
+            </div>
+            <!-- end data laporanya-->
+        </div>
+        <!-- /.container-fluid -->
     </section>
     <!-- /.content -->
 </div>

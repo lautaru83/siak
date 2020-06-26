@@ -20,48 +20,84 @@ class Neracasaldo extends CI_Controller
         $data['pembukuan_id'] = $pembukuan_id;
         $data['pembukuan'] = $this->Tahunbuku_model->ambil_data();
         //$data['neracasaldo'] = "";
-        $data['awal_periode'] = tanggal_input($this->session->userdata('buku_awal'));
-        $data['akhir_periode'] = tanggal_indo($this->session->userdata('buku_akhir'));
-        $data['jurnal'] = "";
-        //$data['unit'] = $this->Unit_model->ambil_data_institusi_id($institusi_id);
+        $awal_periode = tanggal_indo($this->session->userdata('buku_awal'));
+        $akhir_periode = tanggal_indo($this->session->userdata('buku_akhir'));
+        $data['awal_periode'] = $awal_periode;
+        $data['akhir_periode'] = $akhir_periode;
+        $data['awalbuku'] = $awal_periode;
+        $data['akhirbuku'] = $akhir_periode;
+        $data['laporan'] = "";
         $this->template->display('akuntansi/laporan/neracasaldo', $data);
-        //$this->template->display('akuntansi/transaksi/kasmasuk');
     }
-    public function data()
+    public function viewdata()
     {
-        $data['kontenmenu'] = "Laporan";
-        $data['kontensubmenu'] = "Neraca Saldo";
-        $data['neracasaldo'] = "";
-        $pembukuan_id = $this->input->post('ns_pembukuan_id');
-        $data['pembukuan_id'] = $pembukuan_id;
-        $data['pembukuan'] = $this->Tahunbuku_model->ambil_data();
-        $data['awal_periode'] = $this->input->post('awalperiode');
-        $data['akhir_periode'] = $this->input->post('akhir_periode');
-        $this->_validatejurnal();
+        $data['laporan'] = 1;
+        $data['awalbuku'] = tanggal_input($this->input->post('awalbuku'));
+        $data['pembukuan_id'] = $this->input->post('tahunbuku');
+        $data['akhirbuku'] = tanggal_input($this->input->post('akhirbuku'));
+        $data['akhir_periode'] = tanggal_input($this->input->post('akhir_periode'));
+        $data['neracasaldo'] = $this->Laporan_model->neracasaldo();
+        $this->load->view('akuntansi/laporan/neracasaldo/institusi', $data);
+    }
+    // public function data()
+    // {
+    //     $data['kontenmenu'] = "Laporan";
+    //     $data['kontensubmenu'] = "Neraca Saldo";
+    //     $data['neracasaldo'] = "";
+    //     $pembukuan_id = $this->input->post('ns_pembukuan_id');
+    //     $data['pembukuan_id'] = $pembukuan_id;
+    //     $data['pembukuan'] = $this->Tahunbuku_model->ambil_data();
+    //     $data['awal_periode'] = $this->input->post('awalperiode');
+    //     $data['akhir_periode'] = $this->input->post('akhir_periode');
+    //     $this->_validatejurnal();
+    //     if ($this->form_validation->run() == false) {
+    //         $data = array(
+    //             'status' => 'gagal',
+    //             //'awal_error' => form_error('awal_periode'),
+    //             'akhir_error' => form_error('akhir_periode')
+    //         );
+    //     } else {
+    //         $data['neracasaldo'] = $this->Laporan_model->neracasaldo();
+    //     }
+    //     $this->template->display('akuntansi/laporan/neracasaldodata', $data);
+    // }
+    public function cekinput()
+    {
+        $this->_validate();
         if ($this->form_validation->run() == false) {
-            $data = array(
+            $response = array(
                 'status' => 'gagal',
-                //'awal_error' => form_error('awal_periode'),
                 'akhir_error' => form_error('akhir_periode')
             );
         } else {
-            $data['neracasaldo'] = $this->Laporan_model->neracasaldo();
+            $response = array(
+                'status' => 'sukses'
+            );
         }
-        $this->template->display('akuntansi/laporan/neracasaldodata', $data);
+        echo json_encode($response);
     }
-
-
-
-    private function _validatejurnal()
+    public function cek_tanggalakhir()
     {
-        //$this->form_validation->set_rules('awal_periode', 'Tanggal', 'required|trim');
-        $this->form_validation->set_rules('akhir_periode', 'Tanggal', 'required|trim');
-        // $this->form_validation->set_rules('akhir_periode', 'Tanggal', 'required|trim');
-        // $this->form_validation->set_rules('awal_periode', 'Tanggal', 'required|trim|callback_cek_tanggal', [
-        //     'cek_tanggal' => 'Diluar periode pembukuan!!'
+        $akhir_periode = strtotime($this->input->post('akhir_periode'));
+        $buku_awal = strtotime($this->input->post('awalbuku'));
+        $buku_akhir = strtotime($this->input->post('akhirbuku'));
+        if ($akhir_periode < $buku_awal) {
+            return false;
+        } elseif ($akhir_periode > $buku_akhir) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    private function _validate()
+    {
+        // $this->form_validation->set_rules('a6level_id', 'Akun', 'required|trim');
+        $this->form_validation->set_rules('akhir_periode', 'Akhir periode', 'required|trim|callback_cek_tanggalakhir', [
+            'cek_tanggalakhir' => 'Tanggal tidak valid!!'
+        ]);
+        // $this->form_validation->set_rules('awal_periode', 'Awal periode', 'required|trim|callback_cek_tanggalawal', [
+        //     'cek_tanggalawal' => 'Tanggal tidak valid!!'
         // ]);
-        // $this->form_validation->set_rules('keterangan', 'uraian', 'required|trim');
-        // $this->form_validation->set_rules('unit_id', 'Unit Usaha', 'required|trim');
     }
 
 

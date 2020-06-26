@@ -30,11 +30,11 @@ class Laporan_model extends CI_Model
     public function neracasaldo()
     {
         // $tgl1 = $this->session->userdata('buku_awal');
-        $tgl1 = tanggal_input($this->input->post('awalperiode'));
+        $tgl1 = tanggal_input($this->input->post('awalbuku'));
         $tgl2 = tanggal_input($this->input->post('akhir_periode'));
         $institusi_id = $this->session->userdata('idInstitusi');
-        $thbuku = $this->input->post('ns_pembukuan_id');
-        return $this->db2->query("SELECT a.id as id,a.level6 as level6,a.posisi as posisi,a.institusi_id as institusi_id,c.tanggal_transaksi as tanggal_transaksi,SUM(b.debet) as debet,SUM(b.kredit) as kredit,c.is_valid as is_valid,c.jurnal as jurnal FROM a6levels a JOIN detail_transaksis b  ON a.id = b.a6level_id JOIN transaksis c ON c.id = b.transaksi_id WHERE a.institusi_id='$institusi_id' AND c.tahun_buku='$thbuku' AND c.tanggal_transaksi BETWEEN '$tgl1' AND '$tgl2' AND  c.is_valid BETWEEN 1 AND 2 GROUP BY a.id ORDER BY a.id ASC
+        $thbuku = $this->input->post('tahunbuku');
+        return $this->db2->query("SELECT a.id as id,a.level6 as level6,a.posisi as posisi,a.institusi_id as institusi_id,c.tanggal_transaksi as tanggal_transaksi,SUM(b.debet) as debet,SUM(b.kredit) as kredit,c.is_valid as is_valid,c.jurnal as jurnal FROM a6levels a JOIN detail_transaksis b  ON a.id = b.a6level_id JOIN transaksis c ON c.id = b.transaksi_id WHERE a.institusi_id='$institusi_id' AND c.tahun_buku='$thbuku' AND c.tanggal_transaksi BETWEEN '$tgl1' AND '$tgl2' AND  c.is_valid IN ('1','2','3') GROUP BY a.id ORDER BY a.id ASC
         ")->result_array();
     }
     public function bukubesar()

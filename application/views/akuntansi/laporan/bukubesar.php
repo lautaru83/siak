@@ -86,9 +86,7 @@
                                     </div>
                                 </div>
                             </form>
-                            <!-- /.form inline -->
                             <!--------------- isi content ---------------------------- -->
-
                         </div>
                         <!-- /.card-body -->
                     </div>
@@ -97,15 +95,10 @@
                 <!-- /.col-md-12 -->
             </div>
             <!-- /.row -->
-            <!-- <div class="row">
-                <div class="col-md-12"> -->
             <!-- data laporanya -->
             <div id="data">
             </div>
             <!-- end data laporanya-->
-            <!-- </div>
-            </div> -->
-
         </div>
         <!-- /.container-fluid -->
     </section>

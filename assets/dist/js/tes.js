@@ -66,8 +66,8 @@ $(document).ready(function () {
             cache: false,
             dataType: "JSON",
             success: function (data) {
-                $('[name="awal_periode"]').val(data.awal_periode);
-                $('[name="akhir_periode"]').val(data.akhir_periode);
+                $("#awal_periode").data('daterangepicker').setStartDate(data.awal_periode);
+                $("#akhir_periode").data('daterangepicker').setStartDate(data.akhir_periode);
                 $('[name="awalbuku"]').val(data.awal_periode);
                 $('[name="akhirbuku"]').val(data.akhir_periode);
             },
@@ -197,13 +197,79 @@ $(document).ready(function () {
             cache: false,
             dataType: "JSON",
             success: function (data) {
-                $('[name="awalperiode"]').val(data.awal_periode);
-                $('[name="akhir_periode"]').val(data.akhir_periode);
+                //$("#awal_periode").data('daterangepicker').setStartDate(data.awal_periode);
+                $("#akhir_periode").data('daterangepicker').setStartDate(data.akhir_periode);
+                $('[name="awalbuku"]').val(data.awal_periode);
+                $('[name="akhirbuku"]').val(data.akhir_periode);
+
             },
             error: function (e) {
                 console.log('Error' + e);
             }
         });
+    });
+    $('#btn-tampil-neracasaldo').on('click', function (e) {
+        e.preventDefault();
+        const awalbuku = $('[name="awalbuku"]').val();
+        const akhirbuku = $('[name="akhirbuku"]').val();
+        const tahunbuku = $('[name="ns_pembukuan_id"]').val();
+        const akhir_periode = $('[name="akhir_periode"]').val();
+        // Toast.fire({
+        //     icon: 'success',
+        //     title: ' awalbuku. >' + awalbuku + 'akhirbuku >' + akhirbuku + 'akhir_periode   >' + akhir_periode + 'tahun buku >' + tahunbuku
+        // });
+        $.ajax({
+            cache: false,
+            type: "POST",
+            url: base_url + "akuntansi/neracasaldo/cekinput",
+            data: {
+                awalbuku: awalbuku,
+                akhirbuku: akhirbuku,
+                akhir_periode: akhir_periode
+            },
+            dataType: "JSON",
+            beforeSend: function () {
+                $('#btn-tampil-neracasaldo').attr('disabled', 'disabled');
+            },
+            success: function (response) {
+                if (response.status == 'gagal') {
+                    Toast.fire({
+                        icon: 'warning',
+                        title: 'Data tidak valid!!!'
+                    });
+                    if (response.akhir_error != '') {
+                        $('#akhir_error').html(response.akhir_error);
+                    } else {
+                        $('#akhir_error').html('');
+                    }
+                } else {
+                    $('#akhir_error').html('');
+                    Toast.fire({
+                        icon: 'success',
+                        title: ' Menampilkan Laporan..'
+                    });
+                    $.ajax({
+                        type: "POST",
+                        cache: false,
+                        url: base_url + "akuntansi/neracasaldo/viewdata",
+                        data: {
+                            tahunbuku: tahunbuku,
+                            awalbuku: awalbuku,
+                            akhirbuku: akhirbuku,
+                            akhir_periode: akhir_periode
+                        },
+                        success: function (data) {
+                            $("#data").html(data);
+                        }
+                    });
+                }
+                $('#btn-tampil-neracasaldo').attr('disabled', false);
+            },
+            error: function (e) {
+                console.log('Error' + e);
+            }
+        });
+        //return false;
     });
     // --------------------------------------/NERACA SALDO----------------------------
     // --------------------------------------NERACA----------------------------
@@ -217,7 +283,8 @@ $(document).ready(function () {
             success: function (data) {
                 $('[name="awalbuku"]').val(data.awal_periode);
                 $('[name="akhirbuku"]').val(data.akhir_periode);
-                $('[name="akhir_periode"]').val(data.akhir_periode);
+                //$("#awal_periode").data('daterangepicker').setStartDate(data.awal_periode);
+                $("#akhir_periode").data('daterangepicker').setStartDate(data.akhir_periode);
             },
             error: function (e) {
                 console.log('Error' + e);
