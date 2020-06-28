@@ -7,7 +7,7 @@ class Tes extends CI_Controller
     {
         parent::__construct();
         is_logged_in();
-        $this->load->model('akuntansi/Tahunbuku_model', 'Tahunbuku_model');
+        $this->load->model('Institusi_model', 'Institusi_model', 'akuntansi/Tahunbuku_model', 'Tahunbuku_model');
         //$this->load->model('Role_model');
     }
     public function index()
@@ -18,8 +18,13 @@ class Tes extends CI_Controller
         //$this->load->view('tes/index');
         $data['kontenmenu'] = "Master Pembukuan";
         $data['kontensubmenu'] = "Tahun Pembukuan";
-        $data['tahunbuku'] = $this->Tahunbuku_model->ambil_data();
-        $this->template->display('akuntansi/tahunbuku/index', $data);
+        //$data['tahunbuku'] = $this->Tahunbuku_model->ambil_data();
+        $this->template->display('tes/index', $data);
+    }
+    public function cetak()
+    {
+        $data['institusi'] = $this->Institusi_model->ambil_data();
+        $this->load->view('tes/cetak', $data);
     }
     public function tes()
     {

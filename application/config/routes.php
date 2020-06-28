@@ -50,7 +50,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 // --------------- akuntansi -----------------------------
-$route['default_controller'] = 'auth';
+$route['default_controller'] = 'dashboard';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 $route['tahunbuku'] = 'akuntansi/tahunbuku';

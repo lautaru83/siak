@@ -21,6 +21,11 @@ class Institusi extends CI_Controller
         $this->load->view('theme/sidebar-info');
         $this->load->view('theme/footer');
     }
+    public function cetak()
+    {
+        $data['institusi'] = $this->Institusi_model->ambil_data();
+        $this->load->view('setting/institusi/cetak', $data);
+    }
     public function simpan()
     {
         $this->_validate();
@@ -75,21 +80,6 @@ class Institusi extends CI_Controller
         }
         echo json_encode($data);
     }
-    // public function ajax_hapus($id, $info)
-    // {
-    //     $hasil = $this->Institusi_model->cek_hapus($id);
-    //     if (!$hasil) {
-    //         $this->Institusi_model->hapus($id, $info);
-    //         $data = array(
-    //             'status' => 'sukses'
-    //         );
-    //     } else {
-    //         $data = array(
-    //             'status' => 'gagal'
-    //         );
-    //     }
-    //     echo json_encode($data);
-    // }
     private function _validate()
     {
         $this->form_validation->set_rules('institusi', 'Institusi', 'required|trim');

@@ -22,7 +22,11 @@ class Submenu extends CI_Controller
         $this->load->view('theme/sidebar-info');
         $this->load->view('theme/footer');
     }
-
+    public function cetak()
+    {
+        $data['submenu'] = $this->Submenu_model->ambil_data();
+        $this->load->view('setting/submenu/cetak', $data);
+    }
     public function simpan()
     {
         $this->_validate();

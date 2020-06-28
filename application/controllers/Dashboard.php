@@ -10,7 +10,7 @@ class Dashboard extends CI_Controller
     }
     public function index()
     {
-        $data['title'] = "Siak-Serulingmas";
+        $data['title'] = "Siak-Paguwarmas";
         $this->load->view('theme/header', $data);
         $this->load->view('theme/topbar');
         $this->load->view('theme/sidebar');

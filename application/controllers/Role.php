@@ -21,6 +21,11 @@ class Role extends CI_Controller
         $this->load->view('theme/sidebar-info');
         $this->load->view('theme/footer');
     }
+    public function cetak()
+    {
+        $data['role'] = $this->Role_model->ambil_data();
+        $this->load->view('setting/role/cetak', $data);
+    }
     public function simpan()
     {
         $this->_validate();

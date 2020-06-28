@@ -22,7 +22,11 @@ class Unit extends CI_Controller
         $this->load->view('theme/sidebar-info');
         $this->load->view('theme/footer');
     }
-
+    public function cetak()
+    {
+        $data['unit'] = $this->Unit_model->ambil_data();
+        $this->load->view('setting/unit/cetak', $data);
+    }
     public function simpan()
     {
         $this->_validate();

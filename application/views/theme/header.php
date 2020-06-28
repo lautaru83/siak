@@ -46,7 +46,8 @@
     <link rel="stylesheet" href="<?= base_url('assets/') ?>dist/css/modal-center.css">
 
     <!-- Google Font: Source Sans Pro -->
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <!-- <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet"> -->
+    <link href="<?= base_url('assets/') ?>dist/css/googleapis/fontsgoogleapiscom.css" rel="stylesheet">
     <style>
         .align-middle {
             vertical-align: middle !important;

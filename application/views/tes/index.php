@@ -9,10 +9,13 @@
       </div>
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right mr-4">
-          <li class="breadcrumb-item"><a>Master Data<? // $kontenmenu; 
+          <li class="breadcrumb-item"><a>Master Data
+              <? // $kontenmenu; 
                                                     ?></a></li>
-          <li class="breadcrumb-item active">Role Management Tes<? // $kontensubmenu; 
-                                                                ?></li>
+          <li class="breadcrumb-item active">Role Management Tes
+            <? // $kontensubmenu; 
+                                                                ?>
+          </li>
         </ol>
       </div>
     </div>
@@ -39,8 +42,17 @@
               </div>
 
             </div>
+            <div class="card-body">
+              <h4 class="card-title" disabled="disabled">
+                <form method="POST" action="<?= base_url('tes/cetak'); ?>" target="_blank">
+                  <button class="btn btn-link" id="btn-cetak-data">
+                    Cetak <i class="fas fa-print" style="color: teal"></i>
+                  </button>
+                </form>
+              </h4>
+            </div>
             <!-- /.card-header -->
-            <div class="card-body" id="tabel-data">
+            <!-- <div class="card-body" id="tabel-data">
               <table id="tabel-tes" class="table table-bordered table-striped">
                 <thead>
                   <tr>
@@ -48,7 +60,6 @@
                     <td class="w-1">Id</td>
                     <td class="w-25">Role</td>
                     <td class="w-74">Keterangan</td>
-                    <!-- <td class="w-24 text-center" style="color: grey"><i class="fas fa-cog"></i></td> -->
                   </tr>
                 </thead>
                 <tbody>
@@ -56,7 +67,7 @@
                 </tbody>
               </table>
 
-            </div>
+            </div> -->
             <!-- /.card-body -->
           </div>
           <!-- /.card -->

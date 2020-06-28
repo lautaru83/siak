@@ -302,9 +302,6 @@ class Laporan_model extends CI_Model
     }
     public function bersihTerikatKomKonsolidasi()
     {
-        // $tgl1 = tanggal_input($this->session->userdata['buku_awal']);
-        // $tgl2 = tanggal_input($this->input->post('akhir_periode'));
-        // $tahunbuku = $this->session->userdata['tahun_buku'];
         $tgl1 = tanggal_input($this->input->post('awalbuku'));
         $tgl2 = tanggal_input($this->input->post('akhir_periode'));
         $tahunbuku = $this->input->post('tahunbuku');
@@ -635,29 +632,5 @@ class Laporan_model extends CI_Model
         return $this->db2->query("SELECT a.a5level_id as a5level_id,a.level5 as level5, a.posisi as posisi, SUM(b.debet) as debet, SUM(b.kredit) as kredit FROM view_kodeperkiraans AS a INNER JOIN view_transaksis AS b ON a.a6level_id = b.a6level_id WHERE b.tahun_buku='$thbuku' AND b.tanggal_transaksi BETWEEN '$tgl1' AND '$tgl2' AND b.is_valid BETWEEN 1 AND 2 AND a4level_id='$id4' GROUP BY a.a5level_id,b.tahun_buku ORDER BY a.a5level_id ASC ")->result_array();
     }
     // ------------------------------/CALK ----------------------------------
-
-
-
-
-
-
-
-    // public function cektranuser($jurnal)
-    // {
-    //     $user_id = $this->session->userdata('xyz');
-    //     $thbuku_id = $this->session->userdata('tahun_buku');
-    //     return $this->db2->get_where('transaksis', ['tahun_buku' => $thbuku_id, 'jurnal' => $jurnal, 'user_id' => $user_id, 'is_valid' => 0])->row_array();
-    // }
-    // public function ambil_data_id5($id)
-    // {
-    //     return $this->db2->get_where('a5levels', ['id' => $id])->row_array();
-    // }
-    // public function akunjurnal($jenis)
-    // {
-    //     $idinstitusi = $this->session->userdata('idInstitusi');
-    //     return $this->db2->query("select a.id as id,a.level6 as level6 from a6levels a join akun_transaksis b on a.id=b.a6level_id where b.jenis_transaksi_id='$jenis' and a.institusi_id='$idinstitusi' ")->result_array();
-    // }
-
-
 
 }
