@@ -18,6 +18,22 @@ class Angkatan extends CI_Controller
         $data['angkatan'] = $this->Angkatan_model->ambil_data();
         $this->template->display('akademik/angkatan/index', $data);
     }
+    public function cetak2()
+    {
+        $data['judul'] = "Data Angkatan";
+        // $data['css'] = "<link href='../../assets/bootstrap2/css/bootstrap.min.css' rel='stylesheet'>";
+        $this->load->view('akademik/angkatan/cetak', $data);
+    }
+    public function cetak()
+    {
+        $data['judul'] = "Data Angkatan";
+        // $data['css'] = "<link href='../../assets/bootstrap2/css/bootstrap.min.css' rel='stylesheet'>";
+        $data['angkatan'] = $this->Angkatan_model->ambil_data();
+        $this->load->library('pdf');
+        $this->pdf->setPaper('A4', 'potrait');
+        $this->pdf->filename = "Data Angkatan";
+        $this->pdf->load_view('akademik/angkatan/cetak', $data);
+    }
     public function simpan()
     {
         $this->_validate();

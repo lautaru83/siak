@@ -7,7 +7,7 @@ class Welcome extends CI_Controller
 	{
 		parent::__construct();
 		is_logged_in();
-		require_once(APPPATH . 'third_party/dompdf/dompdf_config.inc.php');
+		//require_once(APPPATH . 'third_party/dompdf/dompdf_config.inc.php');
 		$this->load->model(array('Institusi_model' => 'Institusi_model', 'Unit_model' => 'Unit_model'));
 	}
 	public function index()
@@ -16,15 +16,10 @@ class Welcome extends CI_Controller
 	}
 	public function cetak()
 	{
-		$dompdf = new DOMPDF();
 		$data['judul'] = "ok";
-		// $this->load->model(array('Menu_model' => 'Menu_model', 'Submenu_model' => 'Submenu_model'));
-		$data['institusi'] = $this->Institusi_model->ambil_data();
-		$html = $this->load->view('cetak', $data, true);
-		$dompdf->load_html($html);
-		$dompdf->set_paper('A4', 'portrait');
-		$dompdf->render();
-		$pdf = $dompdf->output();
-		$dompdf->stream('welcome.pdf', array("Attachment" => false));
+		$this->load->library('pdf');
+		$this->pdf->setPaper('A4', 'potrait');
+		$this->pdf->filename = "welcome";
+		$this->pdf->load_view('welcome_message', $data);
 	}
 }
