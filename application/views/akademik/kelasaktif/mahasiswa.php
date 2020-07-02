@@ -42,15 +42,10 @@
                                 $data['kelas_id'] = $kelas_id;
                                 ?>
                                 <h4 class="card-title">
-                                    <a href="#" class="text-reset" id="btn-tambah-mahasiswaaktif" data-aksi="tambah"><i class="fas fa-file-alt" style="color: teal"></i> Tambah data </a>
+                                    <span>Uraian</span>
+                                    <!-- <a href="#" class="text-reset" id="btn-tambah-mahasiswaaktif" data-aksi="tambah"><i class="fas fa-file-alt" style="color: teal"></i> Tambah data </a> -->
                                 </h4>
                             </div>
-                            <div class="float-right">
-                                <h4 class="card-title" disabled="disabled">
-                                    <a href="<?= site_url('akademik/kelasaktif/cetakdata/' . $dekelas_id); ?>" target="_blank" class="text-reset">Cetak <i class="fas fa-print" style="color: teal"></i></a>
-                                </h4>
-                            </div>
-
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body" id="tabel-data">
@@ -89,9 +84,16 @@
                 <div class="col col-md-12">
                     <div class="card">
                         <div class="card-header bg-gradient-light">
-                            <h4 class="card-title">
-                                <span>Data Mahasiswa Aktif</span>
-                            </h4>
+                            <div>
+                                <h4 class="card-title">
+                                    <a href="#" class="text-reset" id="btn-tambah-mahasiswaaktif" data-aksi="tambah"><i class="fas fa-file-alt" style="color: teal"></i> Tambah data </a>
+                                </h4>
+                            </div>
+                            <div class="float-right">
+                                <h4 class="card-title" disabled="disabled">
+                                    <a href="<?= site_url('akademik/kelasaktif/cetakdata/' . $dekelas_id); ?>" target="_blank" class="text-reset">Cetak <i class="fas fa-print" style="color: teal"></i></a>
+                                </h4>
+                            </div>
                         </div>
                         <!-- /.card header-->
                         <div class="card-body" id="tabel-data">

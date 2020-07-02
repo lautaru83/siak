@@ -17,11 +17,22 @@ class Bop extends CI_Controller
         $data['bop'] = $this->Bop_model->ambil_data();
         $data['bop2'] = $this->Bop_model->ambil_datafull();
         $data['kelasaktif'] = $this->Kelasaktif_model->detailkelas_data_fk();
-        //$data['akun'] = $this->Kodeperkiraan_model->akun6Institusi();
         $this->template->display('akademik/bop/index', $data);
     }
-    public function data($id)
+    public function cetak()
     {
+        $data['judul'] = "Data BOP";
+        $data['tahun_akademik'] = $this->session->userdata['tahun_akademik'];
+        $data['bop2'] = $this->Bop_model->ambil_datafull();
+        $this->load->library('pdf');
+        $this->pdf->setPaper('A4', 'portrait');
+        $this->pdf->filename = "Data BOP";
+        $this->pdf->load_view('akademik/bop/cetak', $data);
+    }
+    public function data($id, $kd)
+    {
+        $data['bop_id'] = $id;
+        $data['kode_bop'] = $kd;
         $data['kontenmenu'] = "Pengaturan";
         $data['kontensubmenu'] = "Detail BOP";
         $data['bop'] = $this->Bop_model->ambil_data_id($id);
@@ -29,6 +40,18 @@ class Bop extends CI_Controller
         $data['detail'] = $this->Bop_model->ambil_detail_data($id);
         $data['komponen'] = $this->Komponenbop_model->data_fk();
         $this->template->display('akademik/bop/data', $data);
+    }
+    public function cetakdata($id, $kd)
+    {
+        $data['judul'] = "Detail BOP $kd";
+        $data['bop_id'] = $id;
+        $data['bop'] = $this->Bop_model->ambil_data_id($id);
+        $data['bop2'] = $this->Bop_model->ambil_datafull_id($id);
+        $data['detail'] = $this->Bop_model->ambil_detail_data($id);
+        $this->load->library('pdf');
+        $this->pdf->setPaper('A4', 'portrait');
+        $this->pdf->filename = "Detail BOP $kd";
+        $this->pdf->load_view('akademik/bop/cetakdata', $data);
     }
     public function simpan()
     {

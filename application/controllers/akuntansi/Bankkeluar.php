@@ -160,6 +160,7 @@ class Bankkeluar extends CI_Controller
                 'id' => $hasil['id'],
                 'a6level_id' => $hasil['a6level_id'],
                 'posisi_akun' => $hasil['posisi_akun'],
+                'anggaran' => $hasil['is_anggaran'],
                 'jumlah' => rupiah($hasil['jumlah'])
             );
         } else {

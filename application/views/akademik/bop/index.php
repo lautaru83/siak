@@ -33,7 +33,7 @@
                             </div>
                             <div class="float-right">
                                 <h4 class="card-title" disabled="disabled">
-                                    Cetak <i class="fas fa-print" style="color: teal"></i>
+                                    <a href="<?= site_url('akademik/bop/cetak/'); ?>" target="_blank" class="text-reset">Cetak <i class="fas fa-print" style="color: teal"></i></a>
                                 </h4>
                             </div>
 
@@ -52,11 +52,10 @@
                                 <tbody>
                                     <?php
                                     $no = 1;
-                                    //$bop = "";
-                                    //var_dump($kewajiban);
                                     if ($bop2) {
                                         foreach ($bop2 as $dataBop) :
                                             $idBop = $dataBop['id'];
+                                            $kdbop = $dataBop['kode'];
                                     ?>
                                             <tr class="bg-light">
                                                 <td class="text-center">
@@ -65,7 +64,7 @@
                                                 <td><?= $dataBop['kode']; ?></td>
                                                 <td><?= $dataBop['keterangan']; ?></td>
                                                 <td class="text-center">
-                                                    <a href="<?= site_url('akademik/bop/data/' . $idBop); ?>" class="btn-detail-bop" data-toggle="tooltip" data-placement="bottom" title="Detail BOP <?= $dataBop['kode']; ?>"><i class="far fa-list-alt" style="color: teal"></i></a> - <a href="" class="btn-edit-bop" data-id="<?= $idBop; ?>" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fas fa-edit" style="color: olive"></i></a> - <a href="" class="btn-hapus-bop" data-id="<?= $idBop; ?>" data-info="<?= $dataBop['kode']; ?>" data-toggle="tooltip" data-placement="bottom" title="Hapus"> <i class="far fa-trash-alt" style="color: maroon"></i></a></td>
+                                                    <a href="<?= site_url('akademik/bop/data/' . $idBop . '/' . $kdbop); ?>" class="btn-detail-bop" data-toggle="tooltip" data-placement="bottom" title="Detail BOP <?= $dataBop['kode']; ?>"><i class="far fa-list-alt" style="color: teal"></i></a> - <a href="" class="btn-edit-bop" data-id="<?= $idBop; ?>" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fas fa-edit" style="color: olive"></i></a> - <a href="" class="btn-hapus-bop" data-id="<?= $idBop; ?>" data-info="<?= $dataBop['kode']; ?>" data-toggle="tooltip" data-placement="bottom" title="Hapus"> <i class="far fa-trash-alt" style="color: maroon"></i></a></td>
                                             </tr>
                                         <?php
                                             $no++;

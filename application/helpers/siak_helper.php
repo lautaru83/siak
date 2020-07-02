@@ -693,6 +693,14 @@ function padding_akun($posisi)
         echo "class='pl-5'";
     }
 }
+function txt_anggaran($no)
+{
+    if ($no == 1) {
+        echo "Ya";
+    } else {
+        echo "-";
+    }
+}
 function cek_combo($opt1, $opt2)
 {
     if ($opt1 == $opt2) {

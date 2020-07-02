@@ -4946,10 +4946,15 @@ $(document).ready(function () {
         const a6level_id = $('[name="a6level_id"]').val();
         const posisi_akun = $('[name="posisi_akun"]').val();
         const idakun = $('[name="idakun"]').val();
-        const idjt = $('[name="idjt"]').val();
         const tgl2 = $('[name="tgl2"]').val();
         const idubah = $('[name="idubah"]').val();
         const jumlah = $('[name="jumlah"]').val();
+        const idjt = $('[name="idjt"]').val();
+        var anggaran = 0;
+        if ($('#is_anggaran').is(":checked")) {
+            anggaran = 1;
+        }
+        const is_anggaran = anggaran;
         $.ajax({
             cache: false,
             type: "POST",
@@ -4962,7 +4967,8 @@ $(document).ready(function () {
                 a6level_id: a6level_id,
                 posisi_akun: posisi_akun,
                 tgl2: tgl2,
-                jumlah: jumlah
+                jumlah: jumlah,
+                is_anggaran: is_anggaran
             },
             dataType: "JSON",
             beforeSend: function () {
@@ -5012,10 +5018,16 @@ $(document).ready(function () {
         const idubah = $('[name="idubah"]').val();
         const transaksi_id = $('[name="transaksi_id"]').val();
         const a6level_id = $('[name="a6level_id"]').val();
+        const idjt = $('[name="idjt"]').val();
         const idakun = $('[name="idakun"]').val();
         const tgl2 = $('[name="tgl2"]').val();
         const posisi_akun = $('[name="posisi_akun"]').val();
         const jumlah = $('[name="jumlah"]').val();
+        var anggaran = 0;
+        if ($('#is_anggaran').is(":checked")) {
+            anggaran = 1;
+        }
+        const is_anggaran = anggaran;
         $.ajax({
             cache: false,
             type: "POST",
@@ -5027,7 +5039,9 @@ $(document).ready(function () {
                 a6level_id: a6level_id,
                 posisi_akun: posisi_akun,
                 tgl2: tgl2,
-                jumlah: jumlah
+                idjt: idjt,
+                jumlah: jumlah,
+                is_anggaran: is_anggaran
             },
             dataType: "JSON",
             beforeSend: function () {
@@ -5087,6 +5101,9 @@ $(document).ready(function () {
             success: function (data) {
                 $('[name="idubah"]').val(data.id);
                 $('[name="a6level_id"]').val(data.a6level_id);
+                if (data.anggaran == 1) {
+                    $('[name="is_anggaran"]').prop("checked", true);
+                }
                 $('[name="idakun"]').val(data.a6level_id);
                 $('[name="posisi_akun"]').val(data.posisi_akun);
                 $('[name="jumlah"]').val(data.jumlah);
@@ -5348,10 +5365,15 @@ $(document).ready(function () {
         const a6level_id = $('[name="a6level_id"]').val();
         const posisi_akun = $('[name="posisi_akun"]').val();
         const idakun = $('[name="idakun"]').val();
-        const idjt = $('[name="idjt"]').val();
         const idubah = $('[name="idubah"]').val();
         const tgl2 = $('[name="tgl2"]').val();
         const jumlah = $('[name="jumlah"]').val();
+        const idjt = $('[name="idjt"]').val();
+        var anggaran = 0;
+        if ($('#is_anggaran').is(":checked")) {
+            anggaran = 1;
+        }
+        const is_anggaran = anggaran;
         $.ajax({
             cache: false,
             type: "POST",
@@ -5364,6 +5386,7 @@ $(document).ready(function () {
                 a6level_id: a6level_id,
                 posisi_akun: posisi_akun,
                 tgl2: tgl2,
+                is_anggaran: is_anggaran,
                 jumlah: jumlah
             },
             dataType: "JSON",
@@ -5420,6 +5443,12 @@ $(document).ready(function () {
         const tgl2 = $('[name="tgl2"]').val();
         const posisi_akun = $('[name="posisi_akun"]').val();
         const jumlah = $('[name="jumlah"]').val();
+        const idjt = $('[name="idjt"]').val();
+        var anggaran = 0;
+        if ($('#is_anggaran').is(":checked")) {
+            anggaran = 1;
+        }
+        const is_anggaran = anggaran;
         $.ajax({
             cache: false,
             type: "POST",
@@ -5431,7 +5460,9 @@ $(document).ready(function () {
                 a6level_id: a6level_id,
                 posisi_akun: posisi_akun,
                 tgl2: tgl2,
-                jumlah: jumlah
+                jumlah: jumlah,
+                idjt: idjt,
+                is_anggaran: is_anggaran
             },
             dataType: "JSON",
             beforeSend: function () {
@@ -5481,14 +5512,18 @@ $(document).ready(function () {
         e.preventDefault();
         const judul = document.getElementById('judul-modal');
         judul.innerHTML = 'Ubah Rincian Transaksi';
-        var id = $(this).data('id');
+        var idubah = $(this).data('id');
         $('#btn-simpan-detailkaskeluar').hide();
         $('#id').attr('disabled', 'disabled');
         $.ajax({
-            url: base_url + 'akuntansi/kaskeluar/ajax_editrincian/' + id,
+            url: base_url + 'akuntansi/kaskeluar/ajax_editrincian/' + idubah,
+            cache: false,
             type: "GET",
             dataType: "JSON",
             success: function (data) {
+                if (data.anggaran == 1) {
+                    $('[name="is_anggaran"]').prop("checked", true);
+                }
                 $('[name="idubah"]').val(data.id);
                 $('[name="a6level_id"]').val(data.a6level_id);
                 $('[name="idakun"]').val(data.a6level_id);
@@ -5496,8 +5531,8 @@ $(document).ready(function () {
                 $('[name="jumlah"]').val(data.jumlah);
                 $('#modal-kaskeluar').modal('show');
             },
-            error: function (jqXHR, textStatus, errorThrown) {
-                alert('Error get data from ajax');
+            error: function (e) {
+                console.log('Error' + e);
             }
         });
     });
@@ -5754,9 +5789,14 @@ $(document).ready(function () {
         const posisi_akun = $('[name="posisi_akun"]').val();
         const tgl2 = $('[name="tgl2"]').val();
         const idakun = $('[name="idakun"]').val();
-        const idjt = $('[name="idjt"]').val();
         const idubah = $('[name="idubah"]').val();
         const jumlah = $('[name="jumlah"]').val();
+        const idjt = $('[name="idjt"]').val();
+        var anggaran = 0;
+        if ($('#is_anggaran').is(":checked")) {
+            anggaran = 1;
+        }
+        const is_anggaran = anggaran;
         $.ajax({
             cache: false,
             type: "POST",
@@ -5769,6 +5809,7 @@ $(document).ready(function () {
                 a6level_id: a6level_id,
                 posisi_akun: posisi_akun,
                 tgl2: tgl2,
+                is_anggaran: is_anggaran,
                 jumlah: jumlah
             },
             dataType: "JSON",
@@ -5825,6 +5866,12 @@ $(document).ready(function () {
         const tgl2 = $('[name="tgl2"]').val();
         const posisi_akun = $('[name="posisi_akun"]').val();
         const jumlah = $('[name="jumlah"]').val();
+        const idjt = $('[name="idjt"]').val();
+        var anggaran = 0;
+        if ($('#is_anggaran').is(":checked")) {
+            anggaran = 1;
+        }
+        const is_anggaran = anggaran;
         $.ajax({
             cache: false,
             type: "POST",
@@ -5836,7 +5883,9 @@ $(document).ready(function () {
                 a6level_id: a6level_id,
                 posisi_akun: posisi_akun,
                 tgl2: tgl2,
-                jumlah: jumlah
+                jumlah: jumlah,
+                idjt: idjt,
+                is_anggaran: is_anggaran
             },
             dataType: "JSON",
             beforeSend: function () {
@@ -5894,6 +5943,9 @@ $(document).ready(function () {
             type: "GET",
             dataType: "JSON",
             success: function (data) {
+                if (data.anggaran == 1) {
+                    $('[name="is_anggaran"]').prop("checked", true);
+                }
                 $('[name="idubah"]').val(data.id);
                 $('[name="a6level_id"]').val(data.a6level_id);
                 $('[name="idakun"]').val(data.a6level_id);
@@ -6158,10 +6210,15 @@ $(document).ready(function () {
         const a6level_id = $('[name="a6level_id"]').val();
         const posisi_akun = $('[name="posisi_akun"]').val();
         const idakun = $('[name="idakun"]').val();
-        const idjt = $('[name="idjt"]').val();
         const tgl2 = $('[name="tgl2"]').val();
         const idubah = $('[name="idubah"]').val();
         const jumlah = $('[name="jumlah"]').val();
+        const idjt = $('[name="idjt"]').val();
+        var anggaran = 0;
+        if ($('#is_anggaran').is(":checked")) {
+            anggaran = 1;
+        }
+        const is_anggaran = anggaran;
         $.ajax({
             type: "POST",
             url: base_url + "akuntansi/bankkeluar/simpandetail",
@@ -6173,6 +6230,7 @@ $(document).ready(function () {
                 a6level_id: a6level_id,
                 posisi_akun: posisi_akun,
                 tgl2: tgl2,
+                is_anggaran: is_anggaran,
                 jumlah: jumlah
             },
             dataType: "JSON",
@@ -6227,6 +6285,12 @@ $(document).ready(function () {
         const idakun = $('[name="idakun"]').val();
         const posisi_akun = $('[name="posisi_akun"]').val();
         const jumlah = $('[name="jumlah"]').val();
+        const idjt = $('[name="idjt"]').val();
+        var anggaran = 0;
+        if ($('#is_anggaran').is(":checked")) {
+            anggaran = 1;
+        }
+        const is_anggaran = anggaran;
         $.ajax({
             cache: false,
             type: "POST",
@@ -6238,6 +6302,8 @@ $(document).ready(function () {
                 a6level_id: a6level_id,
                 posisi_akun: posisi_akun,
                 tgl2: tgl2,
+                idjt: idjt,
+                is_anggaran: is_anggaran,
                 jumlah: jumlah
             },
             dataType: "JSON",
@@ -6294,8 +6360,12 @@ $(document).ready(function () {
         $.ajax({
             url: base_url + 'akuntansi/bankkeluar/ajax_editrincian/' + id,
             type: "GET",
+            cache: false,
             dataType: "JSON",
             success: function (data) {
+                if (data.anggaran == 1) {
+                    $('[name="is_anggaran"]').prop("checked", true);
+                }
                 $('[name="idubah"]').val(data.id);
                 $('[name="a6level_id"]').val(data.a6level_id);
                 $('[name="idakun"]').val(data.a6level_id);

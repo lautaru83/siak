@@ -12,8 +12,8 @@ class Kelasaktif extends CI_Controller
     }
     public function index()
     {
-        $idPerak = $this->session->userdata('idPerak');
         $data['kontenmenu'] = "Pengaturan";
+        $idPerak = $this->session->userdata('idPerak');
         $data['idperak'] = $idPerak;
         $data['kontensubmenu'] = "Kelas Aktif";
         $data['kelasaktif'] = "";
@@ -29,7 +29,7 @@ class Kelasaktif extends CI_Controller
         $data['idperak'] = $id;
         $data['kelasaktif'] = $this->Kelasaktif_model->ambil_data();
         $this->load->library('pdf');
-        $this->pdf->setPaper('legal', 'portrait');
+        $this->pdf->setPaper('A4', 'portrait');
         $this->pdf->filename = "Data Kelas Aktif $id";
         $this->pdf->load_view('akademik/kelasaktif/cetak', $data);
     }
@@ -52,6 +52,8 @@ class Kelasaktif extends CI_Controller
     }
     public function mahasiswa($id)
     {
+        $tahun_akademik = $this->session->userdata('tahun_akademik');
+        $data['tahun_akademik'] = $tahun_akademik;
         $data['kontenmenu'] = "Pengaturan";
         $data['kontensubmenu'] = "Mahasiswa Aktif";
         $data['dekelas_id'] = $id;

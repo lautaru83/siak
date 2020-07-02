@@ -20,7 +20,7 @@ class Transaksi_model extends CI_Model
     }
     public function detailtransaksi($tran_id)
     {
-        return $this->db2->query("select a.id as id,a.a6level_id as a6level_id,b.level6 as level6,a.posisi_akun as posisi,a.jumlah as jumlah,a.debet as debet,a.kredit as kredit from detail_transaksis a join a6levels b on b.id=a.a6level_id where a.transaksi_id=$tran_id")->result_array();
+        return $this->db2->query("select a.id as id,a.a6level_id as a6level_id,b.level6 as level6,a.posisi_akun as posisi,a.jumlah as jumlah,a.debet as debet,a.kredit as kredit,a.is_anggaran as is_anggaran from detail_transaksis a join a6levels b on b.id=a.a6level_id where a.transaksi_id=$tran_id")->result_array();
     }
     public function detailtransaksi_by_id($id)
     {
@@ -117,13 +117,6 @@ class Transaksi_model extends CI_Model
     }
     public function simpandetailsaldo($tran_id, $a6level_id, $posisi, $jumlah, $debet, $kredit)
     {
-        // if ($posisi == "D") {
-        //     $debet = $jumlah;
-        //     $kredit = 0;
-        // } else {
-        //     $debet = 0;
-        //     $kredit = $jumlah;
-        // }
         $data = array(
             'transaksi_id' => $tran_id,
             'a6level_id' => $a6level_id,
@@ -138,7 +131,13 @@ class Transaksi_model extends CI_Model
     {
         $a6level_id = $this->input->post('a6level_id');
         $posisi = $this->input->post('posisi_akun');
+        $jurnal = $this->input->post('idjt');
         $jumlah = input_uang($this->input->post('jumlah'));
+        $anggaran = $this->input->post('is_anggaran');
+        $is_anggaran = 0;
+        if ($jurnal <> "NN") {
+            $is_anggaran = $anggaran;
+        }
         if ($posisi == "D") {
             $debet = $jumlah;
             $kredit = 0;
@@ -151,7 +150,8 @@ class Transaksi_model extends CI_Model
             'posisi_akun' => $posisi,
             'debet' => $debet,
             'kredit' => $kredit,
-            'jumlah' => $jumlah
+            'jumlah' => $jumlah,
+            'is_anggaran' => $is_anggaran
         );
         $this->db2->where('id', $id);
         $this->db2->update('detail_transaksis', $data);
@@ -163,11 +163,11 @@ class Transaksi_model extends CI_Model
         $posisi = $this->input->post('posisi_akun');
         $jumlah = input_uang($this->input->post('jumlah'));
         $jurnal = $this->input->post('idjt');
-        $is_anggaran = "";
+        $anggaran = $this->input->post('is_anggaran');
+        $is_anggaran = 0;
         if ($jurnal <> "NN") {
-            $is_anggaran = 1;
+            $is_anggaran = $anggaran;
         }
-
         if ($posisi == "D") {
             $debet = $jumlah;
             $kredit = 0;
@@ -206,38 +206,4 @@ class Transaksi_model extends CI_Model
         $this->db2->update('transaksis', $data);
         //return "ok";
     }
-
-    // public function simpan()
-    // {
-    //     $thbuku_id = $this->input->post('tahun_pembukuan_id');
-    //     $akun_id = $this->input->post('a6level_id');
-    //     $saldo = input_uang($this->input->post('saldoawal'));
-    //     $data = array(
-    //         'tahun_pembukuan_id' => $thbuku_id,
-    //         'a6level_id' => $akun_id,
-    //         'saldoawal' => $saldo,
-    //         'is_valid' => 0
-    //     );
-    //     $this->db2->insert('saldoawals', $data);
-    //     $log_type = "tambah";
-    //     $log_desc = "tambah saldoawal -" . $thbuku_id . "-" . $akun_id . "-" . $saldo . "-";
-    //     userLog($log_type, $log_desc);
-    // }
-    // public function ubah($id)
-    // {
-    //     $thbuku_id = $this->input->post('tahun_pembukuan_id');
-    //     $a6level_id = $this->input->post('a6level_id');
-    //     $saldo = input_uang($this->input->post('saldoawal'));
-    //     $data = array(
-    //         'tahun_pembukuan_id' => $thbuku_id,
-    //         'a6level_id' => $a6level_id,
-    //         'saldoawal' => $saldo,
-    //         'is_valid' => 0
-    //     );
-    //     $this->db2->where('id', $id);
-    //     $this->db2->update('saldoawals', $data);
-    //     $log_type = "ubah";
-    //     $log_desc = "ubah saldoawal -" . $thbuku_id . "-" . $a6level_id . "-" . $saldo . "-";
-    //     userLog($log_type, $log_desc);
-    // }
 }

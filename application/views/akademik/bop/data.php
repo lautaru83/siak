@@ -28,15 +28,15 @@
                     <div class="card">
                         <div class="card-header bg-gradient-light">
                             <div>
-                                <h4 class="card-title">
-                                    <a href="#" class="text-reset" id="btn-tambah-detailbop" data-aksi="tambah" data-toggle="tooltip" title="Tambah Detail BOP"><i class="fas fa-file-alt" style="color: teal"></i> Tambah data </a>
+                                <h4 class="card-title" disabled="disabled">
+                                    <span>Uraian</span>
                                 </h4>
                             </div>
-                            <div class="float-right">
+                            <!-- <div class="float-right">
                                 <h4 class="card-title" disabled="disabled">
                                     Cetak <i class="fas fa-print" style="color: teal"></i>
                                 </h4>
-                            </div>
+                            </div> -->
 
                         </div>
                         <!-- /.card-header -->
@@ -85,14 +85,14 @@
                         <div class="card-header bg-gradient-light">
                             <div>
                                 <h4 class="card-title">
-                                    <span>Detail BOP</span>
+                                    <a href="#" class="text-reset" id="btn-tambah-detailbop" data-aksi="tambah" data-toggle="tooltip" title="Tambah Detail BOP"><i class="fas fa-file-alt" style="color: teal"></i> Tambah data </a>
                                 </h4>
                             </div>
-                            <!-- <div class="float-right">
+                            <div class="float-right">
                                 <h4 class="card-title" disabled="disabled">
-                                    Cetak <i class="fas fa-print" style="color: teal"></i>
+                                    <a href="<?= site_url('akademik/bop/cetakdata/' . $bop_id . '/' . $kode_bop); ?>" target="_blank" class="text-reset">Cetak <i class="fas fa-print" style="color: teal"></i></a>
                                 </h4>
-                            </div> -->
+                            </div>
 
                         </div>
                         <!-- /.card-header -->
@@ -112,8 +112,6 @@
                                 <tbody>
                                     <?php
                                     $no = 1;
-                                    // $detail = "";
-                                    //var_dump($detail);
                                     if ($detail) {
                                         foreach ($detail as $dataDetail) :
                                             $idDetail = $dataDetail['id'];

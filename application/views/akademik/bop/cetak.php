@@ -82,51 +82,27 @@
     <div class="content">
         <br>
         <div style="text-align: center">
-            <strong>DATA MAHASISWA AKTIF</strong>
+            <strong>DATA BOP <?= $this->session->userdata['idPerak']; ?></strong>
         </div>
-        <br>
-        <table width="100%">
-            <?php
-            $kelas_id = "";
-            $perak_id = "";
-            $periodeAkad = "";
-            $kelas = "";
-            if ($detailkelas) {
-                $kelas_id = $detailkelas['kelas_id'];
-                $perak_id = $detailkelas['perak_id'];
-                $periodeAkad = $detailkelas['periodeakademik'];
-                $kelas = $detailkelas['kelas'];
-            }
-            $data['kelas_id'] = $kelas_id;
-            ?>
-            <tr>
-                <td width="15%">Periode</td>
-                <td width="3%">:</td>
-                <td><?= $periodeAkad; ?></td>
-            </tr>
-            <tr>
-                <td>Kelas</td>
-                <td>:</td>
-                <td><?= $kelas_id; ?> - <?= $kelas; ?></td>
-            </tr>
-        </table>
         <br>
         <table class="tabledata" width="100%">
             <tr>
                 <th width="5%">No</th>
-                <th width="12%">NIM</th>
-                <th>Nama</th>
+                <th width="20%">Kode Pembayaran</th>
+                <th>Kelas Aktif</th>
             </tr>
             <?php
             $no = 1;
-            if ($mahasiswaaktif) {
-                foreach ($mahasiswaaktif as $dataMahasiswaaktif) :
-                    $idActive = $dataMahasiswaaktif['id'];
+            if ($bop2) {
+                foreach ($bop2 as $dataBop) :
+                    $idBop = $dataBop['id'];
             ?>
                     <tr>
-                        <td align="center"><?= $no; ?></td>
-                        <td align="center"><?= $dataMahasiswaaktif['nim']; ?></td>
-                        <td><?= $dataMahasiswaaktif['nama']; ?></td>
+                        <td align="center">
+                            <?= $no; ?>
+                        </td>
+                        <td align="center"><?= $dataBop['kode']; ?></td>
+                        <td><?= $dataBop['keterangan']; ?></td>
                     </tr>
                 <?php
                     $no++;
@@ -134,7 +110,7 @@
             } else {
                 ?>
                 <tr>
-                    <td colspan="3" align="center">Data tidak ditemukan</td>
+                    <td colspan="3">Data tidak ditemukan</td>
                 </tr>
             <?php
             }

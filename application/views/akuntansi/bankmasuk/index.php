@@ -154,8 +154,9 @@
                                     <tr>
                                         <td width="5%" class="text-center">No</td>
                                         <td class="text-center">Kode Perkiraan</td>
-                                        <td class="text-center" width="15%">Debet (Rp.)</td>
-                                        <td class="text-center" width="15%">Kredit (Rp.)</td>
+                                        <td class="text-center" width="13%">Debet (Rp.)</td>
+                                        <td class="text-center" width="13%">Kredit (Rp.)</td>
+                                        <td class="text-center" width="8%">Anggaran</td>
                                         <td class="text-center" style="color: grey" width="10%"><i class="fas fa-cog"></i></td>
                                     </tr>
                                 </thead>
@@ -176,6 +177,7 @@
                                                 <td <?php padding_akun($posisi); ?>><?= $dataDetail['a6level_id']; ?> - <?= $dataDetail['level6']; ?></td>
                                                 <td class="text-right"><?= rupiah($dataDetail['debet']); ?></td>
                                                 <td class="text-right"><?= rupiah($dataDetail['kredit']); ?></td>
+                                                <td class="text-center"><?= txt_anggaran($dataDetail['is_anggaran']); ?></td>
                                                 <td class="text-center">
                                                     <a href="" class="btn-edit-detailbankmasuk" data-id="<?= $idDetail; ?>" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fas fa-edit" style="color: olive"></i></a> - <a href="" class="btn-hapus-detailbankmasuk" data-id="<?= $idDetail; ?>" data-info="<?= $dataDetail['level6']; ?>" data-toggle="tooltip" data-placement="bottom" title="Hapus"> <i class="far fa-trash-alt" style="color: maroon"></i></a>
                                                 </td>
@@ -190,6 +192,7 @@
                                             <td colspan="2" class="font-weight-normal">Total Transaksi</td>
                                             <td class="text-right font-weight-bolder"><span id="jmldebet" data-jmldebet="<?= $jumlahDebet; ?>"><?= rupiah($jumlahDebet); ?></span></td>
                                             <td class="text-right font-weight-bolder"><span id="jmldebet" data-jmldebet="<?= $jumlahDebet; ?>"><?= rupiah($jumlahKredit); ?></span></td>
+                                            <td></td>
                                             <td class="text-center" style="color: grey"><i class="fas fa-cog"></i></td>
                                         </tr>
                                     <?php } else { ?>
@@ -230,7 +233,7 @@
                                         <td width="10%" class="text-center">Tanggal</td>
                                         <td width="10%" class="text-center">No. Bukti</td>
                                         <td class="text-center">Uraian</td>
-                                        <td width="15%" class="text-center">Jumlah Transaksi (Rp.)</td>
+                                        <td width="15%" class="text-center">Jumlah (Rp.)</td>
                                     </tr>
                                 </thead>
                                 <tbody>
