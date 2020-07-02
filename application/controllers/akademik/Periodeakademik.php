@@ -19,6 +19,15 @@ class Periodeakademik extends CI_Controller
         $data['periodeakademik'] = $this->Periodeakademik_model->ambil_data();
         $this->template->display('akademik/periodeakademik/index', $data);
     }
+    public function cetak()
+    {
+        $data['judul'] = "Data Periode Akademik";
+        $data['periodeakademik'] = $this->Periodeakademik_model->ambil_data();
+        $this->load->library('pdf');
+        $this->pdf->setPaper('A4', 'potrait');
+        $this->pdf->filename = "Data Periode Akademik";
+        $this->pdf->load_view('akademik/periodeakademik/cetak', $data);
+    }
     public function simpan()
     {
         $this->_validate();

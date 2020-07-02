@@ -23,8 +23,12 @@ class Role extends CI_Controller
     }
     public function cetak()
     {
+        $data['judul'] = "Data Role User";
         $data['role'] = $this->Role_model->ambil_data();
-        $this->load->view('setting/role/cetak', $data);
+        $this->load->library('pdf');
+        $this->pdf->setPaper('A4', 'potrait');
+        $this->pdf->filename = "Data Role User";
+        $this->pdf->load_view('setting/role/cetak', $data);
     }
     public function simpan()
     {

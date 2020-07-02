@@ -27,22 +27,21 @@
                         <div class="card-header bg-gradient-light">
                             <div>
                                 <h4 class="card-title">
-                                    <a class="text-reset"><i class="far fa-list-alt" style="color: teal"></i> </a>
+                                    <!-- <a class="text-reset"><i class="far fa-list-alt" style="color: teal"></i> </a> -->
+                                    <span>Tahun Pembukuan <?= $this->session->userdata['tahun_buku']; ?></span>
                                 </h4>
                             </div>
                             <div class="float-right">
-                                <!-- <h4 class="card-title" disabled="disabled">
-                                    Cetak <i class="fas fa-print" style="color: teal"></i>
-                                </h4> -->
+                                <h4 class="card-title" disabled="disabled">
+                                    <a href="<?= site_url('akuntansi/kodeperkiraan/cetak') ?>" target="_blank" class="text-reset">Cetak <i class="fas fa-print" style="color: teal"></i></a>
+                                </h4>
                             </div>
-
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body" id="tabel-data">
                             <table class="table table-bordered table-hover table-sm">
                                 <thead>
                                     <tr class="">
-                                        <!-- <td class="col-1 text-center">Kode</td> -->
                                         <td colspan="5" class="text-center">Daftar Kode Perkiraan</td>
                                         <td class="text-center">Institusi</td>
                                         <td class="text-center">Posisi</td>
@@ -78,9 +77,6 @@
                                                         <td colspan="5"><?= $dataLevel4['level4']; ?>
                                                         </td>
                                                         <td class="text-center">
-                                                            <!-- <div class="form-check">
-                                                                <input class="form-check-input frm-cek-access" type="checkbox">
-                                                            </div> -->
                                                         </td>
                                                     </tr>
                                                     <?php

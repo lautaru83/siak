@@ -31,9 +31,9 @@
                                 </h4>
                             </div>
                             <div class="float-right">
-                                <h4 class="card-title" disabled="disabled">
+                                <!-- <h4 class="card-title" disabled="disabled">
                                     Cetak <i class="fas fa-print" style="color: teal"></i>
-                                </h4>
+                                </h4> -->
                             </div>
 
                         </div>

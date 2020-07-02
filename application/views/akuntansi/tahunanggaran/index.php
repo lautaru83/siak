@@ -33,10 +33,9 @@
                             </div>
                             <div class="float-right">
                                 <h4 class="card-title" disabled="disabled">
-                                    Cetak <i class="fas fa-print" style="color: teal"></i>
+                                    <a href="<?= site_url('akuntansi/tahunanggaran/cetak') ?>" target="_blank" class="text-reset">Cetak <i class="fas fa-print" style="color: teal"></i></a>
                                 </h4>
                             </div>
-
                         </div>
                         <!-- /.card-header -->
                         <!-- <div class="card-body" id="tabel-data"> -->

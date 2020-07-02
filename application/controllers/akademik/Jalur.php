@@ -18,6 +18,15 @@ class Jalur extends CI_Controller
         $data['jalur'] = $this->Jalur_model->ambil_data();
         $this->template->display('akademik/jalur/index', $data);
     }
+    public function cetak()
+    {
+        $data['judul'] = "Data Jalur Pendidikan";
+        $data['jalur'] = $this->Jalur_model->ambil_data();
+        $this->load->library('pdf');
+        $this->pdf->setPaper('A4', 'potrait');
+        $this->pdf->filename = "Data Jalur Pendidikan";
+        $this->pdf->load_view('akademik/jalur/cetak', $data);
+    }
     public function simpan()
     {
         $this->_validate();

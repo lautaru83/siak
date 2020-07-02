@@ -24,8 +24,12 @@ class Unit extends CI_Controller
     }
     public function cetak()
     {
+        $data['judul'] = "Data Unit";
         $data['unit'] = $this->Unit_model->ambil_data();
-        $this->load->view('setting/unit/cetak', $data);
+        $this->load->library('pdf');
+        $this->pdf->setPaper('A4', 'potrait');
+        $this->pdf->filename = "Data Unit";
+        $this->pdf->load_view('setting/unit/cetak', $data);
     }
     public function simpan()
     {

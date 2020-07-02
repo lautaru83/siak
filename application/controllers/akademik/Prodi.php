@@ -12,7 +12,6 @@ class Prodi extends CI_Controller
     }
     public function index()
     {
-        //echo "Angkatan";
         $data['kontenmenu'] = "Master Akademik";
         $data['kontensubmenu'] = "Program Pendidikan";
         $data['prodi'] = $this->Prodi_model->ambil_data();
@@ -20,6 +19,15 @@ class Prodi extends CI_Controller
         $data['jenjang'] = $this->Jenjang_model->data_fk();
         $data['jalur'] = $this->Jalur_model->data_fk();
         $this->template->display('akademik/prodi/index', $data);
+    }
+    public function cetak()
+    {
+        $data['judul'] = "Data Program Pendidikan";
+        $data['prodi'] = $this->Prodi_model->ambil_data();
+        $this->load->library('pdf');
+        $this->pdf->setPaper('A4', 'potrait');
+        $this->pdf->filename = "Data Program Pendidikan";
+        $this->pdf->load_view('akademik/prodi/cetak', $data);
     }
     public function simpan()
     {

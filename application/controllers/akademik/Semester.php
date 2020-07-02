@@ -17,6 +17,15 @@ class Semester extends CI_Controller
         $data['semester'] = $this->Semester_model->ambil_data();
         $this->template->display('akademik/semester/index', $data);
     }
+    public function cetak()
+    {
+        $data['judul'] = "Data Semester";
+        $data['semester'] = $this->Semester_model->ambil_data();
+        $this->load->library('pdf');
+        $this->pdf->setPaper('A4', 'potrait');
+        $this->pdf->filename = "Data Semester";
+        $this->pdf->load_view('akademik/semester/cetak', $data);
+    }
     public function simpan()
     {
         $this->_validate();

@@ -52,6 +52,7 @@
         color: #000;
         font: small;
         font-weight: normal;
+        text-align: center;
     }
 
     .tabledata tr td {
@@ -59,7 +60,6 @@
         font: small;
         font-weight: normal;
         border: 1px solid grey;
-        text-align: center;
     }
 
     /* .tabledata tr:nth-child(even) {
@@ -82,26 +82,56 @@
     <div class="content">
         <br>
         <div style="text-align: center">
-            <strong>DATA ROLE USER</strong>
+            <strong>DATA MAHASISWA</strong>
         </div>
+        <br>
+        <table width="100%">
+            <?php
+            $idkelas = "";
+            $prodi = "";
+            $angkatan = "";
+            if ($detailkelas) {
+                $idKelas = $detailkelas['id'];
+                $prodi = $detailkelas['prodi'];
+                $angkatan = $detailkelas['angkatan'];
+            }
+            ?>
+            <tr>
+                <td width="15%">Kelas</td>
+                <td width="3%">:</td>
+                <td><?= $idKelas; ?></td>
+            </tr>
+            <tr>
+                <td>Prodi</td>
+                <td>:</td>
+                <td><?= $prodi; ?></td>
+            </tr>
+            <tr>
+                <td>Angkatan</td>
+                <td>:</td>
+                <td><?= $angkatan; ?></td>
+            </tr>
+        </table>
         <br>
         <table class="tabledata" width="100%">
             <tr>
                 <th width="5%">No</th>
-                <th width="25%">Role</th>
-                <th>Keterangan</th>
+                <th width="12%">NIM</th>
+                <th>Nama</th>
+                <th width="15%">Status</th>
             </tr>
             <?php
             $no = 1;
-            if ($role) {
-                foreach ($role as $dataRole) :
-                    $idrole = $dataRole['id'];
+            if ($mahasiswa) {
+                foreach ($mahasiswa as $dataMahasiswa) :
+                    $idMahasiswa = $dataMahasiswa['id'];
             ?>
 
                     <tr>
                         <td align="center"><?= $no; ?></td>
-                        <td><?= $dataRole['role']; ?></td>
-                        <td><?= $dataRole['keterangan']; ?></td>
+                        <td align="center"><?= $dataMahasiswa['nim']; ?></td>
+                        <td><?= $dataMahasiswa['nama']; ?></td>
+                        <td align="center"><?= txt_status($dataMahasiswa['is_active']); ?></td>
                     </tr>
                 <?php
                     $no++;

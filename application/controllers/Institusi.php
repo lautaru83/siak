@@ -23,8 +23,12 @@ class Institusi extends CI_Controller
     }
     public function cetak()
     {
+        $data['judul'] = "Data Institusi";
         $data['institusi'] = $this->Institusi_model->ambil_data();
-        $this->load->view('setting/institusi/cetak', $data);
+        $this->load->library('pdf');
+        $this->pdf->setPaper('A4', 'potrait');
+        $this->pdf->filename = "Data Institusi";
+        $this->pdf->load_view('setting/institusi/cetak', $data);
     }
     public function simpan()
     {

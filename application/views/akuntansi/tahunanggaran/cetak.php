@@ -52,6 +52,7 @@
         color: #000;
         font: small;
         font-weight: normal;
+        text-align: center;
     }
 
     .tabledata tr td {
@@ -59,7 +60,6 @@
         font: small;
         font-weight: normal;
         border: 1px solid grey;
-        text-align: center;
     }
 
     /* .tabledata tr:nth-child(even) {
@@ -82,26 +82,31 @@
     <div class="content">
         <br>
         <div style="text-align: center">
-            <strong>DATA ROLE USER</strong>
+            <strong>DATA TAHUN ANGGARAN</strong>
         </div>
         <br>
         <table class="tabledata" width="100%">
             <tr>
                 <th width="5%">No</th>
-                <th width="25%">Role</th>
+                <th>Tahun Anggaran</th>
+                <th>Awal Periode</th>
+                <th>Akhir Periode</th>
                 <th>Keterangan</th>
+                <th>Status</th>
             </tr>
             <?php
             $no = 1;
-            if ($role) {
-                foreach ($role as $dataRole) :
-                    $idrole = $dataRole['id'];
+            if ($tahunanggaran) {
+                foreach ($tahunanggaran as $dataTahunanggaran) :
             ?>
 
                     <tr>
                         <td align="center"><?= $no; ?></td>
-                        <td><?= $dataRole['role']; ?></td>
-                        <td><?= $dataRole['keterangan']; ?></td>
+                        <td><?= $dataTahunanggaran['tahunanggaran']; ?></td>
+                        <td><?= tanggal_indo($dataTahunanggaran['awal_periode']); ?></td>
+                        <td><?= tanggal_indo($dataTahunanggaran['akhir_periode']); ?></td>
+                        <td><?= $dataTahunanggaran['keterangan']; ?></td>
+                        <td align="center"><?= txt_status($dataTahunanggaran['is_active']); ?></td>
                     </tr>
                 <?php
                     $no++;

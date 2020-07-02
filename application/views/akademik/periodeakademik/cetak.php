@@ -52,6 +52,7 @@
         color: #000;
         font: small;
         font-weight: normal;
+        text-align: center;
     }
 
     .tabledata tr td {
@@ -59,7 +60,6 @@
         font: small;
         font-weight: normal;
         border: 1px solid grey;
-        text-align: center;
     }
 
     /* .tabledata tr:nth-child(even) {
@@ -82,26 +82,34 @@
     <div class="content">
         <br>
         <div style="text-align: center">
-            <strong>DATA ROLE USER</strong>
+            <strong>DATA PERIODE AKADEMIK</strong>
         </div>
         <br>
         <table class="tabledata" width="100%">
             <tr>
                 <th width="5%">No</th>
-                <th width="25%">Role</th>
+                <th width="8%">Kode</th>
+                <th width="15%">Tahun Akademik</th>
+                <th width="12%">Awal Semester</th>
+                <th width="12%">Akhir Semester</th>
                 <th>Keterangan</th>
+                <th width="10%">Status</th>
             </tr>
             <?php
             $no = 1;
-            if ($role) {
-                foreach ($role as $dataRole) :
-                    $idrole = $dataRole['id'];
+            if ($periodeakademik) {
+                foreach ($periodeakademik as $dataPeriodeakademik) :
+                    $idPeriode = $dataPeriodeakademik['id'];
             ?>
 
                     <tr>
                         <td align="center"><?= $no; ?></td>
-                        <td><?= $dataRole['role']; ?></td>
-                        <td><?= $dataRole['keterangan']; ?></td>
+                        <td align="center"><?= $idPeriode; ?></td>
+                        <td><?= $dataPeriodeakademik['tahunakademik']; ?></td>
+                        <td><?= tanggal_indo($dataPeriodeakademik['awal_semester']); ?></td>
+                        <td><?= tanggal_indo($dataPeriodeakademik['akhir_semester']); ?></td>
+                        <td><?= $dataPeriodeakademik['keterangan']; ?></td>
+                        <td align="center"><?= txt_status($dataPeriodeakademik['is_active']); ?></td>
                     </tr>
                 <?php
                     $no++;

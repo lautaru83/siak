@@ -33,10 +33,9 @@
                             </div>
                             <div class="float-right">
                                 <h4 class="card-title" disabled="disabled">
-                                    Cetak <i class="fas fa-print" style="color: teal"></i>
+                                    <a href="<?= site_url('akademik/tahunakademik/cetak') ?>" target="_blank" class="text-reset">Cetak <i class="fas fa-print" style="color: teal"></i></a>
                                 </h4>
                             </div>
-
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body" id="tabel-data">
@@ -66,7 +65,7 @@
                                                 <td><?= $dataTahunakademik['tahunakademik']; ?></td>
                                                 <td><?= tanggal_indo($dataTahunakademik['awal_periode']); ?></td>
                                                 <td><?= tanggal_indo($dataTahunakademik['akhir_periode']); ?></td>
-                                                <td><?= txt_status($dataTahunakademik['is_active']); ?></td>
+                                                <td class="text-center"><?= txt_status($dataTahunakademik['is_active']); ?></td>
                                                 <td class="text-center"><a href="" class="btn-edit-tahunakademik" data-id="<?= $idTahunakademik; ?>" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fas fa-edit" style="color: olive"></i></a> - <a href="" class="btn-hapus-tahunakademik" data-id="<?= $idTahunakademik; ?>" data-info="<?= $dataTahunakademik['tahunakademik']; ?>" data-toggle="tooltip" data-placement="bottom" title="Hapus"> <i class="far fa-trash-alt" style="color: maroon"></i></a></td>
                                             </tr>
                                     <?php

@@ -17,6 +17,15 @@ class Tahunanggaran extends CI_Controller
         $data['tahunanggaran'] = $this->Tahunanggaran_model->ambil_data();
         $this->template->display('akuntansi/tahunanggaran/index', $data);
     }
+    public function cetak()
+    {
+        $data['judul'] = "Data Tahun Anggaran";
+        $data['tahunanggaran'] = $this->Tahunanggaran_model->ambil_data();
+        $this->load->library('pdf');
+        $this->pdf->setPaper('A4', 'potrait');
+        $this->pdf->filename = "Data Tahun Anggaran";
+        $this->pdf->load_view('akuntansi/tahunanggaran/cetak', $data);
+    }
     public function simpan()
     {
         $this->_validate();

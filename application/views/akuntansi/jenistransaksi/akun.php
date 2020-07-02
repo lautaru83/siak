@@ -31,7 +31,7 @@
                                     <a href="<?= site_url('jenistransaksi'); ?>" class="text-reset"><i class="far fa-list-alt" style="color: teal"></i>
                                         <?php
                                         if ($transaksi) {
-                                            ?>
+                                        ?>
                                             Jenis Transaksi : <?= $transaksi['jenis_transaksi']; ?>
                                         <?php
                                         }
@@ -48,7 +48,7 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body" id="tabel-data">
-                            <table class="table table-bordered table-hover">
+                            <table class="table table-bordered table-hover table-sm">
                                 <thead>
                                     <tr class="">
                                         <!-- <td class="col-1 text-center">Kode</td> -->
@@ -64,7 +64,7 @@
                                     if ($kodeperkiraan) {
                                         foreach ($kodeperkiraan as $dataKode) :
                                             $idakun3 = $dataKode['id'];
-                                            ?>
+                                    ?>
                                             <tr class="bg-light">
                                                 <td class="text-center" width="8%">
                                                     <?= $idakun3; ?>.00.00.00
@@ -74,11 +74,11 @@
                                                 </td>
                                             </tr>
                                             <?php
-                                                    $level4 = $this->Kodeperkiraan_model->level4($idakun3);
-                                                    if ($level4) {
-                                                        foreach ($level4 as $dataLevel4) :
-                                                            $idakun4 = $dataLevel4['id'];
-                                                            ?>
+                                            $level4 = $this->Kodeperkiraan_model->level4($idakun3);
+                                            if ($level4) {
+                                                foreach ($level4 as $dataLevel4) :
+                                                    $idakun4 = $dataLevel4['id'];
+                                            ?>
                                                     <tr>
                                                         <td class="text-center">
                                                         </td>
@@ -89,11 +89,11 @@
                                                         </td>
                                                     </tr>
                                                     <?php
-                                                                    $level5 = $this->Kodeperkiraan_model->level5($idakun4);
-                                                                    if ($level5) {
-                                                                        foreach ($level5 as $dataLevel5) :
-                                                                            $idakun5 = $dataLevel5['id'];
-                                                                            ?>
+                                                    $level5 = $this->Kodeperkiraan_model->level5($idakun4);
+                                                    if ($level5) {
+                                                        foreach ($level5 as $dataLevel5) :
+                                                            $idakun5 = $dataLevel5['id'];
+                                                    ?>
                                                             <tr>
                                                                 <td></td>
                                                                 <td class="text-center">
@@ -105,11 +105,11 @@
                                                                 </td>
                                                             </tr>
                                                             <?php
-                                                                                    $level6 = $this->Kodeperkiraan_model->level6($idakun5);
-                                                                                    if ($level6) {
-                                                                                        foreach ($level6 as $dataLevel6) :
-                                                                                            $idakun6 = $dataLevel6['id'];
-                                                                                            ?>
+                                                            $level6 = $this->Kodeperkiraan_model->level6($idakun5);
+                                                            if ($level6) {
+                                                                foreach ($level6 as $dataLevel6) :
+                                                                    $idakun6 = $dataLevel6['id'];
+                                                            ?>
                                                                     <tr>
                                                                         <td></td>
                                                                         <td></td>
@@ -125,17 +125,17 @@
                                                                         </td>
                                                                     </tr>
                                                             <?php
-                                                                                        endforeach;
-                                                                                    }
-                                                                                    ?>
+                                                                endforeach;
+                                                            }
+                                                            ?>
                                                     <?php
-                                                                        endforeach;
-                                                                    }
-                                                                    ?>
-                                            <?php
                                                         endforeach;
                                                     }
                                                     ?>
+                                            <?php
+                                                endforeach;
+                                            }
+                                            ?>
 
                                     <?php
                                         //$no++;

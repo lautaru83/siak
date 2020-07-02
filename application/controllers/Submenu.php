@@ -24,8 +24,12 @@ class Submenu extends CI_Controller
     }
     public function cetak()
     {
+        $data['judul'] = "Data Submenu";
         $data['submenu'] = $this->Submenu_model->ambil_data();
-        $this->load->view('setting/submenu/cetak', $data);
+        $this->load->library('pdf');
+        $this->pdf->setPaper('A4', 'potrait');
+        $this->pdf->filename = "Data Angkatan";
+        $this->pdf->load_view('setting/submenu/cetak', $data);
     }
     public function simpan()
     {

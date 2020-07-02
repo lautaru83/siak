@@ -52,6 +52,7 @@
         color: #000;
         font: small;
         font-weight: normal;
+        text-align: center;
     }
 
     .tabledata tr td {
@@ -59,7 +60,6 @@
         font: small;
         font-weight: normal;
         border: 1px solid grey;
-        text-align: center;
     }
 
     /* .tabledata tr:nth-child(even) {
@@ -82,26 +82,24 @@
     <div class="content">
         <br>
         <div style="text-align: center">
-            <strong>DATA ROLE USER</strong>
+            <strong>DATA JALUR PENDIDIKAN</strong>
         </div>
         <br>
         <table class="tabledata" width="100%">
             <tr>
-                <th width="5%">No</th>
-                <th width="25%">Role</th>
-                <th>Keterangan</th>
+                <th width="8%">No</th>
+                <th>Jalur Pendidikan</th>
             </tr>
             <?php
             $no = 1;
-            if ($role) {
-                foreach ($role as $dataRole) :
-                    $idrole = $dataRole['id'];
+            if ($jalur) {
+                foreach ($jalur as $dataJalur) :
+                    $idJalur = $dataJalur['id'];
             ?>
 
                     <tr>
                         <td align="center"><?= $no; ?></td>
-                        <td><?= $dataRole['role']; ?></td>
-                        <td><?= $dataRole['keterangan']; ?></td>
+                        <td align="center"><?= $dataJalur['jalur']; ?></td>
                     </tr>
                 <?php
                     $no++;

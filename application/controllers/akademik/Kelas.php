@@ -12,7 +12,6 @@ class Kelas extends CI_Controller
     }
     public function index()
     {
-        //echo "Angkatan";
         $data['kontenmenu'] = "Master Akademik";
         $data['kontensubmenu'] = "Kelas";
         $data['kelas'] = $this->Kelas_model->ambil_data();
@@ -21,14 +20,15 @@ class Kelas extends CI_Controller
         $data['angkatan'] = $this->Angkatan_model->data_fk();
         $this->template->display('akademik/kelas/index', $data);
     }
-    // public function detail($id)
-    // {
-    //     //echo "Angkatan";
-    //     $data['kontenmenu'] = "Master Akademik";
-    //     $data['kontensubmenu'] = "Kelas";
-    //     $data['kelas'] = $this->Kelas_model->ambil_data();
-    //     $this->template->display('akademik/kelas/detail', $data);
-    // }
+    public function cetak()
+    {
+        $data['judul'] = "Data Kelas";
+        $data['kelas'] = $this->Kelas_model->ambil_data();
+        $this->load->library('pdf');
+        $this->pdf->setPaper('A4', 'potrait');
+        $this->pdf->filename = "Data Kelas";
+        $this->pdf->load_view('akademik/kelas/cetak', $data);
+    }
     public function simpan()
     {
         $this->_validate();

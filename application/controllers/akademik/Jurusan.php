@@ -19,6 +19,15 @@ class Jurusan extends CI_Controller
         $data['jurusan'] = $this->Jurusan_model->ambil_data();
         $this->template->display('akademik/jurusan/index', $data);
     }
+    public function cetak()
+    {
+        $data['judul'] = "Data Jurusan Pendidikan";
+        $data['jurusan'] = $this->Jurusan_model->ambil_data();
+        $this->load->library('pdf');
+        $this->pdf->setPaper('A4', 'potrait');
+        $this->pdf->filename = "Data Jurusan Pendidikan";
+        $this->pdf->load_view('akademik/jurusan/cetak', $data);
+    }
     public function simpan()
     {
         $this->_validate();

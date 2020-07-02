@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <title>SIAK 2.0-PAGUWARMAS</title>
+    <title>SIAK PAGUWARMAS 2.0</title>
     <link rel='icon' href='<?= base_url('assets/') ?>dist/img/book.ico' type='image/x-icon' sizes="16x16" />
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="<?= base_url('assets/') ?>plugins/fontawesome-free/css/all.min.css">

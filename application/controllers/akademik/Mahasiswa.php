@@ -27,6 +27,16 @@ class Mahasiswa extends CI_Controller
         $data['mahasiswa'] = $this->Mahasiswa_model->ambil_data_by_kelas_id($id);
         $this->template->display('akademik/mahasiswa/data', $data);
     }
+    public function cetak($id)
+    {
+        $data['judul'] = "Data Mahasiswa $id";
+        $data['detailkelas'] = $this->Kelas_model->detail_kelas_by_id($id);
+        $data['mahasiswa'] = $this->Mahasiswa_model->ambil_data_by_kelas_id($id);
+        $this->load->library('pdf');
+        $this->pdf->setPaper('A4', 'portrait');
+        $this->pdf->filename = "Data Mahasiswa";
+        $this->pdf->load_view('akademik/mahasiswa/cetak', $data);
+    }
     public function simpan()
     {
         $this->_validate();

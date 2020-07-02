@@ -12,11 +12,19 @@ class Tahunakademik extends CI_Controller
     }
     public function index()
     {
-        //echo "Angkatan";
         $data['kontenmenu'] = "Master Akademik";
         $data['kontensubmenu'] = "Tahun Akademik";
         $data['tahunakademik'] = $this->Tahunakademik_model->ambil_data();
         $this->template->display('akademik/tahunakademik/index', $data);
+    }
+    public function cetak()
+    {
+        $data['judul'] = "Data Tahun Akademik";
+        $data['tahunakademik'] = $this->Tahunakademik_model->ambil_data();
+        $this->load->library('pdf');
+        $this->pdf->setPaper('A4', 'potrait');
+        $this->pdf->filename = "Data Tahun Akademik";
+        $this->pdf->load_view('akademik/tahunakademik/cetak', $data);
     }
     public function simpan()
     {

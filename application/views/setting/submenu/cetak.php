@@ -2,108 +2,135 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <title>Cetak Submenu</title>
-    <!-- Normalize or reset CSS with your favorite library -->
-    <link rel="stylesheet" href="<?= base_url('assets/')
-                                    ?>dist/css/normalize.min.css">
-    <link rel="stylesheet" href="<?= base_url('assets/')
-                                    ?>plugins/fontawesome-free/css/all.min.css">
-    <link rel="stylesheet" href="<?= base_url('assets/')
-                                    ?>dist/css/adminlte.min.css">
-    <!-- Load paper.css for happy printing -->
-    <link href="<?php base_url('assets/') ?>dist/css/googleapis/fontsgoogleapiscom.css" rel="stylesheet">
-    <link rel="stylesheet" href="<?= base_url('assets/') ?>dist/css/paper.css">
-    <!-- Set page size here: A5, A4 or A3 -->
-    <!-- Set also "landscape" if you need -->
-    <style>
-        @media print {
-            * {
-                margin: 0;
-                padding: 0
-            }
-
-            @page {
-                size: legal;
-                margin: 0mm;
-            }
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?= $judul; ?></title>
 </head>
+<style type="text/css">
+    @page {
+        margin: 0.75cm;
+    }
 
-<!-- Set "A5", "A4" or "A3" for class name -->
-<!-- Set also "landscape" if you need -->
+    .pagenum:before {
+        content: counter(page);
+    }
 
-<body class="legal">
+    .header,
+    .footer {
+        position: absolute;
+    }
 
-    <!-- Each sheet element should have the class "sheet" -->
-    <!-- "padding-**mm" is optional: you can set 10, 15, 20 or 25 -->
-    <!-- <section class="sheet padding-10mm"> -->
-    <section class="sheet padding-10mm">
-        <!-- <div class="content-wrapper">
-            </div> -->
-        <div class="wrapper">
-            <section class="content">
-                <div class="row border-bottom">
-                    <div class="col-sm-6">
-                        <h3 class="text-md font-weight-normal">SIAK V. 2.0 PAGUWARMAS</h3>
-                    </div>
-                    <div class="col-sm-6">
-                        <h3 class="text-md text-right"><?= date("d/m/Y h:i"); ?></h3>
-                    </div>
-                    <!-- <div class="col-sm-12">
-                        <hr class="mt-1">
-                    </div> -->
-                </div>
-                <div class="row mt-4 mx-auto">
-                    <div class="col-sm-12">
-                        <h3 class="text-md font-weight-bolder text-center">SUBMENU</h3>
-                    </div>
-                </div>
-                <div class="row mt-2">
-                    <div class="col-sm-12">
-                        <table class="table table-bordered table-sm text-sm" width="100%">
-                            <thead>
-                                <tr>
-                                    <td class="text-center" width="5%">No</td>
-                                    <td class="text-center">Submenu</td>
-                                    <td class="text-center">Menu</td>
-                                    <td class="text-center" width="15%">url</td>
-                                    <td class="text-center" width="15%">icon</td>
-                                    <td class="text-center" width="10%">Status</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                $no = 1;
-                                if ($submenu) {
-                                    foreach ($submenu as $dataSubmenu) :
-                                ?>
+    .footer {
+        font: small;
+        bottom: 0;
+        height: 20px;
+    }
 
-                                        <tr>
-                                            <td class="text-center"><?= $no; ?></td>
-                                            <td><?= $dataSubmenu['submenu']; ?></td>
-                                            <td><?= $dataSubmenu['menu']; ?></td>
-                                            <td><?= $dataSubmenu['url']; ?></td>
-                                            <td><?= $dataSubmenu['icon']; ?></td>
-                                            <td><?= $dataSubmenu['is_active']; ?></td>
-                                        </tr>
-                                <?php
-                                        $no++;
-                                    endforeach;
-                                }
-                                ?>
+    .header {
+        top: 0;
+        height: 40px;
+    }
 
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </section>
+    .content {
+        margin-top: 50px;
+        margin-bottom: 45px;
+    }
+
+    .tabledata {
+        font-family: sans-serif;
+        font-size: 10px;
+        color: #444;
+        border-collapse: collapse;
+        width: 100%;
+        /* border: 1px solid #f2f5f7; */
+    }
+
+    .tabledata tr th {
+        padding: 3px;
+        background: #f2f2f2;
+        border: 1px solid grey;
+        color: #000;
+        font: small;
+        font-weight: normal;
+        text-align: center;
+    }
+
+    .tabledata tr td {
+        padding: 3px;
+        font: small;
+        font-weight: normal;
+        border: 1px solid grey;
+        /* text-align: center; */
+    }
+
+    /* .tabledata tr:nth-child(even) {
+        background-color: #f2f2f2;
+    } */
+</style>
+
+<body>
+    <div class="header">
+        <table width="100%">
+            <tr>
+                <td align="left">SIAK PAGUWASMAS 2.0 </td>
+                <td width="25%" align="right"><?php echo (date("d-m-Y")); ?></td>
+            </tr>
+            <tr>
+                <td colspan="2">Sistem Informasi Akuntansi Keuangan</td>
+            </tr>
+        </table>
+    </div>
+    <div class="content">
+        <br>
+        <div style="text-align: center">
+            <strong>DATA SUBMENU</strong>
         </div>
-    </section>
-    <!-- <script>
-        window.print();
-    </script> -->
+        <br>
+        <table class="tabledata" width="100%">
+            <tr>
+                <th width="5%">No</th>
+                <th>Submenu</th>
+                <th>Menu</th>
+                <th width="15%">url</th>
+                <th width="15%">icon</th>
+                <th width="10%">Status</th>
+            </tr>
+            <?php
+            $no = 1;
+            if ($submenu) {
+                foreach ($submenu as $dataSubmenu) :
+            ?>
+
+                    <tr>
+                        <td align="center"><?= $no; ?></td>
+                        <td><?= $dataSubmenu['submenu']; ?></td>
+                        <td><?= $dataSubmenu['menu']; ?></td>
+                        <td><?= $dataSubmenu['url']; ?></td>
+                        <td><?= $dataSubmenu['icon']; ?></td>
+                        <td align="center"><?= txt_status($dataSubmenu['is_active']); ?></td>
+                    </tr>
+                <?php
+                    $no++;
+                endforeach;
+            } else {
+                ?>
+                <tr>
+                    <td colspan="3">Data tidak ditemukan</td>
+                </tr>
+            <?php
+            }
+            ?>
+        </table>
+
+    </div>
+    <div class="footer">
+        <table width="100%">
+            <tr>
+                <!-- <td>Copyright &copy; 2020 <strong>YAYASAN PAGUWARMAS</strong> Maos-Cilacap. All rights reserved.</td>
+                <td width="10" align="right"><span class="pagenum"></span></td> -->
+            </tr>
+        </table>
+    </div>
 </body>
 
 </html>

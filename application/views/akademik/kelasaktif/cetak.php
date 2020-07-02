@@ -52,6 +52,7 @@
         color: #000;
         font: small;
         font-weight: normal;
+        text-align: center;
     }
 
     .tabledata tr td {
@@ -59,7 +60,6 @@
         font: small;
         font-weight: normal;
         border: 1px solid grey;
-        text-align: center;
     }
 
     /* .tabledata tr:nth-child(even) {
@@ -82,26 +82,27 @@
     <div class="content">
         <br>
         <div style="text-align: center">
-            <strong>DATA ROLE USER</strong>
+            <strong>DATA KELAS AKTIF <?= $idperak; ?></strong>
         </div>
         <br>
         <table class="tabledata" width="100%">
             <tr>
-                <th width="5%">No</th>
-                <th width="25%">Role</th>
-                <th>Keterangan</th>
+                <td width="5%">No</td>
+                <td width="20%">Periode Akademik</td>
+                <td width="">Kelas</td>
+                <td width="10%">Mahasiswa</td>
             </tr>
             <?php
             $no = 1;
-            if ($role) {
-                foreach ($role as $dataRole) :
-                    $idrole = $dataRole['id'];
+            if ($kelasaktif) {
+                foreach ($kelasaktif as $dataKelasaktif) :
+                    $idKelasaktif = $dataKelasaktif['id'];
             ?>
-
                     <tr>
                         <td align="center"><?= $no; ?></td>
-                        <td><?= $dataRole['role']; ?></td>
-                        <td><?= $dataRole['keterangan']; ?></td>
+                        <td><?= $dataKelasaktif['perak_id']; ?></td>
+                        <td><?= $dataKelasaktif['kelas']; ?></td>
+                        <td align="center"><?= $dataKelasaktif['jml_mhs']; ?></td>
                     </tr>
                 <?php
                     $no++;

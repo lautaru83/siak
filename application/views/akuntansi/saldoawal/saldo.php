@@ -32,9 +32,7 @@
                             </div>
                             <div class="float-right">
                                 <h4 class="card-title" disabled="disabled">
-                                    <a id="btn-tes-modal">
-                                        Cetak <i class="fas fa-print" style="color: teal"></i>
-                                    </a>
+                                    <a href="<?= site_url('akuntansi/saldoawal/cetak/' . $idtahun); ?>" target="_blank" class="text-reset">Cetak <i class="fas fa-print" style="color: teal"></i></a>
                                 </h4>
                             </div>
 
@@ -63,11 +61,11 @@
                                                 <td colspan="6" class="text-uppercase text-md"><?= $dataLevel11['level1']; ?></td>
                                             </tr>
                                             <?php
+                                            $saldoaset = 0;
+                                            $jumlahaset = 0;
+                                            $totalaset = 0;
                                             $akunaset6 = $this->Kodeperkiraan_model->akunlevel6saldo($idLevel11);
                                             if ($akunaset6) {
-                                                $saldoaset = 0;
-                                                $jumlahaset = 0;
-                                                $totalaset = 0;
                                                 foreach ($akunaset6 as $dataAkunaset6) :
                                                     $idAkunaset6 = $dataAkunaset6['a6level_id'];
                                                     $posisiAset = $dataAkunaset6['posisi'];
@@ -113,11 +111,11 @@
                                                 <td colspan="6" class="text-uppercase text-md"><?= $dataLevel12['level1']; ?></td>
                                             </tr>
                                             <?php
+                                            $saldokewajiban = 0;
+                                            $jumlahkewajiban = 0;
+                                            $totalkewajiban = 0;
                                             $akunkewajiban6 = $this->Kodeperkiraan_model->akunlevel6saldo($idLevel12);
                                             if ($akunkewajiban6) {
-                                                $saldokewajiban = 0;
-                                                $jumlahkewajiban = 0;
-                                                $totalkewajiban = 0;
                                                 foreach ($akunkewajiban6 as $dataAkunkewajiban6) :
                                                     $idAkunkewajiban = $dataAkunkewajiban6['a6level_id'];
                                                     $posisiKewajiban = $dataAkunkewajiban6['posisi'];
@@ -163,11 +161,11 @@
                                                 <td colspan="6" class="text-uppercase text-md"><?= $dataLevel13['level1']; ?></td>
                                             </tr>
                                             <?php
+                                            $saldobersih = 0;
+                                            $jumlahbersih = 0;
+                                            $totalbersih = 0;
                                             $dataAkunbersih6 = $this->Kodeperkiraan_model->akunlevel6saldo($idLevel13);
                                             if ($dataAkunbersih6) {
-                                                $saldobersih = 0;
-                                                $jumlahbersih = 0;
-                                                $totalbersih = 0;
                                                 foreach ($dataAkunbersih6 as $dataAkunbersih6) :
                                                     $idAkunbersih = $dataAkunbersih6['a6level_id'];
                                                     $posisiBersih = $dataAkunbersih6['posisi'];

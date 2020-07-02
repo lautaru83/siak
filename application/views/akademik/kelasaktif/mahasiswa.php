@@ -47,7 +47,7 @@
                             </div>
                             <div class="float-right">
                                 <h4 class="card-title" disabled="disabled">
-                                    Cetak <i class="fas fa-print" style="color: teal"></i>
+                                    <a href="<?= site_url('akademik/kelasaktif/cetakdata/' . $dekelas_id); ?>" target="_blank" class="text-reset">Cetak <i class="fas fa-print" style="color: teal"></i></a>
                                 </h4>
                             </div>
 
@@ -106,7 +106,6 @@
                                 </thead>
                                 <tbody>
                                     <?php
-                                    //var_dump($mahasiswaaktif);
                                     $no = 1;
                                     if ($mahasiswaaktif) {
                                         foreach ($mahasiswaaktif as $dataMahasiswaaktif) :

@@ -23,8 +23,12 @@ class Menu extends CI_Controller
     }
     public function cetak()
     {
+        $data['judul'] = "Data Menu";
         $data['menu'] = $this->Menu_model->ambil_data();
-        $this->load->view('setting/menu/cetak', $data);
+        $this->load->library('pdf');
+        $this->pdf->setPaper('A4', 'potrait');
+        $this->pdf->filename = "Data Menu";
+        $this->pdf->load_view('setting/menu/cetak', $data);
     }
     public function simpan()
     {

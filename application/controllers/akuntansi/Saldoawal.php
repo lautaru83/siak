@@ -103,6 +103,16 @@ class Saldoawal extends CI_Controller
         $data['kodeperkiraan'] = $this->Kodeperkiraan_model->akun_saldo();
         $this->template->display('akuntansi/saldoawal/saldo', $data);
     }
+    public function cetak($id)
+    {
+        $data['idtahun'] = $id;
+        $data['judul'] = "Data Saldoawal $id";
+        $data['kodeperkiraan'] = $this->Kodeperkiraan_model->akun_saldo();
+        $this->load->library('pdf');
+        $this->pdf->setPaper('legal', 'portrait');
+        $this->pdf->filename = "Data Saldo Awal $id";
+        $this->pdf->load_view('akuntansi/saldoawal/cetak', $data);
+    }
     public function saldo2($idtahun)
     {
         $data['idtahun'] = $idtahun;

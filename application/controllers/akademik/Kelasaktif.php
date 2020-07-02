@@ -12,9 +12,9 @@ class Kelasaktif extends CI_Controller
     }
     public function index()
     {
-        //echo "Angkatan";
         $idPerak = $this->session->userdata('idPerak');
         $data['kontenmenu'] = "Pengaturan";
+        $data['idperak'] = $idPerak;
         $data['kontensubmenu'] = "Kelas Aktif";
         $data['kelasaktif'] = "";
         $data['periode'] = $this->Periodeakademik_model->ambil_data_id($idPerak);
@@ -22,6 +22,16 @@ class Kelasaktif extends CI_Controller
         $data['bop'] = $this->Bop_model->data_fk();
         $data['kelasaktif'] = $this->Kelasaktif_model->ambil_data();
         $this->template->display('akademik/kelasaktif/index', $data);
+    }
+    public function cetak($id)
+    {
+        $data['judul'] = "Data Kelas Aktif $id";
+        $data['idperak'] = $id;
+        $data['kelasaktif'] = $this->Kelasaktif_model->ambil_data();
+        $this->load->library('pdf');
+        $this->pdf->setPaper('legal', 'portrait');
+        $this->pdf->filename = "Data Kelas Aktif $id";
+        $this->pdf->load_view('akademik/kelasaktif/cetak', $data);
     }
     public function simpan()
     {
@@ -48,6 +58,17 @@ class Kelasaktif extends CI_Controller
         $data['detailkelas'] = $this->Kelasaktif_model->detail_data_id($id);
         $data['mahasiswaaktif'] = $this->Kelasaktif_model->mahasiswa_active_id($id); //id detail kelas
         $this->template->display('akademik/kelasaktif/mahasiswa', $data);
+    }
+    public function cetakdata($id)
+    {
+        $data['judul'] = "Data Mahasiswa Aktif $id";
+        $data['dekelas_id'] = $id;
+        $data['detailkelas'] = $this->Kelasaktif_model->detail_data_id($id);
+        $data['mahasiswaaktif'] = $this->Kelasaktif_model->mahasiswa_active_id($id);
+        $this->load->library('pdf');
+        $this->pdf->setPaper('legal', 'portrait');
+        $this->pdf->filename = "Data Mahasiswa Aktif $id";
+        $this->pdf->load_view('akademik/kelasaktif/cetakdata', $data);
     }
     public function hapus()
     {

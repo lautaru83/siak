@@ -117,10 +117,10 @@
     </div>
     <div class="footer">
         <table width="100%">
-            <tr>
+            <!-- <tr>
                 <td>Copyright &copy; 2020 <strong>YAYASAN PAGUWARMAS</strong> Maos-Cilacap. All rights reserved.</td>
                 <td width="10" align="right"><span class="pagenum"></span></td>
-            </tr>
+            </tr> -->
         </table>
     </div>
 </body>

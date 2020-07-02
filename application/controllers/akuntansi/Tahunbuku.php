@@ -17,6 +17,15 @@ class Tahunbuku extends CI_Controller
         $data['tahunbuku'] = $this->Tahunbuku_model->ambil_data();
         $this->template->display('akuntansi/tahunbuku/index', $data);
     }
+    public function cetak()
+    {
+        $data['judul'] = "Data Tahun Pembukuan";
+        $data['tahunbuku'] = $this->Tahunbuku_model->ambil_data();
+        $this->load->library('pdf');
+        $this->pdf->setPaper('A4', 'potrait');
+        $this->pdf->filename = "Data Tahun Pembukuan";
+        $this->pdf->load_view('akuntansi/tahunbuku/cetak', $data);
+    }
     public function simpan()
     {
         $this->_validate();

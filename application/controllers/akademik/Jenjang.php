@@ -18,6 +18,15 @@ class Jenjang extends CI_Controller
         $data['jenjang'] = $this->Jenjang_model->ambil_data();
         $this->template->display('akademik/jenjang/index', $data);
     }
+    public function cetak()
+    {
+        $data['judul'] = "Data Jenjang Pendidikan";
+        $data['jenjang'] = $this->Jenjang_model->ambil_data();
+        $this->load->library('pdf');
+        $this->pdf->setPaper('A4', 'potrait');
+        $this->pdf->filename = "Data Jenjang Pendidikan";
+        $this->pdf->load_view('akademik/jenjang/cetak', $data);
+    }
     public function simpan()
     {
         $this->_validate();
