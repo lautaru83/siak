@@ -6634,6 +6634,11 @@ $(document).ready(function () {
         const idjt = $('[name="idjt"]').val();
         const idubah = $('[name="idubah"]').val();
         const jumlah = $('[name="jumlah"]').val();
+        var anggaran = 0;
+        if ($('#is_anggaran').is(":checked")) {
+            anggaran = 1;
+        }
+        const is_anggaran = anggaran;
         $.ajax({
             cache: false,
             type: "POST",
@@ -6646,6 +6651,7 @@ $(document).ready(function () {
                 a6level_id: a6level_id,
                 posisi_akun: posisi_akun,
                 tgl2: tgl2,
+                is_anggaran: is_anggaran,
                 jumlah: jumlah
             },
             dataType: "JSON",
@@ -6700,6 +6706,12 @@ $(document).ready(function () {
         const tgl2 = $('[name="tgl2"]').val();
         const posisi_akun = $('[name="posisi_akun"]').val();
         const jumlah = $('[name="jumlah"]').val();
+        const idjt = $('[name="idjt"]').val();
+        var anggaran = 0;
+        if ($('#is_anggaran').is(":checked")) {
+            anggaran = 1;
+        }
+        const is_anggaran = anggaran;
         $.ajax({
             cache: false,
             type: "POST",
@@ -6711,6 +6723,8 @@ $(document).ready(function () {
                 a6level_id: a6level_id,
                 posisi_akun: posisi_akun,
                 tgl2: tgl2,
+                idjt: idjt,
+                is_anggaran: is_anggaran,
                 jumlah: jumlah
             },
             dataType: "JSON",
@@ -6767,8 +6781,12 @@ $(document).ready(function () {
         $.ajax({
             url: base_url + 'akuntansi/nonkasbank/ajax_editrincian/' + id,
             type: "GET",
+            cache: false,
             dataType: "JSON",
             success: function (data) {
+                if (data.anggaran == 1) {
+                    $('[name="is_anggaran"]').prop("checked", true);
+                }
                 $('[name="idubah"]').val(data.id);
                 $('[name="a6level_id"]').val(data.a6level_id);
                 $('[name="idakun"]').val(data.a6level_id);

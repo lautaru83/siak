@@ -19,7 +19,7 @@
                                 <input type="hidden" id="tgl2" name="tgl2" value="<?= $tanggal_transaksi; ?>">
                                 <input type="hidden" id="transaksi_id" name="transaksi_id" value="<?= $tran_id; ?>">
                                 <select id="a6level_id" name="a6level_id" class="form-control">
-                                    <option value="">- PILIH -</option>
+                                    <option value="">- Pilih -</option>
                                     <?php
                                     foreach ($akun as $dataAkun) :
                                     ?>
@@ -50,7 +50,14 @@
                                 <span id="jumlah_error" class="text-danger"></span>
                             </div>
                         </div>
-
+                        <div class="form-group">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="is_anggaran" value="" id="is_anggaran">
+                                <label class="form-check-label" for="is_anggaran">
+                                    Anggaran
+                                </label>
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer card-footer">
                         <div>

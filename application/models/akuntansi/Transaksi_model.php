@@ -134,10 +134,11 @@ class Transaksi_model extends CI_Model
         $jurnal = $this->input->post('idjt');
         $jumlah = input_uang($this->input->post('jumlah'));
         $anggaran = $this->input->post('is_anggaran');
-        $is_anggaran = 0;
-        if ($jurnal <> "NN") {
-            $is_anggaran = $anggaran;
-        }
+        // $is_anggaran = 0;
+        // if ($jurnal <> "NN") {
+        //     $is_anggaran = $anggaran;
+        // }
+        $is_anggaran = $anggaran;
         if ($posisi == "D") {
             $debet = $jumlah;
             $kredit = 0;
@@ -164,10 +165,11 @@ class Transaksi_model extends CI_Model
         $jumlah = input_uang($this->input->post('jumlah'));
         $jurnal = $this->input->post('idjt');
         $anggaran = $this->input->post('is_anggaran');
-        $is_anggaran = 0;
-        if ($jurnal <> "NN") {
-            $is_anggaran = $anggaran;
-        }
+        //$is_anggaran = 0;
+        // if ($jurnal <> "NN") {
+        // $is_anggaran = $anggaran;
+        // }
+        $is_anggaran = $anggaran;
         if ($posisi == "D") {
             $debet = $jumlah;
             $kredit = 0;
