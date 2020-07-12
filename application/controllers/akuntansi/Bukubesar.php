@@ -43,6 +43,21 @@ class Bukubesar extends CI_Controller
         $data['bukubesar'] = $this->Laporan_model->bukubesar();
         $this->load->view('akuntansi/laporan/bukubesar/institusi', $data);
     }
+    public function cetakdata()
+    {
+        $data['judul'] = "Buku Besar";
+        $data['awalbuku'] = tanggal_input($this->input->post('bukuawal'));
+        $data['tanggalawal'] = tanggal_input($this->input->post('tgl1'));
+        $data['bukubesar'] = $this->Laporan_model->bukubesarcetak();
+        $data['awal_periode'] = $this->input->post('tgl1');
+        $data['akhir_periode'] = $this->input->post('tgl2');
+        $data['a6level_id'] = $this->input->post('akun_id');
+        $data['pembukuan_id'] = $this->input->post('pembukuan_id');
+        $this->load->library('pdf');
+        $this->pdf->setPaper('A4', 'portrait');
+        $this->pdf->filename = "Buku Besar";
+        $this->pdf->load_view('akuntansi/laporan/bukubesar/cetakdata', $data);
+    }
     public function cekinput()
     {
         $this->_validate();

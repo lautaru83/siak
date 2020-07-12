@@ -39,9 +39,7 @@
                             </div>
                             <div class="float-right">
                                 <h4 class="card-title" disabled="disabled">
-                                    <a id="btn-tes-modal">
-                                        Cetak <i class="fas fa-print" style="color: teal"></i>
-                                    </a>
+                                    <a href="<?= site_url('akuntansi/rapb/cetakdata/' . $idTahun) ?>" target="_blank" class="text-reset">Cetak <i class="fas fa-print" style="color: teal"></i></a>
                                 </h4>
                             </div>
 
@@ -60,7 +58,6 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-
                                     <?php
                                     if ($kelompok) {
                                         $no = 1;

@@ -24,9 +24,21 @@ class Rapb extends CI_Controller
         $data['kontenmenu'] = "Pengaturan";
         $data['kontensubmenu'] = "RAPB";
         $data['kelompok'] = $this->Akunanggaran_model->kelompok_data();
-        //$data['kodeperkiraan'] = $this->Kodeperkiraan_model->ambil_data();
-        //$data['institusi'] = $this->Institusi_model->data_institusi();
         $this->template->display('akuntansi/rapb/data', $data);
+    }
+    public function cetakdata($id)
+    {
+        $hasil = $this->Tahunanggaran_model->ambil_data_id($id);
+        $tahunanggaran = $hasil['tahunanggaran'];
+        $data['judul'] = "Data RAPB $tahunanggaran";
+        $data['tahunanggaran'] = $tahunanggaran;
+        $data['idTahun'] = $id;
+        $data['kelompok'] = $this->Akunanggaran_model->kelompok_data();
+        //$data['kodeperkiraan'] = $this->Kodeperkiraan_model->akun_saldo();
+        $this->load->library('pdf');
+        $this->pdf->setPaper('legal', 'portrait');
+        $this->pdf->filename = "Data RAPB $tahunanggaran";
+        $this->pdf->load_view('akuntansi/rapb/cetakdata', $data);
     }
     public function anggarandata()
     {

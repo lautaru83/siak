@@ -102,7 +102,7 @@
                                 </div>
                                 <div class="float-right">
                                     <h4 class="card-title" disabled="disabled">
-                                        Cetak <i class="fas fa-print" style="color: teal"></i>
+                                        <a href="" target="_blank" class="text-reset" id="lnk-cetak-jurnal">Cetak <i class="fas fa-print" style="color: teal"></i></a>
                                     </h4>
                                 </div>
 
@@ -114,9 +114,9 @@
                                         <table id="tabel3" class="table table-bordered table-hover table-sm">
                                             <thead>
                                                 <tr>
-                                                    <td width="5%" class="text-center">No</td>
-                                                    <td width="9%" class="text-center">Tanggal</td>
-                                                    <td width="9%" class="text-center">No.Bukti</td>
+                                                    <td width="4%" class="text-center">No</td>
+                                                    <td width="10%" class="text-center">Tanggal</td>
+                                                    <td width="10%" class="text-center">No.Bukti</td>
                                                     <td class="text-center">Uraian</td>
                                                     <td width="13%" class="text-center">Debet (Rp)</td>
                                                     <td width="13%" class="text-center">Kredit (Rp)</td>
@@ -161,20 +161,27 @@
                                                         endforeach;
                                                     }
                                                     ?>
-
-
                                                 <?php
                                                     $no++;
                                                 endforeach;
                                                 ?>
                                             </tbody>
                                         </table>
-
-
-
                                         <!--------------- isi content ---------------------------- -->
                                     </div>
                                     <!-- /.col-md-12 -->
+                                </div>
+                                <!-- /.row -->
+                                <div class="row invisible">
+                                    <div class="col-sm-12 text-center">
+                                        <form method="POST" action="<?= base_url('akuntansi/jurnal/cetakdata'); ?>" target="_blank">
+                                            <input type="hidden" id="tgl1" name="tgl1" value="<?= $awal_periode; ?>">
+                                            <input type="hidden" id="tgl2" name="tgl2" value="<?= $akhir_periode; ?>">
+                                            <input type="hidden" id="jurnal_id" name="jurnal_id" value="<?= $jurnal_id; ?>">
+                                            <input type="hidden" id="pembukuan_id" name="pembukuan_id" value="<?= $pembukuan_id; ?>">
+                                            <button type="submit" id="btn-cetak-jurnal" class="btn btn-link">Tampilkan</button>
+                                        </form>
+                                    </div>
                                 </div>
                                 <!-- /.row -->
                             </div>

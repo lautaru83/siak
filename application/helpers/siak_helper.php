@@ -693,6 +693,14 @@ function padding_akun($posisi)
         echo "class='pl-5'";
     }
 }
+function padding_akunlap($posisi)
+{
+    if ($posisi == "D") {
+        echo "";
+    } else {
+        echo "style='padding-left:25px;'";
+    }
+}
 function txt_anggaran($no)
 {
     if ($no == 1) {

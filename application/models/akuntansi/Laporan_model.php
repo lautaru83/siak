@@ -18,9 +18,22 @@ class Laporan_model extends CI_Model
         $institusi_id = $this->session->userdata('idInstitusi');
         $thbuku = $this->input->post('jt_pembukuan_id');
         if (!$jurnal) {
-            return $this->db2->query("select a.id as id,a.tanggal_transaksi as tanggal,a.nobukti as nobukti,a.keterangan as keterangan,a.accounting as accounting from siak_akuntansi.transaksis a join siak_setting.units b on b.id=a.unit_id where a.tanggal_transaksi BETWEEN '$tgl1' and '$tgl2' and b.id='$institusi_id' and a.tahun_buku='$thbuku' and a.is_valid=1 order by a.tanggal_transaksi asc")->result_array();
+            return $this->db2->query("select a.id as id,a.tanggal_transaksi as tanggal,a.nobukti as nobukti,a.keterangan as keterangan,a.accounting as accounting,a.notran as notran from siak_akuntansi.transaksis a join siak_setting.units b on b.id=a.unit_id where a.tanggal_transaksi BETWEEN '$tgl1' and '$tgl2' and b.id='$institusi_id' and a.tahun_buku='$thbuku' and a.is_valid=1 order by a.tanggal_transaksi asc")->result_array();
         } else {
-            return $this->db2->query("select a.id as id,a.tanggal_transaksi as tanggal,a.nobukti as nobukti,a.keterangan as keterangan,a.accounting as accounting from siak_akuntansi.transaksis a join siak_setting.units b on b.id=a.unit_id where a.tanggal_transaksi BETWEEN '$tgl1' and '$tgl2' and b.id='$institusi_id' and a.tahun_buku='$thbuku' and a.jurnal='$jurnal' and a.is_valid=1 order by a.tanggal_transaksi asc")->result_array();
+            return $this->db2->query("select a.id as id,a.tanggal_transaksi as tanggal,a.nobukti as nobukti,a.keterangan as keterangan,a.accounting as accounting,a.notran as notran from siak_akuntansi.transaksis a join siak_setting.units b on b.id=a.unit_id where a.tanggal_transaksi BETWEEN '$tgl1' and '$tgl2' and b.id='$institusi_id' and a.tahun_buku='$thbuku' and a.jurnal='$jurnal' and a.is_valid=1 order by a.tanggal_transaksi asc")->result_array();
+        }
+    }
+    public function jurnalcetak()
+    {
+        $jurnal = $this->input->post('jurnal_id');
+        $tgl1 = tanggal_input($this->input->post('tgl1'));
+        $tgl2 = tanggal_input($this->input->post('tgl2'));
+        $institusi_id = $this->session->userdata('idInstitusi');
+        $thbuku = $this->input->post('pembukuan_id');
+        if (!$jurnal) {
+            return $this->db2->query("select a.id as id,a.tanggal_transaksi as tanggal,a.nobukti as nobukti,a.keterangan as keterangan,a.accounting as accounting,a.notran as notran from siak_akuntansi.transaksis a join siak_setting.units b on b.id=a.unit_id where a.tanggal_transaksi BETWEEN '$tgl1' and '$tgl2' and b.id='$institusi_id' and a.tahun_buku='$thbuku' and a.is_valid=1 order by a.tanggal_transaksi asc")->result_array();
+        } else {
+            return $this->db2->query("select a.id as id,a.tanggal_transaksi as tanggal,a.nobukti as nobukti,a.keterangan as keterangan,a.accounting as accounting,a.notran as notran from siak_akuntansi.transaksis a join siak_setting.units b on b.id=a.unit_id where a.tanggal_transaksi BETWEEN '$tgl1' and '$tgl2' and b.id='$institusi_id' and a.tahun_buku='$thbuku' and a.jurnal='$jurnal' and a.is_valid=1 order by a.tanggal_transaksi asc")->result_array();
         }
     }
     public function detailjurnal($id)
@@ -44,6 +57,16 @@ class Laporan_model extends CI_Model
         $akun_id = $this->input->post('a6level_id');
         $institusi_id = $this->session->userdata('idInstitusi');
         $thbuku = $this->input->post('tahunbuku');
+        return $this->db2->query("SELECT a.id as id,a.level6 as level6,a.posisi as posisi,a.institusi_id as institusi_id,c.tanggal_transaksi as tanggal_transaksi,b.debet as debet,b.kredit as kredit,c.is_valid as is_valid,c.jurnal as jurnal,c.nobukti as nobukti,c.keterangan as keterangan FROM a6levels a JOIN detail_transaksis b  ON a.id = b.a6level_id JOIN transaksis c ON c.id = b.transaksi_id WHERE a.institusi_id='$institusi_id' AND a.id='$akun_id' AND c.tahun_buku='$thbuku' AND  c.is_valid IN('1','2','3') AND c.jurnal!='SA' AND c.tanggal_transaksi BETWEEN '$tgl1' AND '$tgl2' ORDER BY c.tanggal_transaksi,c.notran ASC
+        ")->result_array();
+    }
+    public function bukubesarcetak()
+    {
+        $tgl1 = tanggal_input($this->input->post('tgl1'));
+        $tgl2 = tanggal_input($this->input->post('tgl2'));
+        $akun_id = $this->input->post('akun_id');
+        $institusi_id = $this->session->userdata('idInstitusi');
+        $thbuku = $this->input->post('pembukuan_id');
         return $this->db2->query("SELECT a.id as id,a.level6 as level6,a.posisi as posisi,a.institusi_id as institusi_id,c.tanggal_transaksi as tanggal_transaksi,b.debet as debet,b.kredit as kredit,c.is_valid as is_valid,c.jurnal as jurnal,c.nobukti as nobukti,c.keterangan as keterangan FROM a6levels a JOIN detail_transaksis b  ON a.id = b.a6level_id JOIN transaksis c ON c.id = b.transaksi_id WHERE a.institusi_id='$institusi_id' AND a.id='$akun_id' AND c.tahun_buku='$thbuku' AND  c.is_valid IN('1','2','3') AND c.jurnal!='SA' AND c.tanggal_transaksi BETWEEN '$tgl1' AND '$tgl2' ORDER BY c.tanggal_transaksi,c.notran ASC
         ")->result_array();
     }

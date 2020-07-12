@@ -57,7 +57,7 @@ $(document).ready(function () {
     //     });
     // });
     // cek data
-    // --------------------------------------BUKUBESAR----------------------------
+    // --------------------------------------JURNAL----------------------------
     $("#jt_pembukuan_id").change(function () {
         var pembukuan_id = $("#jt_pembukuan_id option:selected").val();
         $.ajax({
@@ -76,9 +76,16 @@ $(document).ready(function () {
             }
         });
     });
-
-    // --------------------------------------/BUKUBESAR----------------------------
-    // --------------------------------------JURNAL----------------------------
+    $("#lnk-cetak-jurnal").on('click', function (e) {
+        e.preventDefault();
+        $("#btn-cetak-jurnal").trigger("click");
+        // Toast.fire({
+        //     icon: 'success',
+        //     title: ' Tampilkan Laporan '
+        // });
+    });
+    // --------------------------------------/JURNAL----------------------------
+    // --------------------------------------BUKUBESAR----------------------------
     $("#bb_pembukuan_id").change(function () {
         var pembukuan_id = $("#bb_pembukuan_id option:selected").val();
         $.ajax({
@@ -187,7 +194,7 @@ $(document).ready(function () {
         });
         //return false;
     });
-    // --------------------------------------/JURNAL----------------------------
+    // --------------------------------------/BUKUBESAR----------------------------
     // --------------------------------------NERACA SALDO----------------------------
     $("#ns_pembukuan_id").change(function () {
         var pembukuan_id = $("#ns_pembukuan_id option:selected").val();

@@ -8,6 +8,9 @@
                     </h4>
                 </div>
                 <div class="float-right">
+                    <h4 class="card-title" disabled="disabled">
+                        <a href="" target="_blank" class="text-reset" id="lnk-cetak-bukubesar">Cetak <i class="fas fa-print" style="color: teal"></i></a>
+                    </h4>
                 </div>
             </div>
             <div class="card-body">
@@ -35,22 +38,21 @@
                                     $format = "days";
                                     $awalperiode = manipulasiTanggal($tanggalawal, $jumlah, $format);
                                     $saldoawal = saldoawalberjalan($pembukuan_id, $a6level_id, $awalbuku, $awalperiode);
-                                    //echo $awalperiode;
                                 }
                                 ?>
                                 <tr>
                                     <td width="11%">Kode</td>
                                     <td width="3%">:</td>
                                     <td><?= $akun['id']; ?></td>
-                                    <td width="10%">Pembukuan</td>
+                                    <td width="10%">Awal Periode</td>
                                     <td width="3%">:</td>
-                                    <td width="15%" class="text-right"><?= $pembukuan_id; ?></td>
+                                    <td width="12%" class="text-right"><?= format_indo($awal_periode); ?></td>
                                 </tr>
                                 <tr>
                                     <td>Nama Akun</td>
                                     <td>:</td>
                                     <td><?= $akun['level6']; ?></td>
-                                    <td>Tanggal</td>
+                                    <td>Akhir Periode</td>
                                     <td>:</td>
                                     <td class="text-right"><?= format_indo($akhir_periode); ?></td>
                                 </tr>
@@ -149,10 +151,19 @@
                     </div>
                     <!-- /.row -->
                 <?php } ?>
-                <div class="row">
-                    <div style="height: 25px;">
+                <div class="row visible">
+                    <div class="col-sm-12 text-center">
+                        <form method="POST" action="<?= base_url('akuntansi/bukubesar/cetakdata'); ?>" target="_blank">
+                            <input type="hidden" id="bukuawal" name="tgl1" value="<?= $awalbuku; ?>">
+                            <input type="hidden" id="tgl1" name="tgl1" value="<?= $awal_periode; ?>">
+                            <input type="hidden" id="tgl2" name="tgl2" value="<?= $akhir_periode; ?>">
+                            <input type="hidden" id="akun_id" name="akun_id" value="<?= $a6level_id; ?>">
+                            <input type="hidden" id="pembukuan_id" name="pembukuan_id" value="<?= $pembukuan_id; ?>">
+                            <button type="submit" id="btn-cetak-bukubesar" class="btn btn-link">Tampilkan</button>
+                        </form>
                     </div>
                 </div>
+                <!-- /.row -->
             </div>
             <!-- /.card-body -->
 

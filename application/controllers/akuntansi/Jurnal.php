@@ -65,7 +65,20 @@ class Jurnal extends CI_Controller
         }
         $this->template->display('akuntansi/laporan/jurnaldata', $data);
     }
-
+    public function cetakdata()
+    {
+        $data['judul'] = "Data Jurnal Transaksi";
+        $data['bop2'] = null;
+        $data['jurnal'] = $this->Laporan_model->jurnalcetak();
+        $data['awalperiode'] = $this->input->post('tgl1');
+        $data['akhirperiode'] = $this->input->post('tgl2');
+        $data['jurnal_id'] = $this->input->post('jurnal_id');
+        $data['pembukuan'] = $this->input->post('pembukuan_id');
+        $this->load->library('pdf');
+        $this->pdf->setPaper('A4', 'landscape');
+        $this->pdf->filename = "Data Jurnal Transaksi";
+        $this->pdf->load_view('akuntansi/laporan/jurnal/cetakdata', $data);
+    }
     private function _validatejurnal()
     {
         $this->form_validation->set_rules('awal_periode', 'Tanggal', 'required|trim');
