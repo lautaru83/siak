@@ -28,8 +28,11 @@ class Neraca extends CI_Controller
     public function viewdata()
     {
         $jenis = $this->input->post('jenis');
+        $data['jenislap'] = $jenis;
         $data['tanggal'] = tanggal_input($this->input->post('akhir_periode'));
+        $data['awalbuku'] = tanggal_input($this->input->post('awalbuku'));
         $data['akhirbuku'] = tanggal_input($this->input->post('akhirbuku'));
+        $data['pembukuan_id'] = $this->input->post('tahunbuku');
         $data['neraca'] = "1";
         $institusi_id = $this->session->userdata('idInstitusi');
         $data['institusi'] = $this->Institusi_model->ambil_data_id($institusi_id);
@@ -61,6 +64,40 @@ class Neraca extends CI_Controller
             $data['bersihTidakTerikat'] = $this->Laporan_model->bersihTidakTerikatInstitusi();
             $data['bersihTerikat'] = $this->Laporan_model->bersihTerikatInstitusi();
             $this->load->view('akuntansi/laporan/neraca/institusi', $data);
+        }
+    }
+    public function cetakdata()
+    {
+        $institusi_id = $this->session->userdata('idInstitusi');
+        $data['institusi'] = $this->Institusi_model->ambil_data_id($institusi_id);
+        $data['awalbuku'] = tanggal_input($this->input->post('bukuawal'));
+        $data['akhirbuku'] = tanggal_input($this->input->post('bukuakhir'));
+        $data['tanggalawal'] = tanggal_input($this->input->post('tgl1'));
+        $data['neracasaldo'] = null;
+        // $data['neracasaldo'] = $this->Laporan_model->neracasaldocetak();
+        $data['awal_periode'] = $this->input->post('tgl1');
+        $data['akhir_periode'] = $this->input->post('tgl2');
+        $data['pembukuan_id'] = $this->input->post('pembukuan_id');
+        $this->load->library('pdf');
+        $this->pdf->setPaper('A4', 'portrait');
+        $this->pdf->filename = "Neraca.pdf";
+        $laporan = $this->input->post('laporan');
+        if ($laporan == "1") {
+            $data['judul'] = "Neraca Institusi";
+            $data['asetLancar'] = $this->Laporan_model->asetLancarInstitusiCetak();
+            $data['asetTidakLancar'] = $this->Laporan_model->asetTidakLancarInstitusiCetak();
+            $data['kewajiban'] = $this->Laporan_model->kewajibanInstitusiCetak();
+            $data['bersihTidakTerikat'] = $this->Laporan_model->bersihTidakTerikatInstitusiCetak();
+            $data['bersihTerikat'] = $this->Laporan_model->bersihTerikatInstitusiCetak();
+            $this->pdf->load_view('akuntansi/laporan/neraca/cetakinstitusi', $data);
+        } else {
+            $data['judul'] = "Neraca Institusi";
+            $data['asetLancar'] = $this->Laporan_model->asetLancarInstitusiCetak();
+            $data['asetTidakLancar'] = $this->Laporan_model->asetTidakLancarInstitusiCetak();
+            $data['kewajiban'] = $this->Laporan_model->kewajibanInstitusiCetak();
+            $data['bersihTidakTerikat'] = $this->Laporan_model->bersihTidakTerikatInstitusiCetak();
+            $data['bersihTerikat'] = $this->Laporan_model->bersihTerikatInstitusiCetak();
+            $this->pdf->load_view('akuntansi/laporan/neraca/cetakinstitusi', $data);
         }
     }
     public function cekinput()

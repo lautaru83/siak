@@ -8,9 +8,7 @@
                     </h4>
                 </div>
                 <div class="float-right">
-                    <h4 class="card-title" disabled="disabled">
-                        <a href="" target="_blank" class="text-reset" id="lnk-cetak-bukubesar">Cetak <i class="fas fa-print" style="color: teal"></i></a>
-                    </h4>
+
                 </div>
             </div>
             <div class="card-body">
@@ -151,10 +149,10 @@
                     </div>
                     <!-- /.row -->
                 <?php } ?>
-                <div class="row visible">
+                <div class="row invisible">
                     <div class="col-sm-12 text-center">
                         <form method="POST" action="<?= base_url('akuntansi/bukubesar/cetakdata'); ?>" target="_blank">
-                            <input type="hidden" id="bukuawal" name="tgl1" value="<?= $awalbuku; ?>">
+                            <input type="hidden" id="bukuawal" name="bukuawal" value="<?= $awalbuku; ?>">
                             <input type="hidden" id="tgl1" name="tgl1" value="<?= $awal_periode; ?>">
                             <input type="hidden" id="tgl2" name="tgl2" value="<?= $akhir_periode; ?>">
                             <input type="hidden" id="akun_id" name="akun_id" value="<?= $a6level_id; ?>">

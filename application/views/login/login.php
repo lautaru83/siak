@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-	<title>SIAK V 2.0 Paguwarmas</title>
+	<title>SIAK PAGUWARMAS 2.0</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!--===============================================================================================-->

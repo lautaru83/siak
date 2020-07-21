@@ -32,6 +32,9 @@
                                 </h4>
                             </div>
                             <div class="float-right">
+                                <h4 class="card-title" disabled="disabled">
+                                    <a href="" class="text-reset" id="link-cetak-neracasaldo">Cetak <i class="fas fa-print" style="color: teal"></i></a>
+                                </h4>
                             </div>
                         </div>
                         <!-- /.card-header -->

@@ -38,7 +38,7 @@
 
     .tabledata {
         font-family: sans-serif;
-        font-size: 10px;
+        font-size: 11px;
         table-layout: auto;
         color: #444;
         border-collapse: collapse;
@@ -104,7 +104,7 @@
                 <td width="13%">Kode</td>
                 <td width="3%">:</td>
                 <td><?= $akun['id']; ?></td>
-                <td width="13%">Awal Periode</td>
+                <td width="15%">Awal Periode</td>
                 <td width="3%">:</td>
                 <td width="18%" align="right"><?= $awal_periode; ?></td>
             </tr>

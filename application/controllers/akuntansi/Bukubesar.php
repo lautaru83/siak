@@ -25,7 +25,7 @@ class Bukubesar extends CI_Controller
         $data['akhir_periode'] = $akhir_periode;
         $data['awalbuku'] = $awal_periode;
         $data['akhirbuku'] = $akhir_periode;
-        $data['laporan'] = "";
+        $data['laporan'] = null;
         //$data['unit'] = $this->Unit_model->ambil_data_institusi_id($institusi_id);
         $data['akunbuku'] = $this->Kodeperkiraan_model->akun_bukubesar();
         $this->template->display('akuntansi/laporan/bukubesar', $data);

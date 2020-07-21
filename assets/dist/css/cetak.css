@@ -1,0 +1,52 @@
+@page { margin: 0.75cm; }
+body {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 11px;
+    text-decoration: none solid rgb(33, 37, 41);
+ }
+  header { position: fixed; top: -10px; left: 0px; right: 0px; height: 50px; }
+  footer { position: fixed; bottom: -60px; left: 0px; right: 0px; background-color: lightblue; height: 50px; } 
+  .tabel-header {
+    border: 0px;
+  }
+  .judul-laporan{
+    margin-top:25px;
+    text-align: center;   
+  }
+  .tabel-data {
+    border-collapse: collapse;
+  }
+  .tabel-data th,
+  .tabel-data td{
+    border: 1px solid grey;   
+  }
+  .nomor-tabel{
+    text-align:center;
+    vertical-align: text-top;
+    font-size: 10px;
+  }
+  .text-tabel{
+    padding-left:3px;
+  }
+  .nominal-tabel{
+    font-size: 10px;
+    text-align:right;
+    vertical-align: text-top;
+    padding-right:3px;
+  }
+  .tabel-laporan{
+    font-size: 11px;
+    width: 100%; 
+  }
+  .text-subakun{
+    padding-left:20px;
+  }
+  /* .tabel-data.table, #tabel-data.th, #tabel-data.td{
+    border: 1px solid grey; 
+  } */
+  /* td.tabel-data, th.tabel-data{
+    border: 1px solid grey;
+  } */
+  #judul {
+    margin-top: 30px;
+  }

@@ -8,6 +8,7 @@
                     </h4>
                 </div>
                 <div class="float-right">
+
                 </div>
             </div>
             <div class="card-body">
@@ -22,18 +23,34 @@
                 if ($laporan) {
                 ?>
                     <div class="row">
-                        <div class="col-md-12">
-                            <table id="tabel3" class="table table-borderless table-sm">
-                                <tr>
-                                    <td width="10%">Pembukuan</td>
-                                    <td width="3%">:</td>
-                                    <td><?= $pembukuan_id; ?></td>
-                                    <td width="10%">Tanggal</td>
-                                    <td width="3%">:</td>
-                                    <td width="13%" class="text-right"><?= format_indo($akhir_periode); ?></td>
-                                </tr>
-                            </table>
+                        <div class="col-md-12 text-center">
+                            <span class="text-uppercase font-weight-bolder"><?php if ($institusi) {
+                                                                                echo $institusi['keterangan'];
+                                                                            } ?></span>
                         </div>
+                        <div class="col-md-12 text-center">
+                            <span class="font-weight-bolder">NERACA SALDO</span>
+                        </div>
+                        <table id="tabel3" class="table table-sm table-borderless table-hover">
+                            <thead>
+                                <tr>
+                                    <td class="text-center"></td>
+                                    <td class="text-center" colspan="4">
+                                        Tanggal <?= format_indo($akhir_periode); ?><br>
+                                        Untuk Tahun Yang Berakhir <?= format_indo($akhirbuku); ?><br>
+                                        (Dinyatakan dalam Rupiah, kecuali dinyatakan lain)
+                                    </td>
+                                    <td class="text-center"></td>
+                                </tr>
+                            </thead>
+                            <!-- <tbody>
+                                <tr>
+                                    <td class="text-center border-bottom" colspan="6"></td>
+                                </tr>
+                            </tbody> -->
+                        </table>
+                    </div>
+                    <div class="row">
                     </div>
                     <div class="row">
                         <div class="col-md-12">
@@ -42,8 +59,8 @@
                                     <tr>
                                         <td width="5%" class="text-center">No</td>
                                         <td colspan="2" class="text-center">Kode Perkiraan</td>
-                                        <td width="15%" class="text-center">Saldo Debet (Rp)</td>
-                                        <td width="15%" class="text-center">Saldo Kredit (Rp)</td>
+                                        <td width="15%" class="text-center">Debet (Rp)</td>
+                                        <td width="15%" class="text-center">Kredit (Rp)</td>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -91,8 +108,16 @@
                         </div>
                     </div>
                 <?php } ?>
-                <div class="row">
-                    <div style="height: 25px;">
+                <div class="row invisible">
+                    <div class="col-sm-12 text-center">
+                        <form method="POST" action="<?= base_url('akuntansi/neracasaldo/cetakdata'); ?>" target="_blank">
+                            <input type="hidden" id="bukuawal" name="bukuawal" value="<?= $awalbuku; ?>">
+                            <input type="hidden" id="bukuakhir" name="bukuakhir" value="<?= $akhirbuku; ?>">
+                            <input type="hidden" id="tgl1" name="tgl1" value="<?= $awalbuku; ?>">
+                            <input type="hidden" id="tgl2" name="tgl2" value="<?= $akhir_periode; ?>">
+                            <input type="hidden" id="pembukuan_id" name="pembukuan_id" value="<?= $pembukuan_id; ?>">
+                            <button type="submit" id="btn-cetak-neracasaldo" class="btn btn-link">Tampilkan</button>
+                        </form>
                     </div>
                 </div>
             </div>

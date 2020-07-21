@@ -26,12 +26,14 @@ class Neracasaldo extends CI_Controller
         $data['akhir_periode'] = $akhir_periode;
         $data['awalbuku'] = $awal_periode;
         $data['akhirbuku'] = $akhir_periode;
-        $data['laporan'] = "";
+        $data['laporan'] = null;
         $this->template->display('akuntansi/laporan/neracasaldo', $data);
     }
     public function viewdata()
     {
         $data['laporan'] = 1;
+        $institusi_id = $this->session->userdata('idInstitusi');
+        $data['institusi'] = $this->Institusi_model->ambil_data_id($institusi_id);
         $data['awalbuku'] = tanggal_input($this->input->post('awalbuku'));
         $data['pembukuan_id'] = $this->input->post('tahunbuku');
         $data['akhirbuku'] = tanggal_input($this->input->post('akhirbuku'));
@@ -39,28 +41,23 @@ class Neracasaldo extends CI_Controller
         $data['neracasaldo'] = $this->Laporan_model->neracasaldo();
         $this->load->view('akuntansi/laporan/neracasaldo/institusi', $data);
     }
-    // public function data()
-    // {
-    //     $data['kontenmenu'] = "Laporan";
-    //     $data['kontensubmenu'] = "Neraca Saldo";
-    //     $data['neracasaldo'] = "";
-    //     $pembukuan_id = $this->input->post('ns_pembukuan_id');
-    //     $data['pembukuan_id'] = $pembukuan_id;
-    //     $data['pembukuan'] = $this->Tahunbuku_model->ambil_data();
-    //     $data['awal_periode'] = $this->input->post('awalperiode');
-    //     $data['akhir_periode'] = $this->input->post('akhir_periode');
-    //     $this->_validatejurnal();
-    //     if ($this->form_validation->run() == false) {
-    //         $data = array(
-    //             'status' => 'gagal',
-    //             //'awal_error' => form_error('awal_periode'),
-    //             'akhir_error' => form_error('akhir_periode')
-    //         );
-    //     } else {
-    //         $data['neracasaldo'] = $this->Laporan_model->neracasaldo();
-    //     }
-    //     $this->template->display('akuntansi/laporan/neracasaldodata', $data);
-    // }
+    public function cetakdata()
+    {
+        $data['judul'] = "Neraca Saldo";
+        $institusi_id = $this->session->userdata('idInstitusi');
+        $data['institusi'] = $this->Institusi_model->ambil_data_id($institusi_id);
+        $data['awalbuku'] = tanggal_input($this->input->post('bukuawal'));
+        $data['akhirbuku'] = tanggal_input($this->input->post('bukuakhir'));
+        $data['tanggalawal'] = tanggal_input($this->input->post('tgl1'));
+        $data['neracasaldo'] = $this->Laporan_model->neracasaldocetak();
+        $data['awal_periode'] = $this->input->post('tgl1');
+        $data['akhir_periode'] = $this->input->post('tgl2');
+        $data['pembukuan_id'] = $this->input->post('pembukuan_id');
+        $this->load->library('pdf');
+        $this->pdf->setPaper('A4', 'portrait');
+        $this->pdf->filename = "Neraca Saldo.pdf";
+        $this->pdf->load_view('akuntansi/laporan/neracasaldo/cetakdata', $data);
+    }
     public function cekinput()
     {
         $this->_validate();

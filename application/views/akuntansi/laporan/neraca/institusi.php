@@ -345,6 +345,17 @@
                             </tr>
                             <tr>
                                 <td class="text-center"></td>
+                                <td colspan="2">
+                                    <h6 class="my-auto pl-4">Jumlah Aset Bersih</h6>
+                                </td>
+                                <td></td>
+                                <td class="text-right border-top border-bottom">
+                                    <?= rupiah_positif($totalBersihTerikat); ?>
+                                </td>
+                                <td class="text-right"></td>
+                            </tr>
+                            <tr>
+                                <td class="text-center"></td>
                                 <td colspan="3">
                                     <span class="font-weight-bolder text-md">JUMLAH KEWAJIBAN DAN ASET BERSIH</span>
                                 </td>
@@ -361,8 +372,17 @@
                         </tbody>
                     </table>
                 <?php } ?>
-                <div class="row">
-                    <div style="height: 25px;">
+                <div class="row invisible">
+                    <div class="col-sm-12 text-center">
+                        <form method="POST" action="<?= base_url('akuntansi/neraca/cetakdata'); ?>" target="_blank">
+                            <input type="hidden" id="laporan" name="laporan" value="<?= $jenislap; ?>">
+                            <input type="hidden" id="bukuawal" name="bukuawal" value="<?= $awalbuku; ?>">
+                            <input type="hidden" id="bukuakhir" name="bukuakhir" value="<?= $akhirbuku; ?>">
+                            <input type="hidden" id="tgl1" name="tgl1" value="<?= $awalbuku; ?>">
+                            <input type="hidden" id="tgl2" name="tgl2" value="<?= $tanggal; ?>">
+                            <input type="hidden" id="pembukuan_id" name="pembukuan_id" value="<?= $pembukuan_id; ?>">
+                            <button type="submit" id="btn-cetak-neraca" class="btn btn-link">Tampilkan</button>
+                        </form>
                     </div>
                 </div>
             </div>

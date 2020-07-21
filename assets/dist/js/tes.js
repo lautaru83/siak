@@ -79,10 +79,6 @@ $(document).ready(function () {
     $("#lnk-cetak-jurnal").on('click', function (e) {
         e.preventDefault();
         $("#btn-cetak-jurnal").trigger("click");
-        // Toast.fire({
-        //     icon: 'success',
-        //     title: ' Tampilkan Laporan '
-        // });
     });
     // --------------------------------------/JURNAL----------------------------
     // --------------------------------------BUKUBESAR----------------------------
@@ -194,6 +190,10 @@ $(document).ready(function () {
         });
         //return false;
     });
+    $("#link-cetak-bukubesar").on('click', function (e) {
+        e.preventDefault();
+        $("#btn-cetak-bukubesar").trigger("click");
+    });
     // --------------------------------------/BUKUBESAR----------------------------
     // --------------------------------------NERACA SALDO----------------------------
     $("#ns_pembukuan_id").change(function () {
@@ -277,6 +277,10 @@ $(document).ready(function () {
             }
         });
         //return false;
+    });
+    $("#link-cetak-neracasaldo").on('click', function (e) {
+        e.preventDefault();
+        $("#btn-cetak-neracasaldo").trigger("click");
     });
     // --------------------------------------/NERACA SALDO----------------------------
     // --------------------------------------NERACA----------------------------
@@ -372,6 +376,10 @@ $(document).ready(function () {
             }
         });
         return false;
+    });
+    $("#link-cetak-neraca").on('click', function (e) {
+        e.preventDefault();
+        $("#btn-cetak-neraca").trigger("click");
     });
     // -------------------------------------/NERACA----------------------------
     // --------------------------------------CALK----------------------------
