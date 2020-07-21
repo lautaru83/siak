@@ -82,14 +82,30 @@ class Neraca extends CI_Controller
         $this->pdf->setPaper('A4', 'portrait');
         $this->pdf->filename = "Neraca.pdf";
         $laporan = $this->input->post('laporan');
-        if ($laporan == "1") {
-            $data['judul'] = "Neraca Institusi";
-            $data['asetLancar'] = $this->Laporan_model->asetLancarInstitusiCetak();
-            $data['asetTidakLancar'] = $this->Laporan_model->asetTidakLancarInstitusiCetak();
-            $data['kewajiban'] = $this->Laporan_model->kewajibanInstitusiCetak();
-            $data['bersihTidakTerikat'] = $this->Laporan_model->bersihTidakTerikatInstitusiCetak();
-            $data['bersihTerikat'] = $this->Laporan_model->bersihTerikatInstitusiCetak();
-            $this->pdf->load_view('akuntansi/laporan/neraca/cetakinstitusi', $data);
+        if ($laporan == "3") {
+            $data['judul'] = "Neraca Konsolidasi";
+            $data['asetLancar'] = $this->Laporan_model->asetLancarKonsolidasiCetak();
+            $data['asetTidakLancar'] = $this->Laporan_model->asetTidakLancarKonsolidasiCetak();
+            $data['kewajiban'] = $this->Laporan_model->kewajibanKonsolidasiCetak();
+            $data['bersihTidakTerikat'] = $this->Laporan_model->bersihTidakTerikatKonsolidasiCetak();
+            $data['bersihTerikat'] = $this->Laporan_model->bersihTerikatKonsolidasiCetak();
+            $this->pdf->load_view('akuntansi/laporan/neraca/cetakkonsolidasi', $data);
+        } elseif ($laporan == "2") {
+            $data['judul'] = "Neraca Komparatif";
+            $data['asetLancar'] = $this->Laporan_model->asetLancarKomInstitusiCetak();
+            $data['asetTidakLancar'] = $this->Laporan_model->asetTidakLancarKomInstitusiCetak();
+            $data['kewajiban'] = $this->Laporan_model->kewajibanKomInstitusiCetak();
+            $data['bersihTidakTerikat'] = $this->Laporan_model->bersihTidakTerikatKomInstitusiCetak();
+            $data['bersihTerikat'] = $this->Laporan_model->bersihTerikatKomInstitusiCetak();
+            $this->pdf->load_view('akuntansi/laporan/neraca/cetakkomparatif', $data);
+        } elseif ($laporan == "4") {
+            $data['judul'] = "Neraca Komparatif Konsolidasi";
+            $data['asetLancar'] = $this->Laporan_model->asetLancarKomKonsolidasiCetak();
+            $data['asetTidakLancar'] = $this->Laporan_model->asetTidakLancarKomKonsolidasiCetak();
+            $data['kewajiban'] = $this->Laporan_model->kewajibanKomKonsolidasiCetak();
+            $data['bersihTidakTerikat'] = $this->Laporan_model->bersihTidakTerikatKomKonsolidasiCetak();
+            $data['bersihTerikat'] = $this->Laporan_model->bersihTerikatKomKonsolidasiCetak();
+            $this->pdf->load_view('akuntansi/laporan/neraca/cetaklengkap', $data);
         } else {
             $data['judul'] = "Neraca Institusi";
             $data['asetLancar'] = $this->Laporan_model->asetLancarInstitusiCetak();
