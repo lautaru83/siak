@@ -62,11 +62,13 @@
                                 <td class="text-center"></td>
                                 <td class="text-center" colspan="2"></td>
                                 <td width="15%" class="text-center font-weight-normal">
-                                    <span class="font-weight-normal my-auto">Catatan</span>
+                                    <span class="font-weight-normal my-auto"><br>Catatan</span>
                                     <div class="border-top my-1"></div>
                                 </td>
                                 <td width="15%" class="text-center">
-                                    <span class="font-weight-normal my-auto"><?= format_indo($tanggal); ?><div class="border-top my-1"></div>
+                                    <span class="font-weight-normal my-auto">
+                                        1 Januari S/d<br>
+                                        <?= format_indo($tanggal); ?><div class="border-top my-1"></div>
                                         <div class="my-1">(Rp)</div>
                                     </span>
                                 </td>
@@ -413,7 +415,7 @@
                             <tr>
                                 <td class="text-center"></td>
                                 <td colspan="2">
-                                    <span class="font-weight-bolder">Kenaikan (Penurunan) Aset Tidak Terikat Bersih Setelah Pajak</span>
+                                    <span class="font-weight-bolder">Kenaikan(Penurunan) Aset Tidak Terikat Bersih Setelah Pajak</span>
                                 </td>
                                 <td></td>
                                 <td class="border-top border-bottom text-right">
@@ -452,7 +454,7 @@
                                     <span class="font-weight-normal">
                                         <?php
                                         $idakun2 = "310";
-                                        $saldoAsetAwalTahun = saldoAwalAbttInstitusi($idakun2);
+                                        $saldoAsetAwalTahun = saldoAwalAbttInstitusi($idakun2, $pembukuan_id);
                                         echo rupiah_positif($saldoAsetAwalTahun);
                                         ?>
                                     </span>
@@ -478,8 +480,17 @@
                         </tbody>
                     </table>
                 <?php } ?>
-                <div class="row">
-                    <div style="height: 25px;">
+                <div class="row invisible">
+                    <div class="col-sm-12 text-center">
+                        <form method="POST" action="<?= base_url('akuntansi/perubahanaset/cetakdata'); ?>" target="_blank">
+                            <input type="hidden" id="laporan" name="laporan" value="<?= $jenislap; ?>">
+                            <input type="hidden" id="bukuawal" name="bukuawal" value="<?= $awalbuku; ?>">
+                            <input type="hidden" id="bukuakhir" name="bukuakhir" value="<?= $akhirbuku; ?>">
+                            <input type="hidden" id="tgl1" name="tgl1" value="<?= $awalbuku; ?>">
+                            <input type="hidden" id="tgl2" name="tgl2" value="<?= $tanggal; ?>">
+                            <input type="hidden" id="pembukuan_id" name="pembukuan_id" value="<?= $pembukuan_id; ?>">
+                            <button type="submit" id="btn-cetak-perubahanaset" class="btn btn-link">Tampilkan</button>
+                        </form>
                     </div>
                 </div>
             </div>

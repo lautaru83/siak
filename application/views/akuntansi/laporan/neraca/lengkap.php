@@ -65,16 +65,19 @@
                                 <td class="text-center"></td>
                                 <td class="text-center"></td>
                                 <td class="text-center">
+                                    <br>
                                     <span>Catatan</span>
                                 </td>
                                 <td width="15%" class="text-center font-weight-normal">
                                     <span class="font-weight-normal my-auto">
+                                        1 Januari S/d<br>
                                         <?= format_indo($tanggal); ?>
                                     </span>
                                     <div class="border-top my-1">(Rp)</div>
                                 </td>
                                 <td width="15%" class="text-center">
                                     <span class="font-weight-normal my-auto">
+                                        1 Januari S/d<br>
                                         <?= format_indo($tanggallalu); ?>
                                         <div class="border-top my-1"></div>
                                         <div class="my-1">(Rp)</div>

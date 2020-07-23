@@ -61,11 +61,17 @@
                                 <td class="text-center"></td>
                                 <td class="text-center" colspan="2"></td>
                                 <td width="15%" class="text-center font-weight-normal">
-                                    <span class="font-weight-normal my-auto">Catatan</span>
+                                    <span class="font-weight-normal my-auto">
+                                        <br>
+                                        Catatan
+                                    </span>
                                     <div class="border-top my-1"></div>
                                 </td>
                                 <td width="15%" class="text-center">
-                                    <span class="font-weight-normal my-auto"><?= format_indo($tanggal); ?><div class="border-top my-1"></div>
+                                    <span class="font-weight-normal my-auto">
+                                        1 Januari S/d<br>
+                                        <?= format_indo($tanggal); ?>
+                                        <div class="border-top my-1"></div>
                                         <div class="my-1">(Rp)</div>
                                     </span>
                                 </td>
@@ -161,8 +167,7 @@
                                         <td colspan="2">
                                             <div class="font-weight-normal my-auto pl-4"><?= $dataBadu['level4']; ?></div>
                                         </td>
-                                        <td class="text-center"><?php //$dataBadu['catatan_id']; 
-                                                                ?></td>
+                                        <td class="text-center"></td>
                                         <td class="text-right"><?= rupiah_positif($jumlahBadu); ?></td>
                                         <td class="text-right"></td>
                                     </tr>
@@ -395,8 +400,17 @@
                         </tbody>
                     </table>
                 <?php } ?>
-                <div class="row">
-                    <div style="height: 25px;">
+                <div class="row invisible">
+                    <div class="col-sm-12 text-center">
+                        <form method="POST" action="<?= base_url('akuntansi/activitas/cetakdata'); ?>" target="_blank">
+                            <input type="hidden" id="laporan" name="laporan" value="<?= $jenislap; ?>">
+                            <input type="hidden" id="bukuawal" name="bukuawal" value="<?= $awalbuku; ?>">
+                            <input type="hidden" id="bukuakhir" name="bukuakhir" value="<?= $akhirbuku; ?>">
+                            <input type="hidden" id="tgl1" name="tgl1" value="<?= $awalbuku; ?>">
+                            <input type="hidden" id="tgl2" name="tgl2" value="<?= $tanggal; ?>">
+                            <input type="hidden" id="pembukuan_id" name="pembukuan_id" value="<?= $pembukuan_id; ?>">
+                            <button type="submit" id="btn-cetak-activitas" class="btn btn-link">Tampilkan</button>
+                        </form>
                     </div>
                 </div>
             </div>

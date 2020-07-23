@@ -270,12 +270,13 @@ function ambilsaldoawal($thbukuid, $akunid, $posisi)
         return $saldoawal;
     }
 }
-function saldoAwalAbttInstitusi($a2level_id)
+function saldoAwalAbttInstitusi($a2level_id, $tahunbuku)
 {
     $ci = get_instance();
     $ci->db2 = $ci->load->database('akuntansi', TRUE);
     $institusi_id = $ci->session->userdata('idInstitusi');
-    $tahun_buku = $ci->session->userdata('tahun_buku');
+    $tahun_buku = $tahunbuku;
+    // $tahun_buku = $ci->session->userdata('tahun_buku');
     $hasil = $ci->db2->query("SELECT a.posisi, SUM(b.debet) AS debet, SUM(b.kredit) AS kredit FROM view_kodeperkiraans AS a JOIN view_transaksis AS b ON a.a6level_id = b.a6level_id WHERE a.a2level_id = '$a2level_id' AND a.institusi_id = '$institusi_id' AND b.tahun_buku = '$tahun_buku' AND b.jurnal = 'SA' GROUP BY a.a2level_id")->result_array();
     $saldoAwal = 0;
     if ($hasil) {
@@ -333,12 +334,13 @@ function ambil_namaunit($unit_id)
     }
     return $unit;
 }
-function saldoAwalAbttKonsolidasi($a2level_id)
+function saldoAwalAbttKonsolidasi($a2level_id, $tahunbuku)
 {
     $ci = get_instance();
     $ci->db2 = $ci->load->database('akuntansi', TRUE);
     //$institusi_id = $ci->session->userdata('idInstitusi');
-    $tahun_buku = $ci->session->userdata('tahun_buku');
+    // $tahun_buku = $ci->session->userdata('tahun_buku');
+    $tahun_buku = $tahunbuku;
     $hasil = $ci->db2->query("SELECT a.posisi, SUM(b.debet) AS debet, SUM(b.kredit) AS kredit FROM view_kodeperkiraans AS a JOIN view_transaksis AS b ON a.a6level_id = b.a6level_id WHERE a.a2level_id = '$a2level_id' AND b.tahun_buku = '$tahun_buku' AND b.jurnal = 'SA' GROUP BY a.a2level_id")->result_array();
     $saldoAwal = 0;
     if ($hasil) {
@@ -450,8 +452,9 @@ function saldoAkun6Laporan($tanggal, $idakun3)
         $akun_id = "";
     }
     $awal_periode = tanggal_input($ci->session->userdata('buku_awal'));
-    $tahun_buku = $ci->session->userdata('tahun_buku');
+    // $tahun_buku = $ci->session->userdata('tahun_buku');
     $akhir_periode = tanggal_input($tanggal);
+    $tahun_buku = ambilTahun($akhir_periode);
     $hasil = $ci->db2->query("select  a6level_id,posisi,sum(debet) as debet,sum(kredit) as kredit from view_detailtransaksis WHERE a6level_id='$akun_id' AND tanggal_transaksi BETWEEN '$awal_periode' AND '$akhir_periode' AND tahun_buku='$tahun_buku' GROUP BY a6level_id")->result_array();
     $saldo = 0;
     if ($hasil) {
@@ -743,4 +746,8 @@ function manipulasiTahun($tgl, $jumlah, $format)
 {
     $currentDate = $tgl;
     return date('Y', strtotime($jumlah . ' ' . $format, strtotime($currentDate)));
+}
+function ambilTahun($tgl)
+{
+    return date('Y', strtotime($tgl));
 }

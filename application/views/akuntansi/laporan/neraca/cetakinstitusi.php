@@ -46,8 +46,14 @@
     <table class="tabel-laporan">
         <tr>
             <td></td>
-            <td width="18%" align="center" style="border-bottom:solid 1px;">Catatan</td>
-            <td width="18%" align="center" style="border-bottom:solid 1px;"><?= format_indo($akhir_periode); ?></td>
+            <td width="18%" align="center" style="border-bottom:solid 1px;">
+                <br>
+                Catatan
+            </td>
+            <td width="18%" align="center" style="border-bottom:solid 1px;">
+                1 Januari S/d<br>
+                <?= format_indo($akhir_periode); ?>
+            </td>
         </tr>
         <tr>
             <td></td>
@@ -231,84 +237,84 @@
                         <?= $dataBersihTidakTerikat['level3']; ?>
                     </td>
                     <td width="18%" align="center"></td>
-                    <td width="18%" align="right""><?= rupiah_positif($jumlahBersihTidakTerikat); ?></td>
-                                    </tr>
-                            <?php
-                        endforeach;
-                    }
-                            ?>
-                            <tr>
-                                <td class=" text-subakun">
-                        Jumlah Aset Bersih Tidak Terikat
-                    </td>
-                    <td></td>
-                    <td align="right" style="border-bottom:solid 1px;border-top:solid 1px;"><?= rupiah_positif($totalBersihTidakTerikat); ?></td>
+                    <td width="18%" align="right"><?= rupiah_positif($jumlahBersihTidakTerikat); ?></td>
                 </tr>
-                <tr>
-                    <td><strong>Aset Bersih Terikat</strong></td>
-                </tr>
-                <?php
-                $jumlahBersihTerikat = 0;
-                $totalBersihTerikat = 0;
-                $jumlahDebet = 0;
-                $jumlahKredit = 0;
-                if ($bersihTerikat) {
-                    foreach ($bersihTerikat as $dataBersihTerikat) :
-                        $posisi = $dataBersihTerikat['posisi'];
-                        $jumlahDebet = $dataBersihTerikat['debet'];
-                        $jumlahKredit = $dataBersihTerikat['kredit'];
-                        $jumlahBersihTerikat = $jumlahKredit - $jumlahDebet;
-                        $totalBersihTerikat = $totalBersihTerikat + $jumlahBersihTerikat;
+        <?php
+            endforeach;
+        }
+        ?>
+        <tr>
+            <td class=" text-subakun">
+                Jumlah Aset Bersih Tidak Terikat
+            </td>
+            <td></td>
+            <td align="right" style="border-bottom:solid 1px;border-top:solid 1px;"><?= rupiah_positif($totalBersihTidakTerikat); ?></td>
+        </tr>
+        <tr>
+            <td><strong>Aset Bersih Terikat</strong></td>
+        </tr>
+        <?php
+        $jumlahBersihTerikat = 0;
+        $totalBersihTerikat = 0;
+        $jumlahDebet = 0;
+        $jumlahKredit = 0;
+        if ($bersihTerikat) {
+            foreach ($bersihTerikat as $dataBersihTerikat) :
+                $posisi = $dataBersihTerikat['posisi'];
+                $jumlahDebet = $dataBersihTerikat['debet'];
+                $jumlahKredit = $dataBersihTerikat['kredit'];
+                $jumlahBersihTerikat = $jumlahKredit - $jumlahDebet;
+                $totalBersihTerikat = $totalBersihTerikat + $jumlahBersihTerikat;
 
-                ?>
-                        <tr>
-                            <td class="text-subakun">
-                                <?= $dataBersihTerikat['level3']; ?>
-                            </td>
-                            <td width="18%" align="center"></td>
-                            <td width="18%" align="right"><?= rupiah_positif($jumlahBersihTerikat); ?></td>
-                        </tr>
+        ?>
+                <tr>
+                    <td class="text-subakun">
+                        <?= $dataBersihTerikat['level3']; ?>
+                    </td>
+                    <td width="18%" align="center"><?= $dataBersihTerikat['catatan_id']; ?></td>
+                    <td width="18%" align="right"><?= rupiah_positif($jumlahBersihTerikat); ?></td>
+                </tr>
+        <?php
+            endforeach;
+        }
+        ?>
+        <tr>
+            <td class="text-subakun">
+                Jumlah Aset Bersih Terikat
+            </td>
+            <td></td>
+            <td align="right" style="border-bottom:solid 1px;border-top:solid 1px;">
+                <?= rupiah_positif($totalBersihTerikat); ?>
+            </td>
+        </tr>
+        <tr>
+            <td class="text-subakun">
+                <strong>Jumlah Aset Bersih</strong>
+            </td>
+            <td></td>
+            <td align="right" style="border-bottom:solid 0.65mm;">
                 <?php
-                    endforeach;
-                }
+                $totalasetbersih = 0.00;
+                $totalasetbersih = $totalBersihTidakTerikat + $totalBersihTerikat;
                 ?>
-                <tr>
-                    <td class="text-subakun">
-                        Jumlah Aset Bersih Terikat
-                    </td>
-                    <td></td>
-                    <td align="right" style="border-bottom:solid 1px;border-top:solid 1px;">
-                        <?= rupiah_positif($totalBersihTerikat); ?>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="text-subakun">
-                        <strong>Jumlah Aset Bersih</strong>
-                    </td>
-                    <td></td>
-                    <td align="right" style="border-bottom:solid 0.65mm;">
-                        <?php
-                        $totalasetbersih = 0.00;
-                        $totalasetbersih = $totalBersihTidakTerikat + $totalBersihTerikat;
-                        ?>
-                        <strong><?= rupiah_positif($totalasetbersih); ?></strong>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="3">&nbsp;</td>
-                </tr>
-                <tr>
-                    <td><strong>JUMLAH KEWAJIBAN DAN ASET BERSIH</strong></td>
-                    <td></td>
-                    <td align="right" style="border-bottom:solid 0.65mm;border-top:solid 1px;">
-                        <strong>
-                            <?php
-                            $jumlahKewajibanBersih = $totalKewajiban + $totalBersihTidakTerikat + $totalBersihTerikat;
-                            echo rupiah_positif($jumlahKewajibanBersih);
-                            ?>
-                        </strong>
-                    </td>
-                </tr>
+                <strong><?= rupiah_positif($totalasetbersih); ?></strong>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">&nbsp;</td>
+        </tr>
+        <tr>
+            <td><strong>JUMLAH KEWAJIBAN DAN ASET BERSIH</strong></td>
+            <td></td>
+            <td align="right" style="border-bottom:solid 0.65mm;border-top:solid 1px;">
+                <strong>
+                    <?php
+                    $jumlahKewajibanBersih = $totalKewajiban + $totalBersihTidakTerikat + $totalBersihTerikat;
+                    echo rupiah_positif($jumlahKewajibanBersih);
+                    ?>
+                </strong>
+            </td>
+        </tr>
     </table>
 </body>
 

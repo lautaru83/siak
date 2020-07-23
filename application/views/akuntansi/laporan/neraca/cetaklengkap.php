@@ -60,9 +60,18 @@
     <table class="tabel-laporan">
         <tr>
             <td></td>
-            <td width="10%" align="center" style="border-bottom:solid 1px;">Catatan</td>
-            <td width="18%" align="center" style="border-bottom:solid 1px;"><?= format_indo($tanggal); ?></td>
-            <td width="18%" align="center" style="border-bottom:solid 1px;"><?= format_indo($tanggallalu); ?></td>
+            <td width="10%" align="center" style="border-bottom:solid 1px;">
+                <br>
+                Catatan
+            </td>
+            <td width="18%" align="center" style="border-bottom:solid 1px;">
+                1 Januari S/d<br>
+                <?= format_indo($tanggal); ?>
+            </td>
+            <td width="18%" align="center" style="border-bottom:solid 1px;">
+                1 Januari S/d<br>
+                <?= format_indo($tanggallalu); ?>
+            </td>
         </tr>
         <tr>
             <td></td>

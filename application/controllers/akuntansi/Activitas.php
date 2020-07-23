@@ -31,8 +31,10 @@ class Activitas extends CI_Controller
         $data['tanggal'] = tanggal_input($this->input->post('akhir_periode'));
         $data['akhirbuku'] = tanggal_input($this->input->post('akhirbuku'));
         $data['awalbuku'] = tanggal_input($this->input->post('awalbuku'));
-        $data['tahunbuku'] = tanggal_input($this->input->post('tahunbuku'));
+        $data['tahunbuku'] = $this->input->post('tahunbuku');
+        $data['pembukuan_id'] = $this->input->post('tahunbuku');
         $data['activitas'] = "1";
+        $data['jenislap'] = $jenis;
         $institusi_id = $this->session->userdata('idInstitusi');
         $data['institusi'] = $this->Institusi_model->ambil_data_id($institusi_id);
         // $data['institusi'] = $this->Institusi_model->ambil_data();
@@ -64,6 +66,55 @@ class Activitas extends CI_Controller
             $data['bpda'] = $this->Laporan_model->bpdaInstitusi();
             $data['pbll'] = $this->Laporan_model->pbllInstitusi();
             $this->load->view('akuntansi/laporan/activitas/institusi', $data);
+        }
+    }
+    public function cetakdata()
+    {
+        $institusi_id = $this->session->userdata('idInstitusi');
+        $data['institusi'] = $this->Institusi_model->ambil_data_id($institusi_id);
+        $data['awalbuku'] = tanggal_input($this->input->post('bukuawal'));
+        $data['akhirbuku'] = tanggal_input($this->input->post('bukuakhir'));
+        $data['tanggalawal'] = tanggal_input($this->input->post('tgl1'));
+        $data['neracasaldo'] = null;
+        $data['awal_periode'] = $this->input->post('tgl1');
+        $data['akhir_periode'] = $this->input->post('tgl2');
+        $data['pembukuan_id'] = $this->input->post('pembukuan_id');
+        $this->load->library('pdf');
+        $this->pdf->setPaper('A4', 'portrait');
+        $this->pdf->filename = "Aktivitas.pdf";
+        $laporan = $this->input->post('laporan');
+        if ($laporan == "3") {
+            $data['judul'] = "Aktivitas Konsolidasi";
+            $data['pttb'] = $this->Laporan_model->pttbKonsolidasiCetak();
+            $data['badu'] = $this->Laporan_model->baduKonsolidasiCetak();
+            $data['bpdp'] = $this->Laporan_model->bpdpKonsolidasiCetak();
+            $data['bpda'] = $this->Laporan_model->bpdaKonsolidasiCetak();
+            $data['pbll'] = $this->Laporan_model->pbllKonsolidasiCetak();
+            $this->pdf->load_view('akuntansi/laporan/activitas/cetakkonsolidasi', $data);
+        } elseif ($laporan == "2") {
+            $data['judul'] = "Aktivitas Komparatif";
+            $data['pttb'] = $this->Laporan_model->pttbKomInstitusiCetak();
+            $data['badu'] = $this->Laporan_model->baduKomInstitusiCetak();
+            $data['bpdp'] = $this->Laporan_model->bpdpKomInstitusiCetak();
+            $data['bpda'] = $this->Laporan_model->bpdaKomInstitusiCetak();
+            $data['pbll'] = $this->Laporan_model->pbllKomInstitusiCetak();
+            $this->pdf->load_view('akuntansi/laporan/activitas/cetakkomparatif', $data);
+        } elseif ($laporan == "4") {
+            $data['judul'] = "Aktivitas Komparatif Konsolidasi";
+            $data['pttb'] = $this->Laporan_model->pttbKomKonsolidasiCetak();
+            $data['badu'] = $this->Laporan_model->baduKomKonsolidasiCetak();
+            $data['bpdp'] = $this->Laporan_model->bpdpKomKonsolidasiCetak();
+            $data['bpda'] = $this->Laporan_model->bpdaKomKonsolidasiCetak();
+            $data['pbll'] = $this->Laporan_model->pbllKomKonsolidasiCetak();
+            $this->pdf->load_view('akuntansi/laporan/activitas/cetaklengkap', $data);
+        } else {
+            $data['judul'] = "Aktivitas Institusi";
+            $data['pttb'] = $this->Laporan_model->pttbInstitusiCetak();
+            $data['badu'] = $this->Laporan_model->baduInstitusiCetak();
+            $data['bpdp'] = $this->Laporan_model->bpdpInstitusiCetak();
+            $data['bpda'] = $this->Laporan_model->bpdaInstitusiCetak();
+            $data['pbll'] = $this->Laporan_model->pbllInstitusiCetak();
+            $this->pdf->load_view('akuntansi/laporan/activitas/cetakinstitusi', $data);
         }
     }
     public function cekinput()

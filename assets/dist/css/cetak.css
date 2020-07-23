@@ -6,6 +6,9 @@ body {
  }
   header { position: fixed; top: -10px; left: 0px; right: 0px; height: 50px; }
   footer { position: fixed; bottom: -60px; left: 0px; right: 0px; background-color: lightblue; height: 50px; } 
+  hr{
+    border: 1px solid;
+  }
   .tabel-header {
     border: 0px;
   }

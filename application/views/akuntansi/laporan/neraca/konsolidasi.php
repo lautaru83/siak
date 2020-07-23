@@ -61,11 +61,17 @@
                                 <td class="text-center"></td>
                                 <td class="text-center" colspan="2"></td>
                                 <td width="15%" class="text-center font-weight-normal">
-                                    <span class="font-weight-normal my-auto">Catatan</span>
+                                    <span class="font-weight-normal my-auto">
+                                        <br>
+                                        Catatan
+                                    </span>
                                     <div class="border-top my-1"></div>
                                 </td>
                                 <td width="15%" class="text-center">
-                                    <span class="font-weight-normal my-auto"><?= format_indo($tanggal); ?><div class="border-top my-1"></div>
+                                    <span class="font-weight-normal my-auto">
+                                        1 Januari S/d<br>
+                                        <?= format_indo($tanggal); ?>
+                                        <div class="border-top my-1"></div>
                                         <div class="my-1">(Rp)</div>
                                     </span>
                                 </td>
@@ -279,8 +285,7 @@
                                         <td colspan="2">
                                             <div class="font-weight-normal my-auto pl-4"><?= $dataBersihTidakTerikat['level3']; ?></div>
                                         </td>
-                                        <td class="text-center"><?php //$dataBersihTidakTerikat['catatan_id']; 
-                                                                ?></td>
+                                        <td class="text-center"><?= $dataBersihTidakTerikat['catatan_id']; ?></td>
                                         <td class="text-right"><?= rupiah_positif($jumlahBersihTidakTerikat); ?></td>
                                         <td class="text-right"></td>
                                     </tr>
@@ -323,8 +328,7 @@
                                         <td colspan="2">
                                             <div class="font-weight-normal my-auto pl-4"><?= $dataBersihTerikat['level3']; ?></div>
                                         </td>
-                                        <td class="text-center"><?php //$dataBersihTerikat['catatan_id']; 
-                                                                ?></td>
+                                        <td class="text-center"><?= $dataBersihTerikat['catatan_id']; ?></td>
                                         <td class="text-right"><?= rupiah_positif($jumlahBersihTerikat); ?></td>
                                         <td class="text-right"></td>
                                     </tr>

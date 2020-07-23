@@ -548,6 +548,10 @@ $(document).ready(function () {
         });
         return false;
     });
+    $("#link-cetak-activitas").on('click', function (e) {
+        e.preventDefault();
+        $("#btn-cetak-activitas").trigger("click");
+    });
     // -------------------------------------/AKTIVITAS-------------------------
     // --------------------------------------PERUBAHAN ASET-------------------------
     $("#pas_pembukuan_id").change(function () {
@@ -642,6 +646,10 @@ $(document).ready(function () {
         });
         return false;
     });
+    $("#link-cetak-perubahanaset").on('click', function (e) {
+        e.preventDefault();
+        $("#btn-cetak-perubahanaset").trigger("click");
+    });
     // -------------------------------------/PERUBAHAN ASET-------------------------
     // --------------------------------------PERUBAHAN ARUS-------------------------
     $('#btn-tampil-perubahanarus').on('click', function (e) {
@@ -701,7 +709,7 @@ $(document).ready(function () {
         });
         return false;
     });
-    // -------------------------------------/PERUBAHAN ASET-------------------------
+    // -------------------------------------/PERUBAHAN ARUS-------------------------
     // -------------------------------------/RAPB-------------------------
     $('.modal-akunanggaran').on('shown.bs.modal', function () {
         $('#a6level_id').trigger('focus');

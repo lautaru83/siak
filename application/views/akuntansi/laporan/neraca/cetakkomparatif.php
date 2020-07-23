@@ -60,9 +60,18 @@
     <table class="tabel-laporan">
         <tr>
             <td></td>
-            <td width="10%" align="center" style="border-bottom:solid 1px;">Catatan</td>
-            <td width="18%" align="center" style="border-bottom:solid 1px;"><?= format_indo($tanggal); ?></td>
-            <td width="18%" align="center" style="border-bottom:solid 1px;"><?= format_indo($tanggallalu); ?></td>
+            <td width="10%" align="center" style="border-bottom:solid 1px;">
+                <br>
+                Catatan
+            </td>
+            <td width="18%" align="center" style="border-bottom:solid 1px;">
+                1 Januari S/d<br>
+                <?= format_indo($tanggal); ?>
+            </td>
+            <td width="18%" align="center" style="border-bottom:solid 1px;">
+                1 Januari S/d<br>
+                <?= format_indo($tanggallalu); ?>
+            </td>
         </tr>
         <tr>
             <td></td>
@@ -311,7 +320,7 @@
                     <td class="text-subakun">
                         <?= $dataBersihTidakTerikat['level3']; ?>
                     </td>
-                    <td align="center"><?= $dataBersihTidakTerikat['catatan_id']; ?></td>
+                    <td align="center"></td>
                     <td align="right"><?= rupiah_positif($jumlahBersihTidakTerikatA); ?></td>
                     <td align="right"><?= rupiah_positif($jumlahBersihTidakTerikatB); ?></td>
                 </tr>
@@ -358,7 +367,7 @@
                     <td class="text-subakun">
                         <?= $dataBersihTerikat['level3']; ?>
                     </td>
-                    <td align="center"><?= $dataBersihTerikat['catatan_id']; ?></td>
+                    <td align="center"></td>
                     <td align="right"><?= rupiah_positif($jumlahBersihTerikatA); ?></td>
                     <td align="right"><?= rupiah_positif($jumlahBersihTerikatB); ?></td>
                 </tr>

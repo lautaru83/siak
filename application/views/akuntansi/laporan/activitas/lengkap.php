@@ -43,9 +43,8 @@
                             <tr>
                                 <td class="text-center"></td>
                                 <td class="text-center" colspan="4">
-                                    Untuk Tahun Yang Berakhir <?= format_indo($this->session->userdata('buku_akhir')); ?> dan <?= $tahunlalu ?><br>
+                                    Untuk Tahun Yang Berakhir <?= format_indo($akhirbuku); ?> dan <?= $tahunlalu ?><br>
                                     (Dinyatakan dalam Rupiah, kecuali dinyatakan lain)
-
                                 </td>
                                 <td class="text-center"></td>
                             </tr>
@@ -68,16 +67,16 @@
                                 <td class="text-center"></td>
                                 <td class="text-center"></td>
                                 <td width="12%" class="text-center font-weight-normal">
-                                    <span class="font-weight-normal my-auto">Catatan</span>
+                                    <span class="font-weight-normal my-auto"><br>Catatan</span>
                                     <div class="border-top my-1"></div>
                                 </td>
                                 <td width="12%" class="text-center">
-                                    <span class="font-weight-normal my-auto"><?= format_indo($tanggal); ?><div class="border-top my-1"></div>
+                                    <span class="font-weight-normal my-auto">1 Januari S/d<br><?= format_indo($tanggal); ?><div class="border-top my-1"></div>
                                         <div class="my-1">(Rp)</div>
                                     </span>
                                 </td>
                                 <td width="12%" class="text-center">
-                                    <span class="font-weight-normal my-auto"><?= format_indo($tanggallalu); ?><div class="border-top my-1"></div>
+                                    <span class="font-weight-normal my-auto">1 Januari S/d<br><?= format_indo($tanggallalu); ?><div class="border-top my-1"></div>
                                         <div class="my-1">(Rp)</div>
                                     </span>
                                 </td>
@@ -501,8 +500,17 @@
                         </tbody>
                     </table>
                 <?php } ?>
-                <div class="row">
-                    <div style="height: 25px;">
+                <div class="row invisible">
+                    <div class="col-sm-12 text-center">
+                        <form method="POST" action="<?= base_url('akuntansi/activitas/cetakdata'); ?>" target="_blank">
+                            <input type="hidden" id="laporan" name="laporan" value="<?= $jenislap; ?>">
+                            <input type="hidden" id="bukuawal" name="bukuawal" value="<?= $awalbuku; ?>">
+                            <input type="hidden" id="bukuakhir" name="bukuakhir" value="<?= $akhirbuku; ?>">
+                            <input type="hidden" id="tgl1" name="tgl1" value="<?= $awalbuku; ?>">
+                            <input type="hidden" id="tgl2" name="tgl2" value="<?= $tanggal; ?>">
+                            <input type="hidden" id="pembukuan_id" name="pembukuan_id" value="<?= $pembukuan_id; ?>">
+                            <button type="submit" id="btn-cetak-activitas" class="btn btn-link">Tampilkan</button>
+                        </form>
                     </div>
                 </div>
             </div>
