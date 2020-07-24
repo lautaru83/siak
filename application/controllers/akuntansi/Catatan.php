@@ -41,7 +41,8 @@ class Catatan extends CI_Controller
             $this->load->view('akuntansi/laporan/catatan/institusi', $data);
         } else {
             $data['calkAkun3'] = $this->Laporan_model->calkAkun3Institusi();
-            $this->load->view('akuntansi/laporan/catatan/institusi', $data);
+            // $this->load->view('akuntansi/laporan/catatan/institusi', $data);
+            $this->load->view('akuntansi/laporan/catatan/institusites', $data);
         }
     }
     public function cekinput()

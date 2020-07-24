@@ -30,24 +30,20 @@
                                 </h4>
                             </div>
                             <div class="float-right">
-                                <!-- <h4 class="card-title" disabled="disabled">
-                                    Cetak <i class="fas fa-print" style="color: teal"></i>
-                                </h4> -->
+                                <h4 class="card-title" disabled="disabled">
+                                    <a href="" class="text-reset" id="link-cetak-perubahanarus">Cetak <i class="fas fa-print" style="color: teal"></i></a>
+                                </h4>
                             </div>
-
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
                             <!--------------- isi content ---------------------------- -->
-                            <!-- <form method="POST" action="" target="_Blank">
-                                <button class="btn btn-link" type="submit">aaaa</button>
-                            </form> -->
                             <form>
 
                                 <div class="row">
                                     <div class="col-md-2">
                                         <label class="font-weight-normal">Pembukuan</label>
-                                        <select id="pembukuan_id" name="pembukuan_id" class="form-control">
+                                        <select id="pak_pembukuan_id" name="pak_pembukuan_id" class="form-control">
                                             <?php
                                             foreach ($pembukuan as $dataPembukuan) :
                                                 $idBuku = $dataPembukuan['id'];
@@ -60,10 +56,6 @@
                                         <label class="font-weight-normal">Akhir Periode </label>
                                         <input type="text" name="akhir_periode" id="akhir_periode" class="form-control" autocomplete="off">
                                     </div>
-                                    <!-- <div class="col-md-1 ml-4 my-2 mt-auto">
-                                        <input class="form-check-input font-weight-normal" type="checkbox" id="ckkomparatif">
-                                        <label class="form-check-label" for="ckkomparatif">Komparatif</label>
-                                    </div> -->
                                     <?php
                                     if ($institusi_id == "01") {
                                     ?>
@@ -75,6 +67,8 @@
                                     }
                                     ?>
                                     <div class="col-md-2 mt-auto">
+                                        <input type="hidden" id="awalbuku" name="awalbuku" value="<?= $buku_awal; ?>">
+                                        <input type="hidden" id="akhirbuku" name="akhirbuku" value="<?= $buku_akhir; ?>">
                                         <button type="submit" id="btn-tampil-perubahanarus" data-id="<?= $institusi_id; ?>" data-tgl1="<?= $buku_awal; ?>" data-tgl2="<?= $buku_akhir; ?>" data-laporan="activitas" class="btn btn-primary">Tampilkan</button>
                                     </div>
                                 </div>

@@ -29,7 +29,12 @@ class Perubahanarus extends CI_Controller
         $jenis = $this->input->post('jenis');
         $data['tanggal'] = tanggal_input($this->input->post('akhir_periode'));
         $data['arus'] = "1";
+        $data['tahunbuku'] = $this->input->post('tahunbuku');
+        $data['pembukuan_id'] = $this->input->post('tahunbuku');
+        $data['awalbuku'] = tanggal_input($this->input->post('awalbuku'));
+        $data['akhirbuku'] = tanggal_input($this->input->post('akhirbuku'));
         $institusi_id = $this->session->userdata('idInstitusi');
+        $data['jenislap'] = $jenis;
         $data['institusi'] = $this->Institusi_model->ambil_data_id($institusi_id);
         // $data['institusi'] = $this->Institusi_model->ambil_data();
         if ($jenis == "2") {
@@ -40,6 +45,33 @@ class Perubahanarus extends CI_Controller
             $data['kasOp'] = $this->Laporan_model->kasOpInstitusi();
             $data['kasInves'] = $this->Laporan_model->kasInvesInstitusi();
             $this->load->view('akuntansi/laporan/perubahanarus/institusi', $data);
+        }
+    }
+    public function cetakdata()
+    {
+        $institusi_id = $this->session->userdata('idInstitusi');
+        $data['institusi'] = $this->Institusi_model->ambil_data_id($institusi_id);
+        $data['awalbuku'] = tanggal_input($this->input->post('bukuawal'));
+        $data['akhirbuku'] = tanggal_input($this->input->post('bukuakhir'));
+        $data['tanggalawal'] = tanggal_input($this->input->post('tgl1'));
+        $data['neracasaldo'] = null;
+        $data['awal_periode'] = $this->input->post('tgl1');
+        $data['akhir_periode'] = $this->input->post('tgl2');
+        $data['pembukuan_id'] = $this->input->post('pembukuan_id');
+        $this->load->library('pdf');
+        $this->pdf->setPaper('A4', 'portrait');
+        $this->pdf->filename = "Aktivitas.pdf";
+        $laporan = $this->input->post('laporan');
+        if ($laporan == "2") {
+            $data['judul'] = "Perubahan Arus Kas Konsolidasi";
+            $data['kasOp'] = $this->Laporan_model->kasOpKonsolidasiCetak();
+            $data['kasInves'] = $this->Laporan_model->kasInvesKonsolidasiCetak();
+            $this->pdf->load_view('akuntansi/laporan/perubahanarus/cetakkonsolidasi', $data);
+        } else {
+            $data['judul'] = "Perubahan Arus Kas Institusi";
+            $data['kasOp'] = $this->Laporan_model->kasOpInstitusiCetak();
+            $data['kasInves'] = $this->Laporan_model->kasInvesInstitusiCetak();
+            $this->pdf->load_view('akuntansi/laporan/perubahanarus/cetakinstitusi', $data);
         }
     }
     public function cekinput()
@@ -60,8 +92,8 @@ class Perubahanarus extends CI_Controller
     public function cek_tanggal()
     {
         $akhir_periode = strtotime($this->input->post('akhir_periode'));
-        $buku_awal = strtotime($this->session->userdata['buku_awal']);
-        $buku_akhir = strtotime($this->session->userdata['buku_akhir']);
+        $buku_awal = strtotime($this->input->post('awalbuku'));
+        $buku_akhir = strtotime($this->input->post('akhirbuku'));
         if ($akhir_periode < $buku_awal) {
             return false;
         } elseif ($akhir_periode > $buku_akhir) {

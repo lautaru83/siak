@@ -268,7 +268,7 @@
                             $jumlahDebet = 0;
                             $jumlahKredit = 0;
                             if ($bersihTidakTerikat) {
-                                $jumlahAbtt = asetbersihTbKonsolidasi($tanggal);
+                                $jumlahAbtt = asetbersihTbKonsolidasi($awalbuku, $tanggal, $pembukuan_id);
                                 foreach ($bersihTidakTerikat as $dataBersihTidakTerikat) :
                                     $posisi = $dataBersihTidakTerikat['posisi'];
                                     $jumlahDebet = $dataBersihTidakTerikat['debet'];

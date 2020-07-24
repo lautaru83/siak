@@ -387,12 +387,13 @@ function saldoAwalAbttKomKonsolidasi($a2level_id, $tahun_buku)
         return $saldoAwal;
     }
 }
-function saldoAwalKasInstitusi($a3level_id)
+function saldoAwalKasInstitusi($a3level_id, $pembukuan_id)
 {
     $ci = get_instance();
     $ci->db2 = $ci->load->database('akuntansi', TRUE);
     $institusi_id = $ci->session->userdata('idInstitusi');
-    $tahun_buku = $ci->session->userdata('tahun_buku');
+    $tahun_buku = $pembukuan_id;
+    // $tahun_buku = $ci->session->userdata('tahun_buku');
     $hasil = $ci->db2->query("SELECT a.posisi, SUM(b.debet) AS debet, SUM(b.kredit) AS kredit FROM view_kodeperkiraans AS a JOIN view_transaksis AS b ON a.a6level_id = b.a6level_id WHERE a.a3level_id = '$a3level_id' AND a.institusi_id = '$institusi_id' AND b.tahun_buku = '$tahun_buku' AND b.jurnal = 'SA' GROUP BY a.a3level_id")->result_array();
     $saldoAwal = 0;
     if ($hasil) {
@@ -413,12 +414,12 @@ function saldoAwalKasInstitusi($a3level_id)
         return $saldoAwal;
     }
 }
-function saldoAwalKasKonsolidasi($a3level_id)
+function saldoAwalKasKonsolidasi($a3level_id, $tahunbuku)
 {
     $ci = get_instance();
     $ci->db2 = $ci->load->database('akuntansi', TRUE);
     //$institusi_id = $ci->session->userdata('idInstitusi');
-    $tahun_buku = $ci->session->userdata('tahun_buku');
+    $tahun_buku = $tahunbuku;
     $hasil = $ci->db2->query("SELECT a.posisi, SUM(b.debet) AS debet, SUM(b.kredit) AS kredit FROM view_kodeperkiraans AS a JOIN view_transaksis AS b ON a.a6level_id = b.a6level_id WHERE a.a3level_id = '$a3level_id' AND b.tahun_buku = '$tahun_buku' AND b.jurnal = 'SA' GROUP BY a.a3level_id")->result_array();
     $saldoAwal = 0;
     if ($hasil) {
@@ -545,14 +546,14 @@ function saldoAkun6KomKonsolidasi($awal_periode, $akhir_periode, $idakun3, $tahu
         return $saldo;
     }
 }
-function asetbersihTb($tanggal)
+function asetbersihTb($awalbuku, $tanggal, $tahunbuku)
 {
     //Mengambil aset bersih tidak terikat tahun berjalan per institusi
     $ci = get_instance();
     $ci->db2 = $ci->load->database('akuntansi', TRUE);
     $institusi_id = $ci->session->userdata('idInstitusi');
-    $buku_awal = $ci->session->userdata('buku_awal');
-    $tahun_buku = $ci->session->userdata('tahun_buku');
+    $buku_awal = tanggal_input($awalbuku);
+    $tahun_buku = $tahunbuku;
     $akhir_periode = tanggal_input($tanggal);
     // $ci->db->where('submenu_id', $submenu_id);
     $hasil = $ci->db2->query("SELECT a.posisi as posisi, SUM(b.debet) as debet, SUM(b.kredit) as kredit,b.tanggal_transaksi as tanggal_transaksi FROM view_kodeperkiraans AS a INNER JOIN view_transaksis AS b ON a.a6level_id = b.a6level_id WHERE a.a1level_id BETWEEN '400' AND '700' AND b.tahun_buku='$tahun_buku' AND a.institusi_id='$institusi_id' AND b.tanggal_transaksi BETWEEN '$buku_awal' AND '$akhir_periode' AND is_valid BETWEEN 1 AND 2 GROUP BY b.tahun_buku")->result_array();
@@ -595,13 +596,13 @@ function asetbersihTbKom($awalperiode, $akhirperiode, $tahunbuku)
         return $jumlah;
     }
 }
-function asetbersihTbKonsolidasi($tanggal)
+function asetbersihTbKonsolidasi($awalbuku, $tanggal, $tahunbuku)
 {
     //Mengambil aset bersih tidak terikat tahun berjalan per institusi
     $ci = get_instance();
     $ci->db2 = $ci->load->database('akuntansi', TRUE);
-    $buku_awal = $ci->session->userdata('buku_awal');
-    $tahun_buku = $ci->session->userdata('tahun_buku');
+    $buku_awal = tanggal_input($awalbuku);
+    $tahun_buku = $tahunbuku;
     $akhir_periode = tanggal_input($tanggal);
     // $ci->db->where('submenu_id', $submenu_id);
     $hasil = $ci->db2->query("SELECT a.posisi as posisi, SUM(b.debet) as debet, SUM(b.kredit) as kredit,b.tanggal_transaksi as tanggal_transaksi FROM view_kodeperkiraans AS a INNER JOIN view_transaksis AS b ON a.a6level_id = b.a6level_id WHERE a.a1level_id BETWEEN '400' AND '700' AND b.tahun_buku='$tahun_buku' AND b.tanggal_transaksi BETWEEN '$buku_awal' AND '$akhir_periode' AND is_valid BETWEEN 1 AND 2 GROUP BY b.tahun_buku")->result_array();

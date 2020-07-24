@@ -57,7 +57,9 @@
                                 <td class="text-center"></td>
                                 <td class="text-center" colspan="3"></td>
                                 <td width="15%" class="text-center">
-                                    <span class="font-weight-normal my-auto"><?= format_indo($tanggal); ?><div class="border-top my-1"></div>
+                                    <span class="font-weight-normal my-auto">
+                                        1 Januari S/d<br>
+                                        <?= format_indo($tanggal); ?><div class="border-top my-1"></div>
                                         <div class="my-1">(Rp)</div>
                                     </span>
                                 </td>
@@ -68,13 +70,13 @@
                             <tr>
                                 <td class="text-center"></td>
                                 <td colspan="4">
-                                    <span class="font-weight-normal text-md">ARUS AKTIVITAS OPERASIONAL</span>
+                                    <span class="font-weight-normal text-md">ARUS KAS AKTIVITAS OPERASIONAL</span>
                                 </td>
                                 <td class="text-right"></td>
                             </tr>
                             <?php
                             $jumlahKenaikanAB = 0;
-                            $jumlahAbtt = asetbersihTb($tanggal);
+                            $jumlahAbtt = asetbersihTb($awalbuku, $tanggal, $pembukuan_id);
                             $jumlahKenaikanAB = $jumlahKenaikanAB + $jumlahAbtt;
                             ?>
                             <tr>
@@ -123,7 +125,11 @@
                                     $posisi = $dataKasOp['posisi'];
                                     $debet = $dataKasOp['debet'];
                                     $kredit = $dataKasOp['kredit'];
-                                    $jumlahKasOp = $kredit - $debet;
+                                    if ($posisi = "D") {
+                                        $jumlahKasOp = $kredit - $debet;
+                                    } else {
+                                        $jumlahKasOp = $debet - $kredit;
+                                    }
                                     $totalKasOp = $totalKasOp + $jumlahKasOp;
                             ?>
                                     <tr>
@@ -230,7 +236,7 @@
                                 <?php
                                 $kasAwalPeriode = 0;
                                 $akun = '111';
-                                $kasAwalPeriode = saldoAwalKasInstitusi($akun);
+                                $kasAwalPeriode = saldoAwalKasInstitusi($akun, $pembukuan_id);
                                 ?>
                                 <td class="text-right border-top border-bottom">
                                     <span class="font-weight-bolder text-md">
@@ -267,8 +273,17 @@
                         </tbody>
                     </table>
                 <?php } ?>
-                <div class="row">
-                    <div style="height: 25px;">
+                <div class="row invisible">
+                    <div class="col-sm-12 text-center">
+                        <form method="POST" action="<?= base_url('akuntansi/perubahanarus/cetakdata'); ?>" target="_blank">
+                            <input type="hidden" id="laporan" name="laporan" value="<?= $jenislap; ?>">
+                            <input type="hidden" id="bukuawal" name="bukuawal" value="<?= $awalbuku; ?>">
+                            <input type="hidden" id="bukuakhir" name="bukuakhir" value="<?= $akhirbuku; ?>">
+                            <input type="hidden" id="tgl1" name="tgl1" value="<?= $awalbuku; ?>">
+                            <input type="hidden" id="tgl2" name="tgl2" value="<?= $tanggal; ?>">
+                            <input type="hidden" id="pembukuan_id" name="pembukuan_id" value="<?= $pembukuan_id; ?>">
+                            <button type="submit" id="btn-cetak-perubahanarus" class="btn btn-link">Tampilkan</button>
+                        </form>
                     </div>
                 </div>
             </div>

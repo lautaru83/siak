@@ -652,12 +652,32 @@ $(document).ready(function () {
     });
     // -------------------------------------/PERUBAHAN ASET-------------------------
     // --------------------------------------PERUBAHAN ARUS-------------------------
+    $("#pak_pembukuan_id").change(function () {
+        var pembukuan_id = $("#pak_pembukuan_id option:selected").val();
+        $.ajax({
+            url: base_url + 'akuntansi/laporan/ajaxcombobuku/' + pembukuan_id,
+            type: "GET",
+            cache: false,
+            dataType: "JSON",
+            success: function (data) {
+                $('[name="awalbuku"]').val(data.awal_periode);
+                $('[name="akhirbuku"]').val(data.akhir_periode);
+                $('[name="akhir_periode"]').val(data.akhir_periode);
+            },
+            error: function (e) {
+                console.log('Error' + e);
+            }
+        });
+    });
     $('#btn-tampil-perubahanarus').on('click', function (e) {
         e.preventDefault();
         var laporan = $(this).data('laporan');
         var jenis = "";
         var idInstitusi = $(this).data('id');
         const tanggal = $('[name="akhir_periode"]').val();
+        const awalbuku = $('[name="awalbuku"]').val();
+        const akhirbuku = $('[name="akhirbuku"]').val();
+        const tahunbuku = $('[name="pak_pembukuan_id"]').val();
         const ckKonsolidasi = document.getElementById("ckkonsolidasi");
         //const ckKomparatif = document.getElementById("ckkomparatif");
         if (idInstitusi == '01') {
@@ -674,6 +694,8 @@ $(document).ready(function () {
             type: "POST",
             url: base_url + "akuntansi/perubahanarus/cekinput",
             data: {
+                awalbuku: awalbuku,
+                akhirbuku: akhirbuku,
                 akhir_periode: tanggal
             },
             dataType: "JSON",
@@ -692,6 +714,9 @@ $(document).ready(function () {
                         cache: false,
                         url: base_url + "akuntansi/perubahanarus/viewdata",
                         data: {
+                            tahunbuku: tahunbuku,
+                            awalbuku: awalbuku,
+                            akhirbuku: akhirbuku,
                             akhir_periode: tanggal,
                             jenis: jenis
                         },
@@ -701,13 +726,17 @@ $(document).ready(function () {
                     });
                     Toast.fire({
                         icon: 'success',
-                        title: ' Tampilkan laporan!!!. aaaaa' + jenis
+                        title: ' Menampilkan laporan...'
                     });
                 }
                 $('#btn-tampil-perubahanarus').attr('disabled', false);
             }
         });
         return false;
+    });
+    $("#link-cetak-perubahanarus").on('click', function (e) {
+        e.preventDefault();
+        $("#btn-cetak-perubahanarus").trigger("click");
     });
     // -------------------------------------/PERUBAHAN ARUS-------------------------
     // -------------------------------------/RAPB-------------------------

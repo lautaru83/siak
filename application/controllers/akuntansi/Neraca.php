@@ -77,6 +77,7 @@ class Neraca extends CI_Controller
         // $data['neracasaldo'] = $this->Laporan_model->neracasaldocetak();
         $data['awal_periode'] = $this->input->post('tgl1');
         $data['akhir_periode'] = $this->input->post('tgl2');
+        $data['tanggal'] = $this->input->post('tgl2');
         $data['pembukuan_id'] = $this->input->post('pembukuan_id');
         $this->load->library('pdf');
         $this->pdf->setPaper('A4', 'portrait');

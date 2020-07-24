@@ -394,16 +394,14 @@
                     <?php
                     $jumlahPajakPenghasilanA = 0;
                     echo rupiah_positif($jumlahPajakPenghasilanA);
-                    ?>
-                </strong>
+                    ?></strong>
             </td>
             <td align="right">
                 <strong>
                     <?php
                     $jumlahPajakPenghasilanB = 0;
                     echo rupiah_positif($jumlahPajakPenghasilanB);
-                    ?>
-                </strong>
+                    ?></strong>
             </td>
         </tr>
         <tr>
@@ -415,8 +413,7 @@
                     $idakun3 = "313";
                     $saldoAsetMutasiA = saldoAkun6KomInstitusi($buku_awalA, $tanggal, $idakun3, $pembukuan);
                     echo rupiah_positif($saldoAsetMutasiA);
-                    ?>
-                </strong>
+                    ?></strong>
             </td>
             <td align="right" style="border-bottom:solid 1px;">
                 <strong>
@@ -424,8 +421,7 @@
                     $idakun3 = "313";
                     $saldoAsetMutasiB = saldoAkun6KomInstitusi($buku_awalB, $tanggallalu, $idakun3, $tahunlalu);
                     echo rupiah_positif($saldoAsetMutasiB);
-                    ?>
-                </strong>
+                    ?></strong>
             </td>
         </tr>
         <tr>
@@ -437,8 +433,7 @@
                     $hasilSetelahPajakA = 0;
                     $hasilSetelahPajakA = $hasilSebelumPajakA + $saldoAsetMutasiA - $jumlahPajakPenghasilanA;
                     echo rupiah_positif($hasilSetelahPajakA);
-                    ?>
-                </strong>
+                    ?></strong>
             </td>
             <td align="right" style="border-bottom:solid 0.65mm;">
                 <strong>
@@ -446,8 +441,7 @@
                     $hasilSetelahPajakB = 0;
                     $hasilSetelahPajakB = $hasilSebelumPajakB + $saldoAsetMutasiB - $jumlahPajakPenghasilanB;
                     echo rupiah_positif($hasilSetelahPajakB);
-                    ?>
-                </strong>
+                    ?></strong>
             </td>
         </tr>
         <tr>
@@ -491,8 +485,7 @@
                     $saldoAsetAkhirTahunA = 0;
                     $saldoAsetAkhirTahunA = $saldoAsetAwalTahunA + $hasilSetelahPajakA;
                     echo rupiah_positif($saldoAsetAkhirTahunA);
-                    ?>
-                </strong>
+                    ?></strong>
             </td>
             <td align="right" style="border-bottom:solid 0.65mm;border-top:solid 1px;">
                 <strong>
@@ -500,8 +493,7 @@
                     $saldoAsetAkhirTahunB = 0;
                     $saldoAsetAkhirTahunB = $saldoAsetAwalTahunB + $hasilSetelahPajakB;
                     echo rupiah_positif($saldoAsetAkhirTahunB);
-                    ?>
-                </strong>
+                    ?></strong>
             </td>
         </tr>
     </table>
