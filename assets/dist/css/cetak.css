@@ -39,7 +39,8 @@ body {
   }
   .tabel-laporan{
     font-size: 11px;
-    width: 100%; 
+    width: 100%;
+    /* page-break-after: always; */
   }
   .text-subakun{
     padding-left:20px;

@@ -256,9 +256,12 @@
                             </tr>
                             <tr>
                                 <td class="text-center"></td>
-                                <td colspan="4">
+                                <td colspan="2">
                                     <span class="font-weight-bolder text-md">Aset Bersih Tidak Terikat</span>
                                 </td>
+                                <td class="text-center"><?php if ($bersihTidakTerikat) {
+                                                            echo "310";
+                                                        }  ?></td>
                                 <td class="text-right"></td>
                             </tr>
                             <?php
@@ -329,8 +332,7 @@
                                         <td colspan="2">
                                             <div class="font-weight-normal my-auto pl-4"><?= $dataBersihTerikat['level3']; ?></div>
                                         </td>
-                                        <td class="text-center"><?php //$dataBersihTerikat['catatan_id']; 
-                                                                ?></td>
+                                        <td class="text-center"><?= $dataBersihTerikat['catatan_id']; ?></td>
                                         <td class="text-right"><?= rupiah_positif($jumlahBersihTerikat); ?></td>
                                         <td class="text-right"></td>
                                     </tr>

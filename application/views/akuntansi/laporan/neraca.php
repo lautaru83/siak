@@ -54,7 +54,7 @@
                                     </div>
                                     <div class="col-md-2">
                                         <label class="font-weight-normal">Akhir Periode </label>
-                                        <input type="text" name="akhir_periode" id="akhir_periode" class="form-control" autocomplete="off" value="<?= $akhir_periode; ?>">
+                                        <input type="text" name="akhir_periode" id="akhir_periode" class="form-control" autocomplete="off">
                                     </div>
                                     <div class="col-md-1 ml-4 my-2 mt-auto">
                                         <input class="form-check-input font-weight-normal" type="checkbox" id="ckkomparatif">

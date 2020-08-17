@@ -383,15 +383,33 @@ $(document).ready(function () {
     });
     // -------------------------------------/NERACA----------------------------
     // --------------------------------------CALK----------------------------
+    $("#cal_pembukuan_id").change(function () {
+        var pembukuan_id = $("#cal_pembukuan_id option:selected").val();
+        $.ajax({
+            url: base_url + 'akuntansi/laporan/ajaxcombobuku/' + pembukuan_id,
+            type: "GET",
+            cache: false,
+            dataType: "JSON",
+            success: function (data) {
+                $('[name="awalbuku"]').val(data.awal_periode);
+                $('[name="akhirbuku"]').val(data.akhir_periode);
+                //$("#awal_periode").data('daterangepicker').setStartDate(data.awal_periode);
+                $("#akhir_periode").data('daterangepicker').setStartDate(data.akhir_periode);
+            },
+            error: function (e) {
+                console.log('Error' + e);
+            }
+        });
+    });
     $('#btn-tampil-catatan').on('click', function (e) {
         e.preventDefault();
         var laporan = $(this).data('laporan');
         var jenis = "";
         var idInstitusi = $(this).data('id');
-        //const akhir_periode = $('[name="akhir_periode"]').val();
+        const awalbuku = $('[name="awalbuku"]').val();
+        const akhirbuku = $('[name="akhirbuku"]').val();
+        const tahunbuku = $('[name="cal_pembukuan_id"]').val();
         const tanggal = $('[name="akhir_periode"]').val();
-        // const buku_awal = $(this).data('tgl1');
-        // const buku_akhir = $(this).data('tgl2');
         const ckKonsolidasi = document.getElementById("ckkonsolidasi");
         const ckKomparatif = document.getElementById("ckkomparatif");
         if (idInstitusi == '01') {
@@ -416,6 +434,8 @@ $(document).ready(function () {
             type: "POST",
             url: base_url + "akuntansi/catatan/cekinput",
             data: {
+                awalbuku: awalbuku,
+                akhirbuku: akhirbuku,
                 akhir_periode: tanggal
             },
             dataType: "JSON",
@@ -431,13 +451,16 @@ $(document).ready(function () {
                 } else {
                     Toast.fire({
                         icon: 'success',
-                        title: ' Menampilkan laporan!!!.' + jenis
+                        title: ' Menampilkan laporan...'
                     });
                     $.ajax({
                         type: "POST",
                         cache: false,
                         url: base_url + "akuntansi/catatan/viewdata",
                         data: {
+                            tahunbuku: tahunbuku,
+                            awalbuku: awalbuku,
+                            akhirbuku: akhirbuku,
                             akhir_periode: tanggal,
                             jenis: jenis
                         },
@@ -450,6 +473,10 @@ $(document).ready(function () {
             }
         });
         return false;
+    });
+    $("#link-cetak-catatan").on('click', function (e) {
+        e.preventDefault();
+        $("#btn-cetak-catatan").trigger("click");
     });
     // -------------------------------------/CALK----------------------------
     // --------------------------------------AKTIVITAS-------------------------

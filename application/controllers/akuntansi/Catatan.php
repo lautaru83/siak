@@ -27,22 +27,77 @@ class Catatan extends CI_Controller
     public function viewdata()
     {
         $jenis = $this->input->post('jenis');
+        // $data['tanggal'] = tanggal_input($this->input->post('akhir_periode'));
+        $data['jenislap'] = $jenis;
         $data['tanggal'] = tanggal_input($this->input->post('akhir_periode'));
+        $data['awalbuku'] = tanggal_input($this->input->post('awalbuku'));
+        $data['akhirbuku'] = tanggal_input($this->input->post('akhirbuku'));
+        $data['pembukuan_id'] = $this->input->post('tahunbuku');
         $data['calk'] = "1";
         $institusi_id = $this->session->userdata('idInstitusi');
         $data['institusi'] = $this->Institusi_model->ambil_data_id($institusi_id);
         // $data['institusi'] = $this->Institusi_model->ambil_data();
         if ($jenis == "4") {
-            $this->load->view('akuntansi/laporan/catatan/institusi', $data);
+            //lengkap
+            $data['calkAkun3'] = $this->Laporan_model->calkAkun3KomKonsolidasi();
+            $data['calkAb'] = null;
+            $data['calkPd'] = null;
+            // $data['tes'] = $this->Laporan_model->calkAkun3KomKonsolidasi();
+            // $data['calkAb'] = $this->Laporan_model->calkAbKomInstitusi();
+            // $data['calkPd'] = $this->Laporan_model->calkPdKomInstitusi();
+            $this->load->view('akuntansi/laporan/catatan/lengkap', $data);
         } elseif ($jenis == "3") {
             $data['calkAkun3'] = $this->Laporan_model->calkAkun3Konsolidasi();
+            $data['calkAb'] = $this->Laporan_model->calkAbKonsolidasi();
+            $data['calkPd'] = $this->Laporan_model->calkPdKonsolidasi();
             $this->load->view('akuntansi/laporan/catatan/konsolidasi', $data);
         } elseif ($jenis == "2") {
-            $this->load->view('akuntansi/laporan/catatan/institusi', $data);
+            $data['calkAkun3'] = $this->Laporan_model->calkAkun3KomInstitusi();
+            $data['calkAb'] = $this->Laporan_model->calkAbKomInstitusi();
+            $data['calkPd'] = $this->Laporan_model->calkPdKomInstitusi();
+            $this->load->view('akuntansi/laporan/catatan/komparatif', $data);
         } else {
             $data['calkAkun3'] = $this->Laporan_model->calkAkun3Institusi();
-            // $this->load->view('akuntansi/laporan/catatan/institusi', $data);
-            $this->load->view('akuntansi/laporan/catatan/institusites', $data);
+            $data['calkAb'] = $this->Laporan_model->calkAbInstitusi();
+            $data['calkPd'] = $this->Laporan_model->calkPdInstitusi();
+            $this->load->view('akuntansi/laporan/catatan/institusi', $data);
+        }
+    }
+    public function cetakdata()
+    {
+        $institusi_id = $this->session->userdata('idInstitusi');
+        $data['institusi'] = $this->Institusi_model->ambil_data_id($institusi_id);
+        $data['awalbuku'] = tanggal_input($this->input->post('bukuawal'));
+        $data['akhirbuku'] = tanggal_input($this->input->post('bukuakhir'));
+        $data['tanggalawal'] = tanggal_input($this->input->post('tgl1'));
+        // $data['neracasaldo'] = null;
+        // $data['neracasaldo'] = $this->Laporan_model->neracasaldocetak();
+        $data['awal_periode'] = $this->input->post('tgl1');
+        $data['akhir_periode'] = $this->input->post('tgl2');
+        $data['tanggal'] = $this->input->post('tgl2');
+        $data['pembukuan_id'] = $this->input->post('pembukuan_id');
+        $this->load->library('pdf');
+        $this->pdf->setPaper('A4', 'portrait');
+        $this->pdf->filename = "CALK.pdf";
+        $laporan = $this->input->post('laporan');
+        if ($laporan == "3") {
+            $data['judul'] = "CALK Konsolidasi";
+            $data['calkAkun3'] = $this->Laporan_model->calkAkun3KonsolidasiCetak();
+            $data['calkAb'] = $this->Laporan_model->calkAbKonsolidasiCetak();
+            $data['calkPd'] = $this->Laporan_model->calkPdKonsolidasiCetak();
+            $this->pdf->load_view('akuntansi/laporan/catatan/cetakkonsolidasi', $data);
+        } elseif ($laporan == "2") {
+            $data['judul'] = "CALK Komparatif";
+            $this->pdf->load_view('akuntansi/laporan/catatan/cetakkomparatif', $data);
+        } elseif ($laporan == "4") {
+            $data['judul'] = "CALK Konsolidasi Komparatif";
+            $this->pdf->load_view('akuntansi/laporan/catatan/cetaklengkap', $data);
+        } else {
+            $data['judul'] = "CALK Institusi";
+            $data['calkAkun3'] = $this->Laporan_model->calkAkun3InstitusiCetak();
+            $data['calkAb'] = $this->Laporan_model->calkAbInstitusiCetak();
+            $data['calkPd'] = $this->Laporan_model->calkPdInstitusiCetak();
+            $this->pdf->load_view('akuntansi/laporan/catatan/cetakinstitusi', $data);
         }
     }
     public function cekinput()
@@ -63,8 +118,8 @@ class Catatan extends CI_Controller
     public function cek_tanggal()
     {
         $akhir_periode = strtotime($this->input->post('akhir_periode'));
-        $buku_awal = strtotime($this->session->userdata['buku_awal']);
-        $buku_akhir = strtotime($this->session->userdata['buku_akhir']);
+        $buku_awal = strtotime($this->input->post('awalbuku'));
+        $buku_akhir = strtotime($this->input->post('akhirbuku'));
         if ($akhir_periode < $buku_awal) {
             return false;
         } elseif ($akhir_periode > $buku_akhir) {

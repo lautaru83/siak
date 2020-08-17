@@ -30,9 +30,9 @@
                                 </h4>
                             </div>
                             <div class="float-right">
-                                <!-- <h4 class="card-title" disabled="disabled">
-                                    Cetak <i class="fas fa-print" style="color: teal"></i>
-                                </h4> -->
+                                <h4 class="card-title" disabled="disabled">
+                                    <a href="" class="text-reset" id="link-cetak-catatan">Cetak <i class="fas fa-print" style="color: teal"></i></a>
+                                </h4>
                             </div>
 
                         </div>
@@ -43,7 +43,7 @@
                                 <div class="row">
                                     <div class="col-md-2">
                                         <label class="font-weight-normal">Pembukuan</label>
-                                        <select id="pembukuan_id" name="pembukuan_id" class="form-control">
+                                        <select id="cal_pembukuan_id" name="cal_pembukuan_id" class="form-control">
                                             <?php
                                             foreach ($pembukuan as $dataPembukuan) :
                                                 $idBuku = $dataPembukuan['id'];
@@ -71,6 +71,8 @@
                                     }
                                     ?>
                                     <div class="col-md-2 mt-auto">
+                                        <input type="hidden" id="awalbuku" name="awalbuku" value="<?= $buku_awal; ?>">
+                                        <input type="hidden" id="akhirbuku" name="akhirbuku" value="<?= $buku_akhir; ?>">
                                         <button type="submit" id="btn-tampil-catatan" data-id="<?= $institusi_id; ?>" data-tgl1="<?= $buku_awal; ?>" data-tgl2="<?= $buku_akhir; ?>" data-laporan="calk" class="btn btn-primary">Tampilkan</button>
                                     </div>
                                 </div>
@@ -86,7 +88,6 @@
             <!-- /.row -->
             <!-- data laporanya -->
             <div id="data">
-
             </div>
             <!-- end data laporanya-->
         </div>
