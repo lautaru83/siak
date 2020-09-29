@@ -47,7 +47,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <table id="tabel3" class="table table-sm table-bordered table-hover">
+                                    <table id="tabel3" class="table table-sm table-borderless table-hover">
                                         <tr>
                                             <td class="text-center" width="1%"></td>
                                             <td class="text-center" colspan="2"></td>
@@ -199,7 +199,7 @@
                         <!-- <div class="col-sm-1"></div> -->
                     </div>
                 <?php } ?>
-                <div class="row visible">
+                <div class="row invisible">
                     <div class="col-sm-12 text-center">
                         <form method="POST" action="<?= base_url('akuntansi/catatan/cetakdata'); ?>" target="_blank">
                             <input type="hidden" id="laporan" name="laporan" value="<?= $jenislap; ?>">
