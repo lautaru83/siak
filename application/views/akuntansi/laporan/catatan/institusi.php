@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-md-12">
         <div class="card">
-            <div class="card-header bg-gradient-light">
+            <div class="card-header bg-gradient-light d-print-none">
                 <div>
                     <h4 class="card-title">
                         CALK Institusi
@@ -430,7 +430,7 @@
                         <!-- <div class="col-sm-1"></div> -->
                     </div>
                 <?php } ?>
-                <div class="row visible">
+                <div class="row invisible">
                     <div class="col-sm-12 text-center">
                         <form method="POST" action="<?= base_url('akuntansi/catatan/cetakdata'); ?>" target="_blank">
                             <input type="hidden" id="laporan" name="laporan" value="<?= $jenislap; ?>">

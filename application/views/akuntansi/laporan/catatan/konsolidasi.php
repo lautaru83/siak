@@ -430,7 +430,7 @@
                         <!-- <div class="col-sm-1"></div> -->
                     </div>
                 <?php } ?>
-                <div class="row visible">
+                <div class="row invisible">
                     <div class="col-sm-12 text-center">
                         <form method="POST" action="<?= base_url('akuntansi/catatan/cetakdata'); ?>" target="_blank">
                             <input type="hidden" id="laporan" name="laporan" value="<?= $jenislap; ?>">

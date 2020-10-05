@@ -22,7 +22,6 @@
                 </td>
             </tr>
         </table>
-
     </header>
     <br>
     <div class="judul-laporan">

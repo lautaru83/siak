@@ -63,11 +63,11 @@
             </td>
             <td width="18%" align="center" style="border-bottom:solid 1px;">
                 1 Januari S/d<br>
-                <?= format_indo($akhir_periode); ?>
+                <?= format_indo($tanggal); ?>
             </td>
             <td width="18%" align="center" style="border-bottom:solid 1px;">
                 1 Januari S/d<br>
-                <?= format_indo($akhir_periode); ?>
+                <?= format_indo($tanggallalu); ?>
             </td>
         </tr>
         <tr>

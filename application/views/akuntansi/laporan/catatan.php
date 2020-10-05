@@ -23,13 +23,13 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header bg-gradient-light">
+                        <div class="card-header bg-gradient-light d-print-none">
                             <div>
                                 <h4 class="card-title">
                                     Tahun Pembukuan <?= $this->session->userdata('tahun_buku'); ?>
                                 </h4>
                             </div>
-                            <div class="float-right">
+                            <div class="float-right invisible">
                                 <h4 class="card-title" disabled="disabled">
                                     <a href="" class="text-reset" id="link-cetak-catatan">Cetak <i class="fas fa-print" style="color: teal"></i></a>
                                 </h4>
@@ -40,7 +40,7 @@
                         <div class="card-body">
                             <!--------------- isi content ---------------------------- -->
                             <form>
-                                <div class="row">
+                                <div class="row d-print-none">
                                     <div class="col-md-2">
                                         <label class="font-weight-normal">Pembukuan</label>
                                         <select id="cal_pembukuan_id" name="cal_pembukuan_id" class="form-control">

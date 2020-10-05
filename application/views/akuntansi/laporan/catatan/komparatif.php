@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-md-12">
         <div class="card">
-            <div class="card-header bg-gradient-light">
+            <div class="card-header bg-gradient-light d-print-none">
                 <div>
                     <h4 class="card-title">
                         CALK Komparatif
@@ -175,8 +175,8 @@
                                                             Sub Jumlah
                                                         </span>
                                                     </td>
-                                                    <td class="text-right pr-3"><?= rupiah_positif($total6A); ?></td>
-                                                    <td class="text-right pr-3"><?= rupiah_positif($total6B); ?></td>
+                                                    <td class="text-right pr-3 border-top border-bottom"><?= rupiah_positif($total6A); ?></td>
+                                                    <td class="text-right pr-3 border-top border-bottom"><?= rupiah_positif($total6B); ?></td>
                                                     <td></td>
                                                 </tr>
                                                 <tr>
@@ -296,8 +296,8 @@
                                                             Sub Jumlah
                                                         </span>
                                                     </td>
-                                                    <td class="text-right pr-3"><?= rupiah_positif($total6A); ?></td>
-                                                    <td class="text-right pr-3"><?= rupiah_positif($total6B); ?></td>
+                                                    <td class="text-right pr-3 border-top border-bottom"><?= rupiah_positif($total6A); ?></td>
+                                                    <td class="text-right pr-3 border-top border-bottom"><?= rupiah_positif($total6B); ?></td>
                                                     <td></td>
                                                 </tr>
                                                 <tr>
@@ -421,8 +421,8 @@
                                                             Sub Jumlah
                                                         </span>
                                                     </td>
-                                                    <td class="text-right pr-3"><?= rupiah_positif($total6A); ?></td>
-                                                    <td class="text-right pr-3"><?= rupiah_positif($total6B); ?></td>
+                                                    <td class="text-right pr-3 border-top border-bottom"><?= rupiah_positif($total6A); ?></td>
+                                                    <td class="text-right pr-3 border-top border-bottom"><?= rupiah_positif($total6B); ?></td>
                                                     <td></td>
                                                 </tr>
                                                 <tr>

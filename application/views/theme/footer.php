@@ -1,5 +1,5 @@
   <!-- Main Footer -->
-  <footer class="main-footer text-sm">
+  <footer class="main-footer text-sm d-print-none">
     <!-- To the right -->
     <div class="float-right d-none d-sm-inline">
       Siak Versi 2.0

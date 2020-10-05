@@ -175,8 +175,8 @@
                                                             Sub Jumlah
                                                         </span>
                                                     </td>
-                                                    <td class="text-right pr-3"><?= rupiah_positif($total6A); ?></td>
-                                                    <td class="text-right pr-3"><?= rupiah_positif($total6B); ?></td>
+                                                    <td class="text-right pr-3 border-top border-bottom"><?= rupiah_positif($total6A); ?></td>
+                                                    <td class="text-right pr-3 border-top border-bottom"><?= rupiah_positif($total6B); ?></td>
                                                     <td></td>
                                                 </tr>
                                                 <tr>
