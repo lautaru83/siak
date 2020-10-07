@@ -26,10 +26,10 @@
                         <div class="card-header bg-gradient-light">
                             <div>
                                 <h4 class="card-title">
-                                    Tahun Pembukuan <?= $this->session->userdata('tahun_buku'); ?>
+                                    Tahun Anggaran <?= $this->session->userdata('tahun_anggaran'); ?>
                                 </h4>
                             </div>
-                            <div class="float-right">
+                            <div class="float-right invisible">
                                 <h4 class="card-title" disabled="disabled">
                                     <a href="" class="text-reset" id="link-cetak-realisasi">Cetak <i class="fas fa-print" style="color: teal"></i></a>
                                 </h4>
@@ -43,12 +43,13 @@
                                 <div class="row">
                                     <div class="col-md-2">
                                         <label class="font-weight-normal">Pembukuan</label>
-                                        <select id="cal_pembukuan_id" name="cal_pembukuan_id" class="form-control">
+                                        <select id="rab_pembukuan_id" name="rab_pembukuan_id" class="form-control">
                                             <?php
-                                            foreach ($pembukuan as $dataPembukuan) :
-                                                $idBuku = $dataPembukuan['id'];
+                                            foreach ($tahunanggaran as $dataTahunanggaran) :
+                                                $idBuku = $dataTahunanggaran['id'];
+                                                $keterangan = $dataTahunanggaran['tahunanggaran'];
                                             ?>
-                                                <option value="<?= $dataPembukuan['id']; ?>" <?php cek_combo($pembukuan_id, $idBuku); ?>><?= $idBuku; ?></option>
+                                                <option value="<?= $dataTahunanggaran['id']; ?>" <?php cek_combo($tahunanggaran_id, $idBuku); ?>><?= $keterangan; ?></option>
                                             <?php endforeach; ?>
                                         </select>
                                     </div>

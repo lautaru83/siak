@@ -9,7 +9,7 @@ class Laporan extends CI_Controller
         is_logged_in();
         $this->db2 = $this->load->database('akuntansi', TRUE);
         //$this->load->model('akuntansi/Tahunbuku_model', 'Tahunbuku_model');
-        $this->load->model(array('Institusi_model' => 'Institusi_model', 'akuntansi/Kodeperkiraan_model' => 'Kodeperkiraan_model', 'akuntansi/Tahunbuku_model' => 'Tahunbuku_model', 'akuntansi/Saldoawal_model' => 'Saldoawal_model', 'akuntansi/Transaksi_model' => 'Transaksi_model', 'akuntansi/Kodeperkiraan_model' => 'Kodeperkiraan_model', 'Unit_model' => 'Unit_model', 'akuntansi/Laporan_model' => 'Laporan_model'));
+        $this->load->model(array('Institusi_model' => 'Institusi_model', 'akuntansi/Kodeperkiraan_model' => 'Kodeperkiraan_model', 'akuntansi/Tahunbuku_model' => 'Tahunbuku_model', 'akuntansi/Tahunanggaran_model' => 'Tahunanggaran_model', 'akuntansi/Saldoawal_model' => 'Saldoawal_model', 'akuntansi/Transaksi_model' => 'Transaksi_model', 'akuntansi/Kodeperkiraan_model' => 'Kodeperkiraan_model', 'Unit_model' => 'Unit_model', 'akuntansi/Laporan_model' => 'Laporan_model'));
     }
     public function index()
     {
@@ -29,6 +29,24 @@ class Laporan extends CI_Controller
     public function ajaxcombobuku($id)
     {
         $hasil = $this->Tahunbuku_model->ambil_data_id($id);
+        if ($hasil) {
+            $data = array(
+                'status' => 'sukses',
+                'id' => $hasil['id'],
+                'awal_periode' => tanggal_indo($hasil['awal_periode']),
+                'akhir_periode' => tanggal_indo($hasil['akhir_periode']),
+                'keterangan' => $hasil['keterangan']
+            );
+        } else {
+            $data = array(
+                'status' => 'gagal'
+            );
+        }
+        echo json_encode($data);
+    }
+    public function ajaxcomboanggaran($id)
+    {
+        $hasil = $this->Tahunanggaran_model->ambil_data_id($id);
         if ($hasil) {
             $data = array(
                 'status' => 'sukses',

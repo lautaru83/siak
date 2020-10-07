@@ -689,6 +689,62 @@ function no_tran($jurnal)
     }
     return $notran;
 }
+function realisasiKel($awalperiode, $akhirperiode, $idTahan, $idKel)
+{
+    //Mengambil realisasi anggaran /kelompok
+    $ci = get_instance();
+    $ci->db2 = $ci->load->database('akuntansi', TRUE);
+    $buku_awal = $awalperiode;
+    $tahunanggaran_id = $idTahan;
+    $akhir_periode = $akhirperiode;
+    $hasil = $ci->db2->query("SELECT kelompok_id AS kelompok_id, posisi AS posisi, Sum(debet) AS debet, Sum(kredit) AS kredit FROM view_realisasi WHERE tahunanggaran_id = $tahunanggaran_id AND kelompok_id=$idKel AND is_anggaran = 1 AND is_valid = 1 AND jurnal != 'SA' AND tanggal_transaksi BETWEEN '$buku_awal' AND '$akhir_periode' GROUP BY kelompok_id")->result_array();
+    $debet = 0.00;
+    $kredit = 0.00;
+    $jumlah = 0.00;
+    if ($hasil) {
+        foreach ($hasil as $dataHasil) :
+            $debet = $dataHasil['debet'];
+            $kredit = $dataHasil['kredit'];
+            $posisi = $dataHasil['posisi'];
+            if ($posisi == "D") {
+                $jumlah = $debet - $kredit;
+            } else {
+                $jumlah = $kredit - $debet;
+            }
+        endforeach;
+        return $jumlah;
+    } else {
+        return $jumlah;
+    }
+}
+function realisasiAng($awalperiode, $akhirperiode, $idTahan, $idAng)
+{
+    //Mengambil realisasi anggaran /kelompok
+    $ci = get_instance();
+    $ci->db2 = $ci->load->database('akuntansi', TRUE);
+    $buku_awal = $awalperiode;
+    $tahunanggaran_id = $idTahan;
+    $akhir_periode = $akhirperiode;
+    $hasil = $ci->db2->query("SELECT kelompok_id AS kelompok_id, posisi AS posisi, Sum(debet) AS debet, Sum(kredit) AS kredit FROM view_realisasi WHERE tahunanggaran_id = $tahunanggaran_id AND rencana_id=$idAng AND is_anggaran = 1 AND is_valid = 1 AND jurnal != 'SA' AND tanggal_transaksi BETWEEN '$buku_awal' AND '$akhir_periode' GROUP BY rencana_id")->result_array();
+    $debet = 0.00;
+    $kredit = 0.00;
+    $jumlah = 0.00;
+    if ($hasil) {
+        foreach ($hasil as $dataHasil) :
+            $debet = $dataHasil['debet'];
+            $kredit = $dataHasil['kredit'];
+            $posisi = $dataHasil['posisi'];
+            if ($posisi == "D") {
+                $jumlah = $debet - $kredit;
+            } else {
+                $jumlah = $kredit - $debet;
+            }
+        endforeach;
+        return $jumlah;
+    } else {
+        return $jumlah;
+    }
+}
 function padding_akun($posisi)
 {
     if ($posisi == "D") {
@@ -728,6 +784,15 @@ function rupiah_positif($angka)
         echo "-";
     } else {
         echo rupiah($angka);
+    }
+}
+function persentase($nilai1, $nilai2)
+{
+    $persen = round($nilai2 / $nilai1 * 100, 2);
+    if ($persen > 0) {
+        return $persen;
+    } else {
+        return "-";
     }
 }
 function sembunyikan_input($institusi)

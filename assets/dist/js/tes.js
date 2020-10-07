@@ -2940,8 +2940,89 @@ $(document).ready(function () {
         });
     });
     //--------------------------------------/PEMBUKUAN AKTIF----------------------------
+    //---------------------------------------LAP REALISASI----------------------------
+    $("#rab_pembukuan_id").change(function () {
+        var pembukuan_id = $("#rab_pembukuan_id option:selected").val();
+        $.ajax({
+            url: base_url + 'akuntansi/laporan/ajaxcomboanggaran/' + pembukuan_id,
+            type: "GET",
+            cache: false,
+            dataType: "JSON",
+            success: function (data) {
+                $('[name="awalbuku"]').val(data.awal_periode);
+                $('[name="akhirbuku"]').val(data.akhir_periode);
+                $('[name="akhir_periode"]').val(data.akhir_periode);
+            },
+            error: function (e) {
+                console.log('Error' + e);
+            }
+        });
+    });
+    $('#btn-tampil-realisasi').on('click', function (e) {
+        e.preventDefault();
+        var laporan = $(this).data('laporan');
+        // var jenis = "";
+        // var idInstitusi = $(this).data('id');
+        const tanggal = $('[name="akhir_periode"]').val();
+        const awalbuku = $('[name="awalbuku"]').val();
+        const akhirbuku = $('[name="akhirbuku"]').val();
+        const idTahan = $('[name="rab_pembukuan_id"]').val();
+        // const ckKonsolidasi = document.getElementById("ckkonsolidasi");
+        // if (idInstitusi == '01') {
+        //     if (ckKonsolidasi.checked == true) {
+        //         jenis = "2"; //konsolidasi
+        //     } else {
+        //         jenis = "1"; //institusi
+        //     }
+        // } else {
+        //     jenis = "1"; //institusi
+        // }
+        $.ajax({
+            cache: false,
+            type: "POST",
+            url: base_url + "akuntansi/realisasi/cekinput",
+            data: {
+                awalbuku: awalbuku,
+                akhirbuku: akhirbuku,
+                akhir_periode: tanggal
+            },
+            dataType: "JSON",
+            beforeSend: function () {
+                $('#btn-tampil-realisasi').attr('disabled', 'disabled');
+            },
+            success: function (response) {
+                if (response.status == 'gagal') {
+                    Toast.fire({
+                        icon: 'warning',
+                        title: 'Tanggal diluar periode anggaran!!!'
+                    });
+                } else {
+                    $.ajax({
+                        type: "POST",
+                        cache: false,
+                        url: base_url + "akuntansi/realisasi/viewdata",
+                        data: {
+                            idTahan: idTahan,
+                            awalbuku: awalbuku,
+                            akhirbuku: akhirbuku,
+                            akhir_periode: tanggal
+                        },
+                        success: function (data) {
+                            $("#data").html(data);
+                        }
+                    });
+                    Toast.fire({
+                        icon: 'success',
+                        title: ' Menampilkan laporan...'
+                    });
+                }
+                $('#btn-tampil-realisasi').attr('disabled', false);
+            }
+        });
+        return false;
+    });
 
-
+    //---------------------------------------LAP REALISASI----------------------------
     // ---------------------/TES---------------------------
 });
 // document.location.reload();

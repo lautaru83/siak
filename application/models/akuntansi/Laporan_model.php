@@ -1302,5 +1302,20 @@ class Laporan_model extends CI_Model
         return $this->db2->query("SELECT a.a5level_id as a5level_id,a.level5 as level5, a.posisi as posisi, SUM(b.debet) as debet, SUM(b.kredit) as kredit FROM view_kodeperkiraans AS a INNER JOIN view_transaksis AS b ON a.a6level_id = b.a6level_id WHERE b.tahun_buku='$thbuku' AND b.tanggal_transaksi BETWEEN '$tgl1' AND '$tgl2' AND b.is_valid BETWEEN 1 AND 2 AND a4level_id='$id4' GROUP BY a.a5level_id,b.tahun_buku ORDER BY a.a5level_id ASC ")->result_array();
     }
     // ------------------------------/CALK ----------------------------------
+    // -------------------------------REALISASI ----------------------------------
+    public function kelompokAnggaran()
+    {
+        // $tgl1 = tanggal_input($this->input->post('awalbuku'));
+        // $tgl2 = tanggal_input($this->input->post('akhir_periode'));
+        $thanggaran = $this->input->post('idTahan');
+        $institusi_id = $this->session->userdata('idInstitusi');
+        return $this->db2->query("SELECT kelompok_id, kelompok, rencana, posisi, institusi_id, tahunanggaran_id, Sum(resaldo) AS resaldo, sum(terealisasi) as terealisasi, noref AS refA FROM view_anggarans WHERE tahunanggaran_id = $thanggaran AND institusi_id = '$institusi_id' GROUP BY kelompok_id ORDER BY kelompok_id ASC")->result_array();
+    }
+    public function daftarAnggaran($kelompok_id, $tahunanggaran_id)
+    {
+        $institusi_id = $this->session->userdata('idInstitusi');
+        return $this->db2->query("SELECT a.kelompok_id AS kelompok_id, b.rencana AS rencana, b.id AS rencana_id, a.posisi AS posisi, b.tahunanggaran_id AS tahunanggaran_id, b.resaldo AS resaldo, b.terealisasi AS terealisasi, b.noref AS noref, a.institusi_id AS institusi_id FROM anggarans AS a INNER JOIN rencanas AS b ON a.id = b.anggaran_id WHERE a.kelompok_id = $kelompok_id AND a.institusi_id = '$institusi_id' AND b.tahunanggaran_id = $tahunanggaran_id")->result_array();
+    }
+    // ------------------------------/REALISASI ----------------------------------
 
 }
