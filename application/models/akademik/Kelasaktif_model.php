@@ -21,6 +21,11 @@ class Kelasaktif_model extends CI_Model
         $perak_id = $this->session->userdata('idPerak');
         return $this->db3->query("SELECT a.id AS kelas_id, b.id AS detailkelas_id, a.keterangan AS keterangan, b.perak_id AS perak_id FROM kelases AS a INNER JOIN detailkelases AS b ON a.id = b.kelas_id where perak_id='$perak_id'")->result_array();
     }
+    public function detailkelas_by_perakId($perak_id)
+    {
+        //$perak_id = $this->session->userdata('idPerak');
+        return $this->db3->query("SELECT a.id AS kelas_id, b.id AS detailkelas_id, a.keterangan AS keterangan, b.perak_id AS perak_id FROM kelases AS a INNER JOIN detailkelases AS b ON a.id = b.kelas_id where perak_id='$perak_id' ORDER BY a.id DESC")->result_array();
+    }
     public function mahasiswa_active_id($id)
     {
         //id_detail_kelas
@@ -103,5 +108,20 @@ class Kelasaktif_model extends CI_Model
     public function cek_active($data = array())
     {
         return $this->db3->get_where('mahasiswaactives', $data)->row_array();
+    }
+    public function comboKelasAktif($perak_id)
+    {
+        //$hasil = $this->db3->query("")->result_array();
+        $hasil = $this->detailkelas_by_perakId($perak_id);
+        $output = '<option value=""> - Pilih Kelas - </option>';
+        if ($hasil) {
+            foreach ($hasil as $dataHasil) :
+                $idKelas = $dataHasil['kelas_id'];
+                $idDeKelas = $dataHasil['kelas_id'];
+                $detKelas = $dataHasil['keterangan'];
+                $output .= '<option value="' . $idDeKelas . '">' . $idKelas . " - " . $detKelas . '</option>';
+            endforeach;
+        }
+        return $output;
     }
 }

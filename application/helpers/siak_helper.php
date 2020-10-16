@@ -786,6 +786,18 @@ function rupiah_positif($angka)
         echo rupiah($angka);
     }
 }
+function ribuan_positif($angka)
+{
+    $ribuan = $angka / 1000;
+    if ($ribuan < 0) {
+        $ribuan_positif = abs($ribuan);
+        echo "(" . rupiah($ribuan_positif) . ")";
+    } elseif ($ribuan == 0) {
+        echo "-";
+    } else {
+        echo rupiah($ribuan);
+    }
+}
 function persentase($nilai1, $nilai2)
 {
     $persen = round($nilai2 / $nilai1 * 100, 2);

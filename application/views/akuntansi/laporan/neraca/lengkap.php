@@ -311,9 +311,12 @@
                             </tr>
                             <tr>
                                 <td class="text-center"></td>
-                                <td colspan="4">
+                                <td>
                                     <span class="font-weight-bolder text-md">Aset Bersih Tidak Terikat</span>
                                 </td>
+                                <td class="text-center">310</td>
+                                <td class="text-right"></td>
+                                <td class="text-right"></td>
                                 <td class="text-right"></td>
                             </tr>
                             <?php
@@ -371,9 +374,12 @@
                             </tr>
                             <tr>
                                 <td class="text-center"></td>
-                                <td colspan="4">
+                                <td>
                                     <span class="font-weight-bolder text-md">Aset Bersih Terikat</span>
                                 </td>
+                                <td class="text-center"></td>
+                                <td class="text-right"></td>
+                                <td class="text-right"></td>
                                 <td class="text-right"></td>
                             </tr>
                             <?php

@@ -208,10 +208,12 @@
             <td colspan="3">&nbsp;</td>
         </tr>
         <tr>
-            <td><strong>ASET BERSIH</strong></td>
+            <td colspan="3"><strong>ASET BERSIH</strong></td>
         </tr>
         <tr>
             <td><strong>Aset Bersih Tidak Terikat</strong></td>
+            <td align="center">310</td>
+            <td></td>
         </tr>
         <?php
         $jumlahAbtt = 0;

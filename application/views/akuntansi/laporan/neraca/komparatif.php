@@ -313,9 +313,12 @@
                             </tr>
                             <tr>
                                 <td class="text-center"></td>
-                                <td colspan="4">
+                                <td>
                                     <span class="font-weight-bolder text-md">Aset Bersih Tidak Terikat</span>
                                 </td>
+                                <td class="text-center">310</td>
+                                <td class="text-right"></td>
+                                <td class="text-right"></td>
                                 <td class="text-right"></td>
                             </tr>
                             <?php
@@ -406,7 +409,7 @@
                                         <td>
                                             <div class="font-weight-normal my-auto pl-4"><?= $dataBersihTerikat['level3']; ?></div>
                                         </td>
-                                        <td class="text-center"></td>
+                                        <td class="text-center"><?= $dataBersihTerikat['catatan_id']; ?></td>
                                         <td class="text-right"><?= rupiah_positif($jumlahBersihTerikatA); ?></td>
                                         <td class="text-right"><?= rupiah_positif($jumlahBersihTerikatB); ?></td>
                                         <td class="text-right"></td>
@@ -417,10 +420,10 @@
                             ?>
                             <tr>
                                 <td class="text-center"></td>
-                                <td colspan="2">
+                                <td>
                                     <h6 class="my-auto pl-4">Jumlah Aset Bersih Terikat</h6>
                                 </td>
-
+                                <td></td>
                                 <td class="text-right border-top border-bottom">
                                     <?= rupiah_positif($totalBersihTerikatA); ?>
                                 </td>

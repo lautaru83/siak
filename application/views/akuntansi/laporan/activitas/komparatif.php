@@ -259,6 +259,11 @@
                                         $totalBpdpB = $totalBpdpB + $jumlahBpdpB;
                                     endforeach;
                                 }
+                                if ($jumlahBpdpA != 0 || $jumlahBpdpB != 0) {
+                                    $catatanbpdp = "531";
+                                } else {
+                                    $catatanbpdp = "";
+                                }
                                 ?>
                                 <td class="text-center"><?= $catatanbpdp; ?></td>
                                 <td class="text-right"><?= rupiah_positif($jumlahBpdpA); ?></td>
@@ -294,6 +299,11 @@
                                         $jumlahBpdaB = $jumlahKreditB - $jumlahDebetB;
                                         $totalBpdaB = $totalBpdaB + $jumlahBpdaB;
                                     endforeach;
+                                }
+                                if ($jumlahBpdaA != 0 || $jumlahBpdaB != 0) {
+                                    $catatanBpda = "541";
+                                } else {
+                                    $catatanBpda = "";
                                 }
                                 ?>
                                 <td class="text-center"><?= $catatanBpda; ?></td>
@@ -499,7 +509,9 @@
                             </tr>
                         </tbody>
                     </table>
-                <?php } ?>
+                <?php }
+                //var_dump($pbll);
+                ?>
                 <div class="row invisible">
                     <div class="col-sm-12 text-center">
                         <form method="POST" action="<?= base_url('akuntansi/activitas/cetakdata'); ?>" target="_blank">

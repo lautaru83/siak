@@ -1317,5 +1317,19 @@ class Laporan_model extends CI_Model
         return $this->db2->query("SELECT a.kelompok_id AS kelompok_id, b.rencana AS rencana, b.id AS rencana_id, a.posisi AS posisi, b.tahunanggaran_id AS tahunanggaran_id, b.resaldo AS resaldo, b.terealisasi AS terealisasi, b.noref AS noref, a.institusi_id AS institusi_id FROM anggarans AS a INNER JOIN rencanas AS b ON a.id = b.anggaran_id WHERE a.kelompok_id = $kelompok_id AND a.institusi_id = '$institusi_id' AND b.tahunanggaran_id = $tahunanggaran_id")->result_array();
     }
     // ------------------------------/REALISASI ----------------------------------
+    // ------------------------------PEMBAYARAN ----------------------------------
+    public function daftarRekapKelas()
+    {
+        $institusi_id = $this->session->userdata('idInstitusi');
+        $kelas_id = $this->input->post('kelas_id');
+        $perak_id = $this->input->post('akd_pembukuan_id');
+        if ($institusi_id == "01") {
+            return $this->db3->query("SELECT nim AS nim, nama AS nama, is_valid, Sum(IF(kode = 'DPP', debet, 0)) AS debetDPP, Sum(IF(kode = 'DPP', kredit, 0)) AS kreditDPP, Sum(IF(kode = 'INF', debet, 0)) AS debetINF, Sum(IF(kode = 'INF', kredit, 0)) AS kreditINF FROM view_rekapkelasopm WHERE perak_id = '$perak_id' AND kelas_id = '$kelas_id' GROUP BY nim")->result_array();
+        } else {
+            return $this->db3->query("SELECT nim AS nim, nama AS nama, is_valid, Sum(IF(kode = 'SPP', debet, 0)) AS debetSPP, Sum(IF(kode = 'SPP', kredit, 0)) AS kreditSPP, Sum(IF(kode = 'PER', debet, 0)) AS debetPER, Sum(IF(kode = 'PER', kredit, 0)) AS kreditPER, Sum(IF(kode = 'PRA', debet, 0)) AS debetPRA, Sum(IF(kode = 'PRA', kredit, 0)) AS kreditPRA, Sum(IF(kode = 'PKM', debet, 0)) AS debetPKM, Sum(IF(kode = 'PKM', kredit, 0)) AS kreditPKM, Sum(IF(kode = 'LBK', debet, 0)) AS debetLBK, Sum(IF(kode = 'LBK', kredit, 0)) AS kreditLBK, Sum(IF(kode = 'LAB', debet, 0)) AS debetLAB, Sum(IF(kode = 'LAB', kredit, 0)) AS kreditLAB, Sum(IF(kode = 'ULB', debet, 0)) AS debetULB, Sum(IF(kode = 'ULB', kredit, 0)) AS kreditULB, Sum(IF(kode = 'UAP', debet, 0)) AS debetUAP, Sum(IF(kode = 'UAP', kredit, 0)) AS kreditUAP, Sum(IF(kode = 'WIS', debet, 0)) AS debetWIS, Sum(IF(kode = 'WIS', kredit, 0)) AS kreditWIS, Sum(IF(kode = 'DPP', debet, 0)) AS debetDPP, Sum(IF(kode = 'DPP', kredit, 0)) AS kreditDPP, Sum(IF(kode = 'INF', debet, 0)) AS debetINF, Sum(IF(kode = 'INF', kredit, 0)) AS kreditINF FROM view_rekapkelasopm WHERE perak_id = '$perak_id' AND kelas_id = '$kelas_id' GROUP BY nim")->result_array();
+        }
+    }
+
+    // ------------------------------/PEMBAYARAN ----------------------------------
 
 }

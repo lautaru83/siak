@@ -53,8 +53,6 @@ class Akunanggaran_model extends CI_Model
         $this->db2->where('kelompok_id', $id);
         $this->db2->order_by('id', 'ASC');
         $hasil = $this->db2->get('anggarans')->result_array();
-        // $query = $this->db2->get_where('anggarans', array('kelompok_id' => $id, 'institusi_id' => $institusi_id));
-        // return $query;
         $output = '<option value=""> - Pilih Kegiatan - </option>';
         if ($hasil) {
             foreach ($hasil as $dataHasil) :

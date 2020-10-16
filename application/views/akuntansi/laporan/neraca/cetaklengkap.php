@@ -283,7 +283,10 @@
             <td colspan="4"><strong>ASET BERSIH</strong></td>
         </tr>
         <tr>
-            <td colspan="4"><strong>Aset Bersih Tidak Terikat</strong></td>
+            <td><strong>Aset Bersih Tidak Terikat</strong></td>
+            <td align="center">310</td>
+            <td></td>
+            <td></td>
         </tr>
         <?php
         $jumlahAbttA = 0;
@@ -320,7 +323,7 @@
                     <td class="text-subakun">
                         <?= $dataBersihTidakTerikat['level3']; ?>
                     </td>
-                    <td align="center"><?= $dataBersihTidakTerikat['catatan_id']; ?></td>
+                    <td align="center"></td>
                     <td align="right"><?= rupiah_positif($jumlahBersihTidakTerikatA); ?></td>
                     <td align="right"><?= rupiah_positif($jumlahBersihTidakTerikatB); ?></td>
                 </tr>

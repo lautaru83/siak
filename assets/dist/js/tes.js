@@ -13,6 +13,18 @@ $(document).ready(function () {
             format: 'DD-MM-YYYY'
         }
     });
+    $('#periodeAwal').daterangepicker({
+        singleDatePicker: true,
+        locale: {
+            format: 'DD-MM-YYYY'
+        }
+    });
+    $('#periodeAkhir').daterangepicker({
+        singleDatePicker: true,
+        locale: {
+            format: 'DD-MM-YYYY'
+        }
+    });
     $('#tanggal_transaksi').daterangepicker({
         singleDatePicker: true,
         locale: {
@@ -2960,23 +2972,10 @@ $(document).ready(function () {
     });
     $('#btn-tampil-realisasi').on('click', function (e) {
         e.preventDefault();
-        var laporan = $(this).data('laporan');
-        // var jenis = "";
-        // var idInstitusi = $(this).data('id');
         const tanggal = $('[name="akhir_periode"]').val();
         const awalbuku = $('[name="awalbuku"]').val();
         const akhirbuku = $('[name="akhirbuku"]').val();
         const idTahan = $('[name="rab_pembukuan_id"]').val();
-        // const ckKonsolidasi = document.getElementById("ckkonsolidasi");
-        // if (idInstitusi == '01') {
-        //     if (ckKonsolidasi.checked == true) {
-        //         jenis = "2"; //konsolidasi
-        //     } else {
-        //         jenis = "1"; //institusi
-        //     }
-        // } else {
-        //     jenis = "1"; //institusi
-        // }
         $.ajax({
             cache: false,
             type: "POST",
@@ -3022,7 +3021,205 @@ $(document).ready(function () {
         return false;
     });
 
-    //---------------------------------------LAP REALISASI----------------------------
+    //---------------------------------------/LAP REALISASI----------------------------
+    //---------------------------------------LAP PEMBAYARAN----------------------------
+    $("#akd_pembukuan_id").change(function () {
+        const pembukuan_id = $("#akd_pembukuan_id option:selected").val();
+        if (pembukuan_id != '') {
+            $.ajax({
+                cache: false,
+                method: "POST",
+                url: base_url + "akuntansi/pembayaran/kelasdata",
+                data: {
+                    perak_id: pembukuan_id
+                },
+                success: function (data) {
+                    $("#kelas_id").html(data);
+                }
+            });
+        }
+    });
+
+    // $("#per_pembukuan_id").change(function () {
+    //     const pembukuan_id = $("#per_pembukuan_id option:selected").val();
+    //     $.ajax({
+    //         url: base_url + 'akuntansi/laporan/ajaxcomboperak/' + pembukuan_id,
+    //         type: "GET",
+    //         cache: false,
+    //         dataType: "JSON",
+    //         success: function (data) {
+    //             $('[name="awalbuku"]').val(data.awal_periode);
+    //             $('[name="akhirbuku"]').val(data.akhir_periode);
+    //             $('[name="akhir_periode"]').val(data.akhir_periode);
+    //             if (pembukuan_id != '') {
+    //                 $.ajax({
+    //                     cache: false,
+    //                     method: "POST",
+    //                     url: base_url + "akuntansi/pembayaran/kelasdata",
+    //                     data: {
+    //                         perak_id: pembukuan_id
+    //                     },
+    //                     success: function (data) {
+    //                         $("#kelas_id").html(data);
+    //                     }
+    //                 });
+    //             }
+    //         },
+    //         error: function (e) {
+    //             console.log('Error' + e);
+    //         }
+    //     });
+    // });
+
+    $('#btn-tampil-pembayaranTes').on('click', function (e) {
+        e.preventDefault();
+        const tanggal = $('[name="akhir_periode"]').val();
+        const awalbuku = $('[name="awalbuku"]').val();
+        const akhirbuku = $('[name="akhirbuku"]').val();
+        const idPerak = $('[name="akd_pembukuan_id"]').val();
+        const idKelas = $('[name="kelas_id"]').val();
+        const laporan = 1;
+        $.ajax({
+            cache: false,
+            type: "POST",
+            url: base_url + "akuntansi/pembayaran/cekinput",
+            data: {
+                awalbuku: awalbuku,
+                akhirbuku: akhirbuku,
+                // akhir_periode: tanggal,
+                kelas_id: idKelas,
+                perak_id: idPerak
+            },
+            dataType: "JSON",
+            beforeSend: function () {
+                $('#btn-tampil-pembayaran').attr('disabled', 'disabled');
+            },
+            success: function (response) {
+                if (response.status == 'gagal') {
+                    Toast.fire({
+                        icon: 'warning',
+                        title: 'Inpuk tidak valid!!!'
+                    });
+                    if (response.perak_error != '') {
+                        $('#perak_error').html(response.perak_error);
+                    } else {
+                        $('#perak_error').html('');
+                    }
+                    if (response.kelas_error != '') {
+                        $('#kelas_error').html(response.kelas_error);
+                    } else {
+                        $('#kelas_error').html('');
+                    }
+                    if (response.tanggal_error != '') {
+                        $('#tanggal_error').html(response.tanggal_error);
+                    } else {
+                        $('#tanggal_error').html('');
+                    }
+                } else {
+                    $('#perak_error').html('');
+                    $('#kelas_error').html('');
+                    $('#tanggal_error').html('');
+                    $.ajax({
+                        type: "POST",
+                        cache: false,
+                        url: base_url + "akuntansi/pembayaran/viewdata",
+                        data: {
+                            perak_id: idPerak,
+                            // awalbuku: awalbuku,
+                            // akhirbuku: akhirbuku,
+                            kelas_id: idKelas,
+                            jenislap: laporan
+                        },
+                        success: function (data) {
+                            $("#data").html(data);
+                        }
+                    });
+                    Toast.fire({
+                        icon: 'success',
+                        title: ' Menampilkan laporan...'
+                    });
+                }
+                $('#btn-tampil-pembayaran').attr('disabled', false);
+            }
+        });
+        return false;
+    });
+
+    // $('#btn-tampil-pembayaran-periode').on('click', function (e) {
+    //     e.preventDefault();
+    //     const tanggal = $('[name="akhir_periode"]').val();
+    //     const awalbuku = $('[name="awalbuku"]').val();
+    //     const akhirbuku = $('[name="akhirbuku"]').val();
+    //     const idPerak = $('[name="akd_pembukuan_id"]').val();
+    //     const idKelas = $('[name="kelas_id"]').val();
+    //     $.ajax({
+    //         cache: false,
+    //         type: "POST",
+    //         url: base_url + "akuntansi/pembayaran/cekinput",
+    //         data: {
+    //             awalbuku: awalbuku,
+    //             akhirbuku: akhirbuku,
+    //             akhir_periode: tanggal,
+    //             kelas_id: idKelas,
+    //             perak_id: idPerak
+    //         },
+    //         dataType: "JSON",
+    //         beforeSend: function () {
+    //             $('#btn-tampil-pembayaran').attr('disabled', 'disabled');
+    //         },
+    //         success: function (response) {
+    //             if (response.status == 'gagal') {
+    //                 Toast.fire({
+    //                     icon: 'warning',
+    //                     title: 'Inpuk tidak valid!!!'
+    //                 });
+    //                 if (response.perak_error != '') {
+    //                     $('#perak_error').html(response.perak_error);
+    //                 } else {
+    //                     $('#perak_error').html('');
+    //                 }
+    //                 if (response.kelas_error != '') {
+    //                     $('#kelas_error').html(response.kelas_error);
+    //                 } else {
+    //                     $('#kelas_error').html('');
+    //                 }
+    //                 if (response.tanggal_error != '') {
+    //                     $('#tanggal_error').html(response.tanggal_error);
+    //                 } else {
+    //                     $('#tanggal_error').html('');
+    //                 }
+    //             } else {
+    //                 $('#perak_error').html('');
+    //                 $('#kelas_error').html('');
+    //                 $('#tanggal_error').html('');
+    //                 $.ajax({
+    //                     type: "POST",
+    //                     cache: false,
+    //                     url: base_url + "akuntansi/pembayaran/viewdata",
+    //                     data: {
+    //                         perak_id: idPerak,
+    //                         awalbuku: awalbuku,
+    //                         akhirbuku: akhirbuku,
+    //                         kelas_id: idKelas,
+    //                         akhir_periode: tanggal
+    //                     },
+    //                     success: function (data) {
+    //                         $("#data").html(data);
+    //                         $("#tabelLapbayar").DataTable();
+    //                     }
+    //                 });
+    //                 Toast.fire({
+    //                     icon: 'success',
+    //                     title: ' Menampilkan laporan...'
+    //                 });
+    //             }
+    //             $('#btn-tampil-pembayaran').attr('disabled', false);
+    //         }
+    //     });
+    //     return false;
+    // });
+
+    //---------------------------------------/LAP PEMBAYARAN----------------------------
     // ---------------------/TES---------------------------
 });
 // document.location.reload();

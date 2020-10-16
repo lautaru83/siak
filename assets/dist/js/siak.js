@@ -18,6 +18,22 @@ $(document).ready(function () {
         "autoWidth": false,
         "ordering": false
     });
+    $('#tabelLapbayar').DataTable({
+        "paging": false,
+        "lengthChange": true,
+        "searching": false,
+        "ordering": false,
+        "info": false,
+        "autoWidth": true,
+        "scrollX": "110%",
+        // fixedColumns:   {
+        //     leftColumns: 2
+        // }
+        // dom: 'Bfrtip',
+        // buttons: [
+        //     'copy', 'csv', 'excel', 'pdf', 'print'
+        // ]
+    });
     // end atur datatable
     //tampil tooltips text 
     $('#sidebar-menu').on('hover', '.nav-item', function (e) {

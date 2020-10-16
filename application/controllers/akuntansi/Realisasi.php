@@ -20,7 +20,7 @@ class Realisasi extends CI_Controller
         $tahunanggaran_id = $this->session->userdata('idTahan');
         $data['institusi_id'] = $this->idinstitusi;
         $data['pembukuan_id'] = $pembukuan_id;
-        $data['tahunanggaran_id'] = $pembukuan_id;
+        $data['tahunanggaran_id'] = $tahunanggaran_id;
         $data['pembukuan'] = $this->Tahunbuku_model->ambil_data();
         $data['tahunanggaran'] = $this->Tahunanggaran_model->ambil_data();
         $data['buku_awal'] = tanggal_indo($this->session->userdata('anggaran_awal'));

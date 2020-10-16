@@ -21,7 +21,8 @@
 
     <!-- DataTables -->
     <link rel="stylesheet" href="<?= base_url('assets/') ?>plugins/datatables-bs4/css/dataTables.bootstrap4.css">
-
+    <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.6.4/css/buttons.dataTables.min.css"> -->
     <!-- Tempusdominus Bbootstrap 4 -->
 
 
@@ -52,6 +53,16 @@
         .align-middle {
             vertical-align: middle !important;
         }
+
+        /* th,
+        td {
+            white-space: nowrap;
+        }
+
+        div.dataTables_wrapper {
+            width: 800px;
+            margin: 0 auto;
+        } */
     </style>
     <script>
         var base_url = '<?= base_url(); ?>'; // Buat variabel base_url agar bisa di akses di semua file js

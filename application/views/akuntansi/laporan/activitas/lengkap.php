@@ -257,6 +257,11 @@
                                 <?php
                                     endforeach;
                                 }
+                                if ($jumlahBpdpA != 0 || $jumlahBpdpB != 0) {
+                                    $catatanbpdp = "531";
+                                } else {
+                                    $catatanbpdp = "";
+                                }
                                 ?>
                                 <td class="text-center"><?= $catatanbpdp; ?></td>
                                 <td class="text-right"><?= rupiah_positif($jumlahBpdpA); ?></td>
@@ -294,6 +299,11 @@
                                 ?>
                                 <?php
                                     endforeach;
+                                }
+                                if ($jumlahBpdaA != 0 || $jumlahBpdaB != 0) {
+                                    $catatanBpda = "541";
+                                } else {
+                                    $catatanBpda = "";
                                 }
                                 ?>
                                 <td class="text-center"><?= $catatanBpda; ?></td>

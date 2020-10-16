@@ -212,6 +212,11 @@
                     $totalBpdpB = $totalBpdpB + $jumlahBpdpB;
                 endforeach;
             }
+            if ($jumlahBpdpA != 0 || $jumlahBpdpB != 0) {
+                $catatanbpdp = "531";
+            } else {
+                $catatanbpdp = "";
+            }
             ?>
             <td align="center"><?= $catatanbpdp; ?></td>
             <td align="right"><?= rupiah_positif($totalBpdpA); ?></td>
@@ -243,6 +248,11 @@
                     $jumlahBpdaB = $jumlahKreditB - $jumlahDebetB;
                     $totalBpdaB = $totalBpdaB + $jumlahBpdaB;
                 endforeach;
+            }
+            if ($jumlahBpdaA != 0 || $jumlahBpdaB != 0) {
+                $catatanBpda = "541";
+            } else {
+                $catatanBpda = "";
             }
             ?>
             <td align="center"><?= $catatanBpda; ?></td>

@@ -8,8 +8,9 @@ class Laporan extends CI_Controller
         parent::__construct();
         is_logged_in();
         $this->db2 = $this->load->database('akuntansi', TRUE);
+        $this->db3 = $this->load->database('akademik', TRUE);
         //$this->load->model('akuntansi/Tahunbuku_model', 'Tahunbuku_model');
-        $this->load->model(array('Institusi_model' => 'Institusi_model', 'akuntansi/Kodeperkiraan_model' => 'Kodeperkiraan_model', 'akuntansi/Tahunbuku_model' => 'Tahunbuku_model', 'akuntansi/Tahunanggaran_model' => 'Tahunanggaran_model', 'akuntansi/Saldoawal_model' => 'Saldoawal_model', 'akuntansi/Transaksi_model' => 'Transaksi_model', 'akuntansi/Kodeperkiraan_model' => 'Kodeperkiraan_model', 'Unit_model' => 'Unit_model', 'akuntansi/Laporan_model' => 'Laporan_model'));
+        $this->load->model(array('Institusi_model' => 'Institusi_model', 'akuntansi/Kodeperkiraan_model' => 'Kodeperkiraan_model', 'akuntansi/Tahunbuku_model' => 'Tahunbuku_model', 'akuntansi/Tahunanggaran_model' => 'Tahunanggaran_model', 'akuntansi/Saldoawal_model' => 'Saldoawal_model', 'akuntansi/Transaksi_model' => 'Transaksi_model', 'akuntansi/Kodeperkiraan_model' => 'Kodeperkiraan_model', 'Unit_model' => 'Unit_model', 'akuntansi/Laporan_model' => 'Laporan_model', 'akademik/Periodeakademik_model' => 'Periodeakademik_model', 'akademik/Kelas_model' => 'Kelas_model', 'akademik/Kelasaktif_model' => 'Kelasaktif_model'));
     }
     public function index()
     {
@@ -53,6 +54,24 @@ class Laporan extends CI_Controller
                 'id' => $hasil['id'],
                 'awal_periode' => tanggal_indo($hasil['awal_periode']),
                 'akhir_periode' => tanggal_indo($hasil['akhir_periode']),
+                'keterangan' => $hasil['keterangan']
+            );
+        } else {
+            $data = array(
+                'status' => 'gagal'
+            );
+        }
+        echo json_encode($data);
+    }
+    public function ajaxcomboperak($id)
+    {
+        $hasil = $this->Periodeakademik_model->ambil_data_id($id);
+        if ($hasil) {
+            $data = array(
+                'status' => 'sukses',
+                'id' => $hasil['id'],
+                'awal_periode' => tanggal_indo($hasil['awal_semester']),
+                'akhir_periode' => tanggal_indo($hasil['akhir_semester']),
                 'keterangan' => $hasil['keterangan']
             );
         } else {
