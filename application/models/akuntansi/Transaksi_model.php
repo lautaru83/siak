@@ -6,7 +6,7 @@ class Transaksi_model extends CI_Model
     {
         parent::__construct();
         $this->db2 = $this->load->database('akuntansi', TRUE);
-        //$this->db2 = $this->load->database('akuntansi', TRUE);
+        $this->db3 = $this->load->database('akademik', TRUE);
     }
     public function cektranuser($jurnal)
     {
@@ -106,6 +106,55 @@ class Transaksi_model extends CI_Model
         );
         $this->db2->where('id', $id);
         $this->db2->update('transaksis', $data);
+    }
+    public function auditCekId()
+    {
+        $idtran = $this->input->post('id');
+        $jurnal = $this->input->post('jurnal');
+        $notran = $this->input->post('notran');
+        return $this->db2->get_where('transaksis', ['id' => $idtran])->num_rows();
+    }
+    public function auditHapus()
+    {
+        $idtran = $this->input->post('id');
+        $jurnal = $this->input->post('jurnal');
+        $notran = $this->input->post('notran');
+        if ($jurnal == "PM") {
+            $this->db2->query("insert into audits(transaksi_id,jurnal,tahun_buku,notran,nobukti,noref,tanggal_transaksi,keterangan,accounting,date_created,is_valid,total_transaksi,unit_id,user_id) select * from transaksis where id='$idtran'");
+            $hasilOpm = $this->db3->get_where('operasionals', ['notran' => $notran])->row_array();
+            $idOpm = $hasilOpm['id'];
+            $this->db3->query("insert into audits(operasional_id,jurnal,perak_id,notran,nobukti,noref,tanggal_transaksi,jenis,keterangan,accounting,date_created,is_valid,unit_id,user_id,mahasiswa_id,total_transaksi) select * from operasionals where id='$idOpm'");
+            $this->db2->delete('transaksis', ['id' => $idtran]);
+            $this->db3->delete('operasionals', ['id' => $idOpm]);
+            $hasilTran = $this->db2->get_where('detail_transaksis', ['transaksi_id' => $idtran])->result_array();
+            if ($hasilTran) {
+                foreach ($hasilTran as $dataHasilTran) :
+                    $idDetailTran = $dataHasilTran['id'];
+                    $this->db2->query("insert into detail_audits(transaksi_id,a6level_id,posisi_akun,debet,kredit,is_anggaran,jumlah) SELECT transaksi_id,a6level_id,posisi_akun,debet,kredit,is_anggaran,jumlah from detail_transaksis where id='$idDetailTran'");
+                endforeach;
+                $this->db2->delete('detail_transaksis', ['transaksi_id' => $idtran]);
+            }
+            $hasilOpm2 = $this->db2->get_where('detail_transaksis', ['transaksi_id' => $idtran])->result_array();
+            if ($hasilOpm2) {
+                foreach ($hasilOpm2 as $dataHasilOpm2) :
+                    $idDetailOpm = $dataHasilOpm2['id'];
+                    $this->db2->query("insert into detail_audits(transaksi_id,a6level_id,posisi_akun,debet,kredit,is_anggaran,jumlah) SELECT transaksi_id,a6level_id,posisi_akun,debet,kredit,is_anggaran,jumlah from detail_transaksis where id='$idDetailOpm'");
+                endforeach;
+                $this->db3->delete('detail_operasionals', ['operasional_id' => $idDetailOpm]);
+            }
+        } else {
+            // ->result()
+            $this->db2->query("insert into audits(transaksi_id,jurnal,tahun_buku,notran,nobukti,noref,tanggal_transaksi,keterangan,accounting,date_created,is_valid,total_transaksi,unit_id,user_id) select * from transaksis where id='$idtran'");
+            $this->db2->delete('transaksis', ['id' => $idtran]);
+            $hasil = $this->db2->get_where('detail_transaksis', ['transaksi_id' => $idtran])->result_array();
+            if ($hasil) {
+                foreach ($hasil as $dataHasil) :
+                    $idDetail = $dataHasil['id'];
+                    $this->db2->query("insert into detail_audits(transaksi_id,a6level_id,posisi_akun,debet,kredit,is_anggaran,jumlah) SELECT transaksi_id,a6level_id,posisi_akun,debet,kredit,is_anggaran,jumlah from detail_transaksis where id='$idDetail'");
+                endforeach;
+                $this->db2->delete('detail_transaksis', ['transaksi_id' => $idtran]);
+            }
+        }
     }
     public function cek_akunubah($akun_id, $tran_id)
     {

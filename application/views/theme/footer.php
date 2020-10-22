@@ -5,7 +5,7 @@
       Siak Versi 2.0
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2020 <a href="">YAYASAN PAGUWARMAS</a></strong> Maos-Cilacap. All rights reserved.
+    <strong>Copyright &copy; 2020 <a href="" style="color: teal">YAYASAN PAGUWARMAS</a></strong> Maos-Cilacap. All rights reserved.
   </footer>
   </div>
   <!-- ./wrapper -->

@@ -40,11 +40,9 @@ class Catatan extends CI_Controller
         if ($jenis == "4") {
             //lengkap
             $data['calkAkun3'] = $this->Laporan_model->calkAkun3KomKonsolidasi();
-            $data['calkAb'] = null;
-            $data['calkPd'] = null;
-            // $data['tes'] = $this->Laporan_model->calkAkun3KomKonsolidasi();
-            // $data['calkAb'] = $this->Laporan_model->calkAbKomInstitusi();
-            // $data['calkPd'] = $this->Laporan_model->calkPdKomInstitusi();
+            $data['calkAb'] = $this->Laporan_model->calkAbKomKonsolidasi();
+            $data['calkPd'] = $this->Laporan_model->calkPdKomKonsolidasi();
+            // $data['calkPd'] = $this->Laporan_model->calkPdKomKonsolidasi();
             $this->load->view('akuntansi/laporan/catatan/lengkap', $data);
         } elseif ($jenis == "3") {
             $data['calkAkun3'] = $this->Laporan_model->calkAkun3Konsolidasi();

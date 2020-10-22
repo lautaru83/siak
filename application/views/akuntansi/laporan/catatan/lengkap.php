@@ -187,11 +187,253 @@
                                             endforeach;
                                         }
                                         ?>
-                                        <tr>
-                                            <td colspan="6"><?php //var_dump($tes); 
-                                                            ?></td>
-                                        </tr>
+                                        <?php
+                                        $jumlahAbA = 0;
+                                        $jumlahDebetA = 0;
+                                        $jumlahKreditA = 0;
+                                        $jumlahAbB = 0;
+                                        $jumlahDebetB = 0;
+                                        $jumlahKreditB = 0;
+                                        $totalAbA = 0;
+                                        $totalAbB = 0;
+                                        if ($calkAb) {
+                                            foreach ($calkAb as $dataAkun) :
+                                                $jumlahAbttA = asetbersihTbKom($buku_awalA, $tanggal, $pembukuan);
+                                                $jumlahAbttB = asetbersihTbKom($buku_awalB, $tanggallalu, $tahunlalu);
+                                                $akunId = $dataAkun['a1level_id'];
+                                                $idCatatan = $dataAkun['catatan_id']; //level2
+                                                //2020
+                                                $jumlahDebetA = $dataAkun['debetA'];
+                                                $jumlahKreditA = $dataAkun['kreditA'];
+                                                //2019
+                                                $jumlahDebetB = $dataAkun['debetB'];
+                                                $jumlahKreditB = $dataAkun['kreditB'];
+                                                $jumlahAbA = $jumlahKreditA + $jumlahAbttA - $jumlahDebetA;
+                                                $jumlahAbB = $jumlahKreditB + $jumlahAbttB - $jumlahDebetB;
+                                                $totalAbA = $totalAbA + $jumlahAbA;
+                                                $totalAbB = $totalAbB + $jumlahAbB;
 
+                                        ?>
+                                                <tr>
+                                                    <td></td>
+                                                    <td class="text-left" width="3%">
+                                                        <span class="font-weight-bolder">
+                                                            <?= $idCatatan; ?>
+                                                        </span>
+                                                    </td>
+                                                    <td class="font-weight-bolder"><?= $dataAkun['level2']; ?></td>
+                                                    <td class="text-right border-bottom">
+                                                        <span class="font-weight-bolder pr-3">
+                                                            <?= rupiah_positif($jumlahAbA); ?></span>
+                                                    </td>
+                                                    <td class="text-right border-bottom">
+                                                        <span class="font-weight-bolder pr-3">
+                                                            <?= rupiah_positif($jumlahAbB); ?></span>
+                                                    </td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>
+                                                        <span class="font-weight-normal text-md pl-5">
+                                                            Rincian :
+                                                        </span>
+                                                    </td>
+                                                    <td class="text-right">
+                                                        <span class="font-weight-bolder">
+                                                        </span>
+                                                    </td>
+                                                    <td class="text-right">
+                                                        <span class="font-weight-bolder">
+                                                        </span>
+                                                    </td>
+                                                    <td></td>
+                                                </tr>
+                                                <?php
+                                                $debet6A = 0;
+                                                $kredit6A = 0;
+                                                $jumlah6A = 0;
+                                                $total6A = 0;
+                                                $debet6B = 0;
+                                                $kredit6B = 0;
+                                                $jumlah6B = 0;
+                                                $total6B = 0;
+                                                $akun6Ab = $this->Laporan_model->calkAkun6AbKomKonsolidasi($idCatatan);
+                                                if ($akun6Ab) {
+                                                    foreach ($akun6Ab as $dataAkun6) :
+                                                        $posisi = $dataAkun6['posisi'];
+                                                        $debet6A = $dataAkun6['debetA'];
+                                                        $kredit6A = $dataAkun6['kreditA'];
+                                                        $debet6B = $dataAkun6['debetB'];
+                                                        $kredit6B = $dataAkun6['kreditB'];
+                                                        if ($posisi == "S") { //2020
+                                                            $jumlah6A = $jumlahAbttA + $kredit6A - $debet6A;
+                                                            $jumlah6B = $jumlahAbttB + $kredit6B - $debet6B;
+                                                        } else { //2019
+                                                            $jumlah6A = $kredit6A - $debet6A;
+                                                            $jumlah6B = $kredit6B - $debet6B;
+                                                        }
+                                                        $total6A = $total6A + $jumlah6A;
+                                                        $total6B = $total6B + $jumlah6B;
+                                                ?>
+                                                        <tr>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td class="font-weight-normal text-md pl-5">- &nbsp;<?= $dataAkun6['level3']; ?></td>
+                                                            <td class="text-right pr-3"><?= rupiah_positif($jumlah6A); ?></td>
+                                                            <td class="text-right pr-3"><?= rupiah_positif($jumlah6B); ?></td>
+                                                            <td></td>
+                                                        </tr>
+                                                <?php
+                                                    endforeach;
+                                                }
+                                                ?>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>
+                                                        <span class="font-weight-normal text-md pl-5">
+                                                            Sub Jumlah
+                                                        </span>
+                                                    </td>
+                                                    <td class="text-right pr-3 border-top border-bottom"><?= rupiah_positif($total6A); ?></td>
+                                                    <td class="text-right pr-3 border-top border-bottom"><?= rupiah_positif($total6B); ?></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="6">&nbsp;</td>
+                                                </tr>
+
+                                        <?php
+                                            endforeach;
+                                        }
+                                        ?>
+                                        <?php
+                                        $jumlahAkunA = 0;
+                                        $jumlahDebetA = 0;
+                                        $jumlahKreditA = 0;
+                                        $jumlahAkunB = 0;
+                                        $jumlahDebetB = 0;
+                                        $jumlahKreditB = 0;
+                                        if ($calkPd) {
+                                            foreach ($calkPd as $dataAkun) :
+                                                $akunId = $dataAkun['a1level_id'];
+                                                $idCatatan = $dataAkun['catatan_id']; //level3
+                                                //2020
+                                                $jumlahDebetA = $dataAkun['debetA'];
+                                                $jumlahKreditA = $dataAkun['kreditA'];
+                                                //2019
+                                                $jumlahDebetB = $dataAkun['debetB'];
+                                                $jumlahKreditB = $dataAkun['kreditB'];
+                                                if ($akunId == "300") {
+                                                    $jumlahAkunA = $jumlahKreditA - $jumlahDebetA;
+                                                    $jumlahAkunB = $jumlahKreditB - $jumlahDebetB;
+                                                } elseif ($akunId == "400") {
+                                                    $jumlahAkunA = $jumlahKreditA - $jumlahDebetA;
+                                                    $jumlahAkunB = $jumlahKreditB - $jumlahDebetB;
+                                                } elseif ($akunId == "600") {
+                                                    $jumlahAkunA = $jumlahKreditA - $jumlahDebetA;
+                                                    $jumlahAkunB = $jumlahKreditB - $jumlahDebetB;
+                                                } else {
+                                                    $jumlahAkunA = $jumlahDebetA - $jumlahKreditA;
+                                                    $jumlahAkunB = $jumlahDebetB - $jumlahKreditB;
+                                                }
+                                        ?>
+                                                <tr>
+                                                    <td></td>
+                                                    <td class="text-left" width="3%">
+                                                        <span class="font-weight-bolder">
+                                                            <?= $idCatatan; ?>
+                                                        </span>
+                                                    </td>
+                                                    <td class="font-weight-bolder"><?= $dataAkun['level3']; ?></td>
+                                                    <td class="text-right border-bottom">
+                                                        <span class="font-weight-bolder pr-3">
+                                                            <?= rupiah_positif($jumlahAkunA); ?></span>
+                                                    </td>
+                                                    <td class="text-right border-bottom">
+                                                        <span class="font-weight-bolder pr-3">
+                                                            <?= rupiah_positif($jumlahAkunB); ?></span>
+                                                    </td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>
+                                                        <span class="font-weight-normal text-md pl-5">
+                                                            Rincian :
+                                                        </span>
+                                                    </td>
+                                                    <td class="text-right">
+                                                        <span class="font-weight-bolder">
+                                                        </span>
+                                                    </td>
+                                                    <td class="text-right">
+                                                        <span class="font-weight-bolder">
+                                                        </span>
+                                                    </td>
+                                                    <td></td>
+                                                </tr>
+                                                <?php
+                                                $debet6A = 0;
+                                                $kredit6A = 0;
+                                                $jumlah6A = 0;
+                                                $total6A = 0;
+                                                $debet6B = 0;
+                                                $kredit6B = 0;
+                                                $jumlah6B = 0;
+                                                $total6B = 0;
+                                                $akun6Pd = $this->Laporan_model->calkAkun6KomInstitusi($idCatatan);
+                                                if ($akun6Pd) {
+                                                    foreach ($akun6Pd as $dataAkun6) :
+                                                        $posisi = $dataAkun6['posisi'];
+                                                        $debet6A = $dataAkun6['debetA'];
+                                                        $kredit6A = $dataAkun6['kreditA'];
+                                                        $debet6B = $dataAkun6['debetB'];
+                                                        $kredit6B = $dataAkun6['kreditB'];
+                                                        if ($posisi == "D") { //2020
+                                                            $jumlah6A = $debet6A - $kredit6A;
+                                                            $jumlah6B = $debet6B - $kredit6B;
+                                                        } else { //2019
+                                                            $jumlah6A = $kredit6A - $debet6A;
+                                                            $jumlah6B = $kredit6B - $debet6B;
+                                                        }
+                                                        $total6A = $total6A + $jumlah6A;
+                                                        $total6B = $total6B + $jumlah6B;
+                                                ?>
+                                                        <tr>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td class="font-weight-normal text-md pl-5">- &nbsp;<?= $dataAkun6['level6']; ?></td>
+                                                            <td class="text-right pr-3"><?= rupiah_positif($jumlah6A); ?></td>
+                                                            <td class="text-right pr-3"><?= rupiah_positif($jumlah6B); ?></td>
+                                                            <td></td>
+                                                        </tr>
+                                                <?php
+                                                    endforeach;
+                                                }
+                                                ?>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>
+                                                        <span class="font-weight-normal text-md pl-5">
+                                                            Sub Jumlah
+                                                        </span>
+                                                    </td>
+                                                    <td class="text-right pr-3 border-top border-bottom"><?= rupiah_positif($total6A); ?></td>
+                                                    <td class="text-right pr-3 border-top border-bottom"><?= rupiah_positif($total6B); ?></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="6">&nbsp;</td>
+                                                </tr>
+                                        <?php
+                                            endforeach;
+                                        }
+                                        ?>
                                     </table>
                                 </div>
                             </div>

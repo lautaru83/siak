@@ -71,18 +71,18 @@
                                     <td class="text-center" width="5%">No</td>
                                     <td class="text-center" width="8%">Nim</td>
                                     <td class="text-center" width="30%">Nama</td>
-                                    <td class="text-center" width="6%">SPP</td>
-                                    <td class="text-center" width="6%">PER</td>
-                                    <td class="text-center" width="6%">PRA</td>
-                                    <td class="text-center" width="6%">MPP</td>
-                                    <td class="text-center" width="6%">CAP</td>
-                                    <td class="text-center" width="6%">LKK</td>
-                                    <td class="text-center" width="6%">LBK</td>
-                                    <td class="text-center" width="6%">PERP</td>
-                                    <td class="text-center" width="6%">WIS</td>
+                                    <td class="text-center" width="10%">SPP</td>
+                                    <td class="text-center" width="10%">PER</td>
+                                    <td class="text-center" width="10%">PRA</td>
+                                    <td class="text-center" width="10%">MPP</td>
+                                    <td class="text-center" width="10%">CAP</td>
+                                    <td class="text-center" width="10%">LKK</td>
+                                    <td class="text-center" width="10%">LBK</td>
+                                    <td class="text-center" width="10%">PERP</td>
+                                    <td class="text-center" width="10%">WIS</td>
                                     <td class="text-center" width="10%">Subtotal</td>
-                                    <td class="text-center" width="6%">DPP</td>
-                                    <td class="text-center" width="6%">INF</td>
+                                    <td class="text-center" width="10%">DPP</td>
+                                    <td class="text-center" width="10%">INF</td>
                                     <td class="text-center" width="10%">Total</td>
                                 </tr>
                             </thead>

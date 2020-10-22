@@ -354,7 +354,7 @@
                                         <td>
                                             <div class="font-weight-normal my-auto pl-4"><?= $dataBersihTidakTerikat['level3']; ?></div>
                                         </td>
-                                        <td class="text-center"><?= $dataBersihTidakTerikat['catatan_id']; ?></td>
+                                        <td class="text-center"></td>
                                         <td class="text-right"><?= rupiah_positif($jumlahBersihTidakTerikatA); ?></td>
                                         <td class="text-right"><?= rupiah_positif($jumlahBersihTidakTerikatB); ?></td>
                                         <td class="text-right"></td>

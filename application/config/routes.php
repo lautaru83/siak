@@ -79,6 +79,7 @@ $route['kaskeluar'] = 'akuntansi/kaskeluar';
 $route['bankmasuk'] = 'akuntansi/bankmasuk';
 $route['bankkeluar'] = 'akuntansi/bankkeluar';
 $route['nonkasbank'] = 'akuntansi/nonkasbank';
+$route['audit'] = 'akuntansi/audit';
 // $route['bankkeluar'] = 'akuntansi/bankkeluar';
 // --------------- akademik -----------------------------
 $route['angkatan'] = 'akademik/angkatan';

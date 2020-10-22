@@ -17,6 +17,11 @@ class User_model extends CI_Model
     {
         return $this->db->get_where('users', ['id' => $id])->row_array();
     }
+    public function ambil_detail_id()
+    {
+        $user_id = $this->session->userdata('xyz');
+        return $this->db->query("SELECT a.id AS id,a.nama AS nama, a.email AS email,c.role AS role, a.is_active AS is_active FROM users AS a JOIN institusis AS b ON b.id = a.institusi_id JOIN roles AS c ON c.id = a.role_id WHERE a.id = $user_id")->row_array();
+    }
     public function cek_hapus($id)
     {
         return $this->db->get_where('siak_akuntansi.transaksis', ['transaksis.user_id' => $id])->row_array();
@@ -49,6 +54,19 @@ class User_model extends CI_Model
         $this->db->insert('users', $data);
         $tipe = "simpan";
         $desc = $nama . "-" . $role_id . "-" . $institusi_id . "-" . $email;
+        $this->_log($tipe, $desc);
+    }
+    public function ubahsandi()
+    {
+        $ids = $this->session->userdata('xyz');
+        $sandi_baru = $this->input->post('pass1');
+        $data = array(
+            'sandi' => password_hash($sandi_baru, PASSWORD_DEFAULT)
+        );
+        $this->db->where('id', $ids);
+        $this->db->update('users', $data);
+        $tipe = "ubah sandi";
+        $desc = $ids . "-" . $tipe;
         $this->_log($tipe, $desc);
     }
     public function ubah($id)

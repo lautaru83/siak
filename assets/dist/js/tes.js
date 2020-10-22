@@ -3125,8 +3125,6 @@ $(document).ready(function () {
                         url: base_url + "akuntansi/pembayaran/viewdata",
                         data: {
                             perak_id: idPerak,
-                            // awalbuku: awalbuku,
-                            // akhirbuku: akhirbuku,
                             kelas_id: idKelas,
                             jenislap: laporan
                         },
@@ -3145,81 +3143,123 @@ $(document).ready(function () {
         return false;
     });
 
-    // $('#btn-tampil-pembayaran-periode').on('click', function (e) {
-    //     e.preventDefault();
-    //     const tanggal = $('[name="akhir_periode"]').val();
-    //     const awalbuku = $('[name="awalbuku"]').val();
-    //     const akhirbuku = $('[name="akhirbuku"]').val();
-    //     const idPerak = $('[name="akd_pembukuan_id"]').val();
-    //     const idKelas = $('[name="kelas_id"]').val();
-    //     $.ajax({
-    //         cache: false,
-    //         type: "POST",
-    //         url: base_url + "akuntansi/pembayaran/cekinput",
-    //         data: {
-    //             awalbuku: awalbuku,
-    //             akhirbuku: akhirbuku,
-    //             akhir_periode: tanggal,
-    //             kelas_id: idKelas,
-    //             perak_id: idPerak
-    //         },
-    //         dataType: "JSON",
-    //         beforeSend: function () {
-    //             $('#btn-tampil-pembayaran').attr('disabled', 'disabled');
-    //         },
-    //         success: function (response) {
-    //             if (response.status == 'gagal') {
-    //                 Toast.fire({
-    //                     icon: 'warning',
-    //                     title: 'Inpuk tidak valid!!!'
-    //                 });
-    //                 if (response.perak_error != '') {
-    //                     $('#perak_error').html(response.perak_error);
-    //                 } else {
-    //                     $('#perak_error').html('');
-    //                 }
-    //                 if (response.kelas_error != '') {
-    //                     $('#kelas_error').html(response.kelas_error);
-    //                 } else {
-    //                     $('#kelas_error').html('');
-    //                 }
-    //                 if (response.tanggal_error != '') {
-    //                     $('#tanggal_error').html(response.tanggal_error);
-    //                 } else {
-    //                     $('#tanggal_error').html('');
-    //                 }
-    //             } else {
-    //                 $('#perak_error').html('');
-    //                 $('#kelas_error').html('');
-    //                 $('#tanggal_error').html('');
-    //                 $.ajax({
-    //                     type: "POST",
-    //                     cache: false,
-    //                     url: base_url + "akuntansi/pembayaran/viewdata",
-    //                     data: {
-    //                         perak_id: idPerak,
-    //                         awalbuku: awalbuku,
-    //                         akhirbuku: akhirbuku,
-    //                         kelas_id: idKelas,
-    //                         akhir_periode: tanggal
-    //                     },
-    //                     success: function (data) {
-    //                         $("#data").html(data);
-    //                         $("#tabelLapbayar").DataTable();
-    //                     }
-    //                 });
-    //                 Toast.fire({
-    //                     icon: 'success',
-    //                     title: ' Menampilkan laporan...'
-    //                 });
-    //             }
-    //             $('#btn-tampil-pembayaran').attr('disabled', false);
-    //         }
-    //     });
-    //     return false;
-    // });
+
 
     //---------------------------------------/LAP PEMBAYARAN----------------------------
+    //---------------------------------------PROFIL-----------------------------
+    $('#btn-ubah-profil').on('click', function (e) {
+        e.preventDefault();
+        const email = $('[name="email"]').val();
+        const sandi = $('[name="sandi"]').val();
+        const ids = $('[name="ids"]').val();
+        const pass1 = $('[name="pass1"]').val();
+        const pass2 = $('[name="pass2"]').val();
+        $.ajax({
+            cache: false,
+            type: "POST",
+            url: base_url + "profil/simpan",
+            data: {
+                sandi: sandi,
+                pass1: pass1,
+                pass2: pass2,
+                email: email
+            },
+            dataType: "JSON",
+            beforeSend: function () {
+                $('#btn-ubah-profil').attr('disabled', 'disabled');
+            },
+            success: function (response) {
+                if (response.status == 'gagal') {
+                    Toast.fire({
+                        icon: 'warning',
+                        title: 'Inpuk tidak valid!!!'
+                    });
+                    if (response.sandi_error != '') {
+                        $('#sandi_error').html(response.sandi_error);
+                    } else {
+                        $('#sandi_error').html('');
+                    }
+                    if (response.pass1_error != '') {
+                        $('#pass1_error').html(response.pass1_error);
+                    } else {
+                        $('#pass1_error').html('');
+                    }
+                    if (response.pass2_error != '') {
+                        $('#pass2_error').html(response.pass2_error);
+                    } else {
+                        $('#pass2_error').html('');
+                    }
+                } else {
+                    $('#sandi_error').html('');
+                    $('#pass1_error').html('');
+                    $('#pass2_error').html('');
+                    $('#sandi').html('');
+                    $('#pass1').html('');
+                    $('#pass2').html('');
+                    Toast.fire({
+                        icon: 'success',
+                        title: ' Password berhasil diubah...'
+                    });
+                }
+                $('#btn-ubah-profil').attr('disabled', false);
+            }
+        });
+        return false;
+    });
+    //---------------------------------------/PROFIL----------------------------
+    //---------------------------------------AUDIT----------------------------
+    // tombol hapus audit table
+    $('.btn-hapus-audit').on('click', function (e) {
+        e.preventDefault();
+        const notran = $(this).data('notran');
+        const jurnal = $(this).data('jurnal');
+        const id = $(this).data('id');
+        // const a6level_id = $(this).data('id6');
+        const info = $(this).data('info');
+        Swal.fire({
+            title: 'Konfirmasi!',
+            text: 'Apakah yakin menghapus transaksi -' + id + '- !?!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'Batal',
+            confirmButtonText: 'Hapus'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    type: "POST",
+                    cache: false,
+                    url: base_url + "akuntansi/audit/hapus",
+                    data: {
+                        id: id,
+                        notran: notran,
+                        jurnal: jurnal
+                    },
+                    dataType: 'JSON',
+                    success: function (data) {
+                        if (data.status == 'sukses') {
+                            Toast.fire({
+                                icon: 'success',
+                                title: ' Data berhasil dihapus!!!.'
+                            });
+                            // document.location.reload();
+                        } else {
+                            Toast.fire({
+                                icon: 'warning',
+                                title: ' Penghapusan gagal!!!.'
+                            });
+                        }
+                    },
+                    error: function (e) {
+                        console.log('Error' + e);
+                    }
+                });
+            }
+        });
+    });
+    // end tombol hapus audit table
+    //---------------------------------------/AUDIT----------------------------
     // ---------------------/TES---------------------------
 });
 // document.location.reload();

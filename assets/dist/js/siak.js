@@ -25,7 +25,7 @@ $(document).ready(function () {
         "ordering": false,
         "info": false,
         "autoWidth": true,
-        "scrollX": "110%",
+        "scrollX": "110%"
         // fixedColumns:   {
         //     leftColumns: 2
         // }
