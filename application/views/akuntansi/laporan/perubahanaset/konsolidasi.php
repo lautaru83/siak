@@ -403,7 +403,7 @@
                                     <span class="font-weight-normal">
                                         <?php
                                         $idakun3 = "313";
-                                        $saldoAsetMutasi = saldoAkun6Laporan($tanggal, $idakun3);
+                                        $saldoAsetMutasi = saldoAkun6KonInsPerubahanAset($awalbuku, $tanggal, $tahunbuku);
                                         echo rupiah_positif($saldoAsetMutasi);
                                         ?>
                                     </span>

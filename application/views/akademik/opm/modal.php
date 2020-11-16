@@ -30,7 +30,8 @@
                                 <select id="akun_id" name="akun_id" class="form-control">
                                     <option value="">- Pilih -</option>
                                     <?php
-                                    $akunbayar = $this->Opm_model->daftarakunopm($idKelas, $perak_id, $jenis);
+                                    //$akunbayar = $this->Opm_model->daftarakunopm($idKelas, $perak_id, $jenis);
+                                    $akunbayar = $this->Opm_model->daftarakunopm2($idKelas, $perak_id);
                                     if ($akunbayar) {
                                         foreach ($akunbayar as $dataakun) :
                                     ?>

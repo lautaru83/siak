@@ -476,6 +476,41 @@ function saldoAkun6Laporan($tanggal, $idakun3)
         return $saldo;
     }
 }
+function saldoAkun6PerubahanAset($awalbuku, $tanggal, $idakun3)
+{
+    $ci = get_instance();
+    $ci->db2 = $ci->load->database('akuntansi', TRUE);
+    $institusi_id = $ci->session->userdata('idInstitusi');
+    $akun = $ci->db2->query("select a6level_id,level6 from view_kodeperkiraans where institusi_id='$institusi_id' and a3level_id='$idakun3'")->row_array();
+    $akun_id = $akun['a6level_id'];
+    if ($akun) {
+        $akun_id = $akun['a6level_id'];
+    } else {
+        $akun_id = "";
+    }
+    $awal_periode = tanggal_input($awalbuku);
+    $akhir_periode = tanggal_input($tanggal);
+    $tahun_buku = ambilTahun($akhir_periode);
+    $hasil = $ci->db2->query("select  a6level_id,posisi,sum(debet) as debet,sum(kredit) as kredit from view_detailtransaksis WHERE a6level_id='$akun_id' AND is_valid=1 AND tanggal_transaksi BETWEEN '$awal_periode' AND '$akhir_periode' AND tahun_buku='$tahun_buku' GROUP BY a6level_id")->result_array();
+    $saldo = 0;
+    if ($hasil) {
+        $debet = 0;
+        $kredit = 0;
+        foreach ($hasil as $hasilData) :
+            $posisi = $hasilData['posisi'];
+            $debet = $hasilData['debet'];
+            $kredit = $hasilData['kredit'];
+            if ($posisi == "D") {
+                $saldo = $debet - $kredit;
+            } else {
+                $saldo = $kredit - $debet;
+            }
+        endforeach;
+        return $saldo;
+    } else {
+        return $saldo;
+    }
+}
 function saldoAkun6KomInstitusi($awal_periode, $akhir_periode, $idakun3, $tahun_buku)
 {
     $ci = get_instance();
@@ -492,6 +527,68 @@ function saldoAkun6KomInstitusi($awal_periode, $akhir_periode, $idakun3, $tahun_
     //$tahun_buku = $ci->session->userdata('tahun_buku');
     $akhir_periode = tanggal_input($akhir_periode);
     $hasil = $ci->db2->query("select  a6level_id,posisi,sum(debet) as debet,sum(kredit) as kredit from view_detailtransaksis WHERE a6level_id='$akun_id' AND tanggal_transaksi BETWEEN '$awal_periode' AND '$akhir_periode' AND tahun_buku='$tahun_buku' GROUP BY a6level_id")->result_array();
+    $saldo = 0;
+    if ($hasil) {
+        $debet = 0;
+        $kredit = 0;
+        foreach ($hasil as $hasilData) :
+            $posisi = $hasilData['posisi'];
+            $debet = $hasilData['debet'];
+            $kredit = $hasilData['kredit'];
+            if ($posisi == "D") {
+                $saldo = $debet - $kredit;
+            } else {
+                $saldo = $kredit - $debet;
+            }
+        endforeach;
+        return $saldo;
+    } else {
+        return $saldo;
+    }
+}
+function saldoAkun6KomInsPerubahanAset($awal_periode, $akhir_periode, $idakun3, $tahun_buku)
+{
+    $ci = get_instance();
+    $ci->db2 = $ci->load->database('akuntansi', TRUE);
+    $institusi_id = $ci->session->userdata('idInstitusi');
+    $akun = $ci->db2->query("select a6level_id,level6 from view_kodeperkiraans where institusi_id='$institusi_id' and a3level_id='$idakun3'")->row_array();
+    $akun_id = $akun['a6level_id'];
+    if ($akun) {
+        $akun_id = $akun['a6level_id'];
+    } else {
+        $akun_id = "";
+    }
+    $awal_periode = tanggal_input($awal_periode);
+    //$tahun_buku = $ci->session->userdata('tahun_buku');
+    $akhir_periode = tanggal_input($akhir_periode);
+    $hasil = $ci->db2->query("SELECT  a6level_id,posisi,sum(debet) as debet,sum(kredit) as kredit from view_detailtransaksis WHERE a6level_id='$akun_id' AND tahun_buku='$tahun_buku' AND is_valid=1 AND tanggal_transaksi BETWEEN '$awal_periode' AND '$akhir_periode' GROUP BY a6level_id")->result_array();
+    $saldo = 0;
+    if ($hasil) {
+        $debet = 0;
+        $kredit = 0;
+        foreach ($hasil as $hasilData) :
+            $posisi = $hasilData['posisi'];
+            $debet = $hasilData['debet'];
+            $kredit = $hasilData['kredit'];
+            if ($posisi == "D") {
+                $saldo = $debet - $kredit;
+            } else {
+                $saldo = $kredit - $debet;
+            }
+        endforeach;
+        return $saldo;
+    } else {
+        return $saldo;
+    }
+}
+function saldoAkun6KonInsPerubahanAset($awalperiode, $akhirperiode, $tahun_buku)
+{
+    $ci = get_instance();
+    $ci->db2 = $ci->load->database('akuntansi', TRUE);
+    $awal_periode = tanggal_input($awalperiode);
+    //$tahun_buku = $ci->session->userdata('tahun_buku');
+    $akhir_periode = tanggal_input($akhirperiode);
+    $hasil = $ci->db2->query("SELECT b.a6level_id, b.posisi, Sum(b.debet) AS debet, Sum(b.kredit) AS kredit, a.a2level_id AS a2level_id FROM view_kodeperkiraans AS a INNER JOIN view_detailtransaksis AS b ON a.a6level_id = b.a6level_id WHERE a.a3level_id IN ('312', '313') AND b.tahun_buku = '$tahun_buku' AND b.is_valid = 1 AND b.tanggal_transaksi BETWEEN '$awal_periode' AND '$akhir_periode' GROUP BY a.a2level_id")->result_array();
     $saldo = 0;
     if ($hasil) {
         $debet = 0;

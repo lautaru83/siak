@@ -227,6 +227,16 @@ class Kasmasuk extends CI_Controller
             }
         }
     }
+    public function cek_uniknobukti()
+    {
+        $nobukti = $this->input->post('nobukti');
+        $hasil = $this->Transaksi_model->cek_nobukti($nobukti);
+        if ($hasil > 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
     public function cek_akun()
     {
         $a6level_id = $this->input->post('a6level_id');
@@ -266,7 +276,9 @@ class Kasmasuk extends CI_Controller
     }
     private function _validate()
     {
-        $this->form_validation->set_rules('nobukti', 'nobukti', 'required|trim');
+        $this->form_validation->set_rules('nobukti', 'nobukti', 'required|trim|callback_cek_uniknobukti', [
+            'cek_uniknobukti' => 'No Bukti telah digunakan!!'
+        ]);
         $this->form_validation->set_rules('tanggal_transaksi', 'Tanggal', 'required|trim|callback_cek_tanggal', [
             'cek_tanggal' => 'Diluar periode pembukuan!!'
         ]);

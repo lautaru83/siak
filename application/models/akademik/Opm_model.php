@@ -19,6 +19,10 @@ class Opm_model extends CI_Model
     {
         return $this->db3->get_where('detail_operasionals', ['operasional_id' => $id])->num_rows();
     }
+    public function cek_nobukti($nobukti)
+    {
+        return $this->db3->get_where('operasionals', ['nobukti' => $nobukti])->num_rows();
+    }
     public function daftarakunopm($kelas_id, $perak_id, $jenis)
     {
         $institusi_id = $this->session->userdata['idInstitusi'];
@@ -31,6 +35,11 @@ class Opm_model extends CI_Model
         } else {
             return null;
         }
+    }
+    public function daftarakunopm2($kelas_id, $perak_id)
+    {
+        $institusi_id = $this->session->userdata['idInstitusi'];
+        return $this->db2->query("SELECT a.idpembayaran AS idpembayaran,a.a6level_id AS a6level_id, b.level6 AS level6 FROM siak_akademik.view_bops a JOIN siak_akuntansi.view_kodeperkiraans b ON b.a6level_id = a.a6level_id WHERE a.kelas_id = '$kelas_id' AND a.institusi_id=$institusi_id AND a.perak_id='$perak_id' ORDER BY a.a6level_id ASC")->result_array();
     }
     public function detailtransaksi($id)
     {

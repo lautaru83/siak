@@ -180,6 +180,16 @@ class Nonkasbank extends CI_Controller
             return true;
         }
     }
+    public function cek_uniknobukti()
+    {
+        $nobukti = $this->input->post('nobukti');
+        $hasil = $this->Transaksi_model->cek_nobukti($nobukti);
+        if ($hasil > 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
     public function cek_akun()
     {
         $a6level_id = $this->input->post('a6level_id');
@@ -266,7 +276,9 @@ class Nonkasbank extends CI_Controller
     }
     private function _validate()
     {
-        $this->form_validation->set_rules('nobukti', 'nobukti', 'required|trim');
+        $this->form_validation->set_rules('nobukti', 'nobukti', 'required|trim|callback_cek_uniknobukti', [
+            'cek_uniknobukti' => 'No Bukti telah digunakan!!'
+        ]);
         $this->form_validation->set_rules('tanggal_transaksi', 'Tanggal', 'required|trim|callback_cek_tanggal', [
             'cek_tanggal' => 'Diluar periode pembukuan!!'
         ]);
@@ -278,9 +290,8 @@ class Nonkasbank extends CI_Controller
         $this->form_validation->set_rules('a6level_id', 'Kodeperkiraan', 'required|trim|callback_cek_akun', [
             'cek_akun' => 'Akun telah digunakan sebelumnya!!'
         ]);
-        $this->form_validation->set_rules('jumlah', 'Jumlah', 'required|trim|callback_cek_jumlah|callback_cek_saldo', [
-            'cek_jumlah' => 'Jumlah transaksi tidak valid!!',
-            'cek_saldo' => 'Saldo akun tidak mencukupi!!'
+        $this->form_validation->set_rules('jumlah', 'Jumlah', 'required|trim|callback_cek_jumlah', [
+            'cek_jumlah' => 'Jumlah transaksi tidak valid!!'
         ]);
         $this->form_validation->set_rules('posisi_akun', 'Posisi', 'required|trim');
     }

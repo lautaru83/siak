@@ -490,7 +490,8 @@
                                     <span class="font-weight-normal">
                                         <?php
                                         $idakun3 = "313";
-                                        $saldoAsetMutasiA = saldoAkun6KomInstitusi($buku_awalA, $tanggal, $idakun3, $pembukuan);
+                                        $saldoAsetMutasiA = saldoAkun6KonInsPerubahanAset($buku_awalA, $tanggal, $pembukuan);
+                                        // $saldoAsetMutasiA = saldoAkun6KomInstitusi($buku_awalA, $tanggal, $idakun3, $pembukuan);
                                         echo rupiah_positif($saldoAsetMutasiA);
                                         ?>
                                     </span>
@@ -499,7 +500,8 @@
                                     <span class="font-weight-normal">
                                         <?php
                                         $idakun3 = "313";
-                                        $saldoAsetMutasiB = saldoAkun6KomInstitusi($buku_awalB, $tanggallalu, $idakun3, $tahunlalu);
+                                        $saldoAsetMutasiB = saldoAkun6KonInsPerubahanAset($buku_awalB, $tanggallalu, $tahunlalu);
+                                        // $saldoAsetMutasiB = saldoAkun6KomInstitusi($buku_awalB, $tanggallalu, $idakun3, $tahunlalu);
                                         echo rupiah_positif($saldoAsetMutasiB);
                                         ?>
                                     </span>
@@ -561,7 +563,7 @@
                                     <span class="font-weight-normal">
                                         <?php
                                         $idakun2 = "310";
-                                        $saldoAsetAwalTahunA = saldoAwalAbttKomInstitusi($idakun2, $pembukuan);
+                                        $saldoAsetAwalTahunA = saldoAwalAbttKonsolidasi($idakun2, $pembukuan);
                                         echo rupiah_positif($saldoAsetAwalTahunA);
                                         ?>
                                     </span>
@@ -570,7 +572,7 @@
                                     <span class="font-weight-normal">
                                         <?php
                                         $idakun2 = "310";
-                                        $saldoAsetAwalTahunB = saldoAwalAbttKomInstitusi($idakun2, $tahunlalu);
+                                        $saldoAsetAwalTahunB = saldoAwalAbttKonsolidasi($idakun2, $tahunlalu);
                                         echo rupiah_positif($saldoAsetAwalTahunB);
                                         ?>
                                     </span>

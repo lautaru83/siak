@@ -18,6 +18,10 @@ class Transaksi_model extends CI_Model
     {
         return $this->db2->get_where('transaksis', ['tahun_buku' => $thbuku_id, 'unit_id' => $unit_id])->row_array();
     }
+    public function cek_nobukti($nobukti)
+    {
+        return $this->db2->get_where('transaksis', ['nobukti' => $nobukti])->num_rows();
+    }
     public function detailtransaksi($tran_id)
     {
         return $this->db2->query("select a.id as id,a.a6level_id as a6level_id,b.level6 as level6,a.posisi_akun as posisi,a.jumlah as jumlah,a.debet as debet,a.kredit as kredit,a.is_anggaran as is_anggaran from detail_transaksis a join a6levels b on b.id=a.a6level_id where a.transaksi_id=$tran_id")->result_array();

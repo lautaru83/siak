@@ -8,7 +8,7 @@ class Opm extends CI_Controller
         parent::__construct();
         is_logged_in();
         $this->db3 = $this->load->database('akademik', TRUE);
-        $this->load->model(array('akademik/Mahasiswa_model' => 'Mahasiswa_model', 'akademik/Opm_model' => 'Opm_model', 'akuntansi/Kodeperkiraan_model' => 'Kodeperkiraan_model', 'Unit_model' => 'Unit_model', 'Akademik/Bop_model' => 'Bop_model', 'Akuntansi/Transaksi_model' => 'Transaksi_model'));
+        $this->load->model(array('akademik/Mahasiswa_model' => 'Mahasiswa_model', 'akademik/Opm_model' => 'Opm_model', 'akuntansi/Kodeperkiraan_model' => 'Kodeperkiraan_model', 'Unit_model' => 'Unit_model', 'akademik/Bop_model' => 'Bop_model', 'akuntansi/Transaksi_model' => 'Transaksi_model'));
     }
     public function index()
     {
@@ -628,6 +628,16 @@ class Opm extends CI_Controller
             }
         }
     }
+    public function cek_uniknobukti()
+    {
+        $nobukti = $this->input->post('nobukti');
+        $hasil = $this->Opm_model->cek_nobukti($nobukti);
+        if ($hasil > 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
     public function cek_akunganda()
     {
         $akun_id = $this->input->post('akun_id');
@@ -651,10 +661,11 @@ class Opm extends CI_Controller
     }
     private function _validate()
     {
-        $this->form_validation->set_rules('nobukti', 'No. Bukti', 'required|trim');
+        $this->form_validation->set_rules('nobukti', 'No. Bukti', 'required|trim|callback_cek_uniknobukti', [
+            'cek_uniknobukti' => 'No Bukti telah digunakan!!'
+        ]);
         $this->form_validation->set_rules('keterangan', 'Keterangan', 'required|trim');
-        $this->form_validation->set_rules('tanggal_transaksi', 'Tanggal', 'required|trim|callback_cek_tanggalakademik|callback_cek_tanggalbuku', [
-            'cek_tanggalakademik' => 'Diluar periode semester aktif!!',
+        $this->form_validation->set_rules('tanggal_transaksi', 'Tanggal', 'required|trim|callback_cek_tanggalbuku', [
             'cek_tanggalbuku' => 'Diluar periode pembukuan aktif!!'
         ]);
     }
@@ -665,9 +676,8 @@ class Opm extends CI_Controller
         ]);
         $this->form_validation->set_rules('posisi_akun', 'Posisi', 'required|trim');
         //$this->form_validation->set_rules('jumlah', 'Jumlah', 'required|trim');
-        $this->form_validation->set_rules('jumlah', 'Jumlah', 'required|trim|callback_cek_jumlah|callback_cek_saldo', [
-            'cek_jumlah' => 'jumlah transaksi tidak valid!!',
-            'cek_saldo' => 'jumlah transaksi tidak sesuai!!'
+        $this->form_validation->set_rules('jumlah', 'Jumlah', 'required|trim|callback_cek_jumlah', [
+            'cek_jumlah' => 'jumlah transaksi tidak valid!!'
         ]);
     }
 }
