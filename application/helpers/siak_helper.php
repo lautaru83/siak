@@ -746,6 +746,11 @@ function rupiah($angka)
     $hasil_rupiah = number_format($angka, 2, ',', '.');
     return $hasil_rupiah;
 }
+function angka_ribuan($angka)
+{
+    $hasil_rupiah = number_format($angka, 0, ',', '.');
+    return $hasil_rupiah;
+}
 function input_uang($uang)
 {
     $uang1 = str_replace(".", "", $uang);
@@ -888,11 +893,11 @@ function ribuan_positif($angka)
     $ribuan = $angka / 1000;
     if ($ribuan < 0) {
         $ribuan_positif = abs($ribuan);
-        echo "(" . rupiah($ribuan_positif) . ")";
+        echo "(" . angka_ribuan($ribuan_positif) . ")";
     } elseif ($ribuan == 0) {
         echo "-";
     } else {
-        echo rupiah($ribuan);
+        echo angka_ribuan($ribuan);
     }
 }
 function persentase($nilai1, $nilai2)
