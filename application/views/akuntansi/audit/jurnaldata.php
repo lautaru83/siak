@@ -137,7 +137,7 @@
                                                             <?= $dataJurnal['keterangan']; ?>
                                                         </td>
                                                         <td class="text-center">
-                                                            <a href="" class="btn-hapus-audit" data-id="<?= $id; ?>" data-info="<?= $dataJurnal['nobukti']; ?>" data-jurnal="<?= $jur; ?>" data-notran="<?= $notran; ?>" data-toggle="tooltip" data-placement="bottom" title="Hapus Transaksi"> <i class="far fa-trash-alt" style="color: maroon"></i>
+                                                            <a href="" class="btn-edit-audit" data-id="<?= $id; ?>" data-info="<?= $dataJurnal['nobukti']; ?>" data-jurnal="<?= $jur; ?>" data-notran="<?= $notran; ?>" data-toggle="tooltip" data-placement="bottom" title="Edit Jurnal"><i class="fas fa-edit" style="color: olive"></i></a> - <a href="" class="btn-hapus-audit" data-id="<?= $id; ?>" data-info="<?= $dataJurnal['nobukti']; ?>" data-jurnal="<?= $jur; ?>" data-notran="<?= $notran; ?>" data-toggle="tooltip" data-placement="bottom" title="Hapus Transaksi"> <i class="far fa-trash-alt" style="color: maroon"></i></a>
                                                         </td>
                                                     </tr>
 

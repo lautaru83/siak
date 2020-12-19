@@ -61,7 +61,7 @@ class Audit extends CI_Controller
                 'akhir_error' => form_error('akhir_periode')
             );
         } else {
-            $data['jurnal'] = $this->Laporan_model->jurnal();
+            $data['jurnal'] = $this->Laporan_model->jurnalaudit();
         }
         $this->template->display('akuntansi/audit/jurnaldata', $data);
     }
@@ -80,6 +80,34 @@ class Audit extends CI_Controller
             );
         }
 
+        echo json_encode($data);
+    }
+    public function edit()
+    {
+        $jrnl = $this->input->post('jurnal');
+        //cek jurnal Kosong
+        $hasil = $this->Transaksi_model->cektranuser($jrnl);
+        if (!$hasil) {
+            $cekdata = $this->Transaksi_model->auditCekId();
+            if ($cekdata > 0) {
+                $this->Transaksi_model->auditEdit();
+                $data = array(
+                    'status' => 'sukses'
+                );
+            } else {
+                $data = array(
+                    'status' => 'gagal'
+                );
+            }
+            // $data = array(
+            //     'status' => 'sukses'
+            // );
+            //$cekdata=
+        } else {
+            $data = array(
+                'status' => 'pending'
+            );
+        }
         echo json_encode($data);
     }
     private function _validatejurnal()

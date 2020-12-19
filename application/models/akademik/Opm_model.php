@@ -21,7 +21,8 @@ class Opm_model extends CI_Model
     }
     public function cek_nobukti($nobukti)
     {
-        return $this->db3->get_where('operasionals', ['nobukti' => $nobukti])->num_rows();
+        $valid = 1;
+        return $this->db3->get_where('operasionals', ['nobukti' => $nobukti, 'is_valid' => $valid])->num_rows();
     }
     public function daftarakunopm($kelas_id, $perak_id, $jenis)
     {

@@ -3218,7 +3218,7 @@ $(document).ready(function () {
         const info = $(this).data('info');
         Swal.fire({
             title: 'Konfirmasi!',
-            text: 'Apakah yakin menghapus transaksi -' + id + '- !?!',
+            text: 'Apakah yakin menghapus transaksi -' + info + '- !?!',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -3259,6 +3259,89 @@ $(document).ready(function () {
         });
     });
     // end tombol hapus audit table
+    // tombol edit audit table
+    $('.btn-edit-audit').on('click', function (e) {
+        e.preventDefault();
+        const notran = $(this).data('notran');
+        const jurnal = $(this).data('jurnal');
+        const id = $(this).data('id');
+        var transaksi = "";
+        var halaman = "";
+        if (jurnal == 'KM') {
+            transaksi = "Kas Masuk";
+            halaman = base_url + 'kasmasuk'
+        } else if (jurnal == 'KK') {
+            transaksi = "Kas Keluar";
+            halaman = base_url + 'kaskeluar'
+        } else if (jurnal == 'BM') {
+            transaksi = "Bank Masuk";
+            halaman = base_url + 'bankmasuk'
+        } else if (jurnal == 'BK') {
+            transaksi = "Bank Keluar";
+            halaman = base_url + 'bankkeluar'
+        } else if (jurnal == 'NN') {
+            transaksi = "NON Kas Bank";
+            halaman = base_url + 'nonkasbank'
+        } else {
+            transaksi = "Operasional Mahasiswa";
+            halaman = base_url + 'opm';
+        }
+        // const a6level_id = $(this).data('id6');
+        const info = $(this).data('info');
+        Swal.fire({
+            title: 'Konfirmasi!',
+            text: 'Apakah yakin mengedit transaksi -' + info + '- !?!',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'Batal',
+            confirmButtonText: 'Edit'
+        }).then((result) => {
+            if (result.value) {
+                // Toast.fire({
+                //     icon: 'success',
+                //     title: ' Data Diedit!!!.'
+                // });
+                $.ajax({
+                    type: "POST",
+                    cache: false,
+                    url: base_url + "akuntansi/audit/edit",
+                    data: {
+                        id: id,
+                        notran: notran,
+                        jurnal: jurnal
+                    },
+                    dataType: 'JSON',
+                    success: function (data) {
+                        if (data.status == 'sukses') {
+                            //ajax edit transaksi
+                            Toast.fire({
+                                icon: 'success',
+                                title: ' Data siap diedit!!!.'
+                            });
+                            window.location.href = halaman;
+                        } else if (data.status == 'pending') {
+                            Toast.fire({
+                                icon: 'info',
+                                title: ' Terdapat transaksi - ' + transaksi + ' - yang belum di selesaikan!!!.'
+                            });
+                        } else {
+                            Toast.fire({
+                                icon: 'warning',
+                                title: ' Data gagal diedit!!!.'
+                            });
+                        }
+                    },
+                    error: function (e) {
+                        console.log('Error' + e);
+                    }
+                });
+            }
+        });
+    });
+
+    // end tombol edit audit table
     //---------------------------------------/AUDIT----------------------------
     // ---------------------/TES---------------------------
 });

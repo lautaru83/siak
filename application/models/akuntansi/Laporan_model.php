@@ -22,6 +22,20 @@ class Laporan_model extends CI_Model
             return $this->db2->query("select a.id as id,a.tanggal_transaksi as tanggal,a.nobukti as nobukti,a.keterangan as keterangan,a.accounting as accounting,a.notran as notran,a.jurnal as jurnal from siak_akuntansi.transaksis a join siak_setting.units b on b.id=a.unit_id where a.tanggal_transaksi BETWEEN '$tgl1' and '$tgl2' and b.institusi_id='$institusi_id' and a.tahun_buku='$thbuku' and a.jurnal='$jurnal' and a.is_valid=1 order by a.tanggal_transaksi asc")->result_array();
         }
     }
+    public function jurnalaudit()
+    {
+        $jurnal = $this->input->post('jurnal');
+        $tgl1 = tanggal_input($this->input->post('awal_periode'));
+        $tgl2 = tanggal_input($this->input->post('akhir_periode'));
+        +-$institusi_id = $this->session->userdata('idInstitusi');
+        $user_id = $this->session->userdata('xyz');
+        $thbuku = $this->session->userdata('tahun_buku');
+        if (!$jurnal) {
+            return $this->db2->query("select a.id as id,a.tanggal_transaksi as tanggal,a.nobukti as nobukti,a.keterangan as keterangan,a.accounting as accounting,a.notran as notran,a.jurnal as jurnal from siak_akuntansi.transaksis a join siak_setting.units b on b.id=a.unit_id where a.tanggal_transaksi BETWEEN '$tgl1' and '$tgl2' and b.institusi_id='$institusi_id' and a.tahun_buku='$thbuku' and a.user_id='$user_id' and a.is_valid=1 order by a.tanggal_transaksi asc")->result_array();
+        } else {
+            return $this->db2->query("select a.id as id,a.tanggal_transaksi as tanggal,a.nobukti as nobukti,a.keterangan as keterangan,a.accounting as accounting,a.notran as notran,a.jurnal as jurnal from siak_akuntansi.transaksis a join siak_setting.units b on b.id=a.unit_id where a.tanggal_transaksi BETWEEN '$tgl1' and '$tgl2' and b.institusi_id='$institusi_id' and a.tahun_buku='$thbuku' and a.user_id='$user_id' and a.jurnal='$jurnal' and a.is_valid=1 order by a.tanggal_transaksi asc")->result_array();
+        }
+    }
     public function jurnalcetak()
     {
         $jurnal = $this->input->post('jurnal_id');
