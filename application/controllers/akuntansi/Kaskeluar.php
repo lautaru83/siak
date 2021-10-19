@@ -290,9 +290,9 @@ class Kaskeluar extends CI_Controller
         $this->form_validation->set_rules('a6level_id', 'Kodeperkiraan', 'required|trim|callback_cek_akun', [
             'cek_akun' => 'Akun telah digunakan sebelumnya!!'
         ]);
-        $this->form_validation->set_rules('jumlah', 'Jumlah', 'required|trim|callback_cek_jumlah|callback_cek_saldo', [
-            'cek_jumlah' => 'Jumlah transaksi tidak valid!!',
-            'cek_saldo' => 'Saldo akun tidak mencukupi!!'
+        $this->form_validation->set_rules('jumlah', 'Jumlah', 'required|trim|callback_cek_jumlah', [
+            'cek_jumlah' => 'Jumlah transaksi tidak valid!!'
+            // 'cek_saldo' => 'Saldo akun tidak mencukupi!!'
         ]);
         $this->form_validation->set_rules('posisi_akun', 'Posisi', 'required|trim');
     }

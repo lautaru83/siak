@@ -297,6 +297,7 @@ function saldoAwalAbttInstitusi($a2level_id, $tahunbuku)
         return $saldoAwal;
     }
 }
+
 function saldoAwalAbttKomInstitusi($a2level_id, $tahun_buku)
 {
     $ci = get_instance();

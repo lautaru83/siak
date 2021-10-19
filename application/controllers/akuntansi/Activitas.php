@@ -65,6 +65,7 @@ class Activitas extends CI_Controller
             $data['bpdp'] = $this->Laporan_model->bpdpInstitusi();
             $data['bpda'] = $this->Laporan_model->bpdaInstitusi();
             $data['pbll'] = $this->Laporan_model->pbllInstitusi();
+            // $data['akabbt'] = $this->Laporan_model->bersihTidakTerikatInstitusi();
             $this->load->view('akuntansi/laporan/activitas/institusi', $data);
         }
     }
