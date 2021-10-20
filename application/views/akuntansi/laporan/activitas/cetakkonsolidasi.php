@@ -303,6 +303,33 @@
                 </strong>
             </td>
         </tr>
+        <tr>
+            <td>KENAIKAN/(PENURUNAN) ASET BERSIH</td>
+            <td></td>
+            <td align="right" style="border-bottom:solid 1px;">
+                <strong>
+                    <?php
+                    $akun = "313";
+                    $saldoabttAk = 0;
+                    $saldoabttAk = saldoJalanAkun3($akun, $pembukuan_id, $awal_periode, $akhir_periode);
+                    echo rupiah_positif($saldoabttAk);
+                    ?>
+                </strong>
+            </td>
+        </tr>
+        <tr>
+            <td><strong>KENAIKAN/(PENURUNAN)ASET BERSIH TAHUN BERJALAN</strong></td>
+            <td></td>
+            <td align="right" style="border-bottom:solid 0.65mm;">
+                <strong>
+                    <?php
+                    $hasilAbttTahunBerjalan = 0;
+                    $hasilAbttTahunBerjalan = $hasilSetelahPajak + $saldoabttAk;
+                    echo rupiah_positif($hasilAbttTahunBerjalan);
+                    ?>
+                </strong>
+            </td>
+        </tr>
     </table>
 </body>
 

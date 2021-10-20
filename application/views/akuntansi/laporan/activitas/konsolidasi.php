@@ -397,6 +397,43 @@
                                 </td>
                                 <td class="text-right"></td>
                             </tr>
+                            <tr>
+                                <td class="text-center"></td>
+                                <td colspan="2">
+                                    <span class="font-weight-normal">KENAIKAN/(PENURUNAN) ASET BERSIH</span>
+                                </td>
+                                <td></td>
+                                <td class="border-top border-top  text-right">
+                                    <span class="font-weight-normal">
+                                        <?php
+                                        $akun = "313";
+                                        $saldoabttAk = 0;
+                                        $saldoabttAk = saldoJalanAkun3($akun, $tahunbuku, $awalbuku, $akhirbuku);
+                                        echo rupiah_positif($saldoabttAk);
+                                        //var_dump($saldoabttAk);
+                                        ?>
+
+                                    </span>
+                                </td>
+                                <td class="text-right"></td>
+                            </tr>
+                            <tr>
+                                <td class="text-center"></td>
+                                <td colspan="2">
+                                    <span class="font-weight-bolder">KENAIKAN/(PENURUNAN)ASET BERSIH TAHUN BERJALAN</span>
+                                </td>
+                                <td></td>
+                                <td class="border-top border-bottom text-right">
+                                    <span class="font-weight-bolder">
+                                        <?php
+                                        $hasilAbttTahunBerjalan = 0;
+                                        $hasilAbttTahunBerjalan = $hasilSetelahPajak + $saldoabttAk;
+                                        echo rupiah_positif($hasilAbttTahunBerjalan);
+                                        ?>
+                                    </span>
+                                </td>
+                                <td class="text-right"></td>
+                            </tr>
                         </tbody>
                     </table>
                 <?php } ?>
