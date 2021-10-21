@@ -251,12 +251,12 @@
                                         //2020
                                         $jumlahDebetA = $dataBpdp['debetA'];
                                         $jumlahKreditA = $dataBpdp['kreditA'];
-                                        $jumlahBpdpA = $jumlahKreditA - $jumlahDebetA;
+                                        $jumlahBpdpA = $jumlahDebetA - $jumlahKreditA;
                                         $totalBpdpA = $totalBpdpA + $jumlahBpdpA;
                                         //2019
                                         $jumlahDebetB = $dataBpdp['debetB'];
                                         $jumlahKreditB = $dataBpdp['kreditB'];
-                                        $jumlahBpdpB = $jumlahKreditB - $jumlahDebetB;
+                                        $jumlahBpdpB = $jumlahDebetB - $jumlahKreditB;
                                         $totalBpdpB = $totalBpdpB + $jumlahBpdpB;
                                     endforeach;
                                 }
@@ -287,19 +287,19 @@
                                         //2020
                                         $jumlahDebetA = $dataBpda['debetA'];
                                         $jumlahKreditA = $dataBpda['kreditA'];
-                                        $jumlahBpdaA = $jumlahKreditA - $jumlahDebetA;
+                                        $jumlahBpdaA = $jumlahDebetA - $jumlahKreditA;
                                         $totalBpdaA = $totalBpdaA + $jumlahBpdaA;
                                         //2019
                                         $jumlahDebetB = $dataBpda['debetB'];
                                         $jumlahKreditB = $dataBpda['kreditB'];
-                                        $jumlahBpdaB = $jumlahKreditB - $jumlahDebetB;
+                                        $jumlahBpdaB = $jumlahDebetB - $jumlahKreditB;
                                         $totalBpdaB = $totalBpdaB + $jumlahBpdaB;
                                     endforeach;
                                 }
                                 ?>
                                 <td class="text-center"><?= $catatanBpda; ?></td>
-                                <td class="text-right"><?= rupiah_positif($jumlahBpdaA); ?></td>
-                                <td class="text-right"><?= rupiah_positif($jumlahBpdaB); ?></td>
+                                <td class="text-right"><?= rupiah_positif($totalBpdaA); ?></td>
+                                <td class="text-right"><?= rupiah_positif($totalBpdaB); ?></td>
                                 <td class="text-right"></td>
                             </tr>
                             <tr>

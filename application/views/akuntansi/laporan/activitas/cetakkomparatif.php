@@ -419,6 +419,48 @@
                 </strong>
             </td>
         </tr>
+        <tr>
+            <td>KENAIKAN/(PENURUNAN) ASET BERSIH</td>
+            <td></td>
+            <td align="right" style="border-bottom:solid 1px;">
+                <strong>
+                    <?php
+                    // $jumlahPajakPenghasilanA = 0;
+                    // echo rupiah_positif($jumlahPajakPenghasilanA);
+                    ?>
+                </strong>
+            </td>
+            <td align="right" style="border-bottom:solid 1px;">
+                <strong>
+                    <?php
+                    // $jumlahPajakPenghasilanB = 0;
+                    // echo rupiah_positif($jumlahPajakPenghasilanB);
+                    ?>
+                </strong>
+            </td>
+        </tr>
+        <tr>
+            <td><strong>KENAIKAN/(PENURUNAN)ASET BERSIH TAHUN BERJALAN</strong></td>
+            <td></td>
+            <td align="right" style="border-bottom:solid 0.65mm;">
+                <strong>
+                    <?php
+                    // $hasilSetelahPajakA = 0;
+                    // $hasilSetelahPajakA = $hasilSebelumPajakA - $jumlahPajakPenghasilanA;
+                    // echo rupiah_positif($hasilSetelahPajakA);
+                    ?>
+                </strong>
+            </td>
+            <td align="right" style="border-bottom:solid 0.65mm;">
+                <strong>
+                    <?php
+                    // $hasilSetelahPajakB = 0;
+                    // $hasilSetelahPajakB = $hasilSebelumPajakB - $jumlahPajakPenghasilanB;
+                    // echo rupiah_positif($hasilSetelahPajakB);
+                    ?>
+                </strong>
+            </td>
+        </tr>
     </table>
 </body>
 

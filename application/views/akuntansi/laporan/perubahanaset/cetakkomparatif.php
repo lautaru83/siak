@@ -210,12 +210,12 @@
                     //2020
                     $jumlahDebetA = $dataBpdp['debetA'];
                     $jumlahKreditA = $dataBpdp['kreditA'];
-                    $jumlahBpdpA = $jumlahKreditA - $jumlahDebetA;
+                    $jumlahBpdpA = $jumlahDebetA - $jumlahKreditA;
                     $totalBpdpA = $totalBpdpA + $jumlahBpdpA;
                     //2019
                     $jumlahDebetB = $dataBpdp['debetB'];
                     $jumlahKreditB = $dataBpdp['kreditB'];
-                    $jumlahBpdpB = $jumlahKreditB - $jumlahDebetB;
+                    $jumlahBpdpB = $jumlahDebetB - $jumlahKreditB;
                     $totalBpdpB = $totalBpdpB + $jumlahBpdpB;
                 endforeach;
             }
@@ -244,18 +244,18 @@
                     //2020
                     $jumlahDebetA = $dataBpda['debetA'];
                     $jumlahKreditA = $dataBpda['kreditA'];
-                    $jumlahBpdaA = $jumlahKreditA - $jumlahDebetA;
+                    $jumlahBpdaA = $jumlahDebetA - $jumlahKreditA;
                     $totalBpdaA = $totalBpdaA + $jumlahBpdaA;
                     //2019
                     $jumlahDebetB = $dataBpda['debetB'];
                     $jumlahKreditB = $dataBpda['kreditB'];
-                    $jumlahBpdaB = $jumlahKreditB - $jumlahDebetB;
+                    $jumlahBpdaB = $jumlahDebetB - $jumlahKreditB;
                     $totalBpdaB = $totalBpdaB + $jumlahBpdaB;
                 endforeach;
             }
             ?>
             <td align="center"><?php if ($bpda) {
-                                    echo $catatanbpda;
+                                    echo $catatanBpda;
                                 } ?></td>
             <td align="right"><?= rupiah_positif($totalBpdaA); ?></td>
             <td align="right"><?= rupiah_positif($totalBpdaB); ?></td>
@@ -411,15 +411,18 @@
                 <strong>
                     <?php
                     $idakun3 = "313";
-                    $saldoAsetMutasiA = saldoAkun6KomInstitusi($buku_awalA, $tanggal, $idakun3, $pembukuan);
+                    $saldoAsetMutasiA = saldoAkun6KomInsPerubahanAset($buku_awalA, $tanggal, $idakun3, $pembukuan);
                     echo rupiah_positif($saldoAsetMutasiA);
                     ?></strong>
             </td>
             <td align="right" style="border-bottom:solid 1px;">
                 <strong>
                     <?php
+                    // $idakun3 = "313";
+                    // $saldoAsetMutasiB = saldoAkun6KomInstitusi($buku_awalB, $tanggallalu, $idakun3, $tahunlalu);
+                    // echo rupiah_positif($saldoAsetMutasiB);
                     $idakun3 = "313";
-                    $saldoAsetMutasiB = saldoAkun6KomInstitusi($buku_awalB, $tanggallalu, $idakun3, $tahunlalu);
+                    $saldoAsetMutasiB = saldoAkun6KomInsPerubahanAset($buku_awalB, $tanggallalu, $idakun3, $tahunlalu);
                     echo rupiah_positif($saldoAsetMutasiB);
                     ?></strong>
             </td>
