@@ -425,16 +425,20 @@
             <td align="right" style="border-bottom:solid 1px;">
                 <strong>
                     <?php
-                    // $jumlahPajakPenghasilanA = 0;
-                    // echo rupiah_positif($jumlahPajakPenghasilanA);
+                    $akunA = "313";
+                    $saldoabttAkA = 0;
+                    $saldoabttAkA = saldoAkun6Laporan($tanggal, $akunA);
+                    echo rupiah_positif($saldoabttAkA);
                     ?>
                 </strong>
             </td>
             <td align="right" style="border-bottom:solid 1px;">
                 <strong>
                     <?php
-                    // $jumlahPajakPenghasilanB = 0;
-                    // echo rupiah_positif($jumlahPajakPenghasilanB);
+                    $akunB = "313";
+                    $saldoabttAkB = 0;
+                    $saldoabttAkB = saldoAkun6Laporan($tanggallalu, $akunB);
+                    echo rupiah_positif($saldoabttAkB);
                     ?>
                 </strong>
             </td>
@@ -445,18 +449,18 @@
             <td align="right" style="border-bottom:solid 0.65mm;">
                 <strong>
                     <?php
-                    // $hasilSetelahPajakA = 0;
-                    // $hasilSetelahPajakA = $hasilSebelumPajakA - $jumlahPajakPenghasilanA;
-                    // echo rupiah_positif($hasilSetelahPajakA);
+                    $hasilAbttTahunBerjalanA = 0;
+                    $hasilAbttTahunBerjalanA = $hasilSetelahPajakA + $saldoabttAkA;
+                    echo rupiah_positif($hasilAbttTahunBerjalanA);
                     ?>
                 </strong>
             </td>
             <td align="right" style="border-bottom:solid 0.65mm;">
                 <strong>
                     <?php
-                    // $hasilSetelahPajakB = 0;
-                    // $hasilSetelahPajakB = $hasilSebelumPajakB - $jumlahPajakPenghasilanB;
-                    // echo rupiah_positif($hasilSetelahPajakB);
+                    $hasilAbttTahunBerjalanB = 0;
+                    $hasilAbttTahunBerjalanB = $hasilSetelahPajakB + $saldoabttAkB;
+                    echo rupiah_positif($hasilAbttTahunBerjalanB);
                     ?>
                 </strong>
             </td>
