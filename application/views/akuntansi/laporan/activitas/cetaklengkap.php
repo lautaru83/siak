@@ -203,12 +203,12 @@
                     //2020
                     $jumlahDebetA = $dataBpdp['debetA'];
                     $jumlahKreditA = $dataBpdp['kreditA'];
-                    $jumlahBpdpA = $jumlahKreditA - $jumlahDebetA;
+                    $jumlahBpdpA = $jumlahDebetA - $jumlahKreditA;
                     $totalBpdpA = $totalBpdpA + $jumlahBpdpA;
                     //2019
                     $jumlahDebetB = $dataBpdp['debetB'];
                     $jumlahKreditB = $dataBpdp['kreditB'];
-                    $jumlahBpdpB = $jumlahKreditB - $jumlahDebetB;
+                    $jumlahBpdpB = $jumlahDebetB - $jumlahKreditB;
                     $totalBpdpB = $totalBpdpB + $jumlahBpdpB;
                 endforeach;
             }
@@ -240,12 +240,12 @@
                     //2020
                     $jumlahDebetA = $dataBpda['debetA'];
                     $jumlahKreditA = $dataBpda['kreditA'];
-                    $jumlahBpdaA = $jumlahKreditA - $jumlahDebetA;
+                    $jumlahBpdaA = $jumlahDebetA - $jumlahKreditA;
                     $totalBpdaA = $totalBpdaA + $jumlahBpdaA;
                     //2019
                     $jumlahDebetB = $dataBpda['debetB'];
                     $jumlahKreditB = $dataBpda['kreditB'];
-                    $jumlahBpdaB = $jumlahKreditB - $jumlahDebetB;
+                    $jumlahBpdaB = $jumlahDebetB - $jumlahKreditB;
                     $totalBpdaB = $totalBpdaB + $jumlahBpdaB;
                 endforeach;
             }
@@ -415,6 +415,54 @@
                     $hasilSetelahPajakB = 0;
                     $hasilSetelahPajakB = $hasilSebelumPajakB - $jumlahPajakPenghasilanB;
                     echo rupiah_positif($hasilSetelahPajakB);
+                    ?>
+                </strong>
+            </td>
+        </tr>
+        <tr>
+            <td>KENAIKAN/(PENURUNAN) ASET BERSIH</td>
+            <td></td>
+            <td align="right" style="border-bottom:solid 1px;">
+
+                <?php
+                $akunA = "313";
+                $saldoabttAkA = 0;
+                $saldoabttAkA = saldoJalanAkun3($akunA, $pembukuan, $buku_awalA, $tanggal);
+                // $saldoabttAkA = saldoAkun6Laporan($tanggal, $akunA);
+                echo rupiah_positif($saldoabttAkA);
+                ?>
+
+            </td>
+            <td align="right" style="border-bottom:solid 1px;">
+
+                <?php
+                $akunB = "313";
+                $saldoabttAkB = 0;
+                $saldoabttAkB = saldoJalanAkun3($akunB, $tahunlalu, $buku_awalB, $tanggallalu);
+                // $saldoabttAkB = saldoAkun6Laporan($tanggallalu, $akunB);
+                echo rupiah_positif($saldoabttAkB);
+                ?>
+
+            </td>
+        </tr>
+        <tr>
+            <td><strong>KENAIKAN/(PENURUNAN)ASET BERSIH TAHUN BERJALAN</strong></td>
+            <td></td>
+            <td align="right" style="border-bottom:solid 0.65mm;">
+                <strong>
+                    <?php
+                    $hasilAbttTahunBerjalanA = 0;
+                    $hasilAbttTahunBerjalanA = $hasilSetelahPajakA + $saldoabttAkA;
+                    echo rupiah_positif($hasilAbttTahunBerjalanA);
+                    ?>
+                </strong>
+            </td>
+            <td align="right" style="border-bottom:solid 0.65mm;">
+                <strong>
+                    <?php
+                    $hasilAbttTahunBerjalanB = 0;
+                    $hasilAbttTahunBerjalanB = $hasilSetelahPajakB + $saldoabttAkB;
+                    echo rupiah_positif($hasilAbttTahunBerjalanB);
                     ?>
                 </strong>
             </td>

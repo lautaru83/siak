@@ -324,7 +324,33 @@ function saldoJalanAkun3($a3level_id, $tahunbuku, $awalbuku, $akhirperiode)
         return $saldoAwal;
     }
 }
-
+function saldoJalanAkun2($a2level_id, $tahunbuku, $awalbuku, $akhirperiode)
+{
+    $ci = get_instance();
+    $ci->db2 = $ci->load->database('akuntansi', TRUE);
+    //$institusi_id = $ci->session->userdata('idInstitusi');
+    $tahun_buku = $tahunbuku;
+    // $tahun_buku = $ci->session->userdata('tahun_buku');
+    $hasil = $ci->db2->query("SELECT a.posisi, SUM(b.debet) AS debet, SUM(b.kredit) AS kredit FROM view_kodeperkiraans AS a JOIN view_transaksis AS b ON a.a6level_id = b.a6level_id WHERE a.a3level_id = '$a2level_id' AND b.tahun_buku = '$tahun_buku' AND b.tanggal_transaksi BETWEEN '$awalbuku' AND '$akhirperiode' AND is_valid BETWEEN 1 AND 2 GROUP BY a.a2level_id")->result_array();
+    $saldoAwal = 0;
+    if ($hasil) {
+        $debet = 0;
+        $kredit = 0;
+        foreach ($hasil as $dataHasil) :
+            $posisi = $dataHasil['posisi'];
+            $debet = $dataHasil['debet'];
+            $kredit = $dataHasil['kredit'];
+            if ($posisi == "D") {
+                $saldoAwal = $debet - $kredit;
+            } else {
+                $saldoAwal = $kredit - $debet;
+            }
+        endforeach;
+        return $saldoAwal;
+    } else {
+        return $saldoAwal;
+    }
+}
 
 function saldoAwalAbttKomInstitusi($a2level_id, $tahun_buku)
 {
