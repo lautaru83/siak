@@ -251,12 +251,12 @@
                                         //2020
                                         $jumlahDebetA = $dataBpdp['debetA'];
                                         $jumlahKreditA = $dataBpdp['kreditA'];
-                                        $jumlahBpdpA = $jumlahKreditA - $jumlahDebetA;
+                                        $jumlahBpdpA = $jumlahDebetA - $jumlahKreditA;
                                         $totalBpdpA = $totalBpdpA + $jumlahBpdpA;
                                         //2019
                                         $jumlahDebetB = $dataBpdp['debetB'];
                                         $jumlahKreditB = $dataBpdp['kreditB'];
-                                        $jumlahBpdpB = $jumlahKreditB - $jumlahDebetB;
+                                        $jumlahBpdpB = $jumlahDebetB - $jumlahKreditB;
                                         $totalBpdpB = $totalBpdpB + $jumlahBpdpB;
                                 ?>
 
@@ -291,12 +291,12 @@
                                         //2020
                                         $jumlahDebetA = $dataBpda['debetA'];
                                         $jumlahKreditA = $dataBpda['kreditA'];
-                                        $jumlahBpdaA = $jumlahKreditA - $jumlahDebetA;
+                                        $jumlahBpdaA = $jumlahDebetA - $jumlahKreditA;
                                         $totalBpdaA = $totalBpdaA + $jumlahBpdaA;
                                         //2019
                                         $jumlahDebetB = $dataBpda['debetB'];
                                         $jumlahKreditB = $dataBpda['kreditB'];
-                                        $jumlahBpdaB = $jumlahKreditB - $jumlahDebetB;
+                                        $jumlahBpdaB = $jumlahDebetB - $jumlahKreditB;
                                         $totalBpdaB = $totalBpdaB + $jumlahBpdaB;
                                 ?>
                                 <?php
@@ -304,8 +304,8 @@
                                 }
                                 ?>
                                 <td class="text-center"><?= $catatanBpda; ?></td>
-                                <td class="text-right"><?= rupiah_positif($jumlahBpdaA); ?></td>
-                                <td class="text-right"><?= rupiah_positif($jumlahBpdaB); ?></td>
+                                <td class="text-right"><?= rupiah_positif($totalBpdaA); ?></td>
+                                <td class="text-right"><?= rupiah_positif($totalBpdaB); ?></td>
                                 <td class="text-right"></td>
                             </tr>
                             <tr>
@@ -491,7 +491,6 @@
                                         <?php
                                         $idakun3 = "313";
                                         $saldoAsetMutasiA = saldoAkun6KonInsPerubahanAset($buku_awalA, $tanggal, $pembukuan);
-                                        // $saldoAsetMutasiA = saldoAkun6KomInstitusi($buku_awalA, $tanggal, $idakun3, $pembukuan);
                                         echo rupiah_positif($saldoAsetMutasiA);
                                         ?>
                                     </span>
@@ -501,7 +500,6 @@
                                         <?php
                                         $idakun3 = "313";
                                         $saldoAsetMutasiB = saldoAkun6KonInsPerubahanAset($buku_awalB, $tanggallalu, $tahunlalu);
-                                        // $saldoAsetMutasiB = saldoAkun6KomInstitusi($buku_awalB, $tanggallalu, $idakun3, $tahunlalu);
                                         echo rupiah_positif($saldoAsetMutasiB);
                                         ?>
                                     </span>
