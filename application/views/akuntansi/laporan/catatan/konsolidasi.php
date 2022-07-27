@@ -382,7 +382,7 @@
                                                                 <td class="text-center"></td>
                                                                 <td colspan="2">
                                                                     <span class="font-weight-normal text-md pl-5">
-                                                                        - <?= $dataAkun6['level6']; ?>
+                                                                        - <?= $dataAkun6['level5']; ?>
                                                                     </span>
                                                                 </td>
                                                                 <td class="text-right">
